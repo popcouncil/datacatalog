@@ -13,11 +13,12 @@
     <div id="dataDetails">
       <div id="metaDetails">
         <dl>
+          <% org = @source.organization %>
           <%= detail_field @source,
             :attribute => :organization_id,
             :label     => "Organization",
-            :value     => @source.organization.name,
-            :url       => org_path(@source.organization.slug) %>
+            :value     => org ? org.name : nil,
+            :url       => org ? org.slug : "#" %>
           <%= detail_field @source,
             :attribute  => :categories,
             :collection => true,
