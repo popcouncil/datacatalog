@@ -25,12 +25,12 @@ Rails::Initializer.run do |config|
   config.gem 'unindentable', :version => '>= 0.0.1'
   config.gem "rspec", :lib => false, :version => ">= 1.2.0"
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
-  config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0", :source => 'http://gems.github.com'
+  config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0"
   config.gem 'rr', :version => '>= 0.10.0'
-  config.gem 'notahat-machinist', :lib => 'machinist', :version => ">= 1.0.3", :source => 'http://gems.github.com'
+  config.gem 'notahat-machinist', :lib => 'machinist', :version => ">= 1.0.3"
   config.gem 'webrat', :version => '>= 0.4.5'
-  config.gem 'cucumber', :version => '>= 0.3.94', :source => 'http://gems.github.com'
-  config.gem 'bmabey-database_cleaner', :lib => 'database_cleaner', :version => '>= 0.2.2', :source => 'http://gems.github.com'
+  config.gem 'cucumber', :version => '>= 0.8.5'
+  config.gem 'database_cleaner', :lib => 'database_cleaner', :version => '>= 0.5.2'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
