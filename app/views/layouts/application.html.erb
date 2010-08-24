@@ -3,6 +3,7 @@
 <head>
   <meta name="description" content="An open platform for government data sets and APIs. We make it easy to find datasets by and about government, across all levels (federal, state, and local) and across all branches (executive, legislative, and judicial)." />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="last-code-update" content="2010-08-23 22:34:10">
 
   <title><%= yield :title %> | National Data Catalog</title>
   <script src="http://services.sunlightlabs.com/brandingbar/hat_js/natdatcat/" type="text/javascript"></script>
@@ -14,19 +15,14 @@
 </head>
 
 <body class="<%= yield :body_class %>">
-
   <div id="headerWrapper">
-
     <div id="pageMain">
       <%= render 'layouts/header'  %>
       <%= render 'layouts/content' %>
     </div>
-
     <div class="clear"></div>
     <%= render 'layouts/footer' %>
-
   </div>
-
   <%= javascript_include_tag 'jquery', 'jquery-ui', 'jquery.tools', 'application', :cache => true %>
   <%= render 'layouts/analytics' %>
 </body>
