@@ -5,45 +5,59 @@
 <% end %>
 
 <div id="column_fullWidth">
-
   <div class="org_metaDetails">
     <p><%= @org.description %></p>
-
     <div id="dataDetails">
       <div id="metaDetails">
         <dl>
-          <%= detail_field @org, :attribute => :org_type, :label => "Type",
-          :value => @org.org_type, :titleize => true, :noclear => true %>
-
-          <%= detail_field @org, :attribute => :level, :label => "Level",
-          :value => @org.level, :titleize => true, :noclear => true  %>
-
-          <%= detail_field @org, :attribute => :acronym, :label => "Acronym",
-          :value => @org.acronym, :noclear => true  %>
-
-          <%= detail_field @org, :attribute => :names, :collection => true, :label => "Other Names",
-          :value => @org.names, :noclear => true  %>
-
-          <%= detail_field @org, :attribute => :url, :label => "URL",
-          :value => truncate(@org.url, :length => 45), :url => @org.url, :noclear => true  %>
-
-          <%= detail_field @org, :attribute => :url, :label => "Home Page",
-          :value => truncate(@org.home_url, :length => 45), :url => @org.home_url, :noclear => true  %>
-
-          <%= detail_field @org, :attribute => :url, :label => "Catalog URL",
-          :value => truncate(@org.catalog_url, :length => 45), :url => @org.catalog_url, :noclear => true  %>
-
+          <%= detail_field @org,
+            :attribute => :org_type,
+            :label     => "Type",
+            :value     => @org.org_type,
+            :titleize  => true,
+            :noclear   => true %>
+          <%= detail_field @org,
+            :attribute => :level,
+            :label     => "Level",
+            :value     => @org.level,
+            :titleize  => true,
+            :noclear   => true  %>
+          <%= detail_field @org,
+            :attribute => :acronym,
+            :label     => "Acronym",
+            :value     => @org.acronym,
+            :noclear   => true  %>
+          <%= detail_field @org,
+            :attribute  => :names,
+            :collection => true,
+            :label      => "Other Names",
+            :value      => @org.names,
+            :noclear    => true  %>
+          <%= detail_field @org,
+            :attribute => :url,
+            :label     => "URL",
+            :value     => truncate(@org.url, :length => 45),
+            :url       => @org.url,
+            :noclear   => true  %>
+          <%= detail_field @org,
+            :attribute => :url,
+            :label     => "Home Page",
+            :value     => truncate(@org.home_url, :length => 45),
+            :url       => @org.home_url,
+            :noclear   => true  %>
+          <%= detail_field @org,
+            :attribute => :url,
+            :label     => "Catalog URL",
+            :value     => truncate(@org.catalog_url, :length => 45),
+            :url       => @org.catalog_url,
+            :noclear   => true  %>
         </dl>
       </div><!-- metaDetails -->
-
       <div class="clear"></div>
-
     </div><!-- dataDetails -->
-
     <%= render 'shared/pagination', :docs => @sources %>
     <div class="clear"></div>
   </div>
-
   <%= show_flash_message %>
   <%= render 'shared/source_table' %>
   <div class="tableNav">
