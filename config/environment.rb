@@ -10,28 +10,6 @@ Rails::Initializer.run do |config|
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
-  config.gem 'authlogic', :version => '>= 2.1.1'
-  config.gem "authlogic-oid", :lib => "authlogic_openid", :version => '>= 1.0.4'
-  config.gem "ruby-openid", :lib => "openid", :version => '>= 2.1.7'
-  config.gem 'nokogiri', :version => '>= 1.3.2'
-  config.gem 'faker', :version => '>= 0.3.1'
-  config.gem 'rdiscount', :version => '>= 1.3.5'
-  config.gem 'feedzirra', :version => '>= 0.0.20'
-  config.gem 'delayed_job', :version => '>= 1.8.4'
-  config.gem 'httparty', :verstion => '>= 0.5.2'
-  config.gem 'datacatalog', :version => '>= 0.4.14'
-  config.gem 'frequency', :version => '>= 0.1.5'
-  config.gem 'kronos', :version => '>= 0.1.6'
-  config.gem 'unindentable', :version => '>= 0.0.1'
-  config.gem "rspec", :lib => false, :version => ">= 1.2.0"
-  config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
-  config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :version => ">= 2.10.0"
-  config.gem 'rr', :version => '>= 0.10.0'
-  config.gem 'notahat-machinist', :lib => 'machinist', :version => ">= 1.0.3"
-  config.gem 'webrat', :version => '>= 0.4.5'
-  config.gem 'cucumber', :version => '>= 0.8.5'
-  config.gem 'database_cleaner', :lib => 'database_cleaner', :version => '>= 0.5.2'
-
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
