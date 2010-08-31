@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'rails', '2.3.8'
-gem 'mysql'
+gem 'pg'
 
 gem 'authlogic', '>= 2.1.1'
 gem "authlogic-oid", '>= 1.0.4', :require => "authlogic_openid"
