@@ -2,7 +2,6 @@ log/*.*
 db/*.db
 db/*.sqlite3
 *.sqlite
-db/schema.rb
 tmp/*
 .DS_Store
 doc/api
