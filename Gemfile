@@ -21,7 +21,7 @@ group :test do
   gem "rspec-rails", ">= 1.2.0", :require => false
   gem 'thoughtbot-shoulda', ">= 2.10.0", :require => 'shoulda'
   gem 'rr', '>= 0.10.0'
-  gem 'notahat-machinist', ">= 1.0.3", :require => 'machinist'
+  gem 'machinist', ">= 1.0.6"
   gem 'webrat', '>= 0.4.5'
   gem 'cucumber', '>= 0.8.5'
   gem 'database_cleaner', '>= 0.5.2', :require => 'database_cleaner'
