@@ -40,8 +40,14 @@ class ApplicationController < ActionController::Base
   end
 
   def set_analytics
-    analytics = YAML.load_file(Rails.root.to_s + "/config/analytics.yml")
-    @analytics_key = analytics["key"]
+    file = Rails.root.join("config/analytics.yml")
+
+    @analytics_key ||= if file.file?
+      analytics = YAML.load_file(file)
+      analytics["key"]
+    else
+      ENV["ANALYTICS_KEY"]
+    end
   end
 
   def show_title
