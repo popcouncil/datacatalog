@@ -23,6 +23,6 @@ group :test do
   gem 'rr', '>= 0.10.0'
   gem 'machinist', ">= 1.0.6"
   gem 'webrat', '>= 0.4.5'
-  gem 'cucumber', '>= 0.8.5'
+  gem 'cucumber-rails'
   gem 'database_cleaner', '>= 0.5.2', :require => 'database_cleaner'
 end

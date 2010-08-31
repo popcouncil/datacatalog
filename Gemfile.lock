@@ -23,6 +23,8 @@ GEM
       gherkin (~> 2.1.4)
       json_pure (~> 1.4.3)
       term-ansicolor (~> 1.0.4)
+    cucumber-rails (0.3.2)
+      cucumber (>= 0.8.0)
     curb (0.7.8)
     daemons (1.1.0)
     database_cleaner (0.5.2)
@@ -91,7 +93,7 @@ PLATFORMS
 DEPENDENCIES
   authlogic (>= 2.1.1)
   authlogic-oid (>= 1.0.4)
-  cucumber (>= 0.8.5)
+  cucumber-rails
   database_cleaner (>= 0.5.2)
   datacatalog (>= 0.4.14)
   delayed_job (>= 1.8.4)
