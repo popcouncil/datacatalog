@@ -27,3 +27,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'database_cleaner'
 end
+
+group :development, :test do
+  gem 'ruby-debug'
+end 
