@@ -40,6 +40,3 @@ Feature: Sign up
     Given I have signed up but not yet confirmed
     When I click on the confirmation link
     Then I should see "Your email address has been confirmed"
-
-
-    

@@ -22,7 +22,8 @@ group :test do
   gem 'thoughtbot-shoulda', ">= 2.10.0", :require => 'shoulda'
   gem 'rr', '>= 0.10.0'
   gem 'machinist', ">= 1.0.6"
-  gem 'webrat', '>= 0.4.5'
+
+  gem 'capybara'
   gem 'cucumber-rails'
-  gem 'database_cleaner', '>= 0.5.2', :require => 'database_cleaner'
+  gem 'database_cleaner'
 end

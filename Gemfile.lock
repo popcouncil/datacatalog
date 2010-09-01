@@ -16,6 +16,13 @@ GEM
     authlogic-oid (1.0.4)
       authlogic
     builder (2.1.2)
+    capybara (0.3.9)
+      culerity (>= 0.2.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (>= 0.0.3)
     crack (0.1.8)
     cucumber (0.8.5)
       builder (~> 2.1.2)
@@ -25,6 +32,7 @@ GEM
       term-ansicolor (~> 1.0.4)
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
+    culerity (0.2.12)
     curb (0.7.8)
     daemons (1.1.0)
     database_cleaner (0.5.2)
@@ -44,6 +52,8 @@ GEM
       loofah (>= 0.3.1)
       nokogiri (> 0.0.0)
       sax-machine (>= 0.0.12)
+    ffi (0.6.3)
+      rake (>= 0.8.7)
     frequency (0.1.5)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
@@ -55,6 +65,7 @@ GEM
       nokogiri (>= 1.3.3)
     machinist (1.0.6)
     mash (0.1.1)
+    mime-types (1.16)
     nokogiri (1.4.3.1)
     pg (0.9.0)
     rack (1.1.0)
@@ -75,17 +86,18 @@ GEM
       rack (>= 1.0.0)
       rspec (>= 1.3.0)
     ruby-openid (2.1.8)
+    rubyzip (0.9.4)
     sax-machine (0.0.15)
       nokogiri (> 0.0.0)
+    selenium-webdriver (0.0.28)
+      ffi (>= 0.6.1)
+      json_pure
+      rubyzip
     term-ansicolor (1.0.5)
     thoughtbot-shoulda (2.11.1)
     trollop (1.16.2)
     unindentable (0.0.3)
     version_string (0.1.0)
-    webrat (0.7.1)
-      nokogiri (>= 1.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5.3)
 
 PLATFORMS
   ruby
@@ -93,8 +105,9 @@ PLATFORMS
 DEPENDENCIES
   authlogic (>= 2.1.1)
   authlogic-oid (>= 1.0.4)
+  capybara
   cucumber-rails
-  database_cleaner (>= 0.5.2)
+  database_cleaner
   datacatalog (>= 0.4.14)
   delayed_job (>= 1.8.4)
   faker (>= 0.3.1)
@@ -112,4 +125,3 @@ DEPENDENCIES
   ruby-openid (>= 2.1.7)
   thoughtbot-shoulda (>= 2.10.0)
   unindentable (>= 0.0.1)
-  webrat (>= 0.4.5)

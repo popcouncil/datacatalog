@@ -91,11 +91,11 @@ When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^I should see "([^\"]*)"$/ do |text|
-  response.should contain(text)
+  page.should have_content(text)
 end
 
 Then /^I should not see "([^\"]*)"$/ do |text|
-  response.should_not contain(text)
+  page.should_not have_content(text)
 end
 
 Then /^the "([^\"]*)" field should contain "([^\"]*)"$/ do |field, value|

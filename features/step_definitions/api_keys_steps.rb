@@ -14,7 +14,5 @@ Given /^I have an existing application key with "([^\"]*)" as its purpose$/ do |
 end
 
 When /^I choose to "([^\"]*)" that key$/ do |action|
-  within "table#keys tr:nth-child(3)" do
-    click_link action
-  end
+  click_link action
 end

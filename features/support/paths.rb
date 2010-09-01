@@ -6,17 +6,17 @@ module NavigationHelpers
     when /the homepage/
       '/'
     when /sign up/
-      'signup'
+      '/signup'
     when /sign in/
-      'signin'
+      '/signin'
     when /sign out/
-      'signout'
+      '/signout'
     when /my profile/
-      'profile'
+      '/profile/'
     when /the contact form/
-      'contact'
+      '/contact'
     when /the data source suggestion form/
-      'suggest'
+      '/suggest'
 
     # Add more mappings here.
     # Here is a more fancy example:

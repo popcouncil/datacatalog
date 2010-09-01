@@ -3,9 +3,13 @@ ENV["RAILS_ENV"] = "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 require 'cucumber/rails/world'
 require 'cucumber/formatter/unicode'
-require 'webrat'
+require 'capybara/rails'
+require 'capybara/cucumber'
 require 'cucumber/rails/rspec'
-require 'webrat/core/matchers'
+require 'database_cleaner'
+require 'database_cleaner/cucumber'
+
+DatabaseCleaner.strategy = :truncation
 
 ActionController::Base.class_eval do
 
@@ -18,6 +22,9 @@ ActionController::Base.class_eval do
 end
 
 Before do
+  DatabaseCleaner.start
+
+  # Remove all the users and sources from the local API
   DataCatalog::User.all.each do |u|
     DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
   end
@@ -25,4 +32,8 @@ Before do
   DataCatalog::Source.all.each do |s|
     DataCatalog::Source.destroy(s.id)
   end
+end
+
+After do
+  DatabaseCleaner.clean
 end
