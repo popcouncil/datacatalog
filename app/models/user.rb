@@ -24,7 +24,7 @@
 
 class User < ActiveRecord::Base
 
-  validates_presence_of :email, :display_name
+  validates_presence_of :email, :display_name, :country, :city, :user_type
 
   attr_accessor :api_user, :curator
 

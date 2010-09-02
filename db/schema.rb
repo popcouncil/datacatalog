@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091211215757) do
+ActiveRecord::Schema.define(:version => 20100831205557) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(:version => 20091211215757) do
     t.string   "api_key"
     t.string   "api_id"
     t.boolean  "list_opt_in",         :default => false
+    t.string   "affiliation"
+    t.string   "country"
+    t.string   "city"
+    t.string   "personal_url"
+    t.string   "telephone_number"
+    t.string   "user_type"
   end
 
 end

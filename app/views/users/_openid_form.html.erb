@@ -1,17 +1,41 @@
 <li>
-    <%= openid_form.label :openid_identifier, 'OpenID URL' %>
-    <%= openid_form.text_field :openid_identifier %>
+  <%= openid_form.label :openid_identifier, 'OpenID URL' %>
+  <%= openid_form.text_field :openid_identifier %>
 </li>
 <li>
-    <%= openid_form.label :display_name, "Name" %>
-    <%= openid_form.text_field :display_name, :id => "openid_name" %>
+  <%= openid_form.label :display_name, 'Name', :for => 'openid_name' %>
+  <%= openid_form.text_field :display_name, :id => 'openid_name' %>
 </li>
 <li>
-    <%= openid_form.label :email %>
-    <%= openid_form.text_field :email, :id => "openid_email" %>
+  <%= openid_form.label :email, 'Email', :for => 'openid_email' %>
+  <%= openid_form.text_field :email, :id => 'openid_email' %>
+</li>
+<li>
+  <%= openid_form.label :affiliation, 'Affiliation (optional)', :for => 'openid_affiliation' %>
+  <%= openid_form.text_field :affiliation, :id => 'openid_affiliation' %>
+</li>
+<li>
+  <%= openid_form.label :country, 'Country', :for => 'openid_country' %>
+  <%= openid_form.text_field :country, :id => 'openid_country' %>
+</li>
+<li>
+  <%= openid_form.label :city, 'City', :for => 'openid_city' %>
+  <%= openid_form.text_field :city, :id => 'openid_city' %>
+</li>
+<li>
+  <%= openid_form.label :user_type, 'User Type', :for => 'openid_user_type' %>
+  <%= openid_form.text_field :user_type, :id => 'openid_user_type' %>
+</li>
+<li>
+  <%= openid_form.label :personal_url, 'Site Url (optional)', :for => 'openid_personal_url' %>
+  <%= openid_form.text_field :personal_url, :id => 'openid_personal_url' %>
+</li>
+<li>
+  <%= openid_form.label :telephone_number, 'Cell Phone (optional)', :for => 'openid_telephone_number' %>
+  <%= openid_form.text_field :telephone_number, :id => 'openid_telephone_number' %>
 </li>
 
-<li class="signIn_cues">
-  <%= openid_form.check_box :list_opt_in, {:class => "checkbox"} %>
-  <%= openid_form.label :remember_me, "Yes, email me updates from the Sunlight Foundation.", {:class => "inline"}  %>
+<li class='signIn_cues'>
+  <%= openid_form.check_box :list_opt_in, :class => 'checkbox', :id => 'openid_list_opt_in' %>
+  <%= openid_form.label :list_opt_in, 'Yes, email me updates from Population Council.', :class => 'inline', :for => 'openid_list_opt_in' %>
 </li> 
