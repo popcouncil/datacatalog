@@ -1,5 +1,7 @@
 ENV["RAILS_ENV"] = "cucumber"
 
+Dir[Pathname(__FILE__).dirname.join("helpers/**/*.rb")].each {|f| require f }
+
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 require 'cucumber/rails/world'
 require 'cucumber/formatter/unicode'
@@ -20,6 +22,8 @@ ActionController::Base.class_eval do
   end
 
 end
+
+World(DefiniteArticleHelper)
 
 Before do
   DatabaseCleaner.start

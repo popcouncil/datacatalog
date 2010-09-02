@@ -1,9 +1,8 @@
-Given /^I have signed up and confirmed$/ do
-  u = User.create!(:display_name => 'John D.', :email => 'some@email.com', :password => 'test', :password_confirmation => 'test')
-  u.confirm!
-end
-
-Given /^I have signed up via OpenID$/ do
-  u = User.create!(:display_name => 'John D.', :email => 'some@email.com', :openid_identifier => "http://johndoe.myopenid.com/")
-  u.confirm!
+Given /^I am signed in$/ do
+  Given %Q(I have signed up with "some@email.com")
+  @user = User.find_by_api_key(the.user.api_key)
+  visit signin_path
+  fill_in("Email", :with => "some@email.com")
+  fill_in("Password", :with => "test")
+  click_button("Sign In")
 end
