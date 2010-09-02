@@ -13,7 +13,7 @@ Feature: Sign up
     And I fill in "Confirm Password" with "s3krit"
     And I select "Uruguay" from "Country"
     And I fill in "City" with "Montevideo"
-    And I fill in "User Type" with "Journalist"
+    And I select "Journalist" from "User Type"
     And I press "Sign Up"
     Then my account should be created
     And I should see "Please check your email inbox to confirm your email address"

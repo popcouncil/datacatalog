@@ -23,8 +23,10 @@
 #
 
 class User < ActiveRecord::Base
+  USER_TYPES = %w(Researcher Journalist Student Other)
 
   validates_presence_of :email, :display_name, :country, :city, :user_type
+  validates_inclusion_of :user_type, :in => USER_TYPES
 
   attr_accessor :api_user, :curator
 

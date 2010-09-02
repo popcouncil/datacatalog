@@ -24,7 +24,7 @@
 </li>
 <li>
   <%= openid_form.label :user_type, 'User Type', :for => 'openid_user_type' %>
-  <%= openid_form.text_field :user_type, :id => 'openid_user_type' %>
+  <%= openid_form.select :user_type, User::USER_TYPES, { :include_blank => true }, { :id => 'openid_user_type' } %>
 </li>
 <li>
   <%= openid_form.label :personal_url, 'Site Url (optional)', :for => 'openid_personal_url' %>

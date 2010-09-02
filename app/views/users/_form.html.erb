@@ -32,7 +32,7 @@
 </li>
 <li>
     <%= form.label :user_type, 'User Type' %>
-    <%= form.text_field :user_type %>
+    <%= form.select :user_type, User::USER_TYPES, :include_blank => true %>
 </li>
 <li>
     <%= form.label :personal_url, 'Site Url (optional)'%>
