@@ -2,18 +2,42 @@ Given /^I am a site visitor$/ do
   visit signout_path
 end
 
-Given /^I am a site visitor who already has signed up with "([^\"]*)"$/ do |email|
-  u = User.create!(:display_name => 'John D.', :email => email, :password => 'test', :password_confirmation => 'test')
-  u.confirm!
-  @user = User.find_by_api_key(u.api_key)
+Given /^I have signed up(?: with "(.*)")?(?: and confirmed)?$/ do |email|
+  Given %Q(I have signed up with "#{email || "some@email.com"}" but not yet confirmed)
+  the.user.confirm!
 end
 
-Given /^I have signed up but not yet confirmed$/ do
-  User.create!(:display_name => 'John D.', :email => 'some@email.com', :password => 'test', :password_confirmation => 'test')
+Given /^I am a site visitor who already has signed up with "([^\"]*)"$/ do |email|
+  Given %Q(I have signed up with "#{email}")
+  @user = User.find_by_api_key(the.user.api_key)
+end
+
+Given /^I have signed up(?: with "(.*)")? but not yet confirmed$/ do |email|
+  the.user = User.create!(
+    :display_name => 'John D.',
+    :email => email || 'some@email.com',
+    :password => 'test',
+    :password_confirmation => 'test',
+    :country => 'Uganda',
+    :city => 'Kampala',
+    :user_type => 'Journalist'
+  )
 end
 
 Given /^I have signed up via OpenID but not yet confirmed$/ do
-  User.create!(:display_name => 'John D.', :email => 'some1@email.com', :openid_identifier => "http://someid.com/")
+  the.user = User.create!(
+    :display_name => 'John D.',
+    :email => 'some1@email.com',
+    :openid_identifier => 'http://someid.com/',
+    :country => 'Uganda',
+    :city => 'Kampala',
+    :user_type => 'Journalist'
+  )
+end
+
+Given /^I have signed up via OpenID$/ do
+  Given "I have signed up via OpenID but not yet confirmed"
+  the.user.confirm!
 end
 
 When /^I click on the confirmation link$/ do

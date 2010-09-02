@@ -61,7 +61,7 @@ describe User do
     it "should use an existing user if it exists in the API" do
       # test this using the existing API user generated
       # by rake db:ensure_admin on API instance
-      @user.email = "admin@nationaldatacatalog.com"
+      @user.email = "gaba@cuboxsa.com"
       @user.save
       @user.create_api_user
       @user.api_user.admin.should be true

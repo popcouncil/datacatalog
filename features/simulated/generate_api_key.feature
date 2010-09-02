@@ -22,6 +22,7 @@ Feature:
     And I press "Update"
     Then I should see "The API key has been updated"
 
+  @javascript
   Scenario: Delete an existing API key
     Given I am signed in
     And I have an existing application key with "To make an awesome dataviz app" as its purpose

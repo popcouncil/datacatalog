@@ -10,6 +10,9 @@ Feature: Sign up via OpenID
     And I fill in "OpenID URL" with "http://johndoe.myopenid.com/"
     And I fill in "openid_name" with "John D."
     And I fill in "openid_email" with "john@test.com"
+    And I select "Uruguay" from "openid_country"
+    And I fill in "openid_city" with "Montevideo"
+    And I select "Journalist" from "openid_user_type"
     And I press "Sign Up via OpenID"
     Then my OpenID-enabled account should be created
     And I should see "You have been signed in"

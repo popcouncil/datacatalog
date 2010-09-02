@@ -35,8 +35,7 @@ class ApplicationController < ActionController::Base
 
   def set_avatar
     gender = rand(2) == 1 ? "male" : "female"
-    ActionView::Base.default_gravatar_image =
-      "http://nationaldatacatalog.com/images/avatar_#{gender}_lg.png"
+    ActionView::Base.default_gravatar_image = "/images/avatar_#{gender}_lg.png"
   end
 
   def set_analytics

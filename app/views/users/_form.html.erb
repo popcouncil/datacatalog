@@ -18,7 +18,32 @@
 </li>
 <% end -%>
 
+<li>
+    <%= form.label :affiliation, 'Affiliation (optional)' %>
+    <%= form.text_field :affiliation %>
+</li>
+<li>
+    <%= form.label :country %>
+    <%= form.country_select :country %>
+</li>
+<li>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+</li>
+<li>
+    <%= form.label :user_type, 'User Type' %>
+    <%= form.select :user_type, User::USER_TYPES, :include_blank => true %>
+</li>
+<li>
+    <%= form.label :personal_url, 'Site Url (optional)'%>
+    <%= form.text_field :personal_url %>
+</li>
+<li>
+    <%= form.label :telephone_number, 'Cell Phone (optional)'%>
+    <%= form.text_field :telephone_number %>
+</li>
+
 <li class="signIn_cues">
   <%= form.check_box :list_opt_in, {:class => "checkbox"} %>
-  <%= form.label :remember_me, "Yes, email me updates from the Sunlight Foundation.", {:class => "inline"}  %>
+  <%= form.label :list_opt_in, 'Yes, email me updates from Population Council.', {:class => 'inline'}  %>
 </li>

@@ -32,8 +32,7 @@ Feature: Contact Us
   Scenario: View contact form as logged in user
     Given I am signed in
     When I go to the contact form
-    Then I should not see "Name"
-    And I should not see "Email"
+    Then I should not see fields for name or email
 
   Scenario: Use contact form as logged in user
     Given I am signed in
