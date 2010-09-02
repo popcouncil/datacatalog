@@ -16,7 +16,7 @@
 </li>
 <li>
   <%= openid_form.label :country, 'Country', :for => 'openid_country' %>
-  <%= openid_form.text_field :country, :id => 'openid_country' %>
+  <%= openid_form.country_select :country, nil, {}, :id => 'openid_country' %>
 </li>
 <li>
   <%= openid_form.label :city, 'City', :for => 'openid_city' %>

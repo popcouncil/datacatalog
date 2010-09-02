@@ -10,7 +10,7 @@ Feature: Sign up via OpenID
     And I fill in "OpenID URL" with "http://johndoe.myopenid.com/"
     And I fill in "openid_name" with "John D."
     And I fill in "openid_email" with "john@test.com"
-    And I fill in "openid_country" with "Uruguay"
+    And I select "Uruguay" from "openid_country"
     And I fill in "openid_city" with "Montevideo"
     And I fill in "openid_user_type" with "Journalist"
     And I press "Sign Up via OpenID"
