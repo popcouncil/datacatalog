@@ -29,5 +29,6 @@ group :test do
 end
 
 group :development, :test do
+  gem 'mongrel'
   gem 'ruby-debug'
 end 
