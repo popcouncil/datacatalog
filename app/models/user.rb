@@ -20,7 +20,12 @@
 #  openid_identifier   :string(255)
 #  display_name        :string(255)
 #  api_key             :string(255)
-#
+#  country             :string(255)
+#  city                :string(255)
+#  user_type           :string(255)
+#  affiliation         :string(255)
+#  personal_url        :string(255)
+#  telephone_number    :string(255)
 
 class User < ActiveRecord::Base
   USER_TYPES = %w(Researcher Journalist Student Other)
