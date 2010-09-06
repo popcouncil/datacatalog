@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
 
     @updated_params[:name] = self.display_name if self.display_name_changed?
     @updated_params[:email] = self.email if self.email_changed?
-    @updated_params[:curator] = self.curator if self.curator
+    @updated_params[:role] = "curator" if self.curator
 
     @updated_params
   end
