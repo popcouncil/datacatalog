@@ -12,6 +12,14 @@ Given /^I am a site visitor who already has signed up with "([^\"]*)"$/ do |emai
   @user = User.find_by_api_key(the.user.api_key)
 end
 
+Given /^I am a site visitor who had an admin account created with "([^\"]*)" by an admin$/ do |email|
+  Given %Q(I have signed up with "#{email}")
+  the.user.role = "admin"
+  the.user.save
+
+  @user = User.find_by_api_key(the.user.api_key)
+end
+
 Given /^I have signed up(?: with "(.*)")? but not yet confirmed$/ do |email|
   the.user = User.create!(
     :display_name => 'John D.',

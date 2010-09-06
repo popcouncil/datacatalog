@@ -29,11 +29,13 @@
 
 class User < ActiveRecord::Base
   USER_TYPES = %w(Researcher Journalist Student Other)
+  ROLES = { "Admin" => :admin, "Curator" => :curator, "Normal User" => :basic }
 
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES
 
-  attr_accessor :api_user, :curator
+  attr_accessor :api_user, :role
+  attr_reader :curator
 
   before_save :set_update_params
   after_save :update_api_user
@@ -60,12 +62,16 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def curator=(is_curator)
+    self.role = "curator" if !!is_curator
+  end
+
   def set_update_params
     @updated_params = {}
 
     @updated_params[:name] = self.display_name if self.display_name_changed?
     @updated_params[:email] = self.email if self.email_changed?
-    @updated_params[:role] = "curator" if self.curator
+    @updated_params[:role] = self.role if self.role
 
     @updated_params
   end
@@ -94,6 +100,11 @@ class User < ActiveRecord::Base
     Notifier.deliver_welcome_message(self)
   end
 
+  def deliver_admin_welcome!
+    reset_perishable_token!
+    Notifier.deliver_admin_welcome(self)
+  end
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
@@ -112,13 +123,13 @@ class User < ActiveRecord::Base
   # Use admin?, curator?, and admin_or_curator? for authorization.
   # Never use curator (sans question mark), as it is an in-memory accessor.
   def admin?
-    self.api_user.admin
+    self.api_user.try(:admin)
   end
 
   # Use admin?, curator?, and admin_or_curator? for authorization.
   # Never use curator (sans question mark), as it is an in-memory accessor.
   def curator?
-    self.api_user.curator
+    self.api_user.try(:curator)
   end
 
   # Use admin?, curator?, and admin_or_curator? for authorization.

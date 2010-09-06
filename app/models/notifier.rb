@@ -16,6 +16,15 @@ class Notifier < ActionMailer::Base
     body          :profile_url => profile_url, :api_key => user.api_key
   end
 
+  def admin_welcome(user)
+    subject       "A new account has been created for you!"
+    from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    recipients    user.email
+    sent_on       Time.now
+    body          :profile_url => profile_url, :email => user.email, :password => user.password
+  end
+
+
   def password_reset_instructions(user)
     subject      "Password Reset Instructions"
     from         "National Data Catalog <natdatcat@sunlightfoundation.com>"

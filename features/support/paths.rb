@@ -17,6 +17,8 @@ module NavigationHelpers
       '/contact'
     when /the data source suggestion form/
       '/suggest'
+    when 'the admin dashboard'
+      '/admin'
 
     # Add more mappings here.
     # Here is a more fancy example:

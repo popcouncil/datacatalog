@@ -9,11 +9,20 @@
 <% end %>
 
 <div id="ltColumn">
+  <%= show_flash_message %>
+
   <% if @search_term.blank? -%>
-  <h3>There are <%= total_users %> registered users</h3>
+  <h3>
+    There are <%= total_users %> registered users.
+    <%= link_to "Add New", new_admin_user_path %>
+  </h3>
   <% else -%>
-  <h3>There are <%= @users.length %> results for: <%= @search_term %></h3>
+    <h3>
+      There are <%= @users.length %> results for: <%= @search_term %>.
+      <%= link_to "Add New", new_admin_user_path %>
+    </h3>
   <% end -%>
+
   <!--<div id="dashboardControls">
     <ul>
       <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
@@ -54,6 +63,19 @@
       <% end -%>
       <p class="tip">Enter in a name or email address.</p>
     </div>
+    
+    <div id="adminUsers" class="module">
+      <h3>Admins</h3>
+     
+      <ul class="adminUsers">
+        <% @admins.each do |user| %>
+          <li>
+             <%= link_to user.display_name, admin_user_path(user) %>
+          </li>
+        <% end %>
+        <li class="clear"></li>
+      </ul>
+    </div>
 
     <div id="adminUsers" class="module">
       <h3>Curators</h3>
@@ -77,19 +99,4 @@
         <li class="clear"></li>
       </ul>
     </div>
-
-    <div id="adminUsers" class="module">
-      <h3>Admins</h3>
-      <ul class="adminUsers">
-        <li>
-          <span class="adminName">Sam Admin</span>
-        </li>
-        <li>
-          <span class="adminName">Ruth Root</span>
-        </li>
-        <li class="clear"></li>
-      </ul>
-    </div>
-
-  </div>
 </div>

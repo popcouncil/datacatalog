@@ -16,6 +16,7 @@ class Admin::UsersController < AdminController
     else
       User.alphabetical
     end
+    @admins = User.admins
   end
 
   def show
@@ -35,4 +36,22 @@ class Admin::UsersController < AdminController
     redirect_to :back
   end
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(params[:user])
+
+    if @user.save
+      @user.confirm!
+      @user.deliver_admin_welcome!
+
+      flash[:notice] = "The user was created and notified."
+      redirect_to admin_users_path
+    else
+      flash[:error] = "Error creating user"
+      render :new
+    end
+  end
 end

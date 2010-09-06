@@ -1,0 +1,27 @@
+<% content_for :title do %>
+  New User
+<% end %>
+
+<% content_for :body_class do %>admin<% end %>
+
+<% content_for :tabs do %>
+  <%= render 'admin/tabs' %>
+<% end %>
+
+<div id="ltColumn">
+  <% form_for @user, :url => admin_users_path do |f| %>
+    <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+    <ul id="standard_signup">
+      <li>
+        <%= f.label :role %>
+        <%= f.select :role, User::ROLES, :include_blank => true %>
+      </li>
+      <%= render :partial => "users/form", :object => f %>
+      <li>
+        <button class="signUp" id="user_submit" type="submit" value="Sign Up" name="commit">
+          <span>Create User</span>
+        </button>
+      </li>
+    </ul>
+  <% end -%>
+</div>
