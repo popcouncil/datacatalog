@@ -25,15 +25,14 @@ class Admin::UsersController < AdminController
 
   def update
     @user = User.find(params[:id])
-    @user.attributes = params[:user]
-    @user.save do |result|
-      if result
-        flash[:notice] = "Profile updated!"
-      else
-        flash[:error] = "Error updating!"
-      end
+
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Profile updated!"
+      redirect_to :back
+    else
+      flash[:error] = "Error updating!"
+      render :show
     end
-    redirect_to :back
   end
 
   def new
