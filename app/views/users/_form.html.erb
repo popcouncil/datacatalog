@@ -7,16 +7,19 @@
     <%= form.text_field :email %>
 </li>
 
-<% if @user.openid_identifier.blank? -%>
-<li>
-    <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
-    <%= form.password_field :password %>
-</li>
-<li>
-    <%= form.label :password_confirmation, 'Confirm Password' %>
-    <%= form.password_field :password_confirmation %>
-</li>
-<% end -%>
+<%# admin users shouldn't change passwords, that's why we have reset password %>
+<% if local_assigns[:admin].blank? %>
+  <% if @user.openid_identifier.blank? -%>
+  <li>
+      <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
+      <%= form.password_field :password, :value => nil %>
+  </li>
+  <li>
+      <%= form.label :password_confirmation, 'Confirm Password' %>
+      <%= form.password_field :password_confirmation, :value => nil %>
+  </li>
+  <% end %>
+<% end %>
 
 <li>
     <%= form.label :affiliation, 'Affiliation (optional)' %>

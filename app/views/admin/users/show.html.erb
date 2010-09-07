@@ -45,7 +45,7 @@
         <%= f.label :role %>
         <%= f.select :role, User::ROLES, :selected => user_role(f.object) %>
       </li>
-      <%= render "users/form", :form => f %>
+      <%= render "users/form", :form => f, :admin => true %>
       <button class="update" id="user_submit" type="submit" value="Update" name="commit">
         <span>Update</span>
       </button>
