@@ -78,29 +78,29 @@ describe User do
 
       new_name = "Sam Snead"
       @user.display_name = new_name
-      @user.curator = true
+      @user.ministry_user = true
       @user.save
       @user.api_user.name.should eql(new_name)
-      @user.api_user.curator.should be true
-      @user.curator?.should be true
+      @user.api_user.ministry_user.should be true
+      @user.ministry_user?.should be true
     end
 
   end # describe "#save"
 
-  describe ".curators" do
+  describe ".ministry_users" do
 
-    it "should return a collection of curator users" do
+    it "should return a collection of ministry users" do
       u1 = User.create!(valid_user_attributes({:display_name => "User One", :email => "user@one.com"}))
       u2 = User.create!(valid_user_attributes({:display_name => "User Two", :email => "user@two.com"}))
       [@user, u1, u2].each { |u| u.confirm! }
-      User.curators.should be_empty
+      User.ministry_users.should be_empty
 
-      u1.curator = true
+      u1.ministry_user = true
       u1.save
-      User.curators.first.display_name.should eql("User One")
+      User.ministry_users.first.display_name.should eql("User One")
     end
 
-  end # describe ".curators"
+  end # describe ".ministry_users"
 
   describe ".admins" do
 

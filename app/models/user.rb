@@ -29,13 +29,13 @@
 
 class User < ActiveRecord::Base
   USER_TYPES = %w(Researcher Journalist Student Other)
-  ROLES = { "Admin" => :admin, "Curator" => :curator, "Normal User" => :basic }
+  ROLES = { "Admin" => :admin, "Ministry User" => :ministry_user, "Normal User" => :basic }
 
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES
 
   attr_accessor :api_user, :role
-  attr_reader :curator
+  attr_reader :ministry_user
 
   before_save :set_update_params
   after_save :update_api_user
@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
     self.all.select { |u| u.admin? }
   end
 
-  def self.curators
-    self.all.select { |u| u.curator? }
+  def self.ministry_users
+    self.all.select { |u| u.ministry_user? }
   end
 
   def after_find
@@ -62,8 +62,8 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def curator=(is_curator)
-    self.role = "curator" if !!is_curator
+  def ministry_user=(is_ministry_user)
+    self.role = "ministry_user" if !!is_ministry_user
   end
 
   def set_update_params
@@ -120,22 +120,22 @@ class User < ActiveRecord::Base
     self.api_id = self.api_user.id
   end
 
-  # Use admin?, curator?, and admin_or_curator? for authorization.
-  # Never use curator (sans question mark), as it is an in-memory accessor.
+  # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
+  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
   def admin?
     self.api_user.try(:admin)
   end
 
-  # Use admin?, curator?, and admin_or_curator? for authorization.
-  # Never use curator (sans question mark), as it is an in-memory accessor.
-  def curator?
-    self.api_user.try(:curator)
+  # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
+  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
+  def ministry_user?
+    self.api_user.try(:ministry_user)
   end
 
-  # Use admin?, curator?, and admin_or_curator? for authorization.
-  # Never use curator (sans question mark), as it is an in-memory accessor.
-  def admin_or_curator?
-    self.admin? || self.curator?
+  # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
+  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
+  def admin_or_ministry_user?
+    self.admin? || self.ministry_user?
   end
 
   private

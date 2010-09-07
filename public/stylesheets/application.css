@@ -384,7 +384,7 @@ form#sidebarSearch button.addTerm, form#sidebarSearch button.addOrganization, fo
 
 a.calendar { background: url(/images/calendarIcon.png) top right no-repeat; width: 20px; height: 19px; float: left; margin-left: 15px;}
 
-a#addTagLink, div#additionalFields h3 a, a.addLink, .addCurator{ background: url(/images/btn_add.png) top left no-repeat; padding-bottom: 3px; padding-left: 28px;}
+a#addTagLink, div#additionalFields h3 a, a.addLink, .addMinistryUser{ background: url(/images/btn_add.png) top left no-repeat; padding-bottom: 3px; padding-left: 28px;}
 div#additionalFields h3, a.addLink { margin-bottom: 0px; font-size: 120%;}
 div#tags li, div#adminUsers li{ margin-bottom: 5px;}
 div#tags ul { margin-bottom: 20px;}

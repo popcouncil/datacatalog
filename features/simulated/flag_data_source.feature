@@ -10,4 +10,4 @@ Feature: Flag data source as bad
     And leave a comment describing the issue
     Then the data source is marked as "Flagged as Bad"
     And my comment is displayed prominently on the page
-    And the site curators are emailed about the problem
+    And the site ministry users are emailed about the problem
