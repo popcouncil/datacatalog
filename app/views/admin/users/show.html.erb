@@ -17,19 +17,21 @@
       <th class="keyPurpose">Key/Purpose</th>
       <th class="keyOptions right">Options</th>
     </tr>
-    <% @user.api_user.api_keys.each do |key| %>
-    <tr class="user_keys">
-      <td class="left"><%= key.key_type %></td>
-      <td class="keyContent">
-        <div class="key"><%= key.api_key %></div>
-        <p><%= key.purpose %></p>
-      </td>
-      <td class="right">
-        <% unless key.key_type == "primary" -%>
-          <%= link_to "Delete", admin_user_key_path(@user.id, key.id), :method => :delete %>
-        <% end -%>
-      </td>
-    </tr>
+    <% if @user.api_user %>
+      <% @user.api_user.api_keys.each do |key| %>
+      <tr class="user_keys">
+        <td class="left"><%= key.key_type %></td>
+        <td class="keyContent">
+          <div class="key"><%= key.api_key %></div>
+          <p><%= key.purpose %></p>
+        </td>
+        <td class="right">
+          <% unless key.key_type == "primary" -%>
+            <%= link_to "Delete", admin_user_key_path(@user.id, key.id), :method => :delete %>
+          <% end -%>
+        </td>
+      </tr>
+      <% end %>
     <% end %>
   </table>
   </div>
