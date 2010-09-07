@@ -38,36 +38,14 @@
 
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
-  <% form_for @user, :url => admin_user_path(@user.id), :method => :put do |form| %>
-    <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+  <% form_for @user, :url => admin_user_path(@user.id), :method => :put do |f| %>
+    <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
     <ul>
       <li>
-          <%= form.label :display_name, "Name" %>
-          <%= form.text_field :display_name %>
+        <%= f.label :role %>
+        <%= f.select :role, User::ROLES, :selected => user_role(f.object) %>
       </li>
-      <li>
-          <%= form.label :email %>
-          <%= form.text_field :email %>
-      </li>
-      <% if @user.openid_identifier.blank? -%>
-      <li>
-          <%= form.label :password, form.object.new_record? ? nil : "Change Password" %>
-          <%= form.password_field :password %>
-      </li>
-      <li>
-          <%= form.label :password_confirmation, 'Confirm Password' %>
-          <%= form.password_field :password_confirmation %>
-      </li>
-      <% end -%>
-      <li>
-          <%= form.label :openid_identifier, 'OpenID URL' %>
-          <%= form.text_field :openid_identifier, :readonly => "readonly" %>
-      </li>
-      <p class="tip">OpenID must be edited by user.</p>
-      <li>
-          <%= form.check_box :curator, :checked => @user.curator? %>&nbsp;Curator?
-      </li>
-
+      <%= render "users/form", :form => f %>
       <button class="update" id="user_submit" type="submit" value="Update" name="commit">
         <span>Update</span>
       </button>
