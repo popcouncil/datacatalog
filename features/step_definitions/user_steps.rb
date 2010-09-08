@@ -1,6 +1,7 @@
-Then /^a new (.*) account should be created with "(.*)"$/ do |role, email|
+Then /^a new (.*) account should be created with "(.*)"$/ do |role_label, email|
+  role = User::ROLES[role_label]
   user = User.find_by_email(email)
-  user.should send("be_#{role}")
+  user.api_user.role.should == role.to_s
 end
 
 Then /^a new (?:.*) account should not be created with "(.*)"$/ do |email|

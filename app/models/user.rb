@@ -33,10 +33,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES
+  validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
 
   attr_accessor :api_user, :role
   attr_reader :ministry_user
 
+  before_validation_on_create :set_default_role
   before_save :set_update_params
   after_save :update_api_user
 
@@ -145,4 +147,7 @@ class User < ActiveRecord::Base
     self.display_name = registration["nickname"] if display_name.blank?
   end
 
+  def set_default_role
+    self.role = "basic" if role.blank?
+  end
 end
