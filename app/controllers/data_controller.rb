@@ -1,6 +1,14 @@
 class DataController < ApplicationController
   before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
-  before_filter :set_source, :set_favorite
+  before_filter :set_source, :set_favorite, :except => [:new, :create]
+
+  def new
+    @source = DataCatalog::Source.new
+    @organizations = DataCatalog::Organization.all
+  end
+
+  def create
+  end
 
   def show
     @comment = DataCatalog::Comment.new

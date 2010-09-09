@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signin             "signin",                                :controller => "user_sessions",   :action => "new"
   map.signout            "signout",                               :controller => "user_sessions",   :action => "destroy"
   map.signup             "signup",                                :controller => "users",           :action => "new"
+  map.source_new         "data/new",                              :controller => "data",            :action => "new"
+  map.source_create      "data/create",                           :controller => "data",            :action => "create"
   map.source             "data/:slug",                            :controller => "data",            :action => "show"
   map.source_comment     "data/:slug/comment",                    :controller => "data",            :action => "comment"
   map.comment_rating     "data/:slug/comment_rating/:comment_id", :controller => "data",            :action => "comment_rating"

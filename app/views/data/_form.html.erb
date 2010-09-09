@@ -1,0 +1,62 @@
+<li>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+</li>
+<li>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+</li>
+<li>
+  <%= form.label :country %>
+  <%= form.country_select :country %>
+</li>
+<li>
+  <%= form.label :organization %>
+  <%= form.select :organization, organizations_for_select(@organizations) %>
+</li>
+<li>
+  <%= form.label :original_author_name, "Author Name" %>
+  <%= form.text_field :original_author_name %>
+</li>
+<li>
+  <%= form.label :original_author_affiliation, "Author Affiliation" %>
+  <%= form.text_field :original_author_affiliation %>
+</li>
+<li>
+  <%= form.label :url, "Data URL" %>
+  <%= form.text_field :url %>
+</li>
+<li>
+  <%= form.label :status %>
+  <%= form.select :status, %w(Planned Published Completed) %>
+</li>
+<li>
+  <%= form.label :project_name, "Project Name" %>
+  <%= form.text_field :project_name %>
+</li>
+<li>
+  <%= form.label :funder %>
+  <%= form.text_field:funder %>
+</li>
+<li>
+  <%= form.label :year %>
+  <%= form.text_field :year %>
+</li>
+<li>
+  <%= form.label :tags %>
+  <%= form.text_field :tags %>
+</li>
+
+<h2>Contact details to request more information</h2>
+<li>
+  <%= form.label :contact_name, "Name" %>
+  <%= form.text_field :contact_name %>
+</li>
+<li>
+  <%= form.label :contact_email, "Email" %>
+  <%= form.text_field :contact_email %>
+</li>
+<li>
+  <%= form.label :contact_phone, "Phone" %>
+  <%= form.text_field :contact_phone %>
+</li>
