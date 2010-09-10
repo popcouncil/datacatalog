@@ -102,4 +102,16 @@ module ApplicationHelper
   def organizations_for_select(list)
     list.map {|org| [org.name, org.id] }
   end
+
+  def parse_api_errors(hash)
+    return [] if hash.blank?
+
+    errors = []
+    hash.each do |attr, validations|
+      validations.each do |val|
+        errors << "#{attr} #{val}".capitalize
+      end
+    end
+    errors
+  end
 end

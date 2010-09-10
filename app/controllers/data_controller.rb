@@ -8,6 +8,31 @@ class DataController < ApplicationController
   end
 
   def create
+    attributes = params[:data_catalog_source].dup
+
+    attributes[:author] = {
+      :name        => attributes.delete(:original_author_name),
+      :affiliation => attributes.delete(:original_author_affiliation)
+    }
+    attributes[:contact] = {
+      :name  => attributes.delete(:contact_name),
+      :email => attributes.delete(:contact_email),
+      :phone => attributes.delete(:contact_phone)
+    }
+
+    attributes[:source_type] = "interactive"
+
+    DataCatalog.with_key(current_user.api_key) do
+      DataCatalog::Source.create(attributes)
+    end
+
+    flash[:notice] = "Your Data has been submitted"
+    redirect_to new_source_path
+  rescue DataCatalog::BadRequest => e
+    @errors = e.errors
+    @source = DataCatalog::Source.new(attributes)
+    @organizations = DataCatalog::Organization.all
+    render :new
   end
 
   def show

@@ -22,5 +22,14 @@ Feature: Adding data source
     And I fill in "Name" with "John Doe"
     And I fill in "Phone" with "+1 (234) 567 8900"
     And I fill in "Email" with "john.doe@example.org"
-    And I press "Submit"    
+    And I press "Submit"
     Then I should see "Your Data has been submitted"
+
+  Scenario: An admin adds a new data source with errors
+    Given I am a signed in admin
+    And an organization named "DCRA" exists
+    When I follow "Add Data"
+    And I fill in "Title" with ""
+    And I press "Submit"
+    Then I should not see "Your Data has been submitted"
+    And I should see "Title can't be empty"
