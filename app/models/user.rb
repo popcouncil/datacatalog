@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :user_type, :in => USER_TYPES
   validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
 
-  attr_accessor :api_user, :role
+  attr_writer :api_user
   attr_reader :ministry_user
 
   before_validation_on_create :set_default_role
@@ -58,8 +58,8 @@ class User < ActiveRecord::Base
     self.all.select { |u| u.ministry_user? }
   end
 
-  def after_find
-    self.api_user = self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
+  def api_user
+    @api_user ||= self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
   rescue ActiveRecord::MissingAttributeError, DataCatalog::NotFound
     nil
   end
@@ -73,7 +73,6 @@ class User < ActiveRecord::Base
 
     @updated_params[:name] = self.display_name if self.display_name_changed?
     @updated_params[:email] = self.email if self.email_changed?
-    @updated_params[:role] = self.role if self.role
 
     @updated_params
   end
@@ -138,6 +137,22 @@ class User < ActiveRecord::Base
   # Never use ministry_user (sans question mark), as it is an in-memory accessor.
   def admin_or_ministry_user?
     self.admin? || self.ministry_user?
+  end
+
+  def role
+    @role ||= api_user.try(:role)
+  end
+
+  def role=(role)
+    @role = role
+  end
+
+  def update_role(role, api_key)
+    self.role = role
+
+    DataCatalog.with_key(api_key) do
+      DataCatalog::User.update(self.api_user.id, :role => role)
+    end
   end
 
   private

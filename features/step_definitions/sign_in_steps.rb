@@ -9,8 +9,7 @@ end
 
 Given /^I am a signed in (.*)$/ do |role|
   Given %Q(I have signed up with "some@email.com")
-  the.user.role = role
-  the.user.save
+  the.user.update_role(role, DataCatalog.api_key)
 
   visit signin_path
   fill_in("Email", :with => "some@email.com")

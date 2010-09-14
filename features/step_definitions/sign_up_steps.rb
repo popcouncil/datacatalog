@@ -14,8 +14,7 @@ end
 
 Given /^I am a site visitor who had an admin account created with "([^\"]*)" by an admin$/ do |email|
   Given %Q(I have signed up with "#{email}")
-  the.user.role = "admin"
-  the.user.save
+  the.user.update_role("admin", DataCatalog.api_key)
 
   @user = User.find_by_api_key(the.user.api_key)
 end
