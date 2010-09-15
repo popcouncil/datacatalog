@@ -40,6 +40,10 @@ class DataRecord < ActiveRecord::Base
     @comments ||= DataCatalog::Comment.all(:source_id => id)
   end
 
+  def rating_stats
+    OpenStruct.new(:average => 3, :total => 15, :count => 5)
+  end
+
   private
 
   def make_slug
