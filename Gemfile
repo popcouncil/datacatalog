@@ -16,6 +16,7 @@ gem 'datacatalog', '>= 0.4.14'
 gem 'frequency', '>= 0.1.5'
 gem 'kronos', '>= 0.1.6'
 gem 'unindentable', '>= 0.0.1'
+gem 'paperclip', '>= 2.3.3'
 
 group :test do
   gem "rspec-rails", ">= 1.2.0", :require => false
