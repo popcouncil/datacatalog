@@ -4,6 +4,7 @@ class DataRecord < ActiveRecord::Base
   belongs_to :contact, :dependent => :destroy
   belongs_to :catalog, :dependent => :destroy
   has_many :documents, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
 
   before_validation_on_create :make_slug
 
@@ -32,7 +33,13 @@ class DataRecord < ActiveRecord::Base
   end
 
   def downloads
+    warn "DataRecord#downloads is deprecated (called from #{caller.first})"
     []
+  end
+
+  def user_note
+    warn "DataRecord#downloads is deprecated (called from #{caller.first})"
+    OpenStruct.new
   end
 
   def comments

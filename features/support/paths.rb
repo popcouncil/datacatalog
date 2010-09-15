@@ -17,8 +17,12 @@ module NavigationHelpers
       '/contact'
     when /the data source suggestion form/
       '/suggest'
+    when 'my dashboard'
+      dashboard_path
     when 'the admin dashboard'
-      '/admin'
+      admin_path
+    when "the data record's page"
+      data_record_path(the.data_record)
 
     # Add more mappings here.
     # Here is a more fancy example:

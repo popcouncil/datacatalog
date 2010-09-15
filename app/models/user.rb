@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   USER_TYPES = %w(Researcher Journalist Student Other)
   ROLES = { "Admin" => :admin, "Ministry User" => :ministry_user, "Normal User" => :basic }
 
+  has_many :favorites, :dependent => :destroy
+  has_many :favorite_records, :through => :favorites, :source => :data_record
+
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES
   validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
@@ -58,10 +61,6 @@ class User < ActiveRecord::Base
     else
       all(:conditions => ["display_name LIKE ?", "%#{term}%"])
     end
-  end
-
-  def favorites
-    []
   end
 
   def confirmed?
@@ -91,6 +90,10 @@ class User < ActiveRecord::Base
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
+  end
+
+  def favorite?(data_record)
+    favorite_records.include?(data_record)
   end
 
   # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.

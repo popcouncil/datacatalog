@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_records, :as => "data", :only => [:new, :create, :show]
+  map.resources :data_records, :as => "data", :only => [:new, :create, :show] do |data_record|
+    data_record.resource :favorite, :only => [:create, :destroy]
+  end
 
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
@@ -25,12 +27,10 @@ ActionController::Routing::Routes.draw do |map|
   map.source_create_doc  "data/:slug/docs/create",                :controller => "data",            :action => "create_doc"
   map.source_docs        "data/:slug/docs",                       :controller => "data",            :action => "docs"
   map.source_edit_docs   "data/:slug/docs/edit",                  :controller => "data",            :action => "edit_docs"
-  map.source_favorite    "data/:slug/favorite",                   :controller => "data",            :action => "favorite"
   map.source_new_note    "data/:slug/notes/new",                  :controller => "data",            :action => "new_note"
   map.source_notes       "data/:slug/notes",                      :controller => "data",            :action => "notes"
   map.source_rating      "data/:slug/rating/:value",              :controller => "data",            :action => "rating"
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
-  map.source_unfavorite  "data/:slug/unfavorite",                 :controller => "data",            :action => "unfavorite"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
   map.source_update_note "data/:slug/notes/:note_id",             :controller => "data",            :action => "update_note"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"

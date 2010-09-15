@@ -9,7 +9,11 @@ end
 
 Given /^I am a signed in (.*)$/ do |role|
   Given %Q(I have signed up with "some@email.com")
-  the.user.role = role
+  the.user.role = case role
+    when "user"; "basic"
+    when "ministry user"; "ministry_user"
+    else role
+  end
   the.user.save!
 
   visit signin_path
