@@ -18,7 +18,7 @@ Feature: Adding data source
     And I fill in "Project Name" with "The Project"
     And I fill in "Funder" with "Uncle Sam"
     And I fill in "Year" with "2008"
-#    And I fill in "Tags" with "housing, code enforcement, something else"
+    And I fill in "Tags" with "housing, code enforcement, something else"
     And I fill in "Name" with "John Doe"
     And I fill in "Phone" with "+1 (234) 567 8900"
     And I fill in "Email" with "john.doe@example.org"

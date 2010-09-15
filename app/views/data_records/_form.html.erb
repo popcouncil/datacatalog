@@ -46,6 +46,10 @@
   <%= form.label :year %>
   <%= form.text_field :year %>
 </li>
+<li>
+  <%= form.label :tag_list, "Tags" %>
+  <%= form.text_field :tag_list %>
+</li>
 
 <h2>Contact details to request more information</h2>
 <% form.fields_for :contact do |contact_form| %>

@@ -20,6 +20,8 @@ class DataRecord < ActiveRecord::Base
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
 
+  acts_as_taggable
+
   def to_param
     slug
   end
