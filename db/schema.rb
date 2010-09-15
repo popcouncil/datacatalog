@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915162515) do
+ActiveRecord::Schema.define(:version => 20100915192414) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -136,7 +136,6 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.datetime "confirmed_at"
     t.string   "openid_identifier"
     t.string   "display_name"
-    t.string   "api_key"
     t.string   "api_id"
     t.boolean  "list_opt_in",         :default => false
     t.string   "affiliation"
@@ -145,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.string   "personal_url"
     t.string   "telephone_number"
     t.string   "user_type"
+    t.string   "role"
   end
 
 end

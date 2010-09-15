@@ -11,24 +11,18 @@
 <div id="ltColumn">
   <%= show_flash_message %>
 
-  <% if @search_term.blank? -%>
-  <h3>
-    There are <%= total_users %> registered users.
-    <%= link_to "Add New", new_admin_user_path %>
-  </h3>
+  <% if @term.blank? -%>
+    <h3>
+      There are <%= total_users %> registered users.
+      <%= link_to "Add New", new_admin_user_path %>
+    </h3>
   <% else -%>
     <h3>
-      There are <%= @users.length %> results for: <%= @search_term %>.
+      There are <%= @users.length %> results for: <%= @term %>.
       <%= link_to "Add New", new_admin_user_path %>
     </h3>
   <% end -%>
 
-  <!--<div id="dashboardControls">
-    <ul>
-      <li id="deleteBtn"><a class="buttonLink" href="#">Delete</a></li>
-    </ul>
-    <div class="clear"></div>
-  </div>-->
     <table id="usersTable">
       <thead>
         <tr id="titles">

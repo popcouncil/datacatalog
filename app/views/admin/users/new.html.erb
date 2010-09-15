@@ -14,7 +14,7 @@
     <ul id="standard_signup">
       <li>
         <%= f.label :role %>
-        <%= f.select :role, User::ROLES, :selected => user_role(f.object) %>
+        <%= f.select :role, User::ROLES, :selected => f.object.role.try(:to_sym) %>
       </li>
       <%= render :partial => "users/form", :object => f %>
       <li>

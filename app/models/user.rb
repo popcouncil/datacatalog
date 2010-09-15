@@ -28,6 +28,8 @@
 #  telephone_number    :string(255)
 
 class User < ActiveRecord::Base
+  EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
+
   USER_TYPES = %w(Researcher Journalist Student Other)
   ROLES = { "Admin" => :admin, "Ministry User" => :ministry_user, "Normal User" => :basic }
 
@@ -35,12 +37,12 @@ class User < ActiveRecord::Base
   validates_inclusion_of :user_type, :in => USER_TYPES
   validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
 
-  attr_writer :api_user
-  attr_reader :ministry_user
-
   before_validation_on_create :set_default_role
-  before_save :set_update_params
-  after_save :update_api_user
+
+  named_scope :alphabetical, :order => 'display_name'
+
+  named_scope :admins,         :conditions => { :role => "admin" }
+  named_scope :ministry_users, :conditions => { :role => "ministry_user" }
 
   acts_as_authentic do |config|
     config.openid_required_fields = [:nickname, :email]
@@ -48,37 +50,18 @@ class User < ActiveRecord::Base
 
   acts_as_tagger
 
-  named_scope :alphabetical, :order => 'display_name'
+  def self.search(term)
+    return alphabetical if term.blank?
 
-  def self.admins
-    self.all.select { |u| u.admin? }
+    if term =~ EMAIL_REGEX
+      all(:conditions => { :email => term })
+    else
+      all(:conditions => ["display_name LIKE ?", "%#{term}%"])
+    end
   end
 
-  def self.ministry_users
-    self.all.select { |u| u.ministry_user? }
-  end
-
-  def api_user
-    @api_user ||= self.api_key ? DataCatalog::User.get_by_api_key(self.api_key) : nil
-  rescue ActiveRecord::MissingAttributeError, DataCatalog::NotFound
-    nil
-  end
-
-  def ministry_user=(is_ministry_user)
-    self.role = "ministry_user" if !!is_ministry_user
-  end
-
-  def set_update_params
-    @updated_params = {}
-
-    @updated_params[:name] = self.display_name if self.display_name_changed?
-    @updated_params[:email] = self.email if self.email_changed?
-
-    @updated_params
-  end
-
-  def update_api_user
-    self.api_user = DataCatalog::User.update(self.api_user.id, @updated_params) unless self.api_key.nil? || @updated_params.empty?
+  def favorites
+    []
   end
 
   def confirmed?
@@ -86,7 +69,6 @@ class User < ActiveRecord::Base
   end
 
   def confirm!
-    create_api_user
     self.confirmed_at = Time.now
     save!
   end
@@ -111,48 +93,24 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)
   end
 
-  def create_api_user
-    if (found_user = DataCatalog::User.first(:email => self.email))
-      self.api_user = found_user
-    else
-      self.api_user = DataCatalog::User.create(:name => self.display_name, :email => self.email)
-    end
-    self.api_key = self.api_user.primary_api_key
-    self.api_id = self.api_user.id
-  end
-
   # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
-  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
   def admin?
-    self.api_user.try(:admin)
+    role == "admin"
   end
 
   # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
-  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
   def ministry_user?
-    self.api_user.try(:ministry_user)
+    role == "ministry_user"
   end
 
   # Use admin?, ministry_user?, and admin_or_ministry_user? for authorization.
-  # Never use ministry_user (sans question mark), as it is an in-memory accessor.
   def admin_or_ministry_user?
-    self.admin? || self.ministry_user?
+    admin? || ministry_user?
   end
 
-  def role
-    @role ||= api_user.try(:role)
-  end
-
-  def role=(role)
-    @role = role
-  end
-
-  def update_role(role, api_key)
-    self.role = role
-
-    DataCatalog.with_key(api_key) do
-      DataCatalog::User.update(self.api_user.id, :role => role)
-    end
+  def api_user
+    warn "User#api_user is deprecated (called from #{caller.first})"
+    self
   end
 
   private

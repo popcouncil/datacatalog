@@ -10,32 +10,6 @@
 
 <div id="ltColumn">
   <%= show_flash_message %>
-  <div id="user_keys">
-  <table id="keys">
-    <tr id="titles">
-      <th class="keyType left">Key Type</th>
-      <th class="keyPurpose">Key/Purpose</th>
-      <th class="keyOptions right">Options</th>
-    </tr>
-    <% if @user.api_user %>
-      <% @user.api_user.api_keys.each do |key| %>
-      <tr class="user_keys">
-        <td class="left"><%= key.key_type %></td>
-        <td class="keyContent">
-          <div class="key"><%= key.api_key %></div>
-          <p><%= key.purpose %></p>
-        </td>
-        <td class="right">
-          <% unless key.key_type == "primary" -%>
-            <%= link_to "Delete", admin_user_key_path(@user.id, key.id), :method => :delete %>
-          <% end -%>
-        </td>
-      </tr>
-      <% end %>
-    <% end %>
-  </table>
-  </div>
-
 </div>
 
 <div id="rtColumnWrapper">
@@ -45,7 +19,7 @@
     <ul>
       <li>
         <%= f.label :role %>
-        <%= f.select :role, User::ROLES, :selected => user_role(f.object) %>
+        <%= f.select :role, User::ROLES, :selected => f.object.role.to_sym %>
       </li>
       <%= render "users/form", :form => f, :admin => true %>
       <button class="update" id="user_submit" type="submit" value="Update" name="commit">

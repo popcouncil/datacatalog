@@ -13,7 +13,7 @@ class Notifier < ActionMailer::Base
     from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
     recipients    user.email
     sent_on       Time.now
-    body          :profile_url => profile_url, :api_key => user.api_key
+    body          :profile_url => profile_url
   end
 
   def admin_welcome(user)
