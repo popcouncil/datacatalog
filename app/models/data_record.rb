@@ -3,13 +3,14 @@ class DataRecord < ActiveRecord::Base
   belongs_to :author,  :dependent => :destroy
   belongs_to :contact, :dependent => :destroy
   belongs_to :catalog, :dependent => :destroy
+  has_many :documents, :dependent => :destroy
 
   before_validation_on_create :make_slug
 
   validates_presence_of :country
   validates_presence_of :description
   validates_presence_of :homepage_url
-  validates_presence_of :slug
+  validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
   validates_presence_of :year
   validates_inclusion_of :status, :in => %w(Planned Published Completed)
@@ -19,6 +20,7 @@ class DataRecord < ActiveRecord::Base
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
+  accepts_nested_attributes_for :documents
 
   acts_as_taggable
 
@@ -50,5 +52,9 @@ class DataRecord < ActiveRecord::Base
     end
 
     self.slug = slug
+  end
+
+  def has_title?
+    title.present?
   end
 end

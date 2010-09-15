@@ -28,6 +28,7 @@ class DataRecordsController < ApplicationController
 
   def initialize_data_record
     @data_record = DataRecord.new
+    @data_record.documents.build
     @data_record.build_author
     @data_record.build_contact
     @data_record.build_catalog
