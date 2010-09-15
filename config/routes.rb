@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :sources, :controller => "data", :as => "data", :only => [:new, :create]
+  map.resources :data_records, :as => "data", :only => [:new, :create, :show]
 
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"

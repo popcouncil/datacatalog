@@ -14,17 +14,21 @@
   <%= form.label :organization_id %>
   <%= form.select :organization_id, organizations_for_select(@organizations) %>
 </li>
+
+<% form.fields_for :author do |author_form| %>
+  <li>
+    <%= author_form.label :name, "Author Name" %>
+    <%= author_form.text_field :name %>
+  </li>
+  <li>
+    <%= author_form.label :affiliation, "Author Affiliation" %>
+    <%= author_form.text_field :affiliation %>
+  </li>
+<% end %>
+
 <li>
-  <%= form.label :original_author_name, "Author Name" %>
-  <%= form.text_field :original_author_name %>
-</li>
-<li>
-  <%= form.label :original_author_affiliation, "Author Affiliation" %>
-  <%= form.text_field :original_author_affiliation %>
-</li>
-<li>
-  <%= form.label :url, "Data URL" %>
-  <%= form.text_field :url %>
+  <%= form.label :homepage_url, "Homepage URL" %>
+  <%= form.text_field :homepage_url %>
 </li>
 <li>
   <%= form.label :status %>
@@ -42,21 +46,19 @@
   <%= form.label :year %>
   <%= form.text_field :year %>
 </li>
-<li>
-  <%= form.label :tags %>
-  <%= form.text_field :tags %>
-</li>
 
 <h2>Contact details to request more information</h2>
-<li>
-  <%= form.label :contact_name, "Name" %>
-  <%= form.text_field :contact_name %>
-</li>
-<li>
-  <%= form.label :contact_email, "Email" %>
-  <%= form.text_field :contact_email %>
-</li>
-<li>
-  <%= form.label :contact_phone, "Phone" %>
-  <%= form.text_field :contact_phone %>
-</li>
+<% form.fields_for :contact do |contact_form| %>
+  <li>
+    <%= contact_form.label :name %>
+    <%= contact_form.text_field :name %>
+  </li>
+  <li>
+    <%= contact_form.label :email %>
+    <%= contact_form.text_field :email %>
+  </li>
+  <li>
+    <%= contact_form.label :phone %>
+    <%= contact_form.text_field :phone %>
+  </li>
+<% end %>

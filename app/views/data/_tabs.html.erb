@@ -2,18 +2,18 @@
 <div id="content_tabs">
   <ul>
     <li id="nav_dataDetails">
-      <%= link_to "Data Details", source_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["show"])) %>
+      <%= link_to "Data Details", source_path(@data_record.slug), :class => ("buttonLink " + active_if(:action => ["show"])) %>
     </li>
     <li id="nav_communityDocs">
-      <%= link_to "Community Docs", source_docs_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["docs", "edit_docs", "show_doc"])) %>
+      <%= link_to "Community Docs", source_docs_path(@data_record.slug), :class => ("buttonLink " + active_if(:action => ["docs", "edit_docs", "show_doc"])) %>
     </li>
     <% if current_user -%>
     <li id="nav_privateNotes">
-      <%= link_to "Private Notes", source_notes_path(@source.slug), :class => ("buttonLink " + active_if(:action => ["notes"])) %>
+      <%= link_to "Private Notes", source_notes_path(@data_record.slug), :class => ("buttonLink " + active_if(:action => ["notes"])) %>
     </li>
     <% end -%>
   </ul>
 </div>
-<%= link_to "Report a Problem", source_path(@source.slug, :anchor => "comment_form", :reports_problem => 1), :id => "btn_reportProblem", :class => "buttonLink" %>
+<%= link_to "Report a Problem", source_path(@data_record.slug, :anchor => "comment_form", :reports_problem => 1), :id => "btn_reportProblem", :class => "buttonLink" %>
 <div class="clear"></div>
 <% end %>

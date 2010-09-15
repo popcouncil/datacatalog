@@ -2,39 +2,6 @@ class DataController < ApplicationController
   before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
   before_filter :set_source, :set_favorite, :except => [:new, :create]
 
-  def new
-    @source = DataCatalog::Source.new
-    @organizations = DataCatalog::Organization.all
-  end
-
-  def create
-    attributes = params[:data_catalog_source].dup
-
-    attributes[:author] = {
-      :name        => attributes.delete(:original_author_name),
-      :affiliation => attributes.delete(:original_author_affiliation)
-    }
-    attributes[:contact] = {
-      :name  => attributes.delete(:contact_name),
-      :email => attributes.delete(:contact_email),
-      :phone => attributes.delete(:contact_phone)
-    }
-
-    attributes[:source_type] = "interactive"
-
-    DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Source.create(attributes)
-    end
-
-    flash[:notice] = "Your Data has been submitted"
-    redirect_to new_source_path
-  rescue DataCatalog::BadRequest => e
-    @errors = e.errors
-    @source = DataCatalog::Source.new(attributes)
-    @organizations = DataCatalog::Organization.all
-    render :new
-  end
-
   def show
     @comment = DataCatalog::Comment.new
     @comments = []
@@ -56,14 +23,14 @@ class DataController < ApplicationController
   def comment
     comment = params[:data_catalog_comment]
     DataCatalog.with_key(current_user.api_key) do
-      api_params = { :source_id => @source.id, :text => comment[:text] }
+      api_params = { :source_id => @data_record.id, :text => comment[:text] }
       [:parent_id, :reports_problem].each do |field|
         api_params[field] = comment[field]  if comment[field] && !comment[field].blank?
       end
       DataCatalog::Comment.create(api_params)
     end
     flash[:notice] = "Comment saved!"
-    redirect_to source_path(@source.slug)
+    redirect_to @data_record
   end
 
   def rating

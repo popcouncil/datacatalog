@@ -1,0 +1,21 @@
+<% content_for :title do %>
+  Add Data Source
+<% end %>
+
+<div id="ltColumn">
+  <% content_for :body_class do %>add_data<% end %>
+
+  <% form_for @data_record do |f| %>
+  <%= show_flash_message %>
+  <%= f.error_messages %>
+
+  <ul>
+    <%= render "form", :form => f %>
+    <li>
+      <button class="submit" id="data_suggestion_submit" type="submit" value="Submit" name="commit">
+        <span>Submit</span>
+      </button>
+    </li>
+  </ul>
+  <% end %>
+</div>    
