@@ -14,5 +14,4 @@ config/analytics.yml
 config/server.yml
 public/javascripts/all.js
 public/stylesheets/all.css
-config/s3.yml
 public/system/files
