@@ -32,33 +32,8 @@
         </dl>
       </div>
 
-      <div id="ratingBox">
-        <div class="stars" id="overallRating">
-          <h3 class="textReplace withTip" id="header_overall">Overall Rating</h3>
-          <%= render 'shared/star_rating', :rating => (@data_record.rating_stats.average ? @data_record.rating_stats.average.round : nil) %>
-          <div class="tip">(averaged from <%= rating_count(@data_record.rating_stats.average, @data_record.rating_stats.total) %> votes)</div>
-        </div>
-        <div class="stars" id="yourRating">
-          <h3 class="textReplace" id="header_your">Your Rating</h3>
-          <ul class="you-star-rating star-ratingActive">
-            <li title="Unusable" class="oneStar">
-              <%= link_to 1, source_rating_path(@data_record.slug, 1) %>
-            </li>
-            <li title="Bad" class="twoStars">
-              <%= link_to 2, source_rating_path(@data_record.slug, 2) %>
-            </li>
-            <li title="Fair" class="threeStars">
-              <%= link_to 3, source_rating_path(@data_record.slug, 3) %>
-            </li>
-            <li title="Good" class="fourStars">
-              <%= link_to 4, source_rating_path(@data_record.slug, 4) %>
-            </li>
-            <li title="Great" class="fiveStars">
-              <%= link_to 5, source_rating_path(@data_record.slug, 5) %>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <%= render "ratings/box", :rateable => @data_record %>
+
       <div class="clear"></div>
     </div>
 

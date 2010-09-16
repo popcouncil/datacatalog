@@ -33,14 +33,6 @@ class DataController < ApplicationController
     redirect_to @data_record
   end
 
-  def rating
-    DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Rating.create(:kind => "source", :source_id => @source.id, :value => params[:value])
-    end
-    flash[:notice] = "Rating saved!"
-    redirect_to source_path(@source.slug)
-  end
-
   def comment_rating
     DataCatalog.with_key(current_user.api_key) do
       DataCatalog::Rating.create(:kind => "comment", :comment_id => params[:comment_id], :value => 1)

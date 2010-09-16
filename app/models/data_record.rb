@@ -5,6 +5,7 @@ class DataRecord < ActiveRecord::Base
   belongs_to :catalog, :dependent => :destroy
   has_many :documents, :dependent => :destroy
   has_many :favorites, :dependent => :destroy
+  has_many :ratings,   :dependent => :destroy
 
   before_validation_on_create :make_slug
 
@@ -46,8 +47,13 @@ class DataRecord < ActiveRecord::Base
     @comments ||= DataCatalog::Comment.all(:source_id => id)
   end
 
-  def rating_stats
-    OpenStruct.new(:average => 3, :total => 15, :count => 5)
+  def ratings_average
+    return nil if ratings_count.zero?
+    (ratings.sum(:value) / ratings_count).round
+  end
+
+  def ratings_count
+    ratings.count
   end
 
   private

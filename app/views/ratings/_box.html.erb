@@ -1,0 +1,27 @@
+<div id="ratingBox">
+  <div class="stars" id="overallRating">
+    <h3 class="textReplace withTip" id="header_overall">Overall Rating</h3>
+    <%= render 'ratings/stars', :rating => rateable.ratings_average %>
+    <div class="tip">(averaged from <%= pluralize(rateable.ratings_count, "vote") %>)</div>
+  </div>
+  <div class="stars" id="yourRating">
+    <h3 class="textReplace" id="header_your">Your Rating</h3>
+    <ul class="you-star-rating star-ratingActive">
+      <li title="Unusable" class="oneStar">
+        <%= link_to 1, data_record_rating_path(rateable, :value => 1), :method => :put %>
+      </li>
+      <li title="Bad" class="twoStars">
+        <%= link_to 2, data_record_rating_path(rateable, :value => 2), :method => :put %>
+      </li>
+      <li title="Fair" class="threeStars">
+        <%= link_to 3, data_record_rating_path(rateable, :value => 3), :method => :put %>
+      </li>
+      <li title="Good" class="fourStars">
+        <%= link_to 4, data_record_rating_path(rateable, :value => 4), :method => :put %>
+      </li>
+      <li title="Great" class="fiveStars">
+        <%= link_to 5, data_record_rating_path(rateable, :value => 5), :method => :put %>
+      </li>
+    </ul>
+  </div>
+</div>

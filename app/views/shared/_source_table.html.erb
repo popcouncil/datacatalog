@@ -21,7 +21,7 @@
           <p class="clear"><%= truncate(source.description, :length => 350) %></p>
         </td>
         <td class="center">
-          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
+          <%= render 'ratings/stars', :rating => source.ratings_average %>
         </td>
         <td class="center">
           <% jurisdiction = source.jurisdiction %>

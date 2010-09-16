@@ -90,11 +90,6 @@ module ApplicationHelper
     end
   end
 
-  def rating_count(average, total)
-    return "0" unless average
-    (total.to_i / average.to_i).to_i.to_s
-  end
-
   def extract_id(href)
     %r{/(.*)/(.*)}.match(href)[2]
   end
