@@ -2,24 +2,6 @@ class DataController < ApplicationController
   before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
   before_filter :set_source, :set_favorite, :except => [:new, :create]
 
-  def show
-    @comment = DataCatalog::Comment.new
-    @comments = []
-    @source.comments.each do |comment|
-      comment.id = extract_id(comment.href)
-      comment.children = []
-      comment.user = User.find_by_api_id(extract_id(comment.user.href))
-      if comment.parent
-        parent = find_parent_comment(@comments, comment.parent.id)
-        parent.children << comment
-      else
-        @comments << comment
-      end
-    end
-    @parent_id = params[:parent_id]
-    @reports_problem = params[:reports_problem]
-  end
-
   def comment
     comment = params[:data_catalog_comment]
     DataCatalog.with_key(current_user.api_key) do
@@ -39,24 +21,6 @@ class DataController < ApplicationController
     end
     flash[:notice] = "Comment rating saved!"
     redirect_to source_path(@source.slug)
-  end
-
-  def favorite
-    DataCatalog.with_key(current_user.api_key) do
-     DataCatalog::Favorite.create(:source_id => @source.id)
-    end
-    flash[:notice] = "Added as favorite!"
-    redirect_to :back
-  end
-
-  def unfavorite
-    DataCatalog.with_key(current_user.api_key) do
-     DataCatalog::Favorite.all(:source_id => @source.id).each do |f|
-       DataCatalog::Favorite.destroy(f.id) if f.user_id == current_user.api_id
-      end
-    end
-    flash[:notice] = "Removed favorite."
-    redirect_to :back
   end
 
   def docs
