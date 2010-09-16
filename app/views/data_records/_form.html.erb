@@ -1,0 +1,93 @@
+<ul>
+  <li>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </li>
+  <li>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </li>
+  <li>
+    <%= form.label :country %>
+    <%= form.country_select :country %>
+  </li>
+  <li>
+    <%= form.label :organization_id %>
+    <%= form.select :organization_id, organizations_for_select(@organizations) %>
+  </li>
+
+  <% form.fields_for :author do |author_form| %>
+    <li>
+      <%= author_form.label :name, "Author Name" %>
+      <%= author_form.text_field :name %>
+    </li>
+    <li>
+      <%= author_form.label :affiliation, "Author Affiliation" %>
+      <%= author_form.text_field :affiliation %>
+    </li>
+  <% end %>
+
+  <li>
+    <%= form.label :homepage_url, "Homepage URL" %>
+    <%= form.text_field :homepage_url %>
+  </li>
+  <li>
+    <%= form.label :status %>
+    <%= form.select :status, %w(Planned Published Completed) %>
+  </li>
+  <li>
+    <%= form.label :project_name, "Project Name" %>
+    <%= form.text_field :project_name %>
+  </li>
+  <li>
+    <%= form.label :funder %>
+    <%= form.text_field:funder %>
+  </li>
+  <li>
+    <%= form.label :year %>
+    <%= form.text_field :year %>
+  </li>
+  <li>
+    <%= form.label :tag_list, "Tags" %>
+    <%= form.text_field :tag_list %>
+  </li>
+</ul>
+
+<h2>Attached Documents</h2>
+<% form.fields_for :documents do |document_form| %>
+<ul class="toggable-fields">
+  <li class="toggle">
+    <%= radio_button_tag "provide_document", "upload" %>
+    <%= label_tag "provide_document_upload", "Upload a file from my computer" %>
+
+    <%= radio_button_tag "provide_document", "external" %>
+    <%= label_tag "provide_document_external", "Provide an URL to an external file" %>
+  </li>
+  <li class="toggable upload">
+    <%= document_form.label :file, "Upload a File" %>
+    <%= document_form.file_field :file %>
+  </li>
+  <li class="toggable external">
+    <%= document_form.label :external_url, "External URL" %>
+    <%= document_form.text_field :external_url %>
+  </li>
+</ul>
+<% end %>
+
+<h2>Contact details to request more information</h2>
+<ul>
+<% form.fields_for :contact do |contact_form| %>
+  <li>
+    <%= contact_form.label :name %>
+    <%= contact_form.text_field :name %>
+  </li>
+  <li>
+    <%= contact_form.label :email %>
+    <%= contact_form.text_field :email %>
+  </li>
+  <li>
+    <%= contact_form.label :phone %>
+    <%= contact_form.text_field :phone %>
+  </li>
+<% end %>
+</ul>

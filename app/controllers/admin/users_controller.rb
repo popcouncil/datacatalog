@@ -26,7 +26,10 @@ class Admin::UsersController < AdminController
   def update
     @user = User.find(params[:id])
 
+    role = params[:user].delete(:role)
+
     if @user.update_attributes(params[:user])
+      @user.update_role(role, current_user.api_key) if role.present?
       flash[:notice] = "Profile updated!"
       redirect_to :back
     else
@@ -40,10 +43,12 @@ class Admin::UsersController < AdminController
   end
 
   def create
+    role = params[:user].delete(:role)
     @user = User.new(params[:user])
 
     if @user.save
       @user.confirm!
+      @user.update_role(role, current_user.api_key) if role.present?
       @user.deliver_admin_welcome!
 
       flash[:notice] = "The user was created and notified."

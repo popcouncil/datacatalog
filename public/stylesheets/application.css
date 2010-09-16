@@ -60,7 +60,7 @@ a.advancedSearch_link { float: right;}
 
 /*nav*/
 
-div#nav { margin-left: 465px; float: right;}
+div#nav { margin-left: 392px; float: right;}
 div#nav li { float: left; height: 46px; margin-top: -15px; }
 div#nav li a{ text-indent: -9999em; height: 46px; display: block;}
 
@@ -395,12 +395,15 @@ form label, form#new_data_suggestion label, form#addData label, form#comment lab
 .edit_user select { width: 160px; }
 form#sidebarSearch>ul>li>label{ font-weight: bold; display: block; text-transform: uppercase; color: #371D17; margin-bottom: 10px;}
 form#addData li { margin-bottom: 30px;}
-div#ltColumn form li, div#rtColumn form li, ul#openID_signup li { margin-bottom: 15px;}
+div#ltColumn form li, div#rtColumn form li, ul#openID_signup li { margin-bottom: 15px; clear:both; }
 form#addData input, form#addData textarea { width: 250px;}
 div#ltColumn input, div#ltColumn textarea, div#ltColumn select { width: 370px;}
 div#ltColumn input.full, div#ltColumn textarea.full{ width: 530px;}
 .mono { font: 125% "Inconsolata", "Consolas", "Courier New", "Courier", monospace; }
 div#ltColumn select { max-width: 380px; }
+
+form#new_data_record .toggle label { width: auto; display: inline; float: none; margin-right: 40px; }
+form#new_data_record .toggle input { margin: 0; float: none; display: inline; width: auto }
 
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}

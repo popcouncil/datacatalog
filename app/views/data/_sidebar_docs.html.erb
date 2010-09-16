@@ -6,7 +6,7 @@
       <% if ignore_first -%>
         <% ignore_first = false -%>
       <% else -%>
-        <li><%= link_to time_ago_in_words(doc.updated_at), source_show_doc_path(@source.slug, doc.id) %> ago by <%= link_to doc.user.display_name, user_path(doc.user.id) %></a></li>
+        <li><%= link_to time_ago_in_words(doc.updated_at), source_show_doc_path(@data_record.slug, doc.id) %> ago by <%= link_to doc.user.display_name, user_path(doc.user.id) %></a></li>
       <% end -%>
     <% end -%>
   </ul>

@@ -9,7 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100831205557) do
+ActiveRecord::Schema.define(:version => 20100915162515) do
+
+  create_table "catalogs", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_records", :force => true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.string   "homepage_url"
+    t.text     "description"
+    t.string   "country"
+    t.string   "status"
+    t.string   "project_name"
+    t.string   "funder"
+    t.string   "year"
+    t.string   "organization_id"
+    t.integer  "owner_id"
+    t.integer  "catalog_id"
+    t.integer  "author_id"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -20,6 +46,17 @@ ActiveRecord::Schema.define(:version => 20100831205557) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", :force => true do |t|
+    t.integer  "data_record_id"
+    t.string   "external_url"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +74,16 @@ ActiveRecord::Schema.define(:version => 20100831205557) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "people", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "affiliation"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "submissions", :force => true do |t|

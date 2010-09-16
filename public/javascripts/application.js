@@ -93,4 +93,20 @@ $(document).ready(function(){
     current: 'active'
   });
 
+  $("ul.toggable-fields input[type=radio]").change(function() {
+    var radio = $(this),
+        ul = radio.parents("ul");
+    ul.find("li.toggable").hide();
+    ul.find("li." + radio.val()).show();
+  })
+
+  $("ul.toggable-fields li.toggable").hide().each(function() {
+    var value = $(this).find("input").val(),
+        className = $(this).attr("class").replace(/toggable/, '').replace(/\s+/, '');
+
+    if (value) {
+      $(this).parents("ul").find("input[type=radio][value=" + className + "]").attr("checked", true)
+      $(this).show();
+    }
+  });
 });
