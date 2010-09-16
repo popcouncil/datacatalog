@@ -1,7 +1,7 @@
 class Document < ActiveRecord::Base
   belongs_to :data_record
 
-  has_attached_file :file
+  has_attached_file :file, PAPERCLIP_CONFIG
 
   validate :presence_of_file_or_url
 

@@ -15,6 +15,10 @@ GEM
       activesupport
     authlogic-oid (1.0.4)
       authlogic
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     builder (2.1.2)
     capybara (0.3.9)
       culerity (>= 0.2.4)
@@ -116,6 +120,7 @@ GEM
     trollop (1.16.2)
     unindentable (0.0.3)
     version_string (0.1.0)
+    xml-simple (1.0.12)
 
 PLATFORMS
   ruby
@@ -123,6 +128,7 @@ PLATFORMS
 DEPENDENCIES
   authlogic (>= 2.1.1)
   authlogic-oid (>= 1.0.4)
+  aws-s3 (>= 0.6.2)
   capybara
   cucumber-rails
   database_cleaner
