@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   USER_TYPES = %w(Researcher Journalist Student Other)
   ROLES = { "Admin" => :admin, "Ministry User" => :ministry_user, "Normal User" => :basic }
 
+  has_many :notes,     :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   has_many :favorite_records, :through => :favorites, :source => :data_record

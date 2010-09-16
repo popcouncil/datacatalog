@@ -4,7 +4,7 @@
   <%= @data_record.title %>
 <% end %>
 
-<%= render 'data/tabs' %>
+<%= render 'shared/data_record_tabs' %>
 
 <div id="ltColumn">
   <%= show_flash_message %>
@@ -65,7 +65,7 @@
 <div id="rtColumnWrapper">
   <div id="rtColumn" class="withBg">
     <%= render 'favorites/sidebar' %>
-    <%= render 'data/sidebar_notes' %>
+    <%= render 'notes/form' %>
   </div>
 </div>
 <div class="clear"></div>

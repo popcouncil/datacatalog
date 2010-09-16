@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :data_records, :as => "data", :only => [:new, :create, :show] do |data_record|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
+    data_record.resources :notes, :only => [:index, :create]
   end
 
   map.root                                                        :controller => "main",            :action => "dashboard"
@@ -28,11 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.source_create_doc  "data/:slug/docs/create",                :controller => "data",            :action => "create_doc"
   map.source_docs        "data/:slug/docs",                       :controller => "data",            :action => "docs"
   map.source_edit_docs   "data/:slug/docs/edit",                  :controller => "data",            :action => "edit_docs"
-  map.source_new_note    "data/:slug/notes/new",                  :controller => "data",            :action => "new_note"
-  map.source_notes       "data/:slug/notes",                      :controller => "data",            :action => "notes"
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
-  map.source_update_note "data/:slug/notes/:note_id",             :controller => "data",            :action => "update_note"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
   map.suggest            "suggest",                               :controller => "suggest",         :action => "index"
 

@@ -59,30 +59,6 @@ class DataController < ApplicationController
     redirect_to :back
   end
 
-  def notes
-    all_notes = DataCatalog::Note.all(:user_id => current_user.api_id)
-    @notes = []
-    all_notes.each do |note|
-      @notes << note if note.source_id == @source.id
-    end
-  end
-
-  def new_note
-    DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Note.create(:source_id => @source.id, :text => params[:text])
-    end
-    flash[:notice] = "Added note."
-    redirect_to source_notes_path(@source.slug)
-  end
-
-  def update_note
-    DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Note.update(:id => params[:note_id], :text => params[:text])
-    end
-    flash[:notice] = "Updated note."
-    redirect_to source_notes_path(@source.slug)
-  end
-
   def docs
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = @docs.first

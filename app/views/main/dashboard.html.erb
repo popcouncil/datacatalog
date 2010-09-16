@@ -30,8 +30,8 @@
           <%= render 'ratings/stars', :rating => source.ratings_average %>
         </td>
         <td class="right notes">
-        <% unless source.user_note.nil? %>
-          <%= link_to "Notes", source_path(source.slug, :anchor => "notes"), :class => "notesAvailable", :title => "Notes" %>
+        <% if source.annotations_by(current_user).any? %>
+          <%= link_to "Notes", data_record_notes_path(source, :anchor => "notes"), :class => "notesAvailable", :title => "Notes" %>
         <% end %>
         </td>
       </tr>

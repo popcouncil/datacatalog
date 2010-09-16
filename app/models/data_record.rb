@@ -6,6 +6,7 @@ class DataRecord < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
+  has_many :notes,     :dependent => :destroy
 
   before_validation_on_create :make_slug
 
@@ -38,9 +39,8 @@ class DataRecord < ActiveRecord::Base
     []
   end
 
-  def user_note
-    warn "DataRecord#downloads is deprecated (called from #{caller.first})"
-    OpenStruct.new
+  def annotations_by(user)
+    notes.all(:conditions => { :user_id => user.id })
   end
 
   def comments
