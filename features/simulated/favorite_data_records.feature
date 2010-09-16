@@ -25,4 +25,4 @@ Feature: Marking data records as favorites
   Scenario: Favorite records show up in the dashboard
     Given I favorited the data record
     When I go to my dashboard
-    Then I should see "The Data Record"
+    Then I should see the favorited data record

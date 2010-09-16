@@ -15,3 +15,7 @@ end
 Given /^I favorited the data record$/ do
   the.user.favorite_records << the.data_record
 end
+
+Then /^I should see the favorited data record$/ do
+  Then %Q(I should see "#{the.data_record.title}")
+end
