@@ -5,6 +5,12 @@ ActionController::Routing::Routes.draw do |map|
     data_record.resources :notes, :only => [:index, :create]
   end
 
+  map.resources :organization, :as => :org, :only => [:show]
+
+  map.namespace :admin do |admin|
+    admin.resources :organizations, :only => [:index, :show, :new, :create, :update]
+  end
+
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"
@@ -15,7 +21,6 @@ ActionController::Routing::Routes.draw do |map|
   map.dashboard          "dashboard",                             :controller => "main",            :action => "dashboard"
   map.data_suggestion    "suggest/suggest",                       :controller => "suggest",         :action => "suggest"
   map.forgot             "forgot",                                :controller => "password_resets", :action => "new"
-  map.org                "org/:slug",                             :controller => "org",             :action => "show"
   map.perform_reset      "reset/attempt",                         :controller => "password_resets", :action => "update"
   map.reset              "reset/:token",                          :controller => "password_resets", :action => "edit"
   map.search             "search",                                :controller => "search",          :action => "index"
@@ -44,7 +49,6 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :sources,             :controller => "admin/sources" do |source|
       source.resources :downloads,        :controller => "admin/downloads"
     end
-    admin.resources :organizations,       :controller => "admin/organizations"
     admin.resources :data_suggestions,    :controller => "admin/data_suggestions"
     admin.resources :users,               :controller => "admin/users" do |user|
       user.resources :keys,               :controller => "admin/keys"

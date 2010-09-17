@@ -8,11 +8,11 @@ class DataRecordsController < ApplicationController
   end
   
   def new
-    @organizations = DataCatalog::Organization.all
+    @organizations = Organization.all
   end
 
   def create
-    @organizations = DataCatalog::Organization.all
+    @organizations = Organization.all
     @data_record = DataRecord.new(params[:data_record])
 
     if @data_record.save

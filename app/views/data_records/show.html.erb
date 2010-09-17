@@ -13,12 +13,11 @@
     <div id="dataDetails">
       <div id="metaDetails">
         <dl>
-          <% org = @data_record.organization %>
           <%= detail_field @data_record,
             :attribute => :organization_id,
             :label     => "Organization",
-            :value     => org ? org.name : nil,
-            :url       => org ? org.slug : "#" %>
+            :value     => @data_record.organization.name,
+            :url       => @data_record.organization %>
           <%= detail_field @data_record,
             :attribute => :homepage_url,
             :label     => "Homepage",

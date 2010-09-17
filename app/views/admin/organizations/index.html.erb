@@ -10,7 +10,7 @@
 
 <div id="ltColumn">
   <div class="tableNav">
-    <%= render 'shared/pagination', :docs => @organizations %>
+    <%= will_paginate @organizations %>
   </div>
   <table id="dataSources">
     <thead>
@@ -21,10 +21,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @organizations.page(@page).each do |organization| -%>
+      <% @organizations.each do |organization| -%>
       <tr class="<%= cycle 'even','odd'%>">
         <td class="left">
-          <%= link_to organization.name, admin_organization_path(organization.slug) %>
+          <%= link_to organization.name, admin_organization_path(organization) %>
         </td>
         <td class="center">
           <a href="#"><%= organization.acronym %></a>
@@ -35,17 +35,8 @@
     </tbody>
   </table>
   <div class="tableNav">
-    <%= render 'shared/pagination', :docs => @organizations %>
+    <%= will_paginate @organizations %>
   </div>
 </div>
 
-<div id="rtColumnWrapper">
-  <div id="rtColumn" class="withBg">
-    <div id="" class="module">
-      <h3>Top Organizations</h3>
-      <div class="clear"></div>
-    </div>
-    <a href="<%= new_admin_organization_path %>"><img src="/images/btn_addOrganization.png" /></a>
-  </div>
-</div>
-<div class="clear"></div>
+<%= render 'sidebar' %>

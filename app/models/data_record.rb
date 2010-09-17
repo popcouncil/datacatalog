@@ -1,8 +1,10 @@
 class DataRecord < ActiveRecord::Base
-  belongs_to :owner,   :class_name => "User"
-  belongs_to :author,  :dependent => :destroy
-  belongs_to :contact, :dependent => :destroy
-  belongs_to :catalog, :dependent => :destroy
+  belongs_to :owner,        :class_name => "User"
+  belongs_to :author,       :dependent => :destroy
+  belongs_to :contact,      :dependent => :destroy
+  belongs_to :catalog,      :dependent => :destroy
+  belongs_to :organization
+
   has_many :documents, :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
@@ -17,8 +19,6 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :year
   validates_inclusion_of :status, :in => %w(Planned Published Completed)
 
-  validates_presence_of :organization_id
-
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
@@ -28,10 +28,6 @@ class DataRecord < ActiveRecord::Base
 
   def to_param
     slug
-  end
-
-  def organization
-    @organization ||= DataCatalog::Organization.first(:id => organization_id)
   end
 
   def downloads
@@ -59,15 +55,7 @@ class DataRecord < ActiveRecord::Base
   private
 
   def make_slug
-    slug_prefix = title.to_s.parameterize
-    slug, n = slug_prefix, 2
-
-    loop do
-      break unless self.class.find_by_slug(slug)
-      slug, n = "#{slug_prefix}-#{n}"
-    end
-
-    self.slug = slug
+    self.slug = Slugs.make(self, title)
   end
 
   def has_title?

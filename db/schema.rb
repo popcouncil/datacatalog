@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100916204450) do
+ActiveRecord::Schema.define(:version => 20100917184449) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(:version => 20100916204450) do
     t.string   "project_name"
     t.string   "funder"
     t.string   "year"
-    t.string   "organization_id"
     t.integer  "owner_id"
     t.integer  "catalog_id"
     t.integer  "author_id"
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -89,6 +89,22 @@ ActiveRecord::Schema.define(:version => 20100916204450) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.string   "acronym"
+    t.string   "org_type"
+    t.text     "description"
+    t.string   "slug"
+    t.string   "url"
+    t.string   "homepage_url"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", :force => true do |t|

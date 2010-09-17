@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
       current_user.favorites.create(:data_record_id => @data_record.id)
     end
 
-    redirect_to @data_record
+    redirect_to :back
   end
 
   def destroy
@@ -17,6 +17,6 @@ class FavoritesController < ApplicationController
       favorite.destroy
     end
 
-    redirect_to @data_record
+    redirect_to :back
   end
 end

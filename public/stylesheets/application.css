@@ -345,6 +345,8 @@ button.searchBtn { background: url(/images/btn_search.png) top left no-repeat; w
 button.search { background: url(/images/btn_searchBig.png) top left no-repeat; width: 93px;}
 button.saveBtn { background: url(/images/btn_saveNotes.png) top left no-repeat; width: 119px; margin-top: 20px;}
 a#btn_reportProblem { background: url(/images/btn_reportProblem.png) top left no-repeat; width: 253px; float: right;}
+a.add_organization { background: url(/images/btn_addOrganization.png) top left no-repeat; width: 135px; height: 22px; display: block; text-decoration: none; }
+a.add_organization span { visibility: hidden }
 div#favoriteData a.buttonLink { background: url(/images/btn_favoriteData.png) top left no-repeat; width: 272px; height: 42px; margin-left: 4px;}
 div#favoriteData a.buttonLink:hover { background: url(/images/btn_favoriteData.png) bottom left no-repeat; width: 272px; height: 42px; margin-left: 4px;}
 div#favoriteData a.active{ background: url(/images/btn_favoriteData.png) left -42px no-repeat; width: 272px; height: 42px; margin-left: 4px;}

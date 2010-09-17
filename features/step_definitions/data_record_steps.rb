@@ -1,4 +1,6 @@
 Given /^a data record titled "(.*)" exists$/ do |title|
+  Given %Q(an organization named "Red Cross" exists)
+
   the.data_record = DataRecord.create(
     :title           => title,
     :description     => "Some Description",
@@ -6,7 +8,7 @@ Given /^a data record titled "(.*)" exists$/ do |title|
     :homepage_url    => "http://namibia.com/data",
     :year            => "2008",
     :status          => "Published",
-    :organization_id => DataCatalog::Organization.first.id
+    :organization_id => the.organization.id
   ) do |data_record|
     data_record.documents << Document.new(:external_url => "http://namibia.com/data/document")
   end
