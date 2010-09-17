@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100917184449) do
+ActiveRecord::Schema.define(:version => 20100917205805) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -17,6 +17,22 @@ ActiveRecord::Schema.define(:version => 20100917184449) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "body"
+    t.boolean  "reports_problem"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "data_records", :force => true do |t|
     t.string   "title"
@@ -185,5 +201,16 @@ ActiveRecord::Schema.define(:version => 20100917184449) do
     t.string   "user_type"
     t.string   "role"
   end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",          :default => true
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
 
 end
