@@ -25,6 +25,7 @@ class DataRecord < ActiveRecord::Base
   accepts_nested_attributes_for :documents
 
   acts_as_taggable
+  acts_as_commentable
 
   def to_param
     slug
@@ -37,10 +38,6 @@ class DataRecord < ActiveRecord::Base
 
   def annotations_by(user)
     notes.all(:conditions => { :user_id => user.id })
-  end
-
-  def comments
-    @comments ||= DataCatalog::Comment.all(:source_id => id)
   end
 
   def ratings_average

@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
     data_record.resources :notes, :only => [:index, :create]
+    data_record.resources :comments, :only => [:create]
   end
 
   map.resources :organization, :as => :org, :only => [:show]

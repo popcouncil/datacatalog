@@ -1,0 +1,33 @@
+<ul>
+  <% comments.each do |comment| -%>
+    <% author = User.find(comment.user_id) %>
+
+    <li class="<%= cycle 'odd', 'even', :name => 'comments' %>">
+      <div class="commentMetaData">
+        <%= gravatar_for author, :class => "userAvatar", :size => 37 %>
+        <span class="commentDate"><%= comment.created_at.strftime('%b %d, %Y @ %H:%M') %></span>
+        <span class="author">by <%= author.display_name %></span>
+      </div>
+      <div class="rating">
+        <form action="<%= comment_rating_path(@data_record.slug, comment.id) %>" method="post">
+          <button title="Vote This Comment Up" class="thumbUp" type="submit">
+            <span>Vote This Comment Up</span>
+          </button>
+        </form>
+        <span class="ratingNumber"><%= 0 %></span>
+      </div>
+      <div class="clear"></div>
+      <div class="commentContent">
+        <%= markdownize comment.body %>
+      </div>
+      <div class="commentFooter">
+        <%= link_to "Reply to This", data_record_path(@data_record, :parent_id => comment.id, :anchor => "comment_form") %>
+      </div>
+      <div class="clear"></div>
+      <% if comment.children.any? -%>
+        <%= render 'comments/list', :comments => comment.children %>
+      <% end -%>
+    </li>
+    <% reset_cycle "comments" %>
+  <% end -%>
+</ul>

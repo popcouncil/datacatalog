@@ -58,9 +58,9 @@ module ApplicationHelper
     k1.blank? || k2.blank? ? '' : "#{k1} to #{k2}"
   end
 
-  def gravatar_for(user, options)
+  def gravatar_for(user, options={})
     options.reverse_merge!(:class => "avatar", :size => 64)
-    gravatar_image_tag(user.email,
+    gravatar_image_tag(user[:email],
       :alt      => user.display_name,
       :title    => user.display_name,
       :class    => options[:class],
