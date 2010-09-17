@@ -18,6 +18,8 @@ gem 'kronos', '>= 0.1.6'
 gem 'unindentable', '>= 0.0.1'
 gem 'paperclip', '>= 2.3.3'
 gem 'aws-s3', '>= 0.6.2'
+gem 'awesome_nested_set', '1.4.3'
+gem 'will_paginate', '2.3.15'
 
 group :test do
   gem "rspec-rails", ">= 1.2.0", :require => false
