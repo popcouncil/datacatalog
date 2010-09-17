@@ -9,7 +9,6 @@ class DataRecord < ActiveRecord::Base
 
   validates_presence_of :country
   validates_presence_of :description
-  validates_presence_of :homepage_url
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
   validates_presence_of :year
