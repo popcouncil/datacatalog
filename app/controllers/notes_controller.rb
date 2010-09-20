@@ -9,7 +9,7 @@ class NotesController < ApplicationController
     attributes = params[:note].merge(:user_id => current_user.id)
     note = @data_record.notes.create(attributes)
     flash[:notice] = "Added note."
-    redirect_to data_record_notes_path(@data_record)
+    redirect_to :back
   end
   
   private
