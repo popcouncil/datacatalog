@@ -2,14 +2,14 @@
 <div id="content_tabs">
   <ul>
     <li id="nav_dataDetails">
-      <%= link_to "Data Details", @data_record, :class => ("buttonLink " + active_if(:action => ["show"], :controller => ["data_records"])) %>
+      <%= link_to "Data Details", @data_record, :class => ("buttonLink " + active_if(:controller => "data_records")) %>
     </li>
     <li id="nav_communityDocs">
-      <%= link_to "Community Docs", source_docs_path(@data_record.slug), :class => ("buttonLink " + active_if(:action => ["docs", "edit_docs", "show_doc"])) %>
+      <%= link_to "Community Docs", data_record_wiki_path(@data_record), :class => ("buttonLink " + active_if(:controller => "wikis")) %>
     </li>
     <% if current_user %>
       <li id="nav_privateNotes">
-        <%= link_to "Private Notes", data_record_notes_path(@data_record), :class => ("buttonLink " + active_if(:action => ["index"], :controller => "notes")) %>
+        <%= link_to "Private Notes", data_record_notes_path(@data_record), :class => ("buttonLink " + active_if(:controller => "notes")) %>
       </li>
     <% end %>
   </ul>

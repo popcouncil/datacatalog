@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100917214827) do
+ActiveRecord::Schema.define(:version => 20100920182657) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -214,5 +214,26 @@ ActiveRecord::Schema.define(:version => 20100917214827) do
   end
 
   add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
+
+  create_table "wiki_versions", :force => true do |t|
+    t.integer  "wiki_id"
+    t.integer  "version"
+    t.integer  "data_record_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_versions", ["wiki_id"], :name => "index_wiki_versions_on_wiki_id"
+
+  create_table "wikis", :force => true do |t|
+    t.integer  "data_record_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "version"
+  end
 
 end

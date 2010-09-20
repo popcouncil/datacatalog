@@ -5,6 +5,8 @@ class DataRecord < ActiveRecord::Base
   belongs_to :catalog,      :dependent => :destroy
   belongs_to :organization
 
+  has_one :wiki, :dependent => :destroy
+
   has_many :documents, :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
