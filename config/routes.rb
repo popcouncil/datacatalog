@@ -3,7 +3,9 @@ ActionController::Routing::Routes.draw do |map|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
     data_record.resources :notes, :only => [:index, :create]
-    data_record.resources :comments, :only => [:create]
+    data_record.resources :comments, :only => [:create] do |comments|
+      comments.resources :votes, :only => [:create]
+    end
   end
 
   map.resources :organization, :as => :org, :only => [:show]
@@ -30,8 +32,6 @@ ActionController::Routing::Routes.draw do |map|
   map.signout            "signout",                               :controller => "user_sessions",   :action => "destroy"
   map.signup             "signup",                                :controller => "users",           :action => "new"
   map.source             "data/:slug",                            :controller => "data",            :action => "show"
-  map.source_comment     "data/:slug/comment",                    :controller => "data",            :action => "comment"
-  map.comment_rating     "data/:slug/comment_rating/:comment_id", :controller => "data",            :action => "comment_rating"
   map.source_create_doc  "data/:slug/docs/create",                :controller => "data",            :action => "create_doc"
   map.source_docs        "data/:slug/docs",                       :controller => "data",            :action => "docs"
   map.source_edit_docs   "data/:slug/docs/edit",                  :controller => "data",            :action => "edit_docs"

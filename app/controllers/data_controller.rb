@@ -2,14 +2,6 @@ class DataController < ApplicationController
   before_filter :require_user, :except => [:show, :docs, :show_doc, :usages]
   before_filter :set_source, :set_favorite, :except => [:new, :create]
 
-  def comment_rating
-    DataCatalog.with_key(current_user.api_key) do
-      DataCatalog::Rating.create(:kind => "comment", :comment_id => params[:comment_id], :value => 1)
-    end
-    flash[:notice] = "Comment rating saved!"
-    redirect_to source_path(@source.slug)
-  end
-
   def docs
     @docs = DataCatalog::Document.all(:source_id => @source.id)
     @doc = @docs.first
