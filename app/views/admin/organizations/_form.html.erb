@@ -1,0 +1,37 @@
+<li>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</li>
+<li>
+  <%= form.label :acronym %>
+  <%= form.text_field :acronym %>
+</li>
+<li>
+  <%= form.label :parent_id, "Parent" %>
+  <%= form.select :parent_id, organization_tree_except(@organization), :include_blank => true %>
+</li>
+<li>
+  <%= form.label :country %>
+  <%= form.country_select :country %>
+</li>
+<li>
+  <%= form.label :slug, "URL Slug" %>
+  <%= form.text_field :slug %>
+  <p class="tip">Will be auto-generated if left blank.</p>
+</li>
+<li>
+  <%= form.label :url, "Website" %>
+  <%= form.text_field :url %>
+</li>
+<li>
+  <%= form.label :homepage_url, "Home Page" %>
+  <%= form.text_field :homepage_url %>
+</li>
+<li>
+  <%= form.label :org_type, "Type" %>
+  <%= form.select :org_type, Organization::ORGANIZATION_TYPES %>
+</li>
+<li>
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+</li>

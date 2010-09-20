@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915162515) do
+ActiveRecord::Schema.define(:version => 20100920182657) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -17,6 +17,22 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "body"
+    t.boolean  "reports_problem"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "data_records", :force => true do |t|
     t.string   "title"
@@ -28,13 +44,13 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.string   "project_name"
     t.string   "funder"
     t.string   "year"
-    t.string   "organization_id"
     t.integer  "owner_id"
     t.integer  "catalog_id"
     t.integer  "author_id"
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -61,6 +77,21 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.datetime "updated_at"
   end
 
+  create_table "favorites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "data_record_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "data_record_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
     t.integer "lifetime"
@@ -76,12 +107,36 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.string  "salt",       :null => false
   end
 
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.string   "acronym"
+    t.string   "org_type"
+    t.text     "description"
+    t.string   "slug"
+    t.string   "url"
+    t.string   "homepage_url"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
     t.string   "affiliation"
     t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "data_record_id"
+    t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -136,7 +191,6 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.datetime "confirmed_at"
     t.string   "openid_identifier"
     t.string   "display_name"
-    t.string   "api_key"
     t.string   "api_id"
     t.boolean  "list_opt_in",         :default => false
     t.string   "affiliation"
@@ -145,6 +199,41 @@ ActiveRecord::Schema.define(:version => 20100915162515) do
     t.string   "personal_url"
     t.string   "telephone_number"
     t.string   "user_type"
+    t.string   "role"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",          :default => true
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
+
+  create_table "wiki_versions", :force => true do |t|
+    t.integer  "wiki_id"
+    t.integer  "version"
+    t.integer  "data_record_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wiki_versions", ["wiki_id"], :name => "index_wiki_versions_on_wiki_id"
+
+  create_table "wikis", :force => true do |t|
+    t.integer  "data_record_id"
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "version"
   end
 
 end

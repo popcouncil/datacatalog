@@ -1,5 +1,19 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_records, :as => "data", :only => [:new, :create, :show]
+  map.resources :data_records, :as => "data", :only => [:new, :create, :show] do |data_record|
+    data_record.resource :favorite, :only => [:create, :destroy]
+    data_record.resource :rating, :only => [:update]
+    data_record.resources :notes, :only => [:index, :create]
+    data_record.resources :comments, :only => [:create] do |comments|
+      comments.resources :votes, :only => [:create]
+    end
+    data_record.resource :wiki, :as => "docs", :only => [:show, :edit, :update]
+  end
+
+  map.resources :organization, :as => :org, :only => [:show]
+
+  map.namespace :admin do |admin|
+    admin.resources :organizations, :only => [:index, :show, :new, :create, :update]
+  end
 
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
@@ -11,7 +25,6 @@ ActionController::Routing::Routes.draw do |map|
   map.dashboard          "dashboard",                             :controller => "main",            :action => "dashboard"
   map.data_suggestion    "suggest/suggest",                       :controller => "suggest",         :action => "suggest"
   map.forgot             "forgot",                                :controller => "password_resets", :action => "new"
-  map.org                "org/:slug",                             :controller => "org",             :action => "show"
   map.perform_reset      "reset/attempt",                         :controller => "password_resets", :action => "update"
   map.reset              "reset/:token",                          :controller => "password_resets", :action => "edit"
   map.search             "search",                                :controller => "search",          :action => "index"
@@ -20,19 +33,11 @@ ActionController::Routing::Routes.draw do |map|
   map.signout            "signout",                               :controller => "user_sessions",   :action => "destroy"
   map.signup             "signup",                                :controller => "users",           :action => "new"
   map.source             "data/:slug",                            :controller => "data",            :action => "show"
-  map.source_comment     "data/:slug/comment",                    :controller => "data",            :action => "comment"
-  map.comment_rating     "data/:slug/comment_rating/:comment_id", :controller => "data",            :action => "comment_rating"
   map.source_create_doc  "data/:slug/docs/create",                :controller => "data",            :action => "create_doc"
   map.source_docs        "data/:slug/docs",                       :controller => "data",            :action => "docs"
   map.source_edit_docs   "data/:slug/docs/edit",                  :controller => "data",            :action => "edit_docs"
-  map.source_favorite    "data/:slug/favorite",                   :controller => "data",            :action => "favorite"
-  map.source_new_note    "data/:slug/notes/new",                  :controller => "data",            :action => "new_note"
-  map.source_notes       "data/:slug/notes",                      :controller => "data",            :action => "notes"
-  map.source_rating      "data/:slug/rating/:value",              :controller => "data",            :action => "rating"
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
-  map.source_unfavorite  "data/:slug/unfavorite",                 :controller => "data",            :action => "unfavorite"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
-  map.source_update_note "data/:slug/notes/:note_id",             :controller => "data",            :action => "update_note"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
   map.suggest            "suggest",                               :controller => "suggest",         :action => "index"
 
@@ -46,7 +51,6 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :sources,             :controller => "admin/sources" do |source|
       source.resources :downloads,        :controller => "admin/downloads"
     end
-    admin.resources :organizations,       :controller => "admin/organizations"
     admin.resources :data_suggestions,    :controller => "admin/data_suggestions"
     admin.resources :users,               :controller => "admin/users" do |user|
       user.resources :keys,               :controller => "admin/keys"

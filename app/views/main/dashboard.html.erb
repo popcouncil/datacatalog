@@ -6,11 +6,11 @@
 
 <div id="ltColumn">
   <%= show_flash_message %>
-  <% if current_user.api_user.favorites.empty? -%>
+  <% if current_user.favorite_records.empty? %>
   <div id="flash_notice">
     You have no favorites yet. <%= link_to "Browse", browse_path %> for some.
   </div>
-  <% end -%>
+  <% end %>
   <table>
     <thead>
       <tr id="titles">
@@ -20,22 +20,22 @@
       </tr>
     </thead>
     <tbody>
-      <% current_user.api_user.favorites.each do |source| -%>
+      <% current_user.favorite_records.each do |source| %>
       <tr class="<%= cycle 'even', 'odd' %>">
         <td class="left dataContent">
           <%= link_to source.title, source_path(source.slug), :class => "dataName" %>
           <p class="clear"><%= truncate(source.description, 140) %></p>
         </td>
         <td class="center">
-          <%= render 'shared/star_rating', :rating => (source.rating_stats.average ? source.rating_stats.average.round : nil) %>
+          <%= render 'ratings/stars', :rating => source.ratings_average %>
         </td>
         <td class="right notes">
-        <% unless source.user_note.nil? -%>
-          <%= link_to "Notes", source_path(source.slug, :anchor => "notes"), :class => "notesAvailable", :title => "Notes" %>
-        <% end -%>
+        <% if source.annotations_by(current_user).any? %>
+          <%= link_to "Notes", data_record_notes_path(source, :anchor => "notes"), :class => "notesAvailable", :title => "Notes" %>
+        <% end %>
         </td>
       </tr>
-      <% end -%>
+      <% end %>
     </tbody>
   </table>
 </div>
@@ -43,31 +43,31 @@
   <div id="rtColumn">
     <div id="recentComments" class="module">
       <h3>Recent Comments</h3>
-      <% if @recent_comments.length > 0 -%>
+      <% if @recent_comments.length > 0 %>
       <dl>
-        <% @recent_comments.take(5).each do |comment| -%>
+        <% @recent_comments.take(5).each do |comment| %>
         <dt><%= link_to comment.source_title, source_path(comment.source_slug) %></dt>
         <dd><%= truncate(comment.text, :length => 100) %></dd>
         <dd class="commentDate">Posted on <%= comment.created_at.to_s(:mdy_slashed) %></dd>
-        <% end -%>
+        <% end %>
       </dl>
-      <% else -%>
+      <% else %>
       <p>No comments yet...</p>
-      <% end -%>
+      <% end %>
       <!--<a class="allLink" href="#">View All »</a>-->
     </div>
 
     <div id="yourRatings" class="module">
       <h3>Recently Rated</h3>
-      <% if @recent_ratings.length > 0 -%>
+      <% if @recent_ratings.length > 0 %>
       <ul>
-        <% @recent_ratings.take(5).each do |rating| -%>
+        <% @recent_ratings.take(5).each do |rating| %>
         <li><%= link_to rating.source_title, source_path(rating.source_slug) %></li>
-        <% end -%>
+        <% end %>
       </ul>
-      <% else -%>
+      <% else %>
       <p>You haven't rated any data sources yet...</p>
-      <% end -%>
+      <% end %>
     </div>
   </div>
 </div>

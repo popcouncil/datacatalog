@@ -1,0 +1,12 @@
+<% if current_user %>
+  <div class="module">
+    <h3 class="withTip">My Notes on This Data</h3>
+    <% form_for [@data_record, @data_record.notes.new] do |form| %>
+      <p class="tip">Want to keep some private notes on this data source?</p>
+      <%= form.text_area :text, :rows => 5, :cols => 32, :class => "textarea" %>
+      <button class="saveBtn" type="submit">
+        <span>Save Notes</span>
+      </button>
+    <% end %>
+  </div>
+<% end %>

@@ -10,10 +10,10 @@
 
 <div id="ltColumn">
 
-<% form_for :organization, @organization, :url => admin_organizations_path do |f| -%>
+<% form_for [:admin, @organization] do |f| -%>
   <%= show_flash_message %>
   <ul>
-    <%= render 'fields', :object => f %>
+    <%= render 'form', :form => f %>
     <li>
       <button class="submit" id="user_submit" type="submit" value="Update" name="commit">
         <span>Submit</span>
@@ -24,13 +24,4 @@
 <% end -%>
 </div>
 
-<div id="rtColumnWrapper">
-  <div id="rtColumn" class="withBg">
-    <div id="dashboardNav" class="module">
-      <h3>Stats</h3>
-      <div class="clear"></div>
-    </div>
-    <a href="<%= new_admin_organization_path %>"><img src="/images/btn_addOrganization.png" /></a>
-  </div>
-</div>
-<div class="clear"></div>
+<%= render 'sidebar' %>

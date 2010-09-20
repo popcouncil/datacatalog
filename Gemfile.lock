@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/technoweenie/acts_as_versioned.git
+  revision: 589289fd42b2600d5f643c85e3e4e38e03ac655e
+  tag: rails_2
+  specs:
+    acts_as_versioned (0.5.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -15,6 +22,8 @@ GEM
       activesupport
     authlogic-oid (1.0.4)
       authlogic
+    awesome_nested_set (1.4.3)
+      activerecord (>= 1.1)
     aws-s3 (0.6.2)
       builder
       mime-types
@@ -120,14 +129,17 @@ GEM
     trollop (1.16.2)
     unindentable (0.0.3)
     version_string (0.1.0)
+    will_paginate (2.3.15)
     xml-simple (1.0.12)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_versioned!
   authlogic (>= 2.1.1)
   authlogic-oid (>= 1.0.4)
+  awesome_nested_set (= 1.4.3)
   aws-s3 (>= 0.6.2)
   capybara
   cucumber-rails
@@ -152,3 +164,4 @@ DEPENDENCIES
   ruby-openid (>= 2.1.7)
   thoughtbot-shoulda (>= 2.10.0)
   unindentable (>= 0.0.1)
+  will_paginate (= 2.3.15)

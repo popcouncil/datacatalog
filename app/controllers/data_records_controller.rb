@@ -3,16 +3,19 @@ class DataRecordsController < ApplicationController
 
   def show
     @data_record = DataRecord.find_by_slug(params[:id])
-    @comments = @data_record.comments
-    @comment = DataCatalog::Comment.new
+    @comments = @data_record.root_comments
+    @comment = @data_record.comment_threads.new(
+      :reports_problem => params.has_key?(:reports_problem),
+      :parent_id       => params[:parent_id]
+    )
   end
   
   def new
-    @organizations = DataCatalog::Organization.all
+    @organizations = Organization.all
   end
 
   def create
-    @organizations = DataCatalog::Organization.all
+    @organizations = Organization.all
     @data_record = DataRecord.new(params[:data_record])
 
     if @data_record.save
