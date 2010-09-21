@@ -6,13 +6,14 @@ module ApplicationHelper
   end
 
   def active_if(options)
-    actions = options[:action] || []
-    controllers = options[:controller] || []
-    if actions.include?(params[:action]) || controllers.include?(params[:controller])
-      "active"
-    else
-      ""
-    end
+    actions = Array.wrap(options[:action])
+    controllers = Array.wrap(options[:controller])
+
+    action_matches = actions.empty? || actions.include?(params[:action])
+    controller_matches = controllers.empty? || controllers.include?(params[:controller])
+    user_matches = options[:current_user] ? current_user.present? : true
+
+    action_matches && controller_matches && user_matches ? "active" : ""
   end
 
   def show_flash_message
