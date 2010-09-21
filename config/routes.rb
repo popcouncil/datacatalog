@@ -13,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
     admin.resources :organizations, :only => [:index, :show, :new, :create, :update]
+    admin.resources :data_records, :only => [:index]
   end
 
   map.root                                                        :controller => "main",            :action => "dashboard"
@@ -48,9 +49,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
 
   map.resource :admin, :controller => "admin" do |admin|
-    admin.resources :sources,             :controller => "admin/sources" do |source|
-      source.resources :downloads,        :controller => "admin/downloads"
-    end
     admin.resources :data_suggestions,    :controller => "admin/data_suggestions"
     admin.resources :users,               :controller => "admin/users" do |user|
       user.resources :keys,               :controller => "admin/keys"

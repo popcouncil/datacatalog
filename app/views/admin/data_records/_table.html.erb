@@ -1,0 +1,24 @@
+<div class="tableNav">
+  <%= will_paginate @data_records %>
+</div>
+<table id="dataSources">
+    <thead>
+      <tr id="titles">
+        <th class="left">Title</th>
+        <th class="left">Added On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @data_records.each do |data_record| -%>
+        <tr class="<%= cycle 'even','odd'%>">
+          <td class="left">
+            <%= link_to data_record.title, data_record %>
+          </td>
+          <td class="left"><%= data_record.created_at.to_s(:mdy_slashed) %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+<div class="tableNav">
+  <%= will_paginate @data_records %>
+</div>
