@@ -15,8 +15,6 @@ module NavigationHelpers
       '/profile/'
     when /the contact form/
       '/contact'
-    when /the data source suggestion form/
-      '/suggest'
     when 'my dashboard'
       dashboard_path
     when 'the admin dashboard'

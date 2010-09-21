@@ -24,7 +24,6 @@ ActionController::Routing::Routes.draw do |map|
   map.contact            "contact",                               :controller => "contact",         :action => "index"
   map.contact_submission "contact/submit",                        :controller => "contact",         :action => "submit"
   map.dashboard          "dashboard",                             :controller => "main",            :action => "dashboard"
-  map.data_suggestion    "suggest/suggest",                       :controller => "suggest",         :action => "suggest"
   map.forgot             "forgot",                                :controller => "password_resets", :action => "new"
   map.perform_reset      "reset/attempt",                         :controller => "password_resets", :action => "update"
   map.reset              "reset/:token",                          :controller => "password_resets", :action => "edit"
@@ -40,7 +39,6 @@ ActionController::Routing::Routes.draw do |map|
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
-  map.suggest            "suggest",                               :controller => "suggest",         :action => "index"
 
   map.resources :users
   map.resource :profile, :controller => "users" do |profile|
@@ -49,7 +47,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
 
   map.resource :admin, :controller => "admin" do |admin|
-    admin.resources :data_suggestions,    :controller => "admin/data_suggestions"
     admin.resources :users,               :controller => "admin/users" do |user|
       user.resources :keys,               :controller => "admin/keys"
     end
