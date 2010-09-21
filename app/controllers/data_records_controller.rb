@@ -18,6 +18,12 @@ class DataRecordsController < ApplicationController
     @organizations = Organization.all
     @data_record = DataRecord.new(params[:data_record])
 
+    if current_user.admin?
+      @data_record.owner_id = params[:data_record][:owner_id]
+    else
+      @data_record.owner_id = current_user.id
+    end
+
     if @data_record.save
       flash[:notice] = "Your Data has been submitted"
       redirect_to @data_record
@@ -28,6 +34,8 @@ class DataRecordsController < ApplicationController
       render :new
     end
   end
+
+  private
 
   def initialize_data_record
     @data_record = DataRecord.new

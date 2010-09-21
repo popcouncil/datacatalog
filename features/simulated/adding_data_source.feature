@@ -4,29 +4,36 @@ Feature: Adding data source
   I want to be able to create a new data record
 
   @javascript
-  Scenario: An admin adds a new data source
-    Given I am a signed in admin
+  Scenario Outline: A user adds a new data source
+    Given I am a signed in <role>
     And an organization named "DCRA" exists
     When I follow "Add Data"
-    And I fill in "Title" with "Housing Code Enforcement"
-    And I fill in "Description" with "Blah blah blah blah"
-    And I select "Uruguay" from "Country"
-    And I select "DCRA" from "Organization"
-    And I fill in "Author Name" with "Pepe Perez"
-    And I fill in "Author Affiliation" with "DCRA Member"
-    And I fill in "Homepage URL" with "http://data.dc.gov/foo"
-    And I select "Published" from "Status"
-    And I fill in "Project Name" with "The Project"
-    And I fill in "Funder" with "Uncle Sam"
-    And I fill in "Year" with "2008"
-    And I fill in "Tags" with "housing, code enforcement, something else"
+    And I fill in the data record fields
     And I choose "Provide an URL to an external file"
     And I fill in "External URL" with "http://document.url"
-    And I fill in "Name" with "John Doe"
-    And I fill in "Phone" with "+1 (234) 567 8900"
-    And I fill in "Email" with "john.doe@example.org"
     And I press "Submit"
     Then I should see "Your Data has been submitted"
+    And the data record should be created by a <role>
+
+    Examples:
+    | role          |
+    | admin         |
+    | ministry user |
+    | user          |
+
+  @javascript
+  Scenario: An admin adds a data record as a ministry user
+    Given I am a signed in admin
+    And a ministry user named "Johnny Minister" with "johnny@ministry.com" exists
+    And an organization named "DCRA" exists
+    When I follow "Add Data"
+    And I select "Johnny Minister" from "Added By"
+    And I fill in the data record fields
+    And I choose "Provide an URL to an external file"
+    And I fill in "External URL" with "http://document.url"
+    And I press "Submit"
+    Then I should see "Your Data has been submitted"
+    And the data record should be created by a ministry user
 
   Scenario: An admin adds a new data source with errors
     Given I am a signed in admin

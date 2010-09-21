@@ -19,6 +19,7 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
   validates_presence_of :year
+  validates_presence_of :owner_id
   validates_inclusion_of :status, :in => %w(Planned Published Completed)
 
   accepts_nested_attributes_for :author

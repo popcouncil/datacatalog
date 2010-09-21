@@ -1,4 +1,4 @@
-Given /^a user named "(.+)" with "(.*)" exists$/ do |name, email|
+Given /^an? (.*) named "(.+)" with "(.*)" exists$/ do |role, name, email|
   the.user = User.create!(
     :display_name => name,
     :email => email,
@@ -6,7 +6,8 @@ Given /^a user named "(.+)" with "(.*)" exists$/ do |name, email|
     :password_confirmation => 'test',
     :country => 'Uganda',
     :city => 'Kampala',
-    :user_type => 'Journalist'
+    :user_type => 'Journalist',
+    :role => normalize_role(role)
   )
   the.user.confirm!
 end
