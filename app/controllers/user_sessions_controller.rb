@@ -9,13 +9,12 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new params[:user_session]
-    @user_session.save do |result|
-      if result
-        flash[:notice] = "You have been signed in."
-        redirect_to root_path and return
-      else
-        render :action => "new" and return
-      end
+
+    if @user_session.save
+      flash[:notice] = "You have been signed in."
+      redirect_to session.delete(:return_to) || root_path
+    else
+      render :action => "new" and return
     end
   end
 
