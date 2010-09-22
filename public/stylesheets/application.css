@@ -217,10 +217,10 @@ a.flagData { text-indent: -9999em; background: url(/images/icon_favorited.png) r
 
 table#browseTable { width: 960px;}
 table#browseTable td.right, th.right, table#searchTable td.right, th.right { width: 90px;}
-table#browseTable td.dataContent { width: 395px; }
+table#browseTable td.dataContent { width: 240px; }
 
 table#searchTable { width: 750px;}
-table#searchTable td.dataContent { width: 395px;}
+table#searchTable td.dataContent { width: 240px;}
 
 
 dl#searchDetails dt { font-weight: bold; margin-right: 15px; margin-top: 2px; margin-bottom: 15px;}

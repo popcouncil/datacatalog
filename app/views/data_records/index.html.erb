@@ -5,13 +5,17 @@
 
   <%= show_flash_message %>
 
-  <div class="tableNav">
-    <%= will_paginate @data_records %>
-  </div>
+  <% if @data_records.total_pages > 1 %>
+    <div class="tableNav">
+      <%= will_paginate @data_records %>
+    </div>
+  <% end %>
 
   <%= render 'shared/source_table' %>
 
-  <div class="tableNav">
-    <%= will_paginate @data_records %>
-  </div>
+  <% if @data_records.total_pages > 1 %>
+    <div class="tableNav">
+      <%= will_paginate @data_records %>
+    </div>
+  <% end %>
 </div>

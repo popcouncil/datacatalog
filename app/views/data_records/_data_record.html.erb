@@ -1,0 +1,46 @@
+<tr class="<%= cycle 'even', 'odd' %>">
+  <td class="dataContent left">
+    <%= link_to data_record.title, data_record, :class => "dataName" %>
+    <%= render "favorites/button", :data_record => data_record %>
+    <p class="clear"><%= truncate(data_record.description, :length => 350) %></p>
+  </td>
+
+  <td class="center">
+    <%= render 'ratings/stars', :rating => data_record.ratings_average %>
+  </td>
+
+  <td class="center">
+    <span><%= data_record.country %></span>
+  </td>
+
+  <td class="center">
+    <% if data_record.ministry %>
+      <span><%= data_record.ministry.display_name %></span>
+    <% end %>
+  </td>
+
+  <td class="center">
+    <%= link_to data_record.organization.name, data_record.organization %>
+  </td>
+
+  <td class="center">
+    <% if data_record.downloads.any? -%>
+      <ul class="downloadFormats">
+        <% source.downloads.each do |download| %>
+        <li>
+          <a href="<%= download.url %>"><%= download.format.upcase %></a>
+          <% unless download['size'].blank? %>
+            <span>(<%= download['size'] %>)</span>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </td>
+
+  <td class="center">
+    <% if data_record.tags.any? %>
+      <span><%= data_record.tags.join(", ") %></span>
+    <% end %>
+  </td>
+</tr>

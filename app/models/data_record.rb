@@ -59,6 +59,10 @@ class DataRecord < ActiveRecord::Base
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
   end
 
+  def ministry
+    owner.ministry_user? && owner
+  end
+
   def to_param
     slug
   end
