@@ -3,6 +3,12 @@ Feature: Adding data source
   As a registered user
   I want to be able to create a new data record
 
+  Scenario: A guest can't add a new data source
+    Given I am a site visitor
+    When I follow "Add Data"
+    Then I should see "You must be logged in to take that action"
+    And I should not see "Add Data Source"
+
   @javascript
   Scenario Outline: A user adds a new data source
     Given I am a signed in <role>

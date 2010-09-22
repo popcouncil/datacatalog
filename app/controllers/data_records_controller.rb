@@ -1,5 +1,6 @@
 class DataRecordsController < ApplicationController
   before_filter :initialize_data_record, :only => :new
+  before_filter :require_user, :only => [:new, :create]
 
   def show
     @data_record = DataRecord.find_by_slug(params[:id])
