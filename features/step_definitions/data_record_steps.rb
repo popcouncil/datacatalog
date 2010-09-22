@@ -9,6 +9,21 @@ Given /^a data record titled "(.*)" exists$/ do |title|
   end
 end
 
+Given /^the following data records exist:$/ do |table|
+  table.hashes.each do |attr|
+    if attr["organization"]
+      attr["organization"] = Organization.find_by_name(attr["organization"]) || Organization.make(:name => attr["organization"])
+    end
+
+    if attr["ministry"]
+      ministry_name = attr.delete("ministry")
+      attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
+    end
+
+    DataRecord.make(attr)
+  end
+end
+
 Given /^I favorited the data record$/ do
   the.user.favorite_records << the.data_record
 end
@@ -38,4 +53,8 @@ end
 Then /^the data record should be created by a (.+)$/ do |role|
   # FIXME: This should be featured in the UI, not checked in the database
   DataRecord.last.owner.role.should == normalize_role(role)
+end
+
+Then /^I should only see (\d+) records?$/ do |count|
+  page.should have_css("#browseTable tbody tr", :count => count.to_i)
 end

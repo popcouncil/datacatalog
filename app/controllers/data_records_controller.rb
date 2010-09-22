@@ -3,7 +3,8 @@ class DataRecordsController < ApplicationController
   before_filter :require_user, :only => [:new, :create]
 
   def index
-    @data_records = DataRecord.ministry_records_first.paginate(:page => params[:page])
+    @filters = Filters.new(params[:filters])
+    @data_records = DataRecord.filter_by(@filters).ministry_records_first.paginate(:page => params[:page])
   end
 
   def show

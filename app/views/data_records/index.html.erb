@@ -1,7 +1,8 @@
 <% content_for :title do %>Browse<% end %>
 <% content_for :body_class do %>browse<% end %>
 <div id="column_fullWidth">
-  <%#= render :partial => 'filters' %>
+  <%= render 'filters' %>
+
   <%= show_flash_message %>
 
   <div class="tableNav">

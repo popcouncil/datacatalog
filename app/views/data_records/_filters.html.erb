@@ -1,49 +1,33 @@
-<% form_tag '', :method => :get, :id => 'filterDataForm' do %>
+<% form_for @filters, :url => data_records_path, :html => { :method => :get, :id => 'filterDataForm' } do |form| %>
   <div id="filterData">
     <ul>
-      <%= hidden_field_tag :page, 1 %>
       <li>
-        <label for="jurisdiction_list">Jurisdiction</label>
-        <%= select_tag 'jurisdiction_id',
-          options_for_select(@jurisdictions, @filters[:jurisdiction_id]),
-          :id => 'jurisdiction_list' %>
+        <%= form.label :location %>
+        <%= form.country_select :location, ["All"] %>
       </li>
 
       <li>
-        <label for="organization_list">Organization</label>
-        <%= select_tag 'organization_id',
-          options_for_select(@organizations, @filters[:organization_id]),
-          :id => 'organization_list' %>
+        <%= form.label :ministry %>
+        <%= form.select :ministry, ministries_for_select, :disabled => "-------------" %>
       </li>
-      <!--
+
       <li>
-        <label for="source_format_list">Format</label>
-        <select id="source_format_list" name="source_format">
-          <option value="all">All</option>
-          <option value="xml">XML</option>
-          <option value="csv">CSV</option>
-          <option value="json">JSON</option>
-        </select>
+        <%= form.label :organization %>
+        <%= form.select :organization, organizations_for_filtering, :disabled => "-------------" %>
       </li>
-      -->
+
       <li>
-        <label for="source_type_list">Source Type</label>
-        <%= select_tag 'source_type',
-          options_for_select(@source_types, @filters[:source_type]),
-          :id => 'source_type_list' %>
+        <%= form.label :release_year, "Release Year" %>
+        <%= form.select :release_year, years_for_select, :disabled => "-------------" %>
       </li>
-      <li>
-        <label for="release_year_list">Release Year</label>
-        <%= select_tag 'release_year',
-          options_for_select(@release_years, @filters[:release_year].to_i),
-          :id => 'release_year_list' %>
-      </li>
+
       <li id="submit">
         <button class="filterBtn" type="submit">
           <span>Filter Data</span>
         </button>
       </li>
     </ul>
+
     <div class="clear"></div>
   </div>
 <% end %>
