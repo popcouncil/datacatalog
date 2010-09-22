@@ -2,6 +2,10 @@ class DataRecordsController < ApplicationController
   before_filter :initialize_data_record, :only => :new
   before_filter :require_user, :only => [:new, :create]
 
+  def index
+    @data_records = DataRecord.paginate(:page => params[:page])
+  end
+
   def show
     @data_record = DataRecord.find_by_slug(params[:id])
     @comments = @data_record.root_comments

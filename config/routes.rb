@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_records, :as => "data", :only => [:new, :create, :show] do |data_record|
+  map.resources :data_records, :as => "data", :only => [:index, :show, :new, :create] do |data_record|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
     data_record.resources :notes, :only => [:index, :create]
@@ -19,7 +19,6 @@ ActionController::Routing::Routes.draw do |map|
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"
-  map.browse             "browse",                                :controller => "browse",          :action => "index"
   map.confirm            "confirm/:token",                        :controller => "users",           :action => "confirm"
   map.contact            "contact",                               :controller => "contact",         :action => "index"
   map.contact_submission "contact/submit",                        :controller => "contact",         :action => "submit"

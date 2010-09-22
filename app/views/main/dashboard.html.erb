@@ -8,7 +8,7 @@
   <%= show_flash_message %>
   <% if current_user.favorite_records.empty? %>
   <div id="flash_notice">
-    You have no favorites yet. <%= link_to "Browse", browse_path %> for some.
+    You have no favorites yet. <%= link_to "Browse", data_records_path %> for some.
   </div>
   <% end %>
   <table>

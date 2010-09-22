@@ -3,5 +3,14 @@
 <div id="column_fullWidth">
   <%#= render :partial => 'filters' %>
   <%= show_flash_message %>
-  <%= render :partial => 'sources' %>
+
+  <div class="tableNav">
+    <%= will_paginate @data_records %>
+  </div>
+
+  <%= render 'shared/source_table' %>
+
+  <div class="tableNav">
+    <%= will_paginate @data_records %>
+  </div>
 </div>
