@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     data_record.resource :wiki, :as => "docs", :only => [:show, :edit, :update]
   end
 
-  map.resources :organization, :as => :org, :only => [:show]
+  map.resources :organizations, :as => :org, :only => [:show]
 
   map.namespace :admin do |admin|
     admin.resources :organizations, :only => [:index, :show, :new, :create, :update]
