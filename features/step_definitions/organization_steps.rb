@@ -1,10 +1,5 @@
 Given /^an organization named "([^\"]+)" exists$/ do |name|
-  the.organization = Organization.create(
-    :name      => name,
-    :country   => "Afghanistan",
-    :url       => "http://google.com/",
-    :org_type  => "Governmental"
-  )
+  the.organization = Organization.make(:name => name)
 end
 
 Then /^the organization's parent should be "([^\"]+)"$/ do |parent|

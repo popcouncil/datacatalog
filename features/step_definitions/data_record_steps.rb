@@ -1,19 +1,9 @@
 Given /^a data record titled "(.*)" exists$/ do |title|
   Given %Q(an organization named "Red Cross" exists)
 
-  unless User.first
-    Given %Q(an user named "Johnny Data Record Creator" with "johnny@datarecordcreationsinc.com" exists)
-  end
-
-  the.data_record = DataRecord.create(
-    :title           => title,
-    :description     => "Some Description",
-    :country         => "Namibia",
-    :homepage_url    => "http://namibia.com/data",
-    :year            => "2008",
-    :status          => "Published",
-    :organization_id => the.organization.id,
-    :owner_id        => (the.user || User.first).id
+  the.data_record = DataRecord.make(
+    :title        => title,
+    :organization => the.organization
   ) do |data_record|
     data_record.documents << Document.new(:external_url => "http://namibia.com/data/document")
   end

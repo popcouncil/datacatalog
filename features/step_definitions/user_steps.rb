@@ -1,13 +1,8 @@
 Given /^an? (.*) named "(.+)" with "(.*)" exists$/ do |role, name, email|
-  the.user = User.create!(
+  the.user = User.make(
     :display_name => name,
-    :email => email,
-    :password => 'test',
-    :password_confirmation => 'test',
-    :country => 'Uganda',
-    :city => 'Kampala',
-    :user_type => 'Journalist',
-    :role => normalize_role(role)
+    :email        => email,
+    :role         => normalize_role(role)
   )
   the.user.confirm!
 end
