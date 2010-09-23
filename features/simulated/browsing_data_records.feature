@@ -5,13 +5,13 @@ Feature: Browsing data records
 
   Background:
     Given the following data records exist:
-      | title           | organization            | country      | ministry             | year |
-      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2009 |
-      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2008 |
-      | AIDS            | Doctors Without Borders | Ghana        | Health Department    | 2008 |
-      | AIDS            | Doctors Without Borders | South Africa | Ministry of Health   | 2010 |
-      | Malaria         | Red Cross               | Sudan        | Health Ministry      | 2006 |
-      | Sex Trafficking | AST                     | Cyprus       |                      | 2010 |
+      | title           | organization            | country      | ministry             | year | tag_list                     |
+      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2009 | health, children, birth rate |
+      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2008 | health, children, birth rate |
+      | AIDS            | Doctors Without Borders | Ghana        | Health Department    | 2008 | health, diseases             |
+      | AIDS            | Doctors Without Borders | South Africa | Ministry of Health   | 2010 | health, diseases             |
+      | Malaria         | Red Cross               | Sudan        | Health Ministry      | 2006 | health, diseases             |
+      | Sex Trafficking | AST                     | Cyprus       |                      | 2010 | health, sex, slavery         |
 
   Scenario: Viewing data records on the list without filtering
     Given I am a site visitor
@@ -81,3 +81,13 @@ Feature: Browsing data records
     But I should not see "Child Birth"
     And I should not see "Malaria"
     And I should not see "Sex Trafficking"
+
+  Scenario: Filtering by tags
+    Given I am a site visitor
+    When I follow "Browse"
+    Then I should see a record tagged "diseases"
+    When I follow "diseases"
+    Then I should only see 3 records
+    And I should see "Browse by tag"
+    When I follow "View all"
+    Then I should see 6 records

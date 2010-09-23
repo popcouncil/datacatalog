@@ -27,6 +27,7 @@ class DataRecord < ActiveRecord::Base
 
   named_scope :filter_by, lambda {|filters|
     conditions = {}
+    joins = []
 
     if filters.location && filters.location != "All"
       conditions[:country] = filters.location
@@ -44,7 +45,12 @@ class DataRecord < ActiveRecord::Base
       conditions[:year] = filters.release_year
     end
 
-    { :conditions => conditions }
+    if filters.tagged.present?
+      joins << :tags
+      conditions["tags.name"] = filters.tagged
+    end
+
+    { :conditions => conditions, :joins => joins }
   }
 
   accepts_nested_attributes_for :author

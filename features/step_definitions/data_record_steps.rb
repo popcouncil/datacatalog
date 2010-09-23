@@ -54,7 +54,7 @@ Then /^the data record should be created by a (.+)$/ do |role|
   DataRecord.last.owner.role.should == normalize_role(role)
 end
 
-Then /^I should only see (\d+) records?$/ do |count|
+Then /^I should(?: only)? see (\d+) records?$/ do |count|
   page.should have_css("#browseTable tbody tr", :count => count.to_i)
 end
 
@@ -64,4 +64,10 @@ Then /^I should see ministry records before community records$/ do
   end
 
   page.should have_css("#data_record_#{ministry_records.last.id} + #data_record_#{community_records.first.id}")
+end
+
+Then /^I should see a record tagged "(.*)"$/ do |tag|
+  within :css, "tr.data_record .tags" do
+    Then %Q(I should see "#{tag}")
+  end
 end

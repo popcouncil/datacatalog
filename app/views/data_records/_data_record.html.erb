@@ -35,7 +35,7 @@
 
   <td class="center">
     <% if data_record.tags.any? %>
-      <span><%= data_record.tags.join(", ") %></span>
+      <span class="tags"><%= linked_tags(data_record) %></span>
     <% end %>
   </td>
 <% end %>

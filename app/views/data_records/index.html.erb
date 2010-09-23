@@ -1,4 +1,10 @@
-<% content_for :title do %>Browse<% end %>
+<% content_for :title do %>
+  Browse
+  <% if @filters.tagged.present? %>
+    by tag "<%= @filters.tagged %>"
+    <span class="small">(<%= link_to "View all", data_records_path %>)</span>
+  <% end %>
+<% end %>
 <% content_for :body_class do %>browse<% end %>
 <div id="column_fullWidth">
   <%= render 'filters' %>

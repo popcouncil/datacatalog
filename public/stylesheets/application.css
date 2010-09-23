@@ -79,6 +79,7 @@ li#nav_blog a:hover, li#nav_blog a.active { width: 78px; background: url(/images
 /*columns*/
 
 div#contentHeader { background: url(/images/contentHeader_bar.png) bottom left no-repeat;  padding-bottom: 20px; position: relative;}
+#contentHeader .small { font-size: 16px; font-style: normal; }
 body.home div#contentHeader { padding-bottom: 40px; margin-top: 50px;}
 body.lgHeader div#contentHeader { padding-bottom: 0px;}
 body.admin div#contentHeader { padding-bottom: 48px;}
