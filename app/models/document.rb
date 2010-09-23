@@ -4,6 +4,7 @@ class Document < ActiveRecord::Base
   has_attached_file :file, PAPERCLIP_CONFIG
 
   validate :presence_of_file_or_url
+  validates_presence_of :format
 
   private
 

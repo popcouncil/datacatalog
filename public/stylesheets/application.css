@@ -412,7 +412,7 @@ form#new_data_record .toggle input { margin: 0; float: none; display: inline; wi
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
 select.year { float: left;}
-form>ul>li p { margin-left: 150px;}
+form>ul>li p { margin-left: 160px;}
 p.seperator { margin-left: 20px; display: block; float: left;}
 select.newLine { margin-left: 150px;}
 div.searched { font-size: 90%; }

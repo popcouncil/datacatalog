@@ -63,10 +63,10 @@
 <% form.fields_for :documents do |document_form| %>
 <ul class="toggable-fields">
   <li class="toggle">
-    <%= radio_button_tag "provide_document", "upload" %>
+    <%= radio_button_tag "provide_document", "upload", @document_type == "upload" %>
     <%= label_tag "provide_document_upload", "Upload a file from my computer" %>
 
-    <%= radio_button_tag "provide_document", "external" %>
+    <%= radio_button_tag "provide_document", "external", @document_type == "external" %>
     <%= label_tag "provide_document_external", "Provide an URL to an external file" %>
   </li>
   <li class="toggable upload">
@@ -76,6 +76,11 @@
   <li class="toggable external">
     <%= document_form.label :external_url, "External URL" %>
     <%= document_form.text_field :external_url %>
+  </li>
+  <li class="toggable format">
+    <%= document_form.label :format, "Format" %>
+    <%= document_form.text_field :format %>
+    <p class="tip">For example XML, CSV, KML, ATOM, etc. Keep it short.</p>
   </li>
 </ul>
 <% end %>

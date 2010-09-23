@@ -5,7 +5,7 @@ Given /^a data record titled "(.*)" exists$/ do |title|
     :title        => title,
     :organization => the.organization
   ) do |data_record|
-    data_record.documents << Document.new(:external_url => "http://namibia.com/data/document")
+    data_record.documents << Document.make
   end
 end
 

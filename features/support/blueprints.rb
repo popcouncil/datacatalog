@@ -29,3 +29,8 @@ Organization.blueprint do
   url       { Faker::Internet.domain_name }
   org_type  "Governmental"
 end
+
+Document.blueprint do
+  external_url "http://url.com/file.csv"
+  format       "CSV"
+end

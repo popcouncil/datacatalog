@@ -16,7 +16,8 @@ Feature: Adding data source
     When I follow "Add Data"
     And I fill in the data record fields
     And I choose "Provide an URL to an external file"
-    And I fill in "External URL" with "http://document.url"
+    And I fill in "External URL" with "http://document.url/file.csv"
+    And I fill in "Format" with "CSV"
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And the data record should be created by a <role>
@@ -36,7 +37,8 @@ Feature: Adding data source
     And I select "Johnny Minister" from "Added By"
     And I fill in the data record fields
     And I choose "Provide an URL to an external file"
-    And I fill in "External URL" with "http://document.url"
+    And I fill in "External URL" with "http://document.url/file.csv"
+    And I fill in "Format" with "CSV"
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And the data record should be created by a ministry user
