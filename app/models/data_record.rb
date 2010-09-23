@@ -20,7 +20,32 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :year
   validates_presence_of :owner_id
+  validates_presence_of :organization_id
   validates_inclusion_of :status, :in => %w(Planned Published Completed)
+
+  named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
+
+  named_scope :filter_by, lambda {|filters|
+    conditions = {}
+
+    if filters.location && filters.location != "All"
+      conditions[:country] = filters.location
+    end
+
+    if filters.ministry && filters.ministry != "All"
+      conditions[:owner_id] = filters.ministry
+    end
+
+    if filters.organization && filters.organization != "All"
+      conditions[:organization_id] = filters.organization
+    end
+
+    if filters.release_year && filters.release_year != "All"
+      conditions[:year] = filters.release_year
+    end
+
+    { :conditions => conditions }
+  }
 
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :contact
@@ -29,6 +54,15 @@ class DataRecord < ActiveRecord::Base
 
   acts_as_taggable
   acts_as_commentable
+
+  def self.available_years
+    all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
+  end
+
+  def ministry
+    return unless owner.ministry_user?
+    owner
+  end
 
   def to_param
     slug

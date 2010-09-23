@@ -95,10 +95,6 @@ module ApplicationHelper
     %r{/(.*)/(.*)}.match(href)[2]
   end
 
-  def organizations_for_select(list)
-    list.map {|org| [org.name, org.id] }
-  end
-
   def parse_api_errors(hash)
     return [] if hash.blank?
 

@@ -2,6 +2,11 @@ class DataRecordsController < ApplicationController
   before_filter :initialize_data_record, :only => :new
   before_filter :require_user, :only => [:new, :create]
 
+  def index
+    @filters = Filters.new(params[:filters])
+    @data_records = DataRecord.filter_by(@filters).ministry_records_first.paginate(:page => params[:page], :per_page => 25)
+  end
+
   def show
     @data_record = DataRecord.find_by_slug(params[:id])
     @comments = @data_record.root_comments
@@ -29,6 +34,7 @@ class DataRecordsController < ApplicationController
       flash[:notice] = "Your Data has been submitted"
       redirect_to @data_record
     else
+      @document_type = params[:provide_document]
       @data_record.build_author  if @data_record.author.blank?
       @data_record.build_contact if @data_record.contact.blank?
       @data_record.build_catalog if @data_record.catalog.blank?

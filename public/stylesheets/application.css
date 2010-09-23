@@ -110,6 +110,7 @@ li#nav_communityDocs a:hover, li#nav_communityDocs a.active{ background: url(/im
 li#nav_privateNotes a{ background: url(/images/nav_privateNotes.png) top left no-repeat; width: 115px; height: 30px;}
 li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/images/nav_privateNotes.png) bottom left no-repeat; width: 115px; height: 30px;}
 
+#filterData select { width: 190px; margin-right: 5px; }
 
 
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 110px; padding-top: 2px; margin-bottom: 5px;}
@@ -216,10 +217,10 @@ a.flagData { text-indent: -9999em; background: url(/images/icon_favorited.png) r
 
 table#browseTable { width: 960px;}
 table#browseTable td.right, th.right, table#searchTable td.right, th.right { width: 90px;}
-table#browseTable td.dataContent { width: 395px; }
+table#browseTable td.dataContent { width: 240px; }
 
 table#searchTable { width: 750px;}
-table#searchTable td.dataContent { width: 395px;}
+table#searchTable td.dataContent { width: 240px;}
 
 
 dl#searchDetails dt { font-weight: bold; margin-right: 15px; margin-top: 2px; margin-bottom: 15px;}
@@ -411,7 +412,7 @@ form#new_data_record .toggle input { margin: 0; float: none; display: inline; wi
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
 select.year { float: left;}
-form>ul>li p { margin-left: 150px;}
+form>ul>li p { margin-left: 160px;}
 p.seperator { margin-left: 20px; display: block; float: left;}
 select.newLine { margin-left: 150px;}
 div.searched { font-size: 90%; }

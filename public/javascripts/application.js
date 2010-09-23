@@ -96,17 +96,18 @@ $(document).ready(function(){
   $("ul.toggable-fields input[type=radio]").change(function() {
     var radio = $(this),
         ul = radio.parents("ul");
+    ul.find("li.toggable input").val("");
     ul.find("li.toggable").hide();
     ul.find("li." + radio.val()).show();
+    ul.find("li.format").show();
   })
 
-  $("ul.toggable-fields li.toggable").hide().each(function() {
-    var value = $(this).find("input").val(),
-        className = $(this).attr("class").replace(/toggable/, '').replace(/\s+/, '');
+  $(".toggable-fields .toggable").hide()
 
-    if (value) {
-      $(this).parents("ul").find("input[type=radio][value=" + className + "]").attr("checked", true)
-      $(this).show();
+  $("ul.toggable-fields input[type=radio]").each(function() {
+    if ($(this).attr("checked")) {
+      $(".toggable-fields ." + $(this).val()).show()
+      $(".toggable-fields .format").show()
     }
-  });
+  })
 });
