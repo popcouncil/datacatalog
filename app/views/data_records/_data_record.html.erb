@@ -24,15 +24,10 @@
   </td>
 
   <td class="center">
-    <% if data_record.downloads.any? -%>
+    <% if data_record.documents.any? -%>
       <ul class="downloadFormats">
-        <% source.downloads.each do |download| %>
-        <li>
-          <a href="<%= download.url %>"><%= download.format.upcase %></a>
-          <% unless download['size'].blank? %>
-            <span>(<%= download['size'] %>)</span>
-          <% end %>
-        </li>
+        <% data_record.documents.each do |document| %>
+          <li><%= link_to document.format.upcase, document.download_url %></li>
         <% end %>
       </ul>
     <% end %>

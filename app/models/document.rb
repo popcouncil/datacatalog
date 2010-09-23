@@ -6,6 +6,10 @@ class Document < ActiveRecord::Base
   validate :presence_of_file_or_url
   validates_presence_of :format
 
+  def download_url
+    external_url.presence || file.url
+  end
+
   private
 
   def presence_of_file_or_url
