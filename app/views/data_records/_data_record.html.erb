@@ -1,4 +1,4 @@
-<tr class="<%= cycle 'even', 'odd' %>">
+<% content_tag_for :tr, data_record, :class => cycle("even", "odd") do %>
   <td class="dataContent left">
     <%= link_to data_record.title, data_record, :class => "dataName" %>
     <%= render "favorites/button", :data_record => data_record %>
@@ -38,4 +38,4 @@
       <span><%= data_record.tags.join(", ") %></span>
     <% end %>
   </td>
-</tr>
+<% end %>

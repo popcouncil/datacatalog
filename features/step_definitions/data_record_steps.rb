@@ -11,12 +11,11 @@ end
 
 Given /^the following data records exist:$/ do |table|
   table.hashes.each do |attr|
-    if attr["organization"]
+    if attr["organization"].present?
       attr["organization"] = Organization.find_by_name(attr["organization"]) || Organization.make(:name => attr["organization"])
     end
 
-    if attr["ministry"]
-      ministry_name = attr.delete("ministry")
+    if (ministry_name = attr.delete("ministry")) && ministry_name.present?
       attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
     end
 
@@ -57,4 +56,12 @@ end
 
 Then /^I should only see (\d+) records?$/ do |count|
   page.should have_css("#browseTable tbody tr", :count => count.to_i)
+end
+
+Then /^I should see ministry records before community records$/ do
+  ministry_records, community_records = DataRecord.ministry_records_first.partition do |data_record|
+    data_record.ministry
+  end
+
+  page.should have_css("#data_record_#{ministry_records.last.id} + #data_record_#{community_records.first.id}")
 end

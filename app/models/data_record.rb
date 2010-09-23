@@ -60,7 +60,8 @@ class DataRecord < ActiveRecord::Base
   end
 
   def ministry
-    owner.ministry_user? && owner
+    return unless owner.ministry_user?
+    owner
   end
 
   def to_param

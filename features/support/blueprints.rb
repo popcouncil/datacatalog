@@ -7,7 +7,7 @@ DataRecord.blueprint do
   description  { Faker::Lorem.paragraph }
   country      "Ethiopia"
   year         1990
-  owner        { User.first || User.make }
+  owner        { User.make }
   organization { Organization.first || Organization.make }
   status       "Published"
 end
