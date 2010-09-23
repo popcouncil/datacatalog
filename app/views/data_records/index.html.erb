@@ -1,7 +1,9 @@
 <% content_for :title do %>
   Browse
-  <% if @filters.tagged.present? %>
-    by tag "<%= @filters.tagged %>"
+  <% if @filters.tags.present? %>
+    by tag "<%= @filters.tags %>"
+  <% end %>
+  <% if @filters.any? %>
     <span class="small">(<%= link_to "View all", data_records_path %>)</span>
   <% end %>
 <% end %>

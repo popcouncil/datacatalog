@@ -4,6 +4,6 @@ module DataRecordsHelper
   end
 
   def linked_tags(record)
-    record.tags.map { |tag| link_to tag, data_records_path(:filters => { :tagged => tag.name }) }.join(", ")
+    record.tags.map { |tag| link_to tag, data_records_path(:filters => { :tags => tag.name }) }.join(", ")
   end
 end

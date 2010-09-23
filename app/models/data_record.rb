@@ -25,32 +25,24 @@ class DataRecord < ActiveRecord::Base
 
   named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
 
-  named_scope :filter_by, lambda {|filters|
-    conditions = {}
-    joins = []
+  named_scope :by_location, lambda {|country|
+    { :conditions => { :country => country } }
+  }
 
-    if filters.location && filters.location != "All"
-      conditions[:country] = filters.location
-    end
+  named_scope :by_ministry, lambda {|ministry|
+    { :conditions => { :owner_id => ministry } }
+  }
 
-    if filters.ministry && filters.ministry != "All"
-      conditions[:owner_id] = filters.ministry
-    end
+  named_scope :by_organization, lambda {|organization|
+    { :conditions => { :organization_id => organization } }
+  }
 
-    if filters.organization && filters.organization != "All"
-      conditions[:organization_id] = filters.organization
-    end
+  named_scope :by_release_year, lambda {|year|
+    { :conditions => { :year => year } }
+  }
 
-    if filters.release_year && filters.release_year != "All"
-      conditions[:year] = filters.release_year
-    end
-
-    if filters.tagged.present?
-      joins << :tags
-      conditions["tags.name"] = filters.tagged
-    end
-
-    { :conditions => conditions, :joins => joins }
+  named_scope :by_tags, lambda {|*tags|
+    { :joins => :tags, :conditions => { "tags.name" => tags }}
   }
 
   accepts_nested_attributes_for :author

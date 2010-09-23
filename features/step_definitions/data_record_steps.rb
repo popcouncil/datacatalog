@@ -4,9 +4,8 @@ Given /^a data record titled "(.*)" exists$/ do |title|
   the.data_record = DataRecord.make(
     :title        => title,
     :organization => the.organization
-  ) do |data_record|
-    data_record.documents << Document.make
-  end
+  )
+  the.data_record.documents << Document.make(:format => "CSV")
 end
 
 Given /^the following data records exist:$/ do |table|

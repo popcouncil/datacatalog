@@ -4,7 +4,9 @@ class DataRecordsController < ApplicationController
 
   def index
     @filters = Filters.new(params[:filters])
-    @data_records = DataRecord.filter_by(@filters).ministry_records_first.paginate(:page => params[:page], :per_page => 25)
+
+    records = @filters.apply(DataRecord.ministry_records_first)
+    @data_records = records.paginate(:page => params[:page], :per_page => 25)
   end
 
   def show
