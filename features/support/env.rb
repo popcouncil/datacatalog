@@ -29,15 +29,6 @@ World(DefiniteArticleHelper)
 
 Before do
   DatabaseCleaner.start
-
-  # Remove all the users and sources from the local API
-  DataCatalog::User.all.each do |u|
-    DataCatalog::User.destroy(u.id) unless u.name == "Primary Admin"
-  end
-
-  DataCatalog::Source.all.each do |s|
-    DataCatalog::Source.destroy(s.id)
-  end
 end
 
 After do
