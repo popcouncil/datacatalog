@@ -14,7 +14,13 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :organizations, :only => [:index, :show, :new, :create, :update]
     admin.resources :data_records, :only => [:index]
+    admin.resources :users, :only => [:index, :show, :new, :create, :update]
+    admin.resources :contact_submissions, :only => [:index, :show, :update]
   end
+
+  map.resources :users, :only => [:new, :create]
+  map.resource :profile, :controller => "users", :only => [:edit, :update]
+  map.resource :user_session
 
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
@@ -38,17 +44,6 @@ ActionController::Routing::Routes.draw do |map|
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
-
-  map.resources :users, :only => [:new, :create]
-  map.resource :profile, :controller => "users", :only => [:edit, :update]
-  map.resource :user_session
-
-  map.resource :admin, :controller => "admin" do |admin|
-    admin.resources :users,               :controller => "admin/users" do |user|
-      user.resources :keys,               :controller => "admin/keys"
-    end
-    admin.resources :contact_submissions, :controller => "admin/contact_submissions"
-  end
 
   map.connect ":controller/:action/:id"
   map.connect ":controller/:action/:id.:format"
