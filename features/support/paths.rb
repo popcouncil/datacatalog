@@ -12,13 +12,13 @@ module NavigationHelpers
     when /sign out/
       '/signout'
     when /my profile/
-      '/profile/'
+      edit_profile_path
     when /the contact form/
       '/contact'
     when 'my dashboard'
       dashboard_path
     when 'the admin dashboard'
-      admin_path
+      admin_data_records_path
     when "the data record's page"
       data_record_path(the.data_record)
 

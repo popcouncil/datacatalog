@@ -86,38 +86,4 @@ class ApplicationController < ActionController::Base
   def mailer_set_url_options
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
-
-  def handle_api_errors
-    begin
-      yield
-    rescue DataCatalog::Unauthorized
-      flash[:error] = "Unauthorized API Key! (#{DataCatalog.api_key})"
-      redirect_to :back
-    rescue DataCatalog::BadRequest => e
-      flash[:error] = build_error_message(e.errors)
-      redirect_to :back
-    end
-  end
-
-  def build_error_message(error_hash)
-    error_hash.map do |key, messages|
-      "<p>#{key}</p>" +
-      "<ul>" + messages.map { |m| "<li>#{m}</li>" }.join("") + "</ul>"
-    end.join("")
-  end
-
-  def paginate(documents, radius=3)
-    @page = params[:page].nil? ? 1 : params[:page].to_i
-    max = documents.page_count
-    if max > 0 && @page > max
-      # "Could not find page number #{@page}. The maximum is #{max}."
-      render_404(nil)
-      return
-    end
-    list = 1.upto(max).map do |i|
-      i if [1, max].include?(i) || (@page - radius .. @page + radius) === i
-    end
-    list.extend(Squeezable).squeeze
-  end
-
 end

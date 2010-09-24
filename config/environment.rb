@@ -32,10 +32,5 @@ Rails::Initializer.run do |config|
     :secret      => 'f3f57b71ef9345ffccd0c4e841d8e74bb2e7d2ef692a506aa6c2a3c29d584a55dd18426ffc04610be49956a51af'
   }
 
-  config.after_initialize do
-    CACHE = Cache.new
-  end
-
   config.middleware.use "Rack::Honeypot"
-
 end
