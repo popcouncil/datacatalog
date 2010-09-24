@@ -15,3 +15,5 @@ config/server.yml
 public/javascripts/all.js
 public/stylesheets/all.css
 public/system/files
+test
+spec

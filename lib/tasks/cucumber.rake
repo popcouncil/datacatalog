@@ -14,3 +14,5 @@ rescue LoadError
     abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
   end
 end
+
+task :default => :features
