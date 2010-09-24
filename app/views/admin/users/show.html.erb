@@ -10,10 +10,7 @@
 
 <div id="ltColumn">
   <%= show_flash_message %>
-</div>
 
-<div id="rtColumnWrapper">
-  <div id="rtColumn" class="withBg">
   <% form_for @user, :url => admin_user_path(@user.id), :method => :put do |f| %>
     <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
     <ul>
@@ -27,7 +24,7 @@
       </button>
     </ul>
   <% end %>
+</div>
 
-  <div class="clear"></div>
-  </div>
+<div id="rtColumn">
 </div>

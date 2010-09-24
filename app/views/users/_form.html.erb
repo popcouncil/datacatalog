@@ -18,6 +18,11 @@
       <%= form.label :password_confirmation, 'Confirm Password' %>
       <%= form.password_field :password_confirmation, :value => nil %>
   </li>
+  <% elsif !@user.new_record? %>
+  <li>
+      <%= form.label :openid_identifier, 'OpenID Identifier' %>
+      <%= form.password_field :openid_identifier %>
+  </li>
   <% end %>
 <% end %>
 

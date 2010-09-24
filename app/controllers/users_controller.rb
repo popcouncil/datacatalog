@@ -8,46 +8,36 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.save do |result|
-      if result
-        if @user.openid_identifier.present?
-          @user.confirm!
-          @user.deliver_welcome_message!
-          UserSession.create(@user)
-          flash[:notice] = "Success! You have been signed in."
-          redirect_to profile_path
-        else
-          @user.deliver_confirmation_instructions!
-          flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
-          redirect_to signin_path
-        end
+
+    if @user.save
+      if @user.openid_identifier.present?
+        @user.confirm!
+        @user.deliver_welcome_message!
+        UserSession.create(@user)
+        flash[:notice] = "Success! You have been signed in."
+        redirect_to edit_profile_path
       else
-        render :action => :new
+        @user.deliver_confirmation_instructions!
+        flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
+        redirect_to signin_path
       end
+    else
+      render :action => :new
     end
   end
 
-  def show
-    @user = @current_user
-    @key = DataCatalog::ApiKey.new
-  end
-
   def edit
-    @user = @current_user
-    @key = DataCatalog::ApiKey.new
-
+    @user = current_user
   end
 
   def update
-    @user = @current_user
-    @user.attributes = params[:user]
-    @user.save do |result|
-      if result
-        flash[:notice] = "Profile updated!"
-        redirect_to profile_path
-      else
-        render :action => :edit
-      end
+    @user = current_user
+
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Profile updated!"
+      redirect_to edit_profile_path
+    else
+      render :edit
     end
   end
 
@@ -60,7 +50,7 @@ class UsersController < ApplicationController
       @user.deliver_welcome_message!
       UserSession.create(@user)
       flash[:notice] = "Thanks! Your email address has been confirmed and you're now signed in."
-      redirect_to profile_path
+      redirect_to edit_profile_path
     else
       flash[:error] = "Sorry, could not confirm the email address."
       redirect_to signup_path

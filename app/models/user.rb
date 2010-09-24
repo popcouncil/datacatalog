@@ -1,32 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                  :integer(4)      not null, primary key
-#  email               :string(255)
-#  crypted_password    :string(255)
-#  password_salt       :string(255)
-#  persistence_token   :string(255)
-#  single_access_token :string(255)
-#  perishable_token    :string(255)
-#  login_count         :integer(4)      default(0)
-#  failed_login_count  :integer(4)      default(0)
-#  last_request_at     :datetime
-#  current_login_at    :datetime
-#  last_login_at       :datetime
-#  current_login_ip    :string(255)
-#  last_login_ip       :string(255)
-#  confirmed_at        :datetime
-#  openid_identifier   :string(255)
-#  display_name        :string(255)
-#  api_key             :string(255)
-#  country             :string(255)
-#  city                :string(255)
-#  user_type           :string(255)
-#  affiliation         :string(255)
-#  personal_url        :string(255)
-#  telephone_number    :string(255)
-
 class User < ActiveRecord::Base
   EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
 

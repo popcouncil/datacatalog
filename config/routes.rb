@@ -39,10 +39,8 @@ ActionController::Routing::Routes.draw do |map|
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
 
-  map.resources :users
-  map.resource :profile, :controller => "users" do |profile|
-    profile.resources :keys
-  end
+  map.resources :users, :only => [:new, :create]
+  map.resource :profile, :controller => "users", :only => [:edit, :update]
   map.resource :user_session
 
   map.resource :admin, :controller => "admin" do |admin|

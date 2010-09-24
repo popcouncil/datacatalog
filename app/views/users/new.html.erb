@@ -20,10 +20,10 @@ Sign Up
     <div id="standard_signup" class="tab_pane">
       <p class="tip">Sign up the old-fashioned way</p>
       <% if @user.openid_identifier.blank? -%>
-      <% form_for @user, :url => profile_path do |f| %>
-      <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+      <% form_for @user, :url => users_path do |form| %>
+      <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
       <ul id="standard_signup">
-        <%= render :partial => "form", :object => f %>
+        <%= render "form", :form => form %>
         <li>
           <button class="signUp" id="user_submit" type="submit" value="Sign Up" name="commit">
             <span>Sign Up</span>
@@ -36,7 +36,7 @@ Sign Up
 
     <div id="openid_signup" class="tab_pane">
       <p class="tip">Or, use OpenID</p>
-      <% form_for @user, :url => profile_path do |f| %>
+      <% form_for @user, :url => users_path do |f| %>
       <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
       <ul id="openID_signup">
         <%= render :partial => "openid_form", :object => f %>

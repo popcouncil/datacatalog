@@ -6,7 +6,7 @@
         <% content_tag_for :li, version do %>
           <% content_tag :span, :class => (version == @current_version ? "current" : "") do %>
             <%= link_to time_ago_in_words(version.updated_at), data_record_wiki_path(@data_record, :version => version.version) %>
-              ago by <%= link_to version.user.display_name, version.user %>
+              ago by <%= version.user.display_name %>
           <% end %>
         <% end %>
       <% end %>

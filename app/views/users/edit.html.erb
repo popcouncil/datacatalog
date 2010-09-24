@@ -1,26 +1,23 @@
 <% content_for :body_class do %>profile<% end %>
 
 <% content_for :title do %>
-    Edit My Profile
+    Account Settings
 <% end %>
 
 <div id="ltColumn">
-    <%= show_flash_message %>
-    <% form_for @user, :url => profile_path do |f| %>
-        <%= f.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
-        <ul>
-            <%= render :partial => "form", :object => f %>
-            <%= f.label :openid_identifier, 'OpenID URL' %>
-            <%= f.text_field :openid_identifier %>
-            <button id="user_submit" type="submit" value="Update" name="commit">
-                <span>Update</span>
-            </button>
-        </ul>
-    <% end %>
-
-    <br /><%= link_to "My Profile", profile_path %>
+  <%= show_flash_message %>
+  <% form_for @user, :url => profile_path, :html => { :method => :put } do |form| %>
+    <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
+    <ul>
+      <%= render "form", :form => form %>
+      <li>
+      <button class="update_admin" id="user_submit" type="submit" value="Update" name="commit">
+          <span>Update</span>
+        </button>
+      </li>
+    </ul>
+  <% end %>
 </div>
+
 <div id="rtColumn">
-
-
 </div>

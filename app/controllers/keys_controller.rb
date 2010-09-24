@@ -15,7 +15,7 @@ class KeysController < ApplicationController
                                                :key_type =>  params['key']['key_type']})
     end
     flash[:notice] = "New API key generated!"
-    redirect_to profile_path
+    redirect_to edit_profile_path
   end
 
   def update
@@ -24,7 +24,7 @@ class KeysController < ApplicationController
                                                           :key_type =>  params['key']['key_type']})
     end
     flash[:notice] = "The API key has been updated."
-    redirect_to profile_path
+    redirect_to edit_profile_path
   end
 
   def edit
@@ -38,7 +38,7 @@ class KeysController < ApplicationController
       current_user.api_user.delete_api_key!(params[:id])
     end
     flash[:notice] = "The API key has been deleted."
-    redirect_to profile_path
+    redirect_to edit_profile_path
   end
 
 end

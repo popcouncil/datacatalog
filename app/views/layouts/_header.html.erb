@@ -6,7 +6,7 @@
       <% if current_user.admin_or_ministry_user? -%>
         <li id="utilityRegister"><%= link_to "Admin", admin_data_records_path %></li>
       <% end -%>
-      <li id="utilityRegister"><%= link_to "Account Settings", profile_path %></li>
+      <li id="utilityRegister"><%= link_to "Account Settings", edit_profile_path %></li>
       <li id="utilitySignout"><%= link_to "Sign Out", signout_path %></li>
     <% else -%>
       <li id="utilityRegister"><%= link_to "Sign Up", signup_path %></li>
