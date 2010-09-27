@@ -4,8 +4,7 @@ class Organization < ActiveRecord::Base
   has_many :data_records, :dependent => :destroy
 
   validates_presence_of :name
-  validates_presence_of :country
-  validates_inclusion_of :org_type, :in => ORGANIZATION_TYPES
+  validates_inclusion_of :org_type, :in => ORGANIZATION_TYPES, :allow_blank => true
   validates_format_of :slug,
     :with        => /\A[a-zA-z0-9\-]+\z/,
     :message     => "can only contain alphanumeric characters and dashes",
@@ -17,6 +16,10 @@ class Organization < ActiveRecord::Base
 
   def to_param
     slug
+  end
+
+  def to_s
+    name
   end
 
   private

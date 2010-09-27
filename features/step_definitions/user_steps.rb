@@ -7,6 +7,10 @@ Given /^an? (.*) named "(.+)" with "(.*)" exists$/ do |role, name, email|
   the.user.confirm!
 end
 
+Given /^I am affiliated to "(.+)"$/ do |affiliation|
+  the.user.update_attributes(:affiliation => affiliation)
+end
+
 Then /^a new (.*) account should be created with "(.*)"$/ do |role_label, email|
   role = User::ROLES[role_label]
   user = User.find_by_email(email)

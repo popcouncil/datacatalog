@@ -9,7 +9,7 @@ DataRecord.blueprint do
   year         1990
   owner        { User.make }
   organization { Organization.first || Organization.make }
-  status       "Published"
+  tag_list     "foo, bar, baz"
 end
 
 User.blueprint do
@@ -31,6 +31,6 @@ Organization.blueprint do
 end
 
 Document.blueprint do
-  external_url "http://url.com/file.csv"
   format       "CSV"
+  external_url "http://url.com/file.csv"
 end

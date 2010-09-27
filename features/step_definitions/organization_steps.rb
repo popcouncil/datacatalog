@@ -7,3 +7,7 @@ Then /^the organization's parent should be "([^\"]+)"$/ do |parent|
     page.should have_content(parent)
   end
 end
+
+Then /^there should be (\w+) organizations?$/ do |count|
+  Organization.count.should == count.to_i
+end

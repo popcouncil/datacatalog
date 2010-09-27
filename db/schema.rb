@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922211801) do
+ActiveRecord::Schema.define(:version => 20100927193134) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(:version => 20100922211801) do
     t.string   "homepage_url"
     t.text     "description"
     t.string   "country"
-    t.string   "status"
     t.string   "project_name"
     t.string   "funder"
     t.string   "year"

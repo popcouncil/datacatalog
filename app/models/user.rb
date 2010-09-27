@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :ratings,   :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   has_many :favorite_records, :through => :favorites, :source => :data_record
+  has_many :data_records, :foreign_key => :owner_id, :dependent => :nullify
 
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES

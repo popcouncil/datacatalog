@@ -1,6 +1,6 @@
 class DataRecordsController < ApplicationController
-  before_filter :initialize_data_record, :only => :new
   before_filter :require_user, :only => [:new, :create]
+  before_filter :initialize_data_record, :only => :new
 
   def index
     @filters = Filters.new(params[:filters])
@@ -19,11 +19,9 @@ class DataRecordsController < ApplicationController
   end
   
   def new
-    @organizations = Organization.all
   end
 
   def create
-    @organizations = Organization.all
     @data_record = DataRecord.new(params[:data_record])
 
     if current_user.admin?
@@ -47,7 +45,7 @@ class DataRecordsController < ApplicationController
   private
 
   def initialize_data_record
-    @data_record = DataRecord.new
+    @data_record = current_user.data_records.new
     @data_record.documents.build
     @data_record.build_author
     @data_record.build_contact
