@@ -21,7 +21,6 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :year
   validates_presence_of :owner_id
   validates_presence_of :organization_id
-  validates_inclusion_of :status, :in => %w(Planned Published Completed)
 
   named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
 

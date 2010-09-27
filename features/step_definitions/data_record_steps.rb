@@ -34,7 +34,6 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Author Name" with "Pepe Perez")
   When %Q(I fill in "Author Affiliation" with "DCRA Member")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
-  When %Q(I select "Published" from "Status")
   When %Q(I fill in "Project Name" with "The Project")
   When %Q(I fill in "Funder" with "Uncle Sam")
   When %Q(I fill in "Year" with "2008")
