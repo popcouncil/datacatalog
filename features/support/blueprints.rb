@@ -9,6 +9,7 @@ DataRecord.blueprint do
   year         1990
   owner        { User.make }
   organization { Organization.first || Organization.make }
+  tag_list     "foo, bar, baz"
 end
 
 User.blueprint do

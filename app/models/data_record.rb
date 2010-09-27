@@ -15,6 +15,7 @@ class DataRecord < ActiveRecord::Base
   before_validation_on_create :make_slug
 
   validates_presence_of :country
+  validates_presence_of :tag_list, :message => "can't be empty"
   validates_presence_of :description
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
