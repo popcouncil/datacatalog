@@ -21,6 +21,10 @@
     <%= form.label :organization_id %>
     <%= form.select :organization_id, organizations_for_select(@organizations) %>
   </li>
+  <li>
+    <%= form.label :homepage_url, "Homepage URL" %>
+    <%= form.text_field :homepage_url %>
+  </li>
 
   <% form.fields_for :author do |author_form| %>
     <li>
@@ -34,10 +38,6 @@
   <% end %>
 
   <li>
-    <%= form.label :homepage_url, "Homepage URL" %>
-    <%= form.text_field :homepage_url %>
-  </li>
-  <li>
     <%= form.label :project_name, "Project Name" %>
     <%= form.text_field :project_name %>
   </li>
@@ -46,7 +46,7 @@
     <%= form.text_field:funder %>
   </li>
   <li>
-    <%= form.label :year %>
+    <%= form.label :year, "Publication Year" %>
     <%= form.text_field :year %>
   </li>
   <li>
