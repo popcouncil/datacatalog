@@ -18,8 +18,8 @@
     <%= form.country_select :country %>
   </li>
   <li>
-    <%= form.label :organization_id %>
-    <%= form.select :organization_id, organizations_for_select(@organizations) %>
+    <%= form.label :organization_name, "Lead Organization" %>
+    <%= form.text_field :organization_name %>
   </li>
   <li>
     <%= form.label :homepage_url, "Homepage URL" %>

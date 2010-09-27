@@ -15,13 +15,13 @@ class DataRecord < ActiveRecord::Base
   before_validation_on_create :make_slug
 
   validates_presence_of :country
-  validates_presence_of :tag_list, :message => "can't be empty"
   validates_presence_of :description
+  validates_presence_of :organization
+  validates_presence_of :tag_list, :message => "can't be empty"
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
   validates_presence_of :year
   validates_presence_of :owner_id
-  validates_presence_of :organization_id
 
   named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
 
@@ -55,6 +55,19 @@ class DataRecord < ActiveRecord::Base
 
   def self.available_years
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
+  end
+
+  def organization_name=(name)
+    self.organization = Organization.find_or_initialize_by_name(name) if name.present?
+    @organization_name = organization.try(:name)
+  end
+
+  def organization_name
+    if defined?(@organization_name)
+      @organization_name
+    else
+      organization.try(:name) || owner.try(:affiliation)
+    end
   end
 
   def ministry

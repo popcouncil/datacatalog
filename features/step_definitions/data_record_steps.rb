@@ -30,7 +30,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Title" with "Housing Code Enforcement")
   When %Q(I fill in "Description" with "Blah blah blah blah")
   When %Q(I select "Uruguay" from "Country")
-  When %Q(I select "DCRA" from "Organization")
+  When %Q(I fill in "Lead Organization" with "Red Cross International")
   When %Q(I fill in "Author Name" with "Pepe Perez")
   When %Q(I fill in "Author Affiliation" with "DCRA Member")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
@@ -41,6 +41,9 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Name" with "John Doe")
   When %Q(I fill in "Phone" with "+1 (234) 567 8900")
   When %Q(I fill in "Email" with "john.doe@example.org")
+  When %Q(I choose "Provide an URL to an external file")
+  When %Q(I fill in "External URL" with "http://document.url/file.csv")
+  When %Q(I fill in "Format" with "CSV")
 end
 
 Then /^I should see the favorited data record$/ do
@@ -68,4 +71,8 @@ Then /^I should see a record tagged "(.*)"$/ do |tag|
   within :css, "tr.data_record .tags" do
     Then %Q(I should see "#{tag}")
   end
+end
+
+Then /^the data record's lead organization should be "(.+)"$/ do |name|
+  DataRecord.last.organization.name.should == name
 end
