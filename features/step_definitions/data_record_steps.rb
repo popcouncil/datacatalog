@@ -36,7 +36,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
   When %Q(I fill in "Project Name" with "The Project")
   When %Q(I fill in "Funder" with "Uncle Sam")
-  When %Q(I fill in "Year" with "2008")
+  When %Q(I select "2008" from "Year")
   When %Q(I fill in "Tags" with "housing, code enforcement, something else")
   When %Q(I fill in "Name" with "John Doe")
   When %Q(I fill in "Phone" with "+1 (234) 567 8900")
