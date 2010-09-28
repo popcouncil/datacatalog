@@ -11,3 +11,7 @@ end
 Then /^there should be (\w+) organizations?$/ do |count|
   Organization.count.should == count.to_i
 end
+
+Then /^the organization "(.*)" should be located at "(.*)"$/ do |name, location|
+  Organization.find_by_name(name).country.should == location
+end

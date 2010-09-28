@@ -42,7 +42,6 @@ class DataRecord < ActiveRecord::Base
     { :conditions => { :owner_id => ministry } }
   }
 
-  # FIXME
   named_scope :by_organization, lambda {|organization|
     { :joins => :organizations, :conditions => { "organizations.id" => organization } }
   }
@@ -75,7 +74,7 @@ class DataRecord < ActiveRecord::Base
     if defined?(@lead_organization_name)
       @lead_organization_name
     else
-      lead_organization.try(:name) || owner.try(:affiliation)
+      lead_organization.try(:name) || owner.try(:affiliation).try(:name)
     end
   end
 

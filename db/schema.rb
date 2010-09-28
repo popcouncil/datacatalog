@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928172943) do
+ActiveRecord::Schema.define(:version => 20100928195635) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -200,7 +200,6 @@ ActiveRecord::Schema.define(:version => 20100928172943) do
     t.string   "display_name"
     t.string   "api_id"
     t.boolean  "list_opt_in",         :default => false
-    t.string   "affiliation"
     t.string   "country"
     t.string   "city"
     t.string   "personal_url"
@@ -209,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20100928172943) do
     t.string   "role"
     t.datetime "updated_at"
     t.datetime "created_at"
+    t.integer  "affiliation_id"
   end
 
   create_table "votes", :force => true do |t|

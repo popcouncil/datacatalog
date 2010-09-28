@@ -10,11 +10,14 @@ class User < ActiveRecord::Base
   has_many :favorite_records, :through => :favorites, :source => :data_record
   has_many :data_records, :foreign_key => :owner_id, :dependent => :nullify
 
+  belongs_to :affiliation, :class_name => "Organization"
+
   validates_presence_of :email, :display_name, :country, :city, :user_type
   validates_inclusion_of :user_type, :in => USER_TYPES
   validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
 
   before_validation_on_create :set_default_role
+  before_save :link_organization
 
   named_scope :alphabetical, :order => 'display_name'
 
@@ -90,6 +93,18 @@ class User < ActiveRecord::Base
     self
   end
 
+  def affiliation_name=(name)
+    @affiliation_name = name
+  end
+
+  def affiliation_name
+    if defined?(@affiliation_name)
+      @affiliation_name
+    else
+      affiliation.try(:name)
+    end
+  end
+
   private
 
   def map_openid_registration(registration)
@@ -99,5 +114,12 @@ class User < ActiveRecord::Base
 
   def set_default_role
     self.role = "basic" if role.blank?
+  end
+
+  def link_organization
+    if affiliation_name.present?
+      org = Organization.find_or_create_by_name(:name => affiliation_name, :country => country)
+      self.affiliation = org
+    end
   end
 end

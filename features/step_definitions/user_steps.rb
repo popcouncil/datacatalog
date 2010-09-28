@@ -8,7 +8,7 @@ Given /^an? (.*) named "(.+)" with "(.*)" exists$/ do |role, name, email|
 end
 
 Given /^I am affiliated to "(.+)"$/ do |affiliation|
-  the.user.update_attributes(:affiliation => affiliation)
+  the.user.update_attributes(:affiliation_name => affiliation)
 end
 
 Then /^a new (.*) account should be created with "(.*)"$/ do |role_label, email|
@@ -20,4 +20,9 @@ end
 Then /^a new (?:.*) account should not be created with "(.*)"$/ do |email|
   user = User.find_by_email(email)
   user.should be_nil
+end
+
+Then /^the user should be affiliated with "(.*)"$/ do |affiliation|
+  user = User.last
+  user.affiliation.try(:name).to_s.should == affiliation.strip
 end

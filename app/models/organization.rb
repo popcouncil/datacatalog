@@ -19,10 +19,6 @@ class Organization < ActiveRecord::Base
     slug
   end
 
-  def to_s
-    name
-  end
-
   private
 
   def make_slug
