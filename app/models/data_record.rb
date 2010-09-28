@@ -6,9 +6,12 @@ class DataRecord < ActiveRecord::Base
 
   has_many :sponsors, :dependent => :destroy
   has_many :organizations, :through => :sponsors
-  has_one  :lead_organization, :through => :sponsors, 
+  has_one  :lead_organization, :through => :sponsors,
                                :source  => :organization,
                                :conditions => { "sponsors.lead" => true }
+  has_many :collaborators, :through => :sponsors,
+                           :source  => :organization,
+                           :conditions => { "sponsors.lead" => false }
 
   has_one :wiki, :dependent => :destroy
 
@@ -76,6 +79,18 @@ class DataRecord < ActiveRecord::Base
     end
   end
 
+  def collaborator_list=(comma_separated_list)
+    @collaborator_list = comma_separated_list
+  end
+
+  def collaborator_list
+    if defined?(@collaborator_list)
+      @collaborator_list
+    else
+      collaborators.map(&:name).join(", ")
+    end
+  end
+
   def ministry
     return unless owner.ministry_user?
     owner
@@ -117,6 +132,13 @@ class DataRecord < ActiveRecord::Base
     if lead_organization_name.present?
       lead = Organization.find_or_create_by_name(lead_organization_name)
       sponsors.create(:organization => lead, :lead => true)
+    end
+
+    if collaborator_list.present?
+      collaborator_list.split(/\s*,\s*/).map(&:strip).each do |collab_name|
+        collab = Organization.find_or_create_by_name(collab_name)
+        sponsors.find_or_create_by_organization_id(:lead => false, :organization_id => collab.id)
+      end
     end
   end
 end

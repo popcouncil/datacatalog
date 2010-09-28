@@ -51,15 +51,18 @@ Feature: Adding data source
     When I follow "Add Data"
     And I fill in the data record fields
     And I fill in "Lead Organization" with "<name>"
+    And I fill in "Other Collaborators" with "<collaborators>"
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And there should be <count> organizations
     And the data record's lead organization should be "<name>"
 
     Examples:
-    | name      | count |
-    | DCRA      | 1     |
-    | Red Cross | 2     |
+    | name      | collaborators      | count |
+    | DCRA      | United Nations     | 2     |
+    | Red Cross | DCRA, Free Medic   | 3     |
+    | Red Cross | DCRA               | 2     |
+    | Red Cross |                    | 2     |
 
   Scenario: The lead organization defaults to the user's affiliation
     Given I am a signed in user

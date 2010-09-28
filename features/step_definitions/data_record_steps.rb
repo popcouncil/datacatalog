@@ -7,10 +7,6 @@ end
 
 Given /^the following data records exist:$/ do |table|
   table.hashes.each do |attr|
-    if (lead_org_name = attr.delete("lead organization")) && lead_org_name.present?
-      attr["lead_organization_name"] = lead_org_name
-    end
-
     if (ministry_name = attr.delete("ministry")) && ministry_name.present?
       attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
     end
@@ -28,6 +24,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Description" with "Blah blah blah blah")
   When %Q(I select "Uruguay" from "Country")
   When %Q(I fill in "Lead Organization" with "Red Cross International")
+  When %Q(I fill in "Other Collaborators" with "Doctors Without Borders, United Nations")
   When %Q(I fill in "Author Name" with "Pepe Perez")
   When %Q(I fill in "Author Affiliation" with "DCRA Member")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
