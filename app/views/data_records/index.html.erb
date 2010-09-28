@@ -3,11 +3,16 @@
   <% if @filters.tags.present? %>
     by tag "<%= @filters.tags %>"
   <% end %>
-  <% if @filters.any? %>
+<% end %>
+
+<% if @filters.any? %>
+  <% content_for :title_suffix do %>
     <span class="small">(<%= link_to "View all", data_records_path %>)</span>
   <% end %>
 <% end %>
+
 <% content_for :body_class do %>browse<% end %>
+
 <div id="column_fullWidth">
   <%= render 'filters' %>
 

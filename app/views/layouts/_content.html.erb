@@ -2,7 +2,7 @@
   <% if params[:action] == 'dashboard' && !current_user %>
     <%= yield(:feature_box) %>
   <% else %>
-    <h2><%= h yield(:title) %></h2>
+    <h2><%= yield(:title) %><%= yield(:title_suffix) %></h2>
     <%= yield(:tabs) %>
   <% end %>
 </div>
