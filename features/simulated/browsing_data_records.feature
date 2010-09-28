@@ -5,13 +5,13 @@ Feature: Browsing data records
 
   Background:
     Given the following data records exist:
-      | title           | organization            | country      | ministry             | year | tag_list                     |
-      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2009 | health, children, birth rate |
-      | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2008 | health, children, birth rate |
-      | AIDS            | Doctors Without Borders | Ghana        | Health Department    | 2008 | health, diseases             |
-      | AIDS            | Doctors Without Borders | South Africa | Ministry of Health   | 2010 | health, diseases             |
-      | Malaria         | Red Cross               | Sudan        | Health Ministry      | 2006 | health, diseases             |
-      | Sex Trafficking | AST                     | Cyprus       |                      | 2010 | health, sex, slavery         |
+      | title           | lead_organization_name  | collaborator_list       | country      | ministry             | year | tag_list                     |
+      | Child Birth     | Red Cross               | Free Medic, UN          | Afghanistan  | Department of Health | 2009 | health, children, birth rate |
+      | Child Birth     | Red Cross               | UN                      | Afghanistan  | Department of Health | 2008 | health, children, birth rate |
+      | AIDS            | Doctors Without Borders | UN                      | Ghana        | Health Department    | 2008 | health, diseases             |
+      | AIDS            | Doctors Without Borders | UN                      | South Africa | Ministry of Health   | 2010 | health, diseases             |
+      | Malaria         | Red Cross               |                         | Sudan        | Health Ministry      | 2006 | health, diseases             |
+      | Sex Trafficking | AST                     |                         | Cyprus       |                      | 2010 | health, sex, slavery         |
 
   Scenario: Viewing data records on the list without filtering
     Given I am a site visitor
@@ -57,6 +57,13 @@ Feature: Browsing data records
     And I should see "Child Birth"
     And I should see "Malaria"
     But I should not see "AIDS"
+    And I should not see "Sex Trafficking"
+    When I select "UN" from "Organization"
+    And I press "Filter Data"
+    Then I should only see 4 records
+    And I should see "Child Birth"
+    And I should see "AIDS"
+    But I should not see "Malaria"
     And I should not see "Sex Trafficking"
 
   Scenario: Filtering by Release Year
