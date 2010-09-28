@@ -1,7 +1,8 @@
 class Organization < ActiveRecord::Base
   ORGANIZATION_TYPES = %w(Commercial Governmental Not-For-Profit)
 
-  has_many :data_records, :dependent => :destroy
+  has_many :sponsors, :dependent => :destroy
+  has_many :data_records, :through => :sponsors
 
   validates_presence_of :name
   validates_inclusion_of :org_type, :in => ORGANIZATION_TYPES, :allow_blank => true

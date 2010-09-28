@@ -3,7 +3,12 @@ class DataRecord < ActiveRecord::Base
   belongs_to :author,       :dependent => :destroy
   belongs_to :contact,      :dependent => :destroy
   belongs_to :catalog,      :dependent => :destroy
-  belongs_to :organization
+
+  has_many :sponsors, :dependent => :destroy
+  has_many :organizations, :through => :sponsors
+  has_one  :lead_organization, :through => :sponsors, 
+                               :source  => :organization,
+                               :conditions => { "sponsors.lead" => true }
 
   has_one :wiki, :dependent => :destroy
 
@@ -13,10 +18,11 @@ class DataRecord < ActiveRecord::Base
   has_many :notes,     :dependent => :destroy
 
   before_validation_on_create :make_slug
+  after_save :link_organizations
 
   validates_presence_of :country
   validates_presence_of :description
-  validates_presence_of :organization
+  validates_presence_of :lead_organization_name
   validates_presence_of :tag_list, :message => "can't be empty"
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title
@@ -33,8 +39,9 @@ class DataRecord < ActiveRecord::Base
     { :conditions => { :owner_id => ministry } }
   }
 
+  # FIXME
   named_scope :by_organization, lambda {|organization|
-    { :conditions => { :organization_id => organization } }
+    { :joins => :organizations, :conditions => { "organizations.id" => organization } }
   }
 
   named_scope :by_release_year, lambda {|year|
@@ -57,16 +64,15 @@ class DataRecord < ActiveRecord::Base
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
   end
 
-  def organization_name=(name)
-    self.organization = Organization.find_or_initialize_by_name(name) if name.present?
-    @organization_name = organization.try(:name)
+  def lead_organization_name=(name)
+    @lead_organization_name = name
   end
 
-  def organization_name
-    if defined?(@organization_name)
-      @organization_name
+  def lead_organization_name
+    if defined?(@lead_organization_name)
+      @lead_organization_name
     else
-      organization.try(:name) || owner.try(:affiliation)
+      lead_organization.try(:name) || owner.try(:affiliation)
     end
   end
 
@@ -105,5 +111,12 @@ class DataRecord < ActiveRecord::Base
 
   def has_title?
     title.present?
+  end
+
+  def link_organizations
+    if lead_organization_name.present?
+      lead = Organization.find_or_create_by_name(lead_organization_name)
+      sponsors.create(:organization => lead, :lead => true)
+    end
   end
 end

@@ -3,13 +3,13 @@ require 'sham'
 require 'faker'
 
 DataRecord.blueprint do
-  title        { Faker::Lorem.sentence }
-  description  { Faker::Lorem.paragraph }
-  country      "Ethiopia"
-  year         1990
-  owner        { User.make }
-  organization { Organization.first || Organization.make }
-  tag_list     "foo, bar, baz"
+  title                  { Faker::Lorem.sentence }
+  description            { Faker::Lorem.paragraph }
+  country                "Ethiopia"
+  year                   1990
+  owner                  { User.make }
+  lead_organization_name { (Organization.first || Organization.make).name }
+  tag_list               "foo, bar, baz"
 end
 
 User.blueprint do

@@ -1,17 +1,14 @@
 Given /^a data record titled "(.*)" exists$/ do |title|
   Given %Q(an organization named "Red Cross" exists)
 
-  the.data_record = DataRecord.make(
-    :title        => title,
-    :organization => the.organization
-  )
+  the.data_record = DataRecord.make(:title => title, :lead_organization_name => the.organization.name)
   the.data_record.documents << Document.make(:format => "CSV")
 end
 
 Given /^the following data records exist:$/ do |table|
   table.hashes.each do |attr|
-    if attr["organization"].present?
-      attr["organization"] = Organization.find_by_name(attr["organization"]) || Organization.make(:name => attr["organization"])
+    if (lead_org_name = attr.delete("lead organization")) && lead_org_name.present?
+      attr["lead_organization_name"] = lead_org_name
     end
 
     if (ministry_name = attr.delete("ministry")) && ministry_name.present?
@@ -74,5 +71,5 @@ Then /^I should see a record tagged "(.*)"$/ do |tag|
 end
 
 Then /^the data record's lead organization should be "(.+)"$/ do |name|
-  DataRecord.last.organization.name.should == name
+  DataRecord.last.lead_organization.name.should == name
 end

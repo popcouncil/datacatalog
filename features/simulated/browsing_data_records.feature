@@ -5,7 +5,7 @@ Feature: Browsing data records
 
   Background:
     Given the following data records exist:
-      | title           | organization            | country      | ministry             | year | tag_list                     |
+      | title           | lead organization       | country      | ministry             | year | tag_list                     |
       | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2009 | health, children, birth rate |
       | Child Birth     | Red Cross               | Afghanistan  | Department of Health | 2008 | health, children, birth rate |
       | AIDS            | Doctors Without Borders | Ghana        | Health Department    | 2008 | health, diseases             |
