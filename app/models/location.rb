@@ -1,8 +1,18 @@
 class Location < ActiveRecord::Base
-  belongs_to :parent
-
   validates_presence_of :name
   validates_uniqueness_of :name
 
   acts_as_nested_set
+
+  def self.global
+    find_by_name! "Global"
+  end
+
+  def self.continents
+    global.children
+  end
+
+  def self.countries
+    global.leaves
+  end
 end

@@ -11,6 +11,10 @@ Given /^the following data records exist:$/ do |table|
       attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
     end
 
+    if (location = attr.delete("location")) && location.present?
+      attr["location"] = Location.find_by_name(location)
+    end
+
     DataRecord.make(attr)
   end
 end

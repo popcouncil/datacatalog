@@ -1,5 +1,5 @@
 Location.transaction do
-  global = Location.create(:name =>"Global")
+  global = Location.create!(:name =>"Global")
 
   {
     "Asia" => [

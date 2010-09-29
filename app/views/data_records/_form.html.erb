@@ -14,8 +14,8 @@
     <%= form.text_area :description %>
   </li>
   <li>
-    <%= form.label :country %>
-    <%= form.country_select :country %>
+    <%= form.label :location_id, "Country" %>
+    <%= form.select :location_id, all_locations_for_select, :disabled => "-------------" %>
   </li>
   <li>
     <%= form.label :lead_organization_name, "Lead Organization" %>

@@ -31,8 +31,8 @@
     <%= form.text_field :affiliation_name %>
 </li>
 <li>
-    <%= form.label :country %>
-    <%= form.country_select :country %>
+    <%= form.label :location_id, "Country" %>
+    <%= form.select :location_id, all_countries_for_select %>
 </li>
 <li>
     <%= form.label :city %>
