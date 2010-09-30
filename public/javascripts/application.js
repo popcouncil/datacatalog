@@ -110,4 +110,60 @@ $(document).ready(function(){
       $(".toggable-fields .format").show()
     }
   })
+
+  // Handle "Add Another" links for nested forms
+  $(".add_another a").click(function() {
+    var addAnother = $(this).parents(".add_another"),
+        container = addAnother.parent(),
+        target = container.find("li:first-child"),
+        cloned = target.clone(),
+        element = cloned.find("select, input");
+
+    var amount = container.find("li:not(.add_another)").size();
+
+    cloned.find("label").css({ visibility: "hidden" });
+    cloned.append(removeLink());
+
+    element.attr("name", element.attr("name").replace(/\[\d+\]/, '[' + amount + ']'));
+    element.attr("id", element.attr("id").replace(/_\d+_/, '_' + amount + '_'));
+    addAnother.before(cloned)
+
+    console.log(cloned)
+
+    container.trigger("fieldAdded", [cloned]);
+  });
+
+  var removeLink = function() {
+    return $('<a href="javascript:">Remove</a>').click(function() { $(this).parent().remove() });
+  }
+
+  // Handle Add Location for Data Records
+
+  $("#location_fields").bind("fieldAdded", function(_, field) {
+    // Remove the "Global" and first separator from "extra" locations
+    field.find("option:first-child").remove();
+    field.find("option:first-child").remove();
+  });
+
+  $("#location_fields").each(function() {
+    $(this).find("li:not(:first-child) label").css({ visibility: "hidden" });
+    $(this).find("li:not(:first-child):not(.add_another)").each(function() {
+      $(this).append(removeLink());
+    });
+  });
+
+  var toggleLocationsAddAnother = function() {
+    var container = $(this).parents("#location_fields"),
+        addAnother = container.find(".add_another");
+
+    if ($(this).find("option:selected").text() == "Global") {
+      addAnother.hide();
+      container.find("li:not(.add_another):not(:first-child)").remove();
+    } else {
+      addAnother.show();
+    }
+  }
+
+  $("#location_fields select").each(toggleLocationsAddAnother);
+  $("#location_fields select").change(toggleLocationsAddAnother);
 });

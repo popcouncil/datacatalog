@@ -27,6 +27,7 @@ class DataRecord < ActiveRecord::Base
   after_save :link_organizations
 
   validate :at_least_one_location
+  validate :no_duplicate_locations
   validates_presence_of :description
   validates_presence_of :lead_organization_name
   validates_presence_of :tag_list, :message => "can't be empty"
@@ -140,6 +141,11 @@ class DataRecord < ActiveRecord::Base
 
   def at_least_one_location
     errors.add_to_base("Must cover at least one region.") if data_record_locations.empty?
+  end
+
+  def no_duplicate_locations
+    dupes = data_record_locations.group_by {|loc| loc.location_id }.any? {|_, list| list.size > 1 }
+    errors.add_to_base("Geographical Coverage can't have duplicates") if dupes
   end
 
   def link_organizations
