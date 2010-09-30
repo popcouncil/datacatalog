@@ -134,7 +134,7 @@ $(document).ready(function(){
   });
 
   var removeLink = function() {
-    return $('<a href="javascript:">Remove</a>').click(function() { $(this).parent().remove() });
+    return $('<a href="javascript:" class="remove_link">Remove</a>').click(function() { $(this).parent().remove() });
   }
 
   // Handle Add Location for Data Records

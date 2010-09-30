@@ -171,6 +171,9 @@ div#downloadFormats li a{ background: url(/images/btn_arrow.png) top left no-rep
 div#downloadFormats li { margin-right: 25px;}
 div#downloadFormats a { margin-right: 5px;}
 
+.add_another { padding-left: 160px; }
+.remove_link { margin-left: 10px; }
+
 .tip, div#downloadFormats span, ul.downloadFormats span, span.commentDate, span.author{ font-size: 95%; font-style: oblique; color: #928f8c; line-height: 16px; margin-top: 3px; margin-bottom: 15px;}
 
 div.detailBox, div#dashboardControls, div#filterData, div#commentBox, div#additionalFields, div#additionalKeys { background: #f4f2ec; border: 2px solid #d9d7d3; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px; margin-bottom: 30px;}
