@@ -35,10 +35,17 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :year
   validates_presence_of :owner_id
 
-  named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
+  named_scope :ministry_records_first, :joins => [:owner, :locations], :order => "users.role = 'ministry_user' DESC, locations.lft DESC, created_at DESC"
 
   named_scope :by_location, lambda {|country|
-    { :joins => :locations, :conditions => { "data_record_locations.location_id" => country } }
+    target_country = Location.find(country)
+
+    { :joins => :locations,
+      :conditions => [
+        "data_record_locations.location_id = :id OR (locations.lft <= :lft AND locations.rgt >= :rgt)",
+        { :id => target_country.id, :lft => target_country.lft, :rgt => target_country.rgt }
+      ]
+    }
   }
 
   named_scope :by_ministry, lambda {|ministry|

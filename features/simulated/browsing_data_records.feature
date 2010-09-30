@@ -5,13 +5,14 @@ Feature: Browsing data records
 
   Background:
     Given the following data records exist:
-      | title           | lead_organization_name  | collaborator_list       | locations     | ministry             | year | tag_list                     |
-      | Child Birth     | Red Cross               | Free Medic, UN          | Afghanistan  | Department of Health | 2009 | health, children, birth rate |
-      | Child Birth     | Red Cross               | UN                      | Afghanistan  | Department of Health | 2008 | health, children, birth rate |
-      | AIDS            | Doctors Without Borders | UN                      | Ghana        | Health Department    | 2008 | health, diseases             |
-      | AIDS            | Doctors Without Borders | UN                      | South Africa | Ministry of Health   | 2010 | health, diseases             |
-      | Malaria         | Red Cross               |                         | Sudan        | Health Ministry      | 2006 | health, diseases             |
-      | Sex Trafficking | AST                     |                         | Cyprus       |                      | 2010 | health, sex, slavery         |
+      | title           | lead_organization_name  | collaborator_list       | locations      | ministry             | year | tag_list                     |
+      | Child Birth     | Red Cross               | Free Medic, UN          | Afghanistan    | Department of Health | 2009 | health, children, birth rate |
+      | Child Birth     | Red Cross               | UN                      | Afghanistan    | Department of Health | 2008 | health, children, birth rate |
+      | AIDS            | Doctors Without Borders | UN                      | Ghana          | Health Department    | 2008 | health, diseases             |
+      | AIDS            | Doctors Without Borders | UN                      | South Africa   | Ministry of Health   | 2010 | health, diseases             |
+      | Malaria         | Red Cross               |                         | Sudan          | Health Ministry      | 2006 | health, diseases             |
+      | Sex Trafficking | AST                     |                         | Cyprus         |                      | 2010 | health, sex, slavery         |
+      | Child Abuse     | United Nations          |                         | Europe         |                      | 2010 | health, children             |
 
   Scenario: Viewing data records on the list without filtering
     Given I am a site visitor
@@ -36,6 +37,15 @@ Feature: Browsing data records
     But I should not see "AIDS"
     And I should not see "Malaria"
     And I should not see "Sex Trafficking"
+
+  Scenario: Filtering by Location includes broader geographical regions
+    Given I am a site visitor
+    When I follow "Browse"
+    And I select "Cyprus" from "Location"
+    And I press "Filter Data"
+    Then I should only see 2 records
+    And I should see "Cyprus"
+    And I should see "Europe"
 
   Scenario: Filtering by Ministry
     Given I am a site visitor
@@ -97,4 +107,4 @@ Feature: Browsing data records
     Then I should only see 3 records
     And I should see "Browse by tag"
     When I follow "View all"
-    Then I should see 6 records
+    Then I should see 7 records

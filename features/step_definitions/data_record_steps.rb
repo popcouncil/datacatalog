@@ -12,7 +12,7 @@ Given /^the following data records exist:$/ do |table|
     end
 
     if (locations = attr.delete("locations").split(/\s*,\s*/)) && locations.present?
-      attr["locations"] = locations.map {|loc| Location.find_by_name(loc) }
+      attr["data_record_locations"] = locations.map {|loc| DataRecordLocation.new(:location_id => Location.find_by_name(loc).id) }
     end
 
     DataRecord.make(attr)

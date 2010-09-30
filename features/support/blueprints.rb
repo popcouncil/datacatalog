@@ -5,7 +5,7 @@ require 'faker'
 DataRecord.blueprint do
   title                  { Faker::Lorem.sentence }
   description            { Faker::Lorem.paragraph }
-  data_record_locations  { [DataRecordLocation.new(:location_id => Location.all.random_element)] }
+  data_record_locations  { [DataRecordLocation.new(:location_id => Location.all.random_element.id)] }
   year                   1990
   owner                  { User.make }
   lead_organization_name { (Organization.first || Organization.make).name }
