@@ -4,7 +4,6 @@ class DataRecordsController < ApplicationController
 
   def index
     @filters = Filters.new(params[:filters])
-
     records = @filters.apply(DataRecord.ministry_records_first)
     @data_records = records.paginate(:page => params[:page], :per_page => 25)
   end
@@ -47,6 +46,7 @@ class DataRecordsController < ApplicationController
   def initialize_data_record
     @data_record = current_user.data_records.new
     @data_record.documents.build
+    @data_record.data_record_locations.build(:location_id => Location.global.id)
     @data_record.build_author
     @data_record.build_contact
     @data_record.build_catalog

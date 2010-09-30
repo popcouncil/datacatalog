@@ -27,6 +27,11 @@ When /^I select "([^\"]*)" from "([^\"]*)"$/ do |value, field|
   select(value, :from => field)
 end
 
+When /^I select "([^\"]*)" from the (\w+) "([^\"]*)"$/ do |value, position, field|
+  first_field = find_field(field)
+  select(value, :from => first_field[:id].gsub(/_\d+_/, "_#{position.to_i - 1}_"))
+end
+
 # Use this step in conjunction with Rail's datetime_select helper. For example:
 # When I select "December 25, 2008 10:00" as the date and time
 When /^I select "([^\"]*)" as the date and time$/ do |time|

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928195635) do
+ActiveRecord::Schema.define(:version => 20100930172445) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -34,12 +34,18 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "data_record_locations", :force => true do |t|
+    t.integer  "data_record_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "data_records", :force => true do |t|
     t.string   "title"
     t.string   "slug"
     t.string   "homepage_url"
     t.text     "description"
-    t.string   "country"
     t.string   "project_name"
     t.string   "funder"
     t.string   "year"
@@ -83,6 +89,15 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
     t.datetime "updated_at"
   end
 
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "data_record_id"
@@ -108,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
-    t.string   "country"
     t.string   "acronym"
     t.string   "org_type"
     t.text     "description"
@@ -120,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
     t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
   end
 
   create_table "people", :force => true do |t|
@@ -200,7 +215,6 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
     t.string   "display_name"
     t.string   "api_id"
     t.boolean  "list_opt_in",         :default => false
-    t.string   "country"
     t.string   "city"
     t.string   "personal_url"
     t.string   "telephone_number"
@@ -209,6 +223,7 @@ ActiveRecord::Schema.define(:version => 20100928195635) do
     t.datetime "updated_at"
     t.datetime "created_at"
     t.integer  "affiliation_id"
+    t.integer  "location_id"
   end
 
   create_table "votes", :force => true do |t|

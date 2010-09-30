@@ -21,25 +21,14 @@ Given /^I am a site visitor who had an admin account created with "([^\"]*)" by 
 end
 
 Given /^I have signed up(?: with "(.*)")? but not yet confirmed$/ do |email|
-  the.user = User.create!(
-    :display_name => 'John D.',
-    :email => email || 'some@email.com',
-    :password => 'test',
-    :password_confirmation => 'test',
-    :country => 'Uganda',
-    :city => 'Kampala',
-    :user_type => 'Journalist'
-  )
+  the.user = User.make(:email => email || "some@email.com", :display_name => "John D.")
 end
 
 Given /^I have signed up via OpenID but not yet confirmed$/ do
-  the.user = User.create!(
+  the.user = User.make(
     :display_name => 'John D.',
     :email => 'some1@email.com',
-    :openid_identifier => 'http://someid.com/',
-    :country => 'Uganda',
-    :city => 'Kampala',
-    :user_type => 'Journalist'
+    :openid_identifier => 'http://someid.com/'
   )
 end
 

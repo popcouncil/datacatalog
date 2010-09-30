@@ -13,7 +13,7 @@ require 'database_cleaner'
 require 'database_cleaner/cucumber'
 require File.expand_path('../blueprints', __FILE__)
 
-DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.strategy = :truncation, {:except => %w[locations]}
 
 ActionController::Base.class_eval do
 
@@ -28,9 +28,5 @@ end
 World(DefiniteArticleHelper)
 
 Before do
-  DatabaseCleaner.start
-end
-
-After do
-  DatabaseCleaner.clean
+  require Rails.root.join("db/seeds.rb")
 end

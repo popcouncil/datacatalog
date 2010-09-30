@@ -11,8 +11,8 @@
   <%= form.select :parent_id, organization_tree_except(@organization), :include_blank => true %>
 </li>
 <li>
-  <%= form.label :country %>
-  <%= form.country_select :country %>
+  <%= form.label :location_id, "Country" %>
+  <%= form.select :location_id, all_countries_for_select %>
 </li>
 <li>
   <%= form.label :slug, "URL Slug" %>

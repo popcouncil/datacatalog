@@ -15,8 +15,8 @@
   <%= openid_form.text_field :affiliation_name, :id => 'openid_affiliation' %>
 </li>
 <li>
-  <%= openid_form.label :country, 'Country', :for => 'openid_country' %>
-  <%= openid_form.country_select :country, nil, {}, :id => 'openid_country' %>
+  <%= openid_form.label :location_id, "Country", :for => 'openid_country' %>
+  <%= openid_form.select :location_id, all_countries_for_select, {}, :id => 'openid_country' %>
 </li>
 <li>
   <%= openid_form.label :city, 'City', :for => 'openid_city' %>

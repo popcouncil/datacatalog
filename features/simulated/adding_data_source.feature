@@ -69,3 +69,30 @@ Feature: Adding data source
     And I am affiliated to "Red Cross International"
     When I follow "Add Data"
     Then the "Lead Organization" field should contain "Red Cross International"
+
+  @javascript
+  Scenario: A user adds a data record covering multiple regions
+    Given I am a signed in user
+    When I follow "Add Data"
+    And I fill in the data record fields
+    And I select "Africa" from "Geographical Coverage"
+    And I follow "+ Add Another"
+    And I select "Asia" from the 2nd "Geographical Coverage"
+    And I press "Submit"
+    Then I should see "Your Data has been submitted"
+    And I should see "Africa, Asia"
+
+  @javascript
+  Scenario: Setting a data record to have Global coverage should delete any other region
+    Given I am a signed in user
+    When I follow "Add Data"
+    And I fill in the data record fields
+    And I select "Africa" from "Geographical Coverage"
+    And I follow "+ Add Another"
+    And I select "Asia" from the 2nd "Geographical Coverage"
+    And I select "Global" from "Geographical Coverage"
+    And I press "Submit"
+    Then I should see "Your Data has been submitted"
+    And I should see "Global"
+    But I should not see "Africa"
+    And I should not see "Asia"

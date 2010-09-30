@@ -10,7 +10,7 @@
   </td>
 
   <td class="center">
-    <span><%= data_record.country %></span>
+    <span><%= data_record.locations.map(&:name).sort.join(", ") %></span>
   </td>
 
   <td class="center">

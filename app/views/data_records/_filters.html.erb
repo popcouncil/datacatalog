@@ -3,7 +3,7 @@
     <ul>
       <li>
         <%= form.label :location %>
-        <%= form.country_select :location, ["All"] %>
+        <%= form.select :location, all_locations_for_select("All", "-------------"), :disabled => "-------------" %>
       </li>
 
       <li>
