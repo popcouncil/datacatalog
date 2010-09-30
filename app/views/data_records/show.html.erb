@@ -16,7 +16,7 @@
           <dt>Lead Organization</dt>
           <dd><%= link_to @data_record.lead_organization.name, @data_record.lead_organization %>
 
-          <dt>Geographical Coverage</dt>
+          <dt style="clear: both">Geographical Coverage</dt>
           <dd><%= @data_record.locations.map(&:name).sort.join(", ") %></dd>
 
           <%= detail_field @data_record,
