@@ -3,7 +3,9 @@ class DataRecord < ActiveRecord::Base
   belongs_to :author,       :dependent => :destroy
   belongs_to :contact,      :dependent => :destroy
   belongs_to :catalog,      :dependent => :destroy
-  belongs_to :location
+
+  has_many :data_record_locations, :dependent => :destroy
+  has_many :locations, :through => :data_record_locations
 
   has_many :sponsors, :dependent => :destroy
   has_many :organizations, :through => :sponsors
@@ -24,7 +26,7 @@ class DataRecord < ActiveRecord::Base
   before_validation_on_create :make_slug
   after_save :link_organizations
 
-  validates_presence_of :location
+  validate :at_least_one_location
   validates_presence_of :description
   validates_presence_of :lead_organization_name
   validates_presence_of :tag_list, :message => "can't be empty"
@@ -36,7 +38,7 @@ class DataRecord < ActiveRecord::Base
   named_scope :ministry_records_first, :joins => :owner, :order => "users.role = 'ministry_user' DESC, created_at DESC"
 
   named_scope :by_location, lambda {|country|
-    { :conditions => { :location_id => country } }
+    { :joins => :locations, :conditions => { "data_record_locations.location_id" => country } }
   }
 
   named_scope :by_ministry, lambda {|ministry|
@@ -59,6 +61,7 @@ class DataRecord < ActiveRecord::Base
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
   accepts_nested_attributes_for :documents
+  accepts_nested_attributes_for :data_record_locations
 
   acts_as_taggable
   acts_as_commentable
@@ -126,6 +129,10 @@ class DataRecord < ActiveRecord::Base
 
   def has_title?
     title.present?
+  end
+
+  def at_least_one_location
+    errors.add_to_base("Must cover at least one region.") if data_record_locations.empty?
   end
 
   def link_organizations

@@ -46,6 +46,7 @@ class DataRecordsController < ApplicationController
   def initialize_data_record
     @data_record = current_user.data_records.new
     @data_record.documents.build
+    @data_record.data_record_locations.build(:location_id => Location.global.id)
     @data_record.build_author
     @data_record.build_contact
     @data_record.build_catalog

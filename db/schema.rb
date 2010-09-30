@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100929174015) do
+ActiveRecord::Schema.define(:version => 20100930172445) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20100929174015) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "data_record_locations", :force => true do |t|
+    t.integer  "data_record_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "data_records", :force => true do |t|
     t.string   "title"
     t.string   "slug"
@@ -48,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20100929174015) do
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "location_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|

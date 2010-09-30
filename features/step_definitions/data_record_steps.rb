@@ -11,8 +11,8 @@ Given /^the following data records exist:$/ do |table|
       attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
     end
 
-    if (location = attr.delete("location")) && location.present?
-      attr["location"] = Location.find_by_name(location)
+    if (locations = attr.delete("locations").split(/\s*,\s*/)) && locations.present?
+      attr["locations"] = locations.map {|loc| Location.find_by_name(loc) }
     end
 
     DataRecord.make(attr)
@@ -26,7 +26,7 @@ end
 When /^I fill in the data record fields$/ do
   When %Q(I fill in "Title" with "Housing Code Enforcement")
   When %Q(I fill in "Description" with "Blah blah blah blah")
-  When %Q(I select "Uruguay" from "Country")
+  When %Q(I select "Uruguay" from "Geographical Coverage")
   When %Q(I fill in "Lead Organization" with "Red Cross International")
   When %Q(I fill in "Other Collaborators" with "Doctors Without Borders, United Nations")
   When %Q(I fill in "Author Name" with "Pepe Perez")

@@ -13,10 +13,12 @@
     <%= form.label :description %>
     <%= form.text_area :description %>
   </li>
-  <li>
-    <%= form.label :location_id, "Country" %>
-    <%= form.select :location_id, all_locations_for_select, :disabled => "-------------" %>
-  </li>
+  <% form.fields_for :data_record_locations do |location_form| %>
+    <li>
+      <%= location_form.label :location_id, "Geographical Coverage" %>
+      <%= location_form.select :location_id, all_locations_for_select, :disabled => "-------------" %>
+    </li>
+  <% end %>
   <li>
     <%= form.label :lead_organization_name, "Lead Organization" %>
     <%= form.text_field :lead_organization_name %>
