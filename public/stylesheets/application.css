@@ -114,6 +114,8 @@ li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/imag
 #filterData select { width: 190px; margin-right: 5px; }
 
 #authors { margin-bottom: 44px; }
+#authors li div { margin-bottom: 14px; }
+#authors li .remove_link { margin-top: -34px }
 
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 140px; padding-top: 2px; margin-bottom: 5px; clear: both;}
 div#dataDetails dd { margin-bottom: 24px;}
@@ -173,7 +175,7 @@ div#downloadFormats li { margin-right: 25px;}
 div#downloadFormats a { margin-right: 5px;}
 
 .add_another { padding-left: 160px; }
-.remove_link { margin-left: 10px; }
+.remove_link { float: right; }
 
 .tip, div#downloadFormats span, ul.downloadFormats span, span.commentDate, span.author{ font-size: 95%; font-style: oblique; color: #928f8c; line-height: 16px; margin-top: 3px; margin-bottom: 15px;}
 

@@ -121,20 +121,29 @@ $(document).ready(function(){
 
     var amount = container.find("li:not(.add_another)").size();
 
-    cloned.find("label").css({ visibility: "hidden" });
-    cloned.append(removeLink());
+    cloned.append(removeLink(container));
 
-    element.attr("name", element.attr("name").replace(/\[\d+\]/, '[' + amount + ']'));
-    element.attr("id", element.attr("id").replace(/_\d+_/, '_' + amount + '_'));
+    element.each(function() {
+      var elem = $(this),
+          name = elem.attr("name").replace(/\[\d+\]/, '[' + amount + ']'),
+          id   = elem.attr("id").replace(/_\d+_/, '_' + amount + '_');
+
+      elem.parent().find("label").attr("for", id);
+      elem.attr("name", name);
+      elem.attr("id", id);
+    });
+
     addAnother.before(cloned)
-
-    console.log(cloned)
 
     container.trigger("fieldAdded", [cloned]);
   });
 
-  var removeLink = function() {
-    return $('<a href="javascript:" class="remove_link">Remove</a>').click(function() { $(this).parent().remove() });
+  var removeLink = function(container) {
+    return $('<a href="javascript:" class="remove_link">Remove</a>').click(function() {
+      var element = $(this).parent();
+      container.trigger("fieldRemoved", [element]);
+      element.remove();
+    });
   }
 
   // Handle Add Location for Data Records
@@ -143,12 +152,13 @@ $(document).ready(function(){
     // Remove the "Global" and first separator from "extra" locations
     field.find("option:first-child").remove();
     field.find("option:first-child").remove();
+    field.find("label").css({ visibility: "hidden" });
   });
 
   $("#location_fields").each(function() {
     $(this).find("li:not(:first-child) label").css({ visibility: "hidden" });
     $(this).find("li:not(:first-child):not(.add_another)").each(function() {
-      $(this).append(removeLink());
+      $(this).append(removeLink($(this)));
     });
   });
 
@@ -166,4 +176,17 @@ $(document).ready(function(){
 
   $("#location_fields select").each(toggleLocationsAddAnother);
   $("#location_fields select").change(toggleLocationsAddAnother);
+
+  // Handle Add Author for Data Records
+
+  $("#authors").bind("fieldAdded", function() {
+    if ($(this).find("li:not(.add_another)").size() >= 3)
+      $(this).find(".add_another").hide()
+    else
+      $(this).find(".add_another").show()
+  });
+
+  $("#authors").bind("fieldRemoved", function() {
+    $(this).find(".add_another").show()
+  });
 });

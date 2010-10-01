@@ -45,12 +45,18 @@
 <ul id="authors">
   <% form.fields_for :authors do |author_form| %>
     <li>
-      <%= author_form.label :name, "Author Name" %>
-      <%= author_form.text_field :name %>
+      <div>
+        <%= author_form.label :name, "Author Name" %>
+        <%= author_form.text_field :name %>
+      </div>
+      <div>
+        <%= author_form.label :affiliation_name, "Author Affiliation" %>
+        <%= author_form.text_field :affiliation_name %>
+      </div>
     </li>
-    <li>
-      <%= author_form.label :affiliation_name, "Author Affiliation" %>
-      <%= author_form.text_field :affiliation_name %>
+
+    <li class="add_another">
+      <%= link_to "+ Add Another", "javascript:" %>
     </li>
   <% end %>
 </ul>
