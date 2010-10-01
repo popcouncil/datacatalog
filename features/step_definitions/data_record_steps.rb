@@ -28,7 +28,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Description" with "Blah blah blah blah")
   When %Q(I select "Uruguay" from "Geographical Coverage")
   When %Q(I fill in "Lead Organization" with "Red Cross International")
-  When %Q(I fill in "Other Collaborators" with "Doctors Without Borders, United Nations")
+  When %Q(I fill in "Other Institutional Collaborators" with "Doctors Without Borders, United Nations")
   When %Q(I fill in "Author Name" with "Pepe Perez")
   When %Q(I fill in "Author Affiliation" with "DCRA Member")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
