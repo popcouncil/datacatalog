@@ -9,7 +9,7 @@ class DataRecordsController < ApplicationController
   end
 
   def show
-    @data_record = DataRecord.find_by_slug(params[:id])
+    @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :author, :contact, :tags, :comment_threads, :ratings, :favorites])
     @comments = @data_record.root_comments
     @comment = @data_record.comment_threads.new(
       :reports_problem => params.has_key?(:reports_problem),
