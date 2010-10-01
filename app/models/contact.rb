@@ -1,4 +1,6 @@
 class Contact < Person
+  has_one :data_record, :dependent => :nullify
+
   validates_presence_of :name, :message => "for the contact can't be blank"
   validate :presence_of_email_or_phone
 

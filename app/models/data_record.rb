@@ -65,7 +65,7 @@ class DataRecord < ActiveRecord::Base
     { :joins => :tags, :conditions => { "tags.name" => tags }}
   }
 
-  accepts_nested_attributes_for :author
+  accepts_nested_attributes_for :author, :reject_if => :all_blank
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
   accepts_nested_attributes_for :documents
