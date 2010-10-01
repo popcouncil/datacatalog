@@ -30,7 +30,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Lead Organization" with "Red Cross International")
   When %Q(I fill in "Other Institutional Collaborators" with "Doctors Without Borders, United Nations")
   When %Q(I fill in "Author Name" with "Pepe Perez")
-  When %Q(I fill in "Author Affiliation" with "DCRA Member")
+  When %Q(I fill in "Author Affiliation" with "DCRA")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
   When %Q(I fill in "Project Name" with "The Project")
   When %Q(I fill in "Funder" with "Uncle Sam")

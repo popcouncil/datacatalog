@@ -1,6 +1,5 @@
 class DataRecord < ActiveRecord::Base
   belongs_to :owner,        :class_name => "User"
-  belongs_to :author,       :dependent => :destroy
   belongs_to :contact,      :dependent => :destroy
   belongs_to :catalog,      :dependent => :destroy
 
@@ -15,6 +14,8 @@ class DataRecord < ActiveRecord::Base
   has_many :collaborators, :through => :sponsors,
                            :source  => :organization,
                            :conditions => { "sponsors.lead" => false }
+
+  has_many :authors, :dependent => :destroy
 
   has_one :wiki, :dependent => :destroy
 
@@ -65,7 +66,7 @@ class DataRecord < ActiveRecord::Base
     { :joins => :tags, :conditions => { "tags.name" => tags }}
   }
 
-  accepts_nested_attributes_for :author, :reject_if => :all_blank
+  accepts_nested_attributes_for :authors, :reject_if => lambda {|author| author[:name].blank? }
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
   accepts_nested_attributes_for :documents

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001181308) do
+ActiveRecord::Schema.define(:version => 20101001185311) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20101001181308) do
     t.string   "year"
     t.integer  "owner_id"
     t.integer  "catalog_id"
-    t.integer  "author_id"
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -141,10 +140,11 @@ ActiveRecord::Schema.define(:version => 20101001181308) do
     t.string   "name"
     t.string   "phone"
     t.string   "email"
-    t.string   "affiliation"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "affiliation_id"
+    t.integer  "data_record_id"
   end
 
   create_table "ratings", :force => true do |t|
