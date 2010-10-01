@@ -113,6 +113,7 @@ li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/imag
 
 #filterData select { width: 190px; margin-right: 5px; }
 
+#authors { margin-bottom: 44px; }
 
 div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 140px; padding-top: 2px; margin-bottom: 5px; clear: both;}
 div#dataDetails dd { margin-bottom: 24px;}

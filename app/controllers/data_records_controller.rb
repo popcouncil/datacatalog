@@ -9,7 +9,7 @@ class DataRecordsController < ApplicationController
   end
 
   def show
-    @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :author, :contact, :tags, :comment_threads, :ratings, :favorites])
+    @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :authors, :contact, :tags, :comment_threads, :ratings, :favorites])
     @comments = @data_record.root_comments
     @comment = @data_record.comment_threads.new(
       :reports_problem => params.has_key?(:reports_problem),
@@ -34,7 +34,6 @@ class DataRecordsController < ApplicationController
       redirect_to @data_record
     else
       @document_type = params[:provide_document]
-      @data_record.build_author  if @data_record.author.blank?
       @data_record.build_contact if @data_record.contact.blank?
       @data_record.build_catalog if @data_record.catalog.blank?
       render :new
@@ -47,7 +46,7 @@ class DataRecordsController < ApplicationController
     @data_record = current_user.data_records.new
     @data_record.documents.build
     @data_record.data_record_locations.build(:location_id => Location.global.id)
-    @data_record.build_author
+    @data_record.authors.build(:affiliation_name => @data_record.lead_organization_name)
     @data_record.build_contact
     @data_record.build_catalog
   end

@@ -37,14 +37,16 @@
             <dd><%= link_to @data_record.homepage_url %></dd>
           <% end %>
 
-          <% if @data_record.author.try(:name).present? %>
+          <% if @data_record.authors.any? %>
             <dt>Author</dt>
-            <dd><%=h @data_record.author.name %></dd>
-          <% end %>
-
-          <% if @data_record.author.try(:affiliation).present? %>
-            <dt>Author Affiliation</dt>
-            <dd><%=h @data_record.author.affiliation %></dd>
+            <% @data_record.authors.each do |author| %>
+              <dd>
+                <%=h author.name if author.name.present? %>
+                <% if author.affiliation.present? %>
+                  (<%= link_to author.affiliation.name, author.affiliation %>)
+                <% end %>
+              </dd>
+            <% end %>
           <% end %>
 
           <% if @data_record.project_name.present? %>
