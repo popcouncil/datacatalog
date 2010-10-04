@@ -34,7 +34,7 @@
 
           <% if @data_record.homepage_url.present? %>
             <dt>Homepage URL</dt>
-            <dd><%= link_to @data_record.homepage_url %></dd>
+            <dd><%= link_to @data_record.homepage_url, @data_record.homepage_url %></dd>
           <% end %>
 
           <% if @data_record.authors.any? %>
