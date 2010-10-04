@@ -20,7 +20,9 @@ module NavigationHelpers
     when 'the admin dashboard'
       admin_data_records_path
     when "the data record's page"
-      data_record_path(the.data_record)
+      data_record_path(the.data_record || DataRecord.first)
+    when "the browse page"
+      data_records_path
 
     # Add more mappings here.
     # Here is a more fancy example:

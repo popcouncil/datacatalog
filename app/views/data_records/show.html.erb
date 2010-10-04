@@ -55,7 +55,7 @@
           <% end %>
 
           <dt>Publication Year</dt>
-          <dd><%= link_to @data_record.year, data_records_path(:filters => { :publication_year => @data_record.year }) %></dd>
+          <dd><%= link_to @data_record.year, data_records_path(:filters => { :release_year => @data_record.year }) %></dd>
 
           <dt>Tags</dt>
           <dd><%= linked_tags(@data_record) %></dd>

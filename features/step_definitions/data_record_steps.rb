@@ -80,3 +80,14 @@ end
 Then /^the data record's lead organization should be "(.+)"$/ do |name|
   DataRecord.last.lead_organization.name.should == name
 end
+
+Then /^I should be browsing filtered by the "([^\"]+)" tag$/ do |tag|
+  Then %Q(I should be on the browse page)
+  Then %Q(I should see "Browse by tag")
+  Then %Q(I should see a record tagged "#{tag}")
+end
+
+Then /^I should be browsing records created on (\d+)$/ do |year|
+  Then %Q(I should be on the browse page)
+  Then %Q(the "Release Year" field should contain "#{year}")
+end
