@@ -22,7 +22,7 @@
     </li>
   <% end %>
   <li class="add_another">
-    <%= link_to "+ Add Another", "javascript:" %>
+    <%= link_to "+ Add Location", "javascript:" %>
   </li>
 </ul>
 <ul>
@@ -80,30 +80,40 @@
 </ul>
 
 <h2>Attached Documents</h2>
-<% form.fields_for :documents do |document_form| %>
-<ul class="toggable-fields">
-  <li class="toggle">
-    <%= radio_button_tag "provide_document", "upload", @document_type == "upload" %>
-    <%= label_tag "provide_document_upload", "Upload a file from my computer" %>
+<ul id="documents_fields">
+  <% form.fields_for :documents do |document_form| %>
+    <li>
+      <div class="toggable-fields">
+        <div>
+          <%= document_form.label :title %>
+          <%= document_form.text_field :title %>
+        </div>
+        <div>
+          <%= document_form.label :document_type, "Type" %>
+          <%= document_form.select :document_type, Document::DOCUMENT_TYPES %>
+        </div>
+        <div class="toggle">
+          <%= document_form.radio_button :storage, "upload" %>
+          <%= document_form.label :storage_upload, "Upload a file from my computer" %>
 
-    <%= radio_button_tag "provide_document", "external", @document_type == "external" %>
-    <%= label_tag "provide_document_external", "Provide an URL to an external file" %>
-  </li>
-  <li class="toggable upload">
-    <%= document_form.label :file, "Upload a File" %>
-    <%= document_form.file_field :file %>
-  </li>
-  <li class="toggable external">
-    <%= document_form.label :external_url, "External URL" %>
-    <%= document_form.text_field :external_url %>
-  </li>
-  <li class="toggable format">
-    <%= document_form.label :format, "Format" %>
-    <%= document_form.text_field :format %>
-    <p class="tip">For example XML, CSV, KML, ATOM, etc. Keep it short.</p>
+          <%= document_form.radio_button :storage, "external" %>
+          <%= document_form.label :storage_external, "Provide an URL to an external file" %>
+        </div>
+        <div class="toggable upload">
+          <%= document_form.label :file, "Upload a File" %>
+          <%= document_form.file_field :file %>
+        </div>
+        <div class="toggable external">
+          <%= document_form.label :external_url, "External URL" %>
+          <%= document_form.text_field :external_url %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <li class="add_another">
+    <%= link_to "+ Add Document", "javascript:" %>
   </li>
 </ul>
-<% end %>
 
 <h2>Contact details to request more information</h2>
 <ul>

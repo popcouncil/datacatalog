@@ -33,7 +33,6 @@ class DataRecordsController < ApplicationController
       flash[:notice] = "Your Data has been submitted"
       redirect_to @data_record
     else
-      @document_type = params[:provide_document]
       @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
       @data_record.build_contact if @data_record.contact.blank?
       @data_record.build_catalog if @data_record.catalog.blank?

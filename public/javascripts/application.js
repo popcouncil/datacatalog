@@ -93,21 +93,20 @@ $(document).ready(function(){
     current: 'active'
   });
 
-  $("ul.toggable-fields input[type=radio]").change(function() {
+  // Toggle upload/external url for documents
+  $(".toggable-fields input:radio").live("change", function() {
     var radio = $(this),
-        ul = radio.parents("ul");
-    ul.find("li.toggable input").val("");
-    ul.find("li.toggable").hide();
-    ul.find("li." + radio.val()).show();
-    ul.find("li.format").show();
+        container = radio.parents(".toggable-fields");
+    container.find(".toggable input").val("");
+    container.find(".toggable").hide();
+    container.find("." + radio.val()).show();
   })
 
   $(".toggable-fields .toggable").hide()
 
-  $("ul.toggable-fields input[type=radio]").each(function() {
+  $(".toggable-fields input:radio").each(function() {
     if ($(this).attr("checked")) {
-      $(".toggable-fields ." + $(this).val()).show()
-      $(".toggable-fields .format").show()
+      $(this).parents(".toggable-fields").find("." + $(this).val()).show()
     }
   })
 
@@ -117,19 +116,26 @@ $(document).ready(function(){
         container = addAnother.parent(),
         target = container.find("li:first-child"),
         cloned = target.clone(),
-        element = cloned.find("select, input");
+        elements = cloned.find("select, input");
 
     var amount = container.find("li:not(.add_another)").size();
 
     cloned.append(removeLink(container));
 
-    element.each(function() {
-      var elem = $(this),
-          name = elem.attr("name").replace(/\[\d+\]/, '[' + amount + ']'),
-          id   = elem.attr("id").replace(/_\d+_/, '_' + amount + '_');
+    elements.each(function() {
+      var elem  = $(this),
+          label = elem.parent().find("label[for=" + elem.attr("id") + "]"),
+          name  = elem.attr("name").replace(/\[\d+\]/, '[' + amount + ']'),
+          id    = elem.attr("id").replace(/_\d+_/, '_' + amount + '_');
 
-      elem.val("");
-      elem.parent().find("label").attr("for", id);
+      label.attr("for", id);
+
+      if (elem.is(":text")) {
+        elem.val("");
+      } else if (elem.is(":checkbox") || elem.is(":radio")) {
+        elem.attr("checked", false)
+      }
+
       elem.attr("name", name);
       elem.attr("id", id);
     });
@@ -195,4 +201,9 @@ $(document).ready(function(){
   });
 
   $("#authors li:first-child").hide();
+
+  // Handle Add Document for Data Records
+  $("#documents_fields").bind("fieldAdded", function(_, li) {
+    li.find(".toggable").hide();
+  });
 });

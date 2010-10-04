@@ -76,7 +76,7 @@ Feature: Adding data source
     When I follow "Add Data"
     And I fill in the data record fields
     And I select "Africa" from "Geographical Coverage"
-    And I follow "+ Add Another"
+    And I follow "+ Add Location"
     And I select "Asia" from the 2nd "Geographical Coverage"
     And I press "Submit"
     Then I should see "Your Data has been submitted"
@@ -88,7 +88,7 @@ Feature: Adding data source
     When I follow "Add Data"
     And I fill in the data record fields
     And I select "Africa" from "Geographical Coverage"
-    And I follow "+ Add Another"
+    And I follow "+ Add Location"
     And I select "Asia" from the 2nd "Geographical Coverage"
     And I select "Global" from "Geographical Coverage"
     And I press "Submit"
@@ -96,6 +96,23 @@ Feature: Adding data source
     And I should see "Global"
     But I should not see "Africa"
     And I should not see "Asia"
+
+  @javascript
+  Scenario: A data record can have multiple documents
+    Given I am a signed in user
+    When I follow "Add Data"
+    And I fill in the data record fields
+    And I select "Map" from "Type"
+    And I choose "Provide an URL to an external file"
+    And I fill in "External URL" with "http://maps.google.com"
+    And I follow "+ Add Document"
+    And I select "News Article" from the 2nd "Type"
+    And I choose the 2nd "Provide an URL to an external file"
+    And I fill in the 2nd "External URL" with "http://nytimes.com"
+    And I press "Submit"
+    Then I should see "Your Data has been submitted"
+    And I should see a link to "http://maps.google.com" labelled "MAP"
+    And I should see a link to "http://nytimes.com" labelled "NEWS ARTICLE"
 
 #  @javascript
 #  Scenario: A data record can have up to 3 authors

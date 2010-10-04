@@ -2,7 +2,7 @@ Given /^a data record titled "(.*)" exists$/ do |title|
   Given %Q(an organization named "Red Cross" exists)
 
   the.data_record = DataRecord.make(:title => title, :lead_organization_name => the.organization.name)
-  the.data_record.documents << Document.make(:format => "CSV")
+  the.data_record.documents << Document.make(:document_type => "Data")
 end
 
 Given /^the following data records exist:$/ do |table|
@@ -34,12 +34,16 @@ When /^I fill in the data record fields$/ do
   When %Q(I fill in "Funder" with "Uncle Sam")
   When %Q(I select "2008" from "Year")
   When %Q(I fill in "Tags" with "housing, code enforcement, something else")
+
+  # contact
   When %Q(I fill in "Name" with "John Doe")
   When %Q(I fill in "Phone" with "+1 (234) 567 8900")
   When %Q(I fill in "Email" with "john.doe@example.org")
+
+  # documents
   When %Q(I choose "Provide an URL to an external file")
   When %Q(I fill in "External URL" with "http://document.url/file.csv")
-  When %Q(I fill in "Format" with "CSV")
+  When %Q(I select "Data" from "Type")
 end
 
 When /^I fill in the (\w+) author name with "([^\"]+)"$/ do |position, value|

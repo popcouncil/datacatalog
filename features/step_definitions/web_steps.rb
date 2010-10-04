@@ -98,6 +98,12 @@ When /^I choose "([^\"]*)"$/ do |field|
   choose(field)
 end
 
+# I choose the 2nd "Field"
+When /^I choose the (\w+) "([^\"]*)"$/ do |position, field|
+  first_field = find_field(field)
+  choose first_field[:id].gsub(/_\d+_/, "_#{position.to_i - 1}_")
+end
+
 When /^I attach the file at "([^\"]*)" to "([^\"]*)"$/ do |path, field|
   attach_file(field, path)
 end
@@ -128,6 +134,10 @@ end
 
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
+end
+
+Then /^I should see a link to "([^\"]*)" labelled "([^\"]*)"$/ do |url, label|
+  find_link(label)["href"].should == url
 end
 
 Then /^the "([^\"]*)" link should be hidden$/ do |link|

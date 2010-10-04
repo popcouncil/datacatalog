@@ -1,13 +1,29 @@
 class Document < ActiveRecord::Base
+  DOCUMENT_TYPES = %w(Data Journal\ Article News\ Article Map Report Other)
+
   belongs_to :data_record
 
   has_attached_file :file, PAPERCLIP_CONFIG
 
   validate :presence_of_file_or_url
-  validates_presence_of :format
+  validates_inclusion_of :document_type, :in => DOCUMENT_TYPES
 
   def download_url
     external_url.presence || file.url
+  end
+
+  def storage
+    if @storage.present?
+      @storage
+    elsif external_url.present?
+      "external"
+    elsif file_file_name.present?
+      "upload"
+    end
+  end
+
+  def storage=(type)
+    @storage = type
   end
 
   private

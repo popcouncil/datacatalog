@@ -31,6 +31,6 @@ Organization.blueprint do
 end
 
 Document.blueprint do
-  format       "CSV"
-  external_url "http://url.com/file.csv"
+  document_type "Data"
+  external_url  "http://url.com/file.csv"
 end
