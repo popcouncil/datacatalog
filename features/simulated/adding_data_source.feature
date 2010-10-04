@@ -96,3 +96,34 @@ Feature: Adding data source
     And I should see "Global"
     But I should not see "Africa"
     And I should not see "Asia"
+
+#  @javascript
+#  Scenario: A data record can have up to 3 authors
+#    Given I am a signed in user
+#    When I follow "Add Data"
+#    And I fill in the data record fields
+#    And I follow "+ Add Author"
+#    And I fill in the 1st author name with "John Doe"
+#    And I follow "+ Add Author"
+#    And I fill in the 2nd author name with "Jane Doe"
+#    And I follow "+ Add Author"
+#    And I fill in the 3rd author name with "Tom From MySpace"
+#    Then the "+ Add Author" link should be hidden
+#    When I press "Submit"
+#    Then I should see "Your Data has been submitted"
+#    And I should see "John Doe"
+#    And I should see "Jane Doe"
+#    And I should see "Tom From MySpace"
+
+#  @javascript
+#  Scenario: A data record author's affiliation defaults to its lead organization
+#    Given I am a signed in user
+#    When I follow "Add Data"
+#    And I fill in the data record fields
+#    And I fill in "Lead Organization" with "Red Cross"
+#    And I follow "+ Add Author"
+#    Then the "Author Affiliation" field should contain "Red Cross"
+#    When I fill in the 1st author name with "John Doe"
+#    And I press "Submit"
+#    Then I should see "Your Data has been submitted"
+#    And I should see "John Doe (Red Cross)"

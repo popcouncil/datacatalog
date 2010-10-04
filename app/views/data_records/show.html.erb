@@ -39,14 +39,9 @@
 
           <% if @data_record.authors.any? %>
             <dt>Author</dt>
-            <% @data_record.authors.each do |author| %>
-              <dd>
-                <%=h author.name if author.name.present? %>
-                <% if author.affiliation.present? %>
-                  (<%= link_to author.affiliation.name, author.affiliation %>)
-                <% end %>
-              </dd>
-            <% end %>
+            <dd>
+              <%= authors_of @data_record %>
+            </dd>
           <% end %>
 
           <% if @data_record.project_name.present? %>

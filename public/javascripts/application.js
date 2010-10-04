@@ -128,12 +128,13 @@ $(document).ready(function(){
           name = elem.attr("name").replace(/\[\d+\]/, '[' + amount + ']'),
           id   = elem.attr("id").replace(/_\d+_/, '_' + amount + '_');
 
+      elem.val("");
       elem.parent().find("label").attr("for", id);
       elem.attr("name", name);
       elem.attr("id", id);
     });
 
-    addAnother.before(cloned)
+    addAnother.before(cloned.show())
 
     container.trigger("fieldAdded", [cloned]);
   });
@@ -179,8 +180,11 @@ $(document).ready(function(){
 
   // Handle Add Author for Data Records
 
-  $("#authors").bind("fieldAdded", function() {
-    if ($(this).find("li:not(.add_another)").size() >= 3)
+  $("#authors").bind("fieldAdded", function(_, li) {
+    li.find("input[id*=affiliation]").val($("#data_record_lead_organization_name").val());
+
+    // at most 3 authors (plus the hidden one)
+    if ($(this).find("li:not(.add_another)").size() >= 4)
       $(this).find(".add_another").hide()
     else
       $(this).find(".add_another").show()
@@ -189,4 +193,6 @@ $(document).ready(function(){
   $("#authors").bind("fieldRemoved", function() {
     $(this).find(".add_another").show()
   });
+
+  $("#authors li:first-child").hide();
 });

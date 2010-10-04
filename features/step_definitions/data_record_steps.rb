@@ -29,8 +29,6 @@ When /^I fill in the data record fields$/ do
   When %Q(I select "Uruguay" from "Geographical Coverage")
   When %Q(I fill in "Lead Organization" with "Red Cross International")
   When %Q(I fill in "Other Institutional Collaborators" with "Doctors Without Borders, United Nations")
-  When %Q(I fill in "Author Name" with "Pepe Perez")
-  When %Q(I fill in "Author Affiliation" with "DCRA")
   When %Q(I fill in "Homepage URL" with "http://data.dc.gov/foo")
   When %Q(I fill in "Project Name" with "The Project")
   When %Q(I fill in "Funder" with "Uncle Sam")
@@ -42,6 +40,10 @@ When /^I fill in the data record fields$/ do
   When %Q(I choose "Provide an URL to an external file")
   When %Q(I fill in "External URL" with "http://document.url/file.csv")
   When %Q(I fill in "Format" with "CSV")
+end
+
+When /^I fill in the (\w+) author name with "([^\"]+)"$/ do |position, value|
+  %Q(When I fill in the #{position.to_i + 1} "Author Name" with "#{value}")
 end
 
 Then /^I should see the favorited data record$/ do

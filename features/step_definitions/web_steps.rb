@@ -23,10 +23,17 @@ When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
+# I fill in the 2nd "Field" with "Value"
+When /^I fill in the (\w+) "([^\"]*)" with "([^\"]*)"$/ do |position, field, value|
+  first_field = find_field(field)
+  fill_in(first_field[:id].gsub(/_\d+_/, "_#{position.to_i - 1}_"), :with => value)
+end
+
 When /^I select "([^\"]*)" from "([^\"]*)"$/ do |value, field|
   select(value, :from => field)
 end
 
+# I select "Value" from the 2nd "Field"
 When /^I select "([^\"]*)" from the (\w+) "([^\"]*)"$/ do |value, position, field|
   first_field = find_field(field)
   select(value, :from => first_field[:id].gsub(/_\d+_/, "_#{position.to_i - 1}_"))
@@ -121,4 +128,8 @@ end
 
 Then /^I should be on (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
+end
+
+Then /^the "([^\"]*)" link should be hidden$/ do |link|
+  find_link(link)["style"].should =~ /display\s*:\s*none/
 end
