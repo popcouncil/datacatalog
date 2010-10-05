@@ -7,7 +7,7 @@ module NavigationHelpers
       '/'
     when /sign up/
       '/signup'
-    when /sign in/
+    when /sign in/, "the sign in page"
       '/signin'
     when /sign out/
       '/signout'

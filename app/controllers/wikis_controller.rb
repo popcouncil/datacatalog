@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  before_filter :require_user, :only => [:edit, :update]
   before_filter :load_data_record
 
   def show

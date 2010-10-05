@@ -26,6 +26,20 @@ Feature: Help document a data source
     Then I should see the updated documentation
     And I should see 2 versions in the sidebar
 
+  Scenario Outline: Guests can't edit documentation
+    Given the data record is <status>
+    And I am a site visitor
+    When I browse to the data record's documentation
+    When I follow "<link>"
+    Then I should see "You must be logged in to take that action"
+    And I should be on the sign in page
+
+    Examples:
+      | status          | link                               |
+      | documented      | edit and improve the documentation |
+      | not documented  | writing it                         |
+
+
   Scenario: Create the first version of the documentation
     Given the data record is not documented
     And I am a signed in user

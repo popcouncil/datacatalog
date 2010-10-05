@@ -1,5 +1,5 @@
 Given /^the data record is not documented$/ do
-  # no-op
+  the.data_record.wiki.try(:destroy)
 end
 
 Given /^the data record is documented$/ do
