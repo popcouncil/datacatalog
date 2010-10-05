@@ -91,3 +91,11 @@ Then /^I should be browsing records created on (\d+)$/ do |year|
   Then %Q(I should be on the browse page)
   Then %Q(the "Release Year" field should contain "#{year}")
 end
+
+Then /^the contact (\w+) field should contain the user's (\w+)$/ do |field, attribute|
+  Then %Q(the "#{field.titleize}" field should contain "#{the.user.send(attribute)}")
+end
+
+Then /^the contact (\w+) field should be blank$/ do |field|
+  find_field(field.titleize)["value"].should be_blank
+end

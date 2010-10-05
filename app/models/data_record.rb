@@ -130,6 +130,11 @@ class DataRecord < ActiveRecord::Base
     ratings.count
   end
 
+  def build_contact_from_owner
+    build_contact(:name  => owner.try(:display_name),
+                  :email => owner.try(:email))
+  end
+
   private
 
   def make_slug

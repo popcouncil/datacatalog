@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
 
   acts_as_tagger
 
+  # It really should be name, not display_name
+  alias_attribute :name, :display_name
+
   def self.search(term)
     return alphabetical if term.blank?
 

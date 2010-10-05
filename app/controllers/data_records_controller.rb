@@ -34,7 +34,7 @@ class DataRecordsController < ApplicationController
       redirect_to @data_record
     else
       @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
-      @data_record.build_contact if @data_record.contact.blank?
+      @data_record.build_contact_from_owner if @data_record.contact.blank?
       @data_record.build_catalog if @data_record.catalog.blank?
       render :new
     end
@@ -47,7 +47,7 @@ class DataRecordsController < ApplicationController
     @data_record.documents.build
     @data_record.data_record_locations.build(:location_id => Location.global.id)
     @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
-    @data_record.build_contact
+    @data_record.build_contact_from_owner
     @data_record.build_catalog
   end
 end

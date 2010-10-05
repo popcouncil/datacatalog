@@ -144,3 +144,10 @@ Feature: Adding data source
 #    And I press "Submit"
 #    Then I should see "Your Data has been submitted"
 #    And I should see "John Doe (Red Cross)"
+
+  Scenario: By default the contact information is pre-filled from the user's information
+    Given I am a signed in user
+    When I follow "Add Data"
+    Then the contact name field should contain the user's name
+    And the contact email field should contain the user's email
+    But the contact phone field should be blank
