@@ -47,7 +47,7 @@
     <li>
       <div>
         <%= author_form.label :name, "Author Name" %>
-        <%= author_form.text_field :name %>
+        <%= author_form.text_field :name, :class => "required" %>
       </div>
       <div>
         <%= author_form.label :affiliation_name, "Author Affiliation" %>
@@ -101,11 +101,11 @@
         </div>
         <div class="toggable upload">
           <%= document_form.label :file, "Upload a File" %>
-          <%= document_form.file_field :file %>
+          <%= document_form.file_field :file, :class => "required" %>
         </div>
         <div class="toggable external">
           <%= document_form.label :external_url, "External URL" %>
-          <%= document_form.text_field :external_url %>
+          <%= document_form.text_field :external_url, :class => "required" %>
         </div>
       </div>
     </li>

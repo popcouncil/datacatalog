@@ -206,4 +206,24 @@ $(document).ready(function(){
   $("#documents_fields").bind("fieldAdded", function(_, li) {
     li.find(".toggable").hide();
   });
+
+  // Only show add_another links if all elements in the current field are filled
+  $("#documents_fields .add_another").hide();
+
+  $("#authors, #documents_fields").bind("fieldAdded", function() {
+    $(this).find(".add_another").hide();
+  });
+
+  $("#authors .required").live("keyup", function() {
+    var hasEmpty = $("#authors .required").filter(function() {
+      console.log($(this).val())
+      return $(this).val() == "";
+    }).size() > 1; // the hidden one
+
+    if (hasEmpty) {
+      $("#authors .add_another").hide()
+    } else {
+      $("#authors .add_another").show()
+    }
+  });
 });
