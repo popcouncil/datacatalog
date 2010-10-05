@@ -226,4 +226,20 @@ $(document).ready(function(){
       $("#authors .add_another").show()
     }
   });
+
+  var showOrHideAddDocumentLink = function() {
+    var hasEmpty = $("#documents_fields .toggable-fields").filter(function() {
+      return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "");
+    }).size() > 0;
+
+    if (hasEmpty) {
+      $("#documents_fields .add_another").hide()
+    } else {
+      $("#documents_fields .add_another").show()
+    }
+  }
+
+  $("#documents_fields .upload .required").live("change", showOrHideAddDocumentLink);
+  $("#documents_fields .external .required").live("keyup", showOrHideAddDocumentLink);
+  $("#documents_fields :radio").live("change", showOrHideAddDocumentLink);
 });
