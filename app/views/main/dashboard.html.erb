@@ -1,7 +1,7 @@
 <% content_for :body_class do %>dashboard<% end %>
 
 <% content_for :title do %>
-  My Dashboard
+  My Favorite Data Records
 <% end %>
 
 <div id="ltColumn">
@@ -38,38 +38,6 @@
       <% end %>
     </tbody>
   </table>
-</div>
-<div id="rtColumnWrapper">
-  <div id="rtColumn">
-    <div id="recentComments" class="module">
-      <h3>Recent Comments</h3>
-      <% if @recent_comments.length > 0 %>
-      <dl>
-        <% @recent_comments.take(5).each do |comment| %>
-        <dt><%= link_to comment.source_title, source_path(comment.source_slug) %></dt>
-        <dd><%= truncate(comment.text, :length => 100) %></dd>
-        <dd class="commentDate">Posted on <%= comment.created_at.to_s(:mdy_slashed) %></dd>
-        <% end %>
-      </dl>
-      <% else %>
-      <p>No comments yet...</p>
-      <% end %>
-      <!--<a class="allLink" href="#">View All »</a>-->
-    </div>
-
-    <div id="yourRatings" class="module">
-      <h3>Recently Rated</h3>
-      <% if @recent_ratings.length > 0 %>
-      <ul>
-        <% @recent_ratings.take(5).each do |rating| %>
-        <li><%= link_to rating.source_title, source_path(rating.source_slug) %></li>
-        <% end %>
-      </ul>
-      <% else %>
-      <p>You haven't rated any data sources yet...</p>
-      <% end %>
-    </div>
-  </div>
 </div>
 
 <div class="clear"></div>

@@ -2,8 +2,6 @@ class MainController < ApplicationController
 
   def dashboard
     if current_user
-      @recent_comments = [] 
-      @recent_ratings = @all_ratings = []
       render 'dashboard'
     else
       @source_count = DataRecord.count
