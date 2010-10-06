@@ -120,6 +120,7 @@ $(document).ready(function(){
 
     var amount = container.find("li:not(.add_another)").size();
 
+    cloned.find(".remove_checkbox, .remove_link").remove();
     cloned.append(removeLink(container));
 
     elements.each(function() {
@@ -153,19 +154,42 @@ $(document).ready(function(){
     });
   }
 
+  $(".remove_checkbox").each(function() {
+    var checkboxContainer = $(this);
+    checkboxContainer.hide();
+
+    var link = $('<a href="javascript:" class="remove_link">Remove</a>');
+    link.click(function() {
+      var element = checkboxContainer.parents("li"),
+          container = element.parent();
+      container.trigger("fieldRemoved", [element]);
+
+      checkboxContainer.find(":checkbox").attr("checked", true)
+      element.hide();
+    });
+
+    checkboxContainer.before(link);
+  });
+
   // Handle Add Location for Data Records
+  $("#location_fields li:first-child").each(function() {
+    $(this).find(".remove_link, .remove_checkbox").remove();
+  });
+
+  var removeGlobalOption = function(container) {
+    container.find("option:first-child").remove(); // Global
+    container.find("option:first-child").remove(); // ----------
+    container.find("label").css({ visibility: "hidden" });
+  }
 
   $("#location_fields").bind("fieldAdded", function(_, field) {
-    // Remove the "Global" and first separator from "extra" locations
-    field.find("option:first-child").remove();
-    field.find("option:first-child").remove();
-    field.find("label").css({ visibility: "hidden" });
+    removeGlobalOption(field)
   });
 
   $("#location_fields").each(function() {
     $(this).find("li:not(:first-child) label").css({ visibility: "hidden" });
     $(this).find("li:not(:first-child):not(.add_another)").each(function() {
-      $(this).append(removeLink($(this)));
+      removeGlobalOption($(this))
     });
   });
 
@@ -199,6 +223,7 @@ $(document).ready(function(){
   // Handle Add Document for Data Records
   $("#documents_fields").bind("fieldAdded", function(_, li) {
     li.find(".toggable").hide();
+    li.find(".current_file").remove();
   });
 
   // Only show add_another links if all elements in the current field are filled
@@ -222,7 +247,7 @@ $(document).ready(function(){
 
   var showOrHideAddDocumentLink = function() {
     var hasEmpty = $("#documents_fields .toggable-fields").filter(function() {
-      return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "");
+      return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "") && ($(this).find(".current_file").size() == 0);
     }).size() > 0;
 
     if (hasEmpty) {

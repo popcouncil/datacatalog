@@ -518,3 +518,5 @@ div#footer div#HigestRatedData li a{ float: left; width: 415px; padding-right: 1
 div#footer.star-rating { float: right;}
 
 .clear{ clear: both;}
+
+.current_file { display: block; margin-left: 160px; }
