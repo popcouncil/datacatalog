@@ -10,7 +10,7 @@
   <%= show_flash_message %>
   <p><%= @data_record.description %></p>
   <div class="module">
-    <div id="dataDetails">
+    <div class="dataDetails">
       <div id="metaDetails">
         <dl>
           <dt>Submitted By</dt>
@@ -68,7 +68,7 @@
     </div>
 
     <% if @data_record.documents.any? -%>
-    <div id="downloadFormats">
+    <div id="downloadFormats" class="dataDetails">
       <h3>Files Available for Download</h3>
       <ul>
         <% @data_record.documents.each do |document| %>
@@ -78,6 +78,26 @@
       <div class="clear"></div>
     </div>
     <% end %>
+
+
+    <div id="contact_information" class="dataDetails">
+      <h3>Contact Details to Request More Information</h3>
+      <dl>
+        <dt>Name</dt>
+        <dd><%=h @data_record.contact.name %></dd>
+
+        <% if @data_record.contact.email.present? %>
+          <dt>Email</dt>
+          <dd><%= mail_to @data_record.contact.email %></dd>
+        <% end %>
+
+        <% if @data_record.contact.phone.present? %>
+          <dt>Phone</dt>
+          <dd><%=h @data_record.contact.phone %></dd>
+        <% end %>
+      </dl>
+      <div class="clear"></div>
+    </div>
   </div>
 </div>
 

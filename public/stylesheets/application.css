@@ -120,9 +120,9 @@ li#nav_privateNotes a:hover, li#nav_privateNotes a.active{ background: url(/imag
 #documents_fields li { border-bottom: 1px solid #ddd }
 #documents_fields .add_another { border-bottom: none } 
 
-div#dataDetails dt{ text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 140px; padding-top: 2px; margin-bottom: 5px; clear: both;}
-div#dataDetails dd { margin-bottom: 24px;}
-div#dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px; margin-top: 20px;}
+#dataDetails dt, .dataDetails dt { text-transform: uppercase; font-weight: bold; float: left; color: #371d17; width: 140px; padding-top: 2px; margin-bottom: 5px; clear: both;}
+#dataDetails dd, .dataDetails dd { margin-bottom: 24px;}
+#dataDetails, .dataDetails { border-bottom: #f2f3f1 1px solid; padding-bottom: 20px; margin-bottom: 20px; margin-top: 20px;}
 
 body.organization div#dataDetails { border-bottom: none; padding-bottom: 0;}
 body.organization div#dataDetails dd { width: 320px; float: left; margin-right: 15px; margin-bottom: 2px;}
@@ -173,6 +173,7 @@ ul.you_rateThreeStars li.threeStars a, ul.you_rateFourStars li.threeStars a, ul.
 ul.you_rateFourStars li.fourStars a, ul.you_rateFiveStars li.fourStars a { background: url(/images/youRate_stars.png) top left no-repeat; }
 ul.you_rateFiveStars li.fiveStars a { background: url(/images/youRate_stars.png) top left no-repeat; }
 
+#downloadFormats { padding-bottom: 20px; margin-bottom: 20px; }
 div#downloadFormats li a{ background: url(/images/btn_arrow.png) top left no-repeat; padding-left: 25px; padding-bottom: 3px;}
 div#downloadFormats li { margin-right: 25px;}
 div#downloadFormats a { margin-right: 5px;}
