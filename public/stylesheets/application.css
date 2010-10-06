@@ -386,9 +386,10 @@ button.signIn { background: url(/images/btn_signIn.png) top left no-repeat; widt
 button.signUp { background: url(/images/btn_signUp.png) top left no-repeat; width: 94px; margin-left: 150px; margin-top: 20px; }
 button.signIn_openID { background: url(/images/btn_signIn_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
 button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left no-repeat; width: 172px; margin-left: 150px; margin-top: 20px; }
-button.update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
+button.update, a#btn_update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
 button.update_admin { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; margin-left: 150px;}
 a#lg_signup { background: url(/images/btn_signUp_lg.png) top left no-repeat; width: 183px; height: 42px; margin: 15px auto 0;}
+a#btn_update { float: right; margin-top: 0; margin-left: 10px; }
 
 ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}
@@ -416,8 +417,8 @@ div#ltColumn input.full, div#ltColumn textarea.full{ width: 530px;}
 .mono { font: 125% "Inconsolata", "Consolas", "Courier New", "Courier", monospace; }
 div#ltColumn select { max-width: 380px; }
 
-form#new_data_record .toggle label { width: auto; display: inline; float: none; margin-right: 40px; }
-form#new_data_record .toggle input { margin: 0; float: none; display: inline; width: auto }
+form#new_data_record .toggle label, form#edit_data_record .toggle label { width: auto; display: inline; float: none; margin-right: 40px; }
+form#new_data_record .toggle input, form#edit_data_record .toggle input { margin: 0; float: none; display: inline; width: auto; }
 
 div#ltColumn input#source { float: left; margin-right: 15px; width: 250px;}
 form#addData select { margin-right: 5px; float: left;}
@@ -517,3 +518,5 @@ div#footer div#HigestRatedData li a{ float: left; width: 415px; padding-right: 1
 div#footer.star-rating { float: right;}
 
 .clear{ clear: both;}
+
+.current_file { display: block; margin-left: 160px; }

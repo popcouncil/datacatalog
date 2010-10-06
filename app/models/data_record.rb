@@ -66,11 +66,11 @@ class DataRecord < ActiveRecord::Base
     { :joins => :tags, :conditions => { "tags.name" => tags }}
   }
 
-  accepts_nested_attributes_for :authors, :reject_if => lambda {|author| author[:name].blank? }
+  accepts_nested_attributes_for :authors, :allow_destroy => true, :reject_if => lambda {|author| author[:name].blank? }
   accepts_nested_attributes_for :contact
   accepts_nested_attributes_for :catalog
-  accepts_nested_attributes_for :documents
-  accepts_nested_attributes_for :data_record_locations
+  accepts_nested_attributes_for :documents, :allow_destroy => true
+  accepts_nested_attributes_for :data_record_locations, :allow_destroy => true
 
   acts_as_taggable
   acts_as_commentable

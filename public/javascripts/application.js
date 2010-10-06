@@ -120,6 +120,7 @@ $(document).ready(function(){
 
     var amount = container.find("li:not(.add_another)").size();
 
+    cloned.find(".remove_checkbox, .remove_link").remove();
     cloned.append(removeLink(container));
 
     elements.each(function() {
@@ -153,19 +154,42 @@ $(document).ready(function(){
     });
   }
 
+  $(".remove_checkbox").each(function() {
+    var checkboxContainer = $(this);
+    checkboxContainer.hide();
+
+    var link = $('<a href="javascript:" class="remove_link">Remove</a>');
+    link.click(function() {
+      var element = checkboxContainer.parents("li"),
+          container = element.parent();
+      container.trigger("fieldRemoved", [element]);
+
+      checkboxContainer.find(":checkbox").attr("checked", true)
+      element.hide();
+    });
+
+    checkboxContainer.before(link);
+  });
+
   // Handle Add Location for Data Records
+  $("#location_fields li:first-child").each(function() {
+    $(this).find(".remove_link, .remove_checkbox").remove();
+  });
+
+  var removeGlobalOption = function(container) {
+    container.find("option:first-child").remove(); // Global
+    container.find("option:first-child").remove(); // ----------
+    container.find("label").css({ visibility: "hidden" });
+  }
 
   $("#location_fields").bind("fieldAdded", function(_, field) {
-    // Remove the "Global" and first separator from "extra" locations
-    field.find("option:first-child").remove();
-    field.find("option:first-child").remove();
-    field.find("label").css({ visibility: "hidden" });
+    removeGlobalOption(field)
   });
 
   $("#location_fields").each(function() {
     $(this).find("li:not(:first-child) label").css({ visibility: "hidden" });
     $(this).find("li:not(:first-child):not(.add_another)").each(function() {
-      $(this).append(removeLink($(this)));
+      removeGlobalOption($(this))
     });
   });
 
@@ -188,12 +212,6 @@ $(document).ready(function(){
 
   $("#authors").bind("fieldAdded", function(_, li) {
     li.find("input[id*=affiliation]").val($("#data_record_lead_organization_name").val());
-
-    // at most 3 authors (plus the hidden one)
-    if ($(this).find("li:not(.add_another)").size() >= 4)
-      $(this).find(".add_another").hide()
-    else
-      $(this).find(".add_another").show()
   });
 
   $("#authors").bind("fieldRemoved", function() {
@@ -205,31 +223,31 @@ $(document).ready(function(){
   // Handle Add Document for Data Records
   $("#documents_fields").bind("fieldAdded", function(_, li) {
     li.find(".toggable").hide();
+    li.find(".current_file").remove();
   });
 
   // Only show add_another links if all elements in the current field are filled
-  $("#documents_fields .add_another").hide();
-
   $("#authors, #documents_fields").bind("fieldAdded", function() {
     $(this).find(".add_another").hide();
   });
 
-  $("#authors .required").live("keyup", function() {
+  var showOrHideAddAuthorLink = function() {
     var hasEmpty = $("#authors .required").filter(function() {
-      console.log($(this).val())
       return $(this).val() == "";
     }).size() > 1; // the hidden one
 
-    if (hasEmpty) {
+    if (hasEmpty || ($("#authors").find("li:not(.add_another)").size() >= 4)) {
       $("#authors .add_another").hide()
     } else {
       $("#authors .add_another").show()
     }
-  });
+  }
+
+  $("#authors .required").live("keyup", showOrHideAddAuthorLink);
 
   var showOrHideAddDocumentLink = function() {
     var hasEmpty = $("#documents_fields .toggable-fields").filter(function() {
-      return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "");
+      return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "") && ($(this).find(".current_file").size() == 0);
     }).size() > 0;
 
     if (hasEmpty) {
@@ -242,4 +260,7 @@ $(document).ready(function(){
   $("#documents_fields .upload .required").live("change", showOrHideAddDocumentLink);
   $("#documents_fields .external .required").live("keyup", showOrHideAddDocumentLink);
   $("#documents_fields :radio").live("change", showOrHideAddDocumentLink);
+
+  showOrHideAddDocumentLink();
+  showOrHideAddAuthorLink();
 });

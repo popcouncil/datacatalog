@@ -11,6 +11,10 @@ Given /^I am affiliated to "(.+)"$/ do |affiliation|
   the.user.update_attributes(:affiliation_name => affiliation)
 end
 
+Given /^my (\w+) is "([^\"]+)"$/ do |attribute, value|
+  the.user.update_attribute(attribute, value)
+end
+
 Then /^a new (.*) account should be created with "(.*)"$/ do |role_label, email|
   role = User::ROLES[role_label]
   user = User.find_by_email(email)
