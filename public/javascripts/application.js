@@ -188,12 +188,6 @@ $(document).ready(function(){
 
   $("#authors").bind("fieldAdded", function(_, li) {
     li.find("input[id*=affiliation]").val($("#data_record_lead_organization_name").val());
-
-    // at most 3 authors (plus the hidden one)
-    if ($(this).find("li:not(.add_another)").size() >= 4)
-      $(this).find(".add_another").hide()
-    else
-      $(this).find(".add_another").show()
   });
 
   $("#authors").bind("fieldRemoved", function() {
@@ -208,24 +202,23 @@ $(document).ready(function(){
   });
 
   // Only show add_another links if all elements in the current field are filled
-  $("#documents_fields .add_another").hide();
-
   $("#authors, #documents_fields").bind("fieldAdded", function() {
     $(this).find(".add_another").hide();
   });
 
-  $("#authors .required").live("keyup", function() {
+  var showOrHideAddAuthorLink = function() {
     var hasEmpty = $("#authors .required").filter(function() {
-      console.log($(this).val())
       return $(this).val() == "";
     }).size() > 1; // the hidden one
 
-    if (hasEmpty) {
+    if (hasEmpty || ($("#authors").find("li:not(.add_another)").size() >= 4)) {
       $("#authors .add_another").hide()
     } else {
       $("#authors .add_another").show()
     }
-  });
+  }
+
+  $("#authors .required").live("keyup", showOrHideAddAuthorLink);
 
   var showOrHideAddDocumentLink = function() {
     var hasEmpty = $("#documents_fields .toggable-fields").filter(function() {
@@ -242,4 +235,7 @@ $(document).ready(function(){
   $("#documents_fields .upload .required").live("change", showOrHideAddDocumentLink);
   $("#documents_fields .external .required").live("keyup", showOrHideAddDocumentLink);
   $("#documents_fields :radio").live("change", showOrHideAddDocumentLink);
+
+  showOrHideAddDocumentLink();
+  showOrHideAddAuthorLink();
 });

@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_records, :as => "data", :only => [:index, :show, :new, :create] do |data_record|
+  map.resources :data_records, :as => "data", :except => :destroy do |data_record|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
     data_record.resources :notes, :only => [:index, :create]

@@ -1,6 +1,7 @@
 class DataRecordsController < ApplicationController
   before_filter :require_user, :only => [:new, :create]
-  before_filter :initialize_data_record, :only => :new
+  before_filter :find_data_record, :only => [:show, :edit, :update]
+  before_filter :require_owner_or_admin, :only => [:edit, :update]
 
   def index
     @filters = Filters.new(params[:filters])
@@ -9,7 +10,6 @@ class DataRecordsController < ApplicationController
   end
 
   def show
-    @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :authors, :contact, :tags, :comment_threads, :ratings, :favorites])
     @comments = @data_record.root_comments
     @comment = @data_record.comment_threads.new(
       :reports_problem => params.has_key?(:reports_problem),
@@ -18,6 +18,8 @@ class DataRecordsController < ApplicationController
   end
   
   def new
+    @data_record = current_user.data_records.new
+    initialize_data_record_associations
   end
 
   def create
@@ -33,21 +35,48 @@ class DataRecordsController < ApplicationController
       flash[:notice] = "Your Data has been submitted"
       redirect_to @data_record
     else
-      @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
-      @data_record.build_contact_from_owner if @data_record.contact.blank?
-      @data_record.build_catalog if @data_record.catalog.blank?
+      initialize_data_record_associations
       render :new
+    end
+  end
+
+  def edit
+    initialize_data_record_associations
+  end
+
+  def update
+    if current_user.admin?
+      @data_record.owner_id = params[:data_record][:owner_id]
+    else
+      @data_record.owner_id = current_user.id
+    end
+
+    if @data_record.update_attributes(params[:data_record])
+      flash[:notice] = "Your Data has been updated"
+      redirect_to @data_record
+    else
+      initialize_data_record_associations
+      render :edit
     end
   end
 
   private
 
-  def initialize_data_record
-    @data_record = current_user.data_records.new
-    @data_record.documents.build
-    @data_record.data_record_locations.build(:location_id => Location.global.id)
+  def initialize_data_record_associations
+    @data_record.documents.build if @data_record.documents.empty?
+    @data_record.data_record_locations.build(:location_id => Location.global.id) if @data_record.locations.empty?
     @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
-    @data_record.build_contact_from_owner
-    @data_record.build_catalog
+    @data_record.build_contact_from_owner if @data_record.contact.blank?
+  end
+
+  def find_data_record
+    @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :authors, :contact, :tags, :comment_threads, :ratings, :favorites])
+  end
+
+  def require_owner_or_admin
+    unless current_user == @data_record.owner || current_user.admin?
+      flash[:notice] = "You don't have permission to do that"
+      redirect_to @data_record
+    end
   end
 end

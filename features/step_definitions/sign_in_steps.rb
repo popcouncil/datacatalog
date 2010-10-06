@@ -21,3 +21,11 @@ Given /^I am a signed in (.*)$/ do |role|
   fill_in("Password", :with => "test")
   click_button("Sign In")
 end
+
+Given /^I am signed in as "([^\"]+)"$/ do |email|
+  the.user = User.find_by_email(email)
+  visit signin_path
+  fill_in "Email",    :with => email
+  fill_in "Password", :with => "test"
+  click_button "Sign In"
+end
