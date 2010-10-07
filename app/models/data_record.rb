@@ -153,7 +153,7 @@ class DataRecord < ActiveRecord::Base
   def link_organizations
     if lead_organization_name.present?
       lead = Organization.find_or_create_by_name(lead_organization_name)
-      sponsors.create(:organization => lead, :lead => true)
+      sponsors.find_or_create_by_organization_id(:lead => true, :organization_id => lead.id)
     end
 
     if collaborator_list.present?
