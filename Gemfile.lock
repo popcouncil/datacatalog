@@ -116,6 +116,7 @@ GEM
       ffi (>= 0.6.1)
       json_pure
       rubyzip
+    sortable_table (0.1.0)
     term-ansicolor (1.0.5)
     thoughtbot-shoulda (2.11.1)
     trollop (1.16.2)
@@ -149,6 +150,7 @@ DEPENDENCIES
   rspec-rails (>= 1.2.0)
   ruby-debug
   ruby-openid (>= 2.1.7)
+  sortable_table (= 0.1.0)
   thoughtbot-shoulda (>= 2.10.0)
   unindentable (>= 0.0.1)
   will_paginate (= 2.3.15)
