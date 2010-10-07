@@ -11,6 +11,7 @@ DataRecord.blueprint do
   owner                  { User.make }
   lead_organization_name { (Organization.first || Organization.make).name }
   tag_list               "foo, bar, baz"
+  contact                { Contact.make }
 end
 
 User.blueprint do
@@ -34,4 +35,9 @@ end
 Document.blueprint do
   document_type "Data"
   external_url  "http://url.com/file.csv"
+end
+
+Contact.blueprint do
+  name  "John Doe"
+  email "john@doe.com"
 end
