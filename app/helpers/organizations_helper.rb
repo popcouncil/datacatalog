@@ -14,7 +14,9 @@ module OrganizationsHelper
   end
 
   def organizations_for(data_record)
-    data_record.sponsors.map do |sponsor|
+    data_record.sponsors.sort_by do |sponsor|
+      sponsor.organization.name.downcase
+    end.map do |sponsor|
       if sponsor.lead?
         [content_tag(:strong, sponsor.organization.name), sponsor.organization]
       else

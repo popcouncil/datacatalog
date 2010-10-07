@@ -192,7 +192,8 @@ span#numberComments { background: url(/images/commentBubble.png) left 2px no-rep
 
 div#dashboardControls>ul>li { float: left; margin-right: 15px;}
 table { width: 600px; margin-bottom: 30px;}
-table tr#titles th, div#filterData label{ font-weight: bold; color: #371d17; text-transform: uppercase; font-size: 110%;}
+table tr#titles th, div#filterData label,#titles a{ font-weight: bold; color: #371d17; text-transform: uppercase; font-size: 110%; text-decoration: none;}
+#titles th a { font-size: 100%; }
 table p { font-size: 90%; line-height: 17px; padding-top: 3px;}
 th#selectTitle { text-indent: -9999em; width: 40px;}
 tr.even { background: #f7f7f3; }
@@ -215,7 +216,7 @@ table#messagesTable td.right, table#messagesTable th.right { width: 40px;}
 
 table#suggestedData td.center, table#suggestedData td.left, table#suggestedData th.center, table#suggestedData th.left { padding-right: 15px;}
 
-th.sort { background: url(/images/sortArrows.png) left 4px no-repeat; padding-left: 15px; cursor: pointer;}
+th.sort a { background: url(/images/sortArrows.png) left 4px no-repeat; padding-left: 10px; cursor: pointer;}
 
 div.key { color: #371D17;}
 table#keys td.left, table#keys th.left { width: 80px; padding-right: 15px;}
@@ -231,6 +232,7 @@ table#browseTable td.right, th.right, table#searchTable td.right, th.right { wid
 table#browseTable td.dataContent { width: 240px; }
 
 #browseTable strong { font-weight: bold; }
+#browseTable th
 
 table#searchTable { width: 750px;}
 table#searchTable td.dataContent { width: 240px;}
