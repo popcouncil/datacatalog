@@ -54,3 +54,11 @@ Feature: Rating data records
     | 3     | 2       | 2     |
     | 4     | 3       | 2     |
     | 5     | 3       | 2     |
+
+  @javascript
+  Scenario: Guests can't rate data records
+    Given I am a site visitor
+    And I am on the data record's page
+    And I rate it 4 stars
+    Then I should see "You must be logged in to take that action"
+    And I should be on the sign in page
