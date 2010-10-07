@@ -230,6 +230,8 @@ table#browseTable { width: 960px;}
 table#browseTable td.right, th.right, table#searchTable td.right, th.right { width: 90px;}
 table#browseTable td.dataContent { width: 240px; }
 
+#browseTable strong { font-weight: bold; }
+
 table#searchTable { width: 750px;}
 table#searchTable td.dataContent { width: 240px;}
 

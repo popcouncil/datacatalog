@@ -12,4 +12,16 @@ module OrganizationsHelper
       [name, id.to_s]
     end
   end
+
+  def organizations_for(data_record)
+    data_record.sponsors.map do |sponsor|
+      if sponsor.lead?
+        [content_tag(:strong, sponsor.organization.name), sponsor.organization]
+      else
+        [sponsor.organization.name, sponsor.organization]
+      end
+    end.map do |name, org|
+      link_to name, org
+    end.join(", ")
+  end
 end
