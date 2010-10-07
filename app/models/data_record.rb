@@ -123,11 +123,7 @@ class DataRecord < ActiveRecord::Base
 
   def ratings_average
     return nil if ratings_count.zero?
-    (ratings.sum(:value) / ratings_count).round
-  end
-
-  def ratings_count
-    ratings.count
+    (ratings_total / ratings_count).round
   end
 
   def build_contact_from_owner
