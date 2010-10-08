@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101004180417) do
+ActiveRecord::Schema.define(:version => 20101007192708) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20101004180417) do
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ratings_count", :default => 0
+    t.integer  "ratings_total", :default => 0
   end
 
   create_table "delayed_jobs", :force => true do |t|

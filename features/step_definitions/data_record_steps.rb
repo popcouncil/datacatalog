@@ -15,8 +15,16 @@ Given /^the following data records exist:$/ do |table|
       attr["owner"] = User.ministry_users.find_by_display_name(ministry_name) || User.make(:display_name => ministry_name, :role => "ministry_user")
     end
 
-    if (locations = attr.delete("locations").split(/\s*,\s*/)) && locations.present?
+    if (locations = attr.delete("locations").to_s.split(/\s*,\s*/)) && locations.present?
       attr["data_record_locations"] = locations.map {|loc| DataRecordLocation.new(:location_id => Location.find_by_name(loc).id) }
+    end
+
+    if (ratings = attr.delete("ratings").to_s.split(/\s*,\s*/)) && ratings.present?
+      attr["ratings"] = ratings.map {|val| Rating.new(:value => val, :user => User.make) }
+    end
+
+    if (documents = attr.delete("documents").to_s.split(/\s*,\s*/)) && documents.present?
+      attr["documents"] = documents.map {|type| Document.make_unsaved(:document_type => type) }
     end
 
     DataRecord.make(attr)
@@ -54,6 +62,13 @@ When /^I fill in the (\w+) author name with "([^\"]+)"$/ do |position, value|
   %Q(When I fill in the #{position.to_i + 1} "Author Name" with "#{value}")
 end
 
+When /^I sort by "([^\"]+)" (\w+)$/ do |field, order|
+  # Clicking the sorting link the first time sorts descending,
+  # clicking it the second time sorts ascending
+  When %Q(I follow "#{field}")
+  When %Q(I follow "#{field}") if order == "descending"
+end
+
 Then /^I should see the favorited data record$/ do
   Then %Q(I should see "#{the.data_record.title}")
 end
@@ -68,11 +83,11 @@ Then /^I should(?: only)? see (\d+) records?$/ do |count|
 end
 
 Then /^I should see ministry records before community records$/ do
-  ministry_records, community_records = DataRecord.ministry_records_first.partition do |data_record|
+  ministry_records, community_records = DataRecord.sorted(nil).partition do |data_record|
     data_record.ministry
   end
 
-  page.should have_css("#data_record_#{ministry_records.last.id} + #data_record_#{community_records.first.id}")
+  page.should have_css("#data_record_#{ministry_records.last["id"]} + #data_record_#{community_records.first["id"]}")
 end
 
 Then /^I should see a record tagged "(.*)"$/ do |tag|
@@ -102,4 +117,9 @@ end
 
 Then /^the contact (\w+) field should be blank$/ do |field|
   find_field(field.titleize)["value"].should be_blank
+end
+
+Then /^"([^\"]+)" should come before "([^\"]+)"$/ do |first_title, second_title|
+  first, second = DataRecord.find_by_title(first_title), DataRecord.find_by_title(second_title)
+  page.should have_css("#data_record_#{first["id"]} ~ #data_record_#{second["id"]}")
 end

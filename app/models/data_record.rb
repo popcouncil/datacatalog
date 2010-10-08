@@ -37,12 +37,15 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :year
   validates_presence_of :owner_id
 
-  named_scope :ministry_records_first, :joins => [:owner, :locations], :order => "users.role = 'ministry_user' DESC, locations.lft DESC, created_at DESC"
+  named_scope :sorted, lambda {|sort|
+    { :include => [:organizations, :owner, :locations, :documents, :tags],
+      :order   => ["users.role = 'ministry_user' DESC", sort.presence, "locations.lft DESC", "data_records.created_at DESC"].compact.join(", ") }
+  } 
 
   named_scope :by_location, lambda {|country|
     target_country = Location.find(country)
 
-    { :joins => :locations,
+    { :include => :locations,
       :conditions => [
         "data_record_locations.location_id = :id OR (locations.lft <= :lft AND locations.rgt >= :rgt)",
         { :id => target_country.id, :lft => target_country.lft, :rgt => target_country.rgt }
@@ -55,7 +58,7 @@ class DataRecord < ActiveRecord::Base
   }
 
   named_scope :by_organization, lambda {|organization|
-    { :joins => :organizations, :conditions => { "organizations.id" => organization } }
+    { :include => :organizations, :conditions => { "organizations.id" => organization } }
   }
 
   named_scope :by_release_year, lambda {|year|
@@ -63,7 +66,7 @@ class DataRecord < ActiveRecord::Base
   }
 
   named_scope :by_tags, lambda {|*tags|
-    { :joins => :tags, :conditions => { "tags.name" => tags }}
+    { :include => :tags, :conditions => { "tags.name" => tags }}
   }
 
   accepts_nested_attributes_for :authors, :allow_destroy => true, :reject_if => lambda {|author| author[:name].blank? }
@@ -74,6 +77,10 @@ class DataRecord < ActiveRecord::Base
 
   acts_as_taggable
   acts_as_commentable
+
+  def self.browse(filters, sort_string=nil)
+    filters.apply(sorted(sort_string))
+  end
 
   def self.available_years
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
@@ -122,12 +129,7 @@ class DataRecord < ActiveRecord::Base
   end
 
   def ratings_average
-    return nil if ratings_count.zero?
-    (ratings.sum(:value) / ratings_count).round
-  end
-
-  def ratings_count
-    ratings.count
+    (ratings_total / [1, ratings_count].max).round
   end
 
   def build_contact_from_owner
@@ -157,7 +159,7 @@ class DataRecord < ActiveRecord::Base
   def link_organizations
     if lead_organization_name.present?
       lead = Organization.find_or_create_by_name(lead_organization_name)
-      sponsors.create(:organization => lead, :lead => true)
+      sponsors.find_or_create_by_organization_id(:lead => true, :organization_id => lead.id)
     end
 
     if collaborator_list.present?

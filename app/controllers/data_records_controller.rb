@@ -3,10 +3,11 @@ class DataRecordsController < ApplicationController
   before_filter :find_data_record, :only => [:show, :edit, :update]
   before_filter :require_owner_or_admin, :only => [:edit, :update]
 
+  include BrowseTableSorts
+
   def index
     @filters = Filters.new(params[:filters])
-    records = @filters.apply(DataRecord.ministry_records_first)
-    @data_records = records.paginate(:page => params[:page], :per_page => 25)
+    @data_records = DataRecord.browse(@filters, sort_order).paginate(:page => params[:page], :per_page => 25)
   end
 
   def show
