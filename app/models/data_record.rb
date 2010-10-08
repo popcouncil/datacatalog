@@ -38,7 +38,7 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :owner_id
 
   named_scope :sorted, lambda {|sort|
-    { :include => [:organizations, :owner, :locations, :documents, :tags, :ratings],
+    { :include => [:organizations, :owner, :locations, :documents, :tags],
       :order   => ["users.role = 'ministry_user' DESC", sort.presence, "locations.lft DESC", "data_records.created_at DESC"].compact.join(", ") }
   } 
 
@@ -129,8 +129,7 @@ class DataRecord < ActiveRecord::Base
   end
 
   def ratings_average
-    return nil if ratings_count.zero?
-    (ratings_total / ratings_count).round
+    (ratings_total / [1, ratings_count].max).round
   end
 
   def build_contact_from_owner
