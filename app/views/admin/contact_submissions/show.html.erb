@@ -16,7 +16,7 @@
 
   <h3>User Details</h3>
   <% if user = @submission.user -%>
-  <p><%= link_to user.display_name, user %> &lt;<%= link_to user.email, "mailto:#{user.email}" %>&gt;</p>
+  <p><%= user.display_name %> &lt;<%= link_to user.email, "mailto:#{user.email}" %>&gt;</p>
   <% else -%>
   <p><%= @submission.name %> &lt;<%= link_to @submission.email, "mailto:#{@submission.email}" %>&gt;</p>
   <% end # if user -%>
