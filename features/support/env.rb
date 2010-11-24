@@ -1,6 +1,6 @@
 ENV["RAILS_ENV"] = "cucumber"
 
-Dir[Pathname(__FILE__).dirname.join("helpers/**/*.rb")].each {|f| require f }
+Dir[File.dirname(__FILE__) + "/helpers/**/*.rb"].each {|f| require f }
 
 
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
