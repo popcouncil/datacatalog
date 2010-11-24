@@ -1,8 +1,6 @@
 development: &default
   database: dcweb_development
-  username: root
-  password:
-  adapter:  mysql
+  adapter:  postgresql
   host:     localhost
 
 test:
