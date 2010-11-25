@@ -32,7 +32,7 @@ Feature: Managing Organizations
   Scenario: Admin edits an organization
     When I go to the admin dashboard
     And I follow "Organizations"
-    When I follow "Red Cross"
+    And I follow "Red Cross"
     And I fill in "Name" with "Red Cross International"
     And I press "Update"
     Then I should see "Red Cross International"
