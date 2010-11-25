@@ -1,0 +1,2245 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: catalogs; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE catalogs (
+    id integer NOT NULL,
+    title character varying(255),
+    url character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.catalogs OWNER TO hong;
+
+--
+-- Name: catalogs_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE catalogs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.catalogs_id_seq OWNER TO hong;
+
+--
+-- Name: catalogs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE catalogs_id_seq OWNED BY catalogs.id;
+
+
+--
+-- Name: catalogs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('catalogs_id_seq', 1, false);
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    commentable_id integer,
+    commentable_type character varying(255),
+    body text,
+    reports_problem boolean,
+    user_id integer,
+    parent_id integer,
+    lft integer,
+    rgt integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.comments OWNER TO hong;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comments_id_seq OWNER TO hong;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('comments_id_seq', 7, false);
+
+
+--
+-- Name: data_record_locations; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE data_record_locations (
+    id integer NOT NULL,
+    data_record_id integer,
+    location_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.data_record_locations OWNER TO hong;
+
+--
+-- Name: data_record_locations_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE data_record_locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.data_record_locations_id_seq OWNER TO hong;
+
+--
+-- Name: data_record_locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE data_record_locations_id_seq OWNED BY data_record_locations.id;
+
+
+--
+-- Name: data_record_locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('data_record_locations_id_seq', 28, false);
+
+
+--
+-- Name: data_records; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE data_records (
+    id integer NOT NULL,
+    title character varying(255),
+    slug character varying(255),
+    homepage_url character varying(255),
+    description text,
+    project_name character varying(255),
+    funder character varying(255),
+    year character varying(255),
+    owner_id integer,
+    catalog_id integer,
+    contact_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    ratings_count integer DEFAULT 0,
+    ratings_total integer DEFAULT 0
+);
+
+
+ALTER TABLE public.data_records OWNER TO hong;
+
+--
+-- Name: data_records_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE data_records_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.data_records_id_seq OWNER TO hong;
+
+--
+-- Name: data_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE data_records_id_seq OWNED BY data_records.id;
+
+
+--
+-- Name: data_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('data_records_id_seq', 27, false);
+
+
+--
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE delayed_jobs (
+    id integer NOT NULL,
+    priority integer DEFAULT 0,
+    attempts integer DEFAULT 0,
+    handler text,
+    last_error text,
+    run_at timestamp without time zone,
+    locked_at timestamp without time zone,
+    failed_at timestamp without time zone,
+    locked_by character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.delayed_jobs OWNER TO hong;
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE delayed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.delayed_jobs_id_seq OWNER TO hong;
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('delayed_jobs_id_seq', 88, false);
+
+
+--
+-- Name: documents; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE documents (
+    id integer NOT NULL,
+    data_record_id integer,
+    external_url character varying(255),
+    file_file_name character varying(255),
+    file_content_type character varying(255),
+    file_file_size integer,
+    file_updated_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    document_type character varying(255),
+    title character varying(255)
+);
+
+
+ALTER TABLE public.documents OWNER TO hong;
+
+--
+-- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE documents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.documents_id_seq OWNER TO hong;
+
+--
+-- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
+
+
+--
+-- Name: documents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('documents_id_seq', 28, false);
+
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE favorites (
+    id integer NOT NULL,
+    user_id integer,
+    data_record_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.favorites OWNER TO hong;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE favorites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.favorites_id_seq OWNER TO hong;
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE favorites_id_seq OWNED BY favorites.id;
+
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('favorites_id_seq', 5, false);
+
+
+--
+-- Name: locations; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE locations (
+    id integer NOT NULL,
+    name character varying(255),
+    parent_id integer,
+    lft integer,
+    rgt integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.locations OWNER TO hong;
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE locations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.locations_id_seq OWNER TO hong;
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
+
+
+--
+-- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('locations_id_seq', 201, false);
+
+
+--
+-- Name: notes; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE notes (
+    id integer NOT NULL,
+    user_id integer,
+    data_record_id integer,
+    text text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.notes OWNER TO hong;
+
+--
+-- Name: notes_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE notes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notes_id_seq OWNER TO hong;
+
+--
+-- Name: notes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE notes_id_seq OWNED BY notes.id;
+
+
+--
+-- Name: notes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('notes_id_seq', 3, false);
+
+
+--
+-- Name: open_id_authentication_associations; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE open_id_authentication_associations (
+    id integer NOT NULL,
+    issued integer,
+    lifetime integer,
+    handle character varying(255),
+    assoc_type character varying(255),
+    server_url bytea,
+    secret bytea
+);
+
+
+ALTER TABLE public.open_id_authentication_associations OWNER TO hong;
+
+--
+-- Name: open_id_authentication_associations_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE open_id_authentication_associations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.open_id_authentication_associations_id_seq OWNER TO hong;
+
+--
+-- Name: open_id_authentication_associations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE open_id_authentication_associations_id_seq OWNED BY open_id_authentication_associations.id;
+
+
+--
+-- Name: open_id_authentication_associations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('open_id_authentication_associations_id_seq', 1, false);
+
+
+--
+-- Name: open_id_authentication_nonces; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE open_id_authentication_nonces (
+    id integer NOT NULL,
+    "timestamp" integer NOT NULL,
+    server_url character varying(255),
+    salt character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.open_id_authentication_nonces OWNER TO hong;
+
+--
+-- Name: open_id_authentication_nonces_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE open_id_authentication_nonces_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.open_id_authentication_nonces_id_seq OWNER TO hong;
+
+--
+-- Name: open_id_authentication_nonces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE open_id_authentication_nonces_id_seq OWNED BY open_id_authentication_nonces.id;
+
+
+--
+-- Name: open_id_authentication_nonces_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('open_id_authentication_nonces_id_seq', 1, false);
+
+
+--
+-- Name: organizations; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE organizations (
+    id integer NOT NULL,
+    name character varying(255),
+    acronym character varying(255),
+    org_type character varying(255),
+    description text,
+    slug character varying(255),
+    url character varying(255),
+    homepage_url character varying(255),
+    parent_id integer,
+    lft integer,
+    rgt integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    location_id integer
+);
+
+
+ALTER TABLE public.organizations OWNER TO hong;
+
+--
+-- Name: organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE organizations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.organizations_id_seq OWNER TO hong;
+
+--
+-- Name: organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
+
+
+--
+-- Name: organizations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('organizations_id_seq', 21, false);
+
+
+--
+-- Name: people; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE people (
+    id integer NOT NULL,
+    name character varying(255),
+    phone character varying(255),
+    email character varying(255),
+    type character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    affiliation_id integer,
+    data_record_id integer
+);
+
+
+ALTER TABLE public.people OWNER TO hong;
+
+--
+-- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE people_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.people_id_seq OWNER TO hong;
+
+--
+-- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE people_id_seq OWNED BY people.id;
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('people_id_seq', 52, false);
+
+
+--
+-- Name: ratings; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE ratings (
+    id integer NOT NULL,
+    user_id integer,
+    data_record_id integer,
+    value integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.ratings OWNER TO hong;
+
+--
+-- Name: ratings_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE ratings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ratings_id_seq OWNER TO hong;
+
+--
+-- Name: ratings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE ratings_id_seq OWNED BY ratings.id;
+
+
+--
+-- Name: ratings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('ratings_id_seq', 7, false);
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO hong;
+
+--
+-- Name: sponsors; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE sponsors (
+    id integer NOT NULL,
+    data_record_id integer,
+    organization_id integer,
+    lead boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.sponsors OWNER TO hong;
+
+--
+-- Name: sponsors_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE sponsors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sponsors_id_seq OWNER TO hong;
+
+--
+-- Name: sponsors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE sponsors_id_seq OWNED BY sponsors.id;
+
+
+--
+-- Name: sponsors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('sponsors_id_seq', 75, false);
+
+
+--
+-- Name: submissions; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE submissions (
+    id integer NOT NULL,
+    type character varying(255),
+    name character varying(255),
+    email character varying(255),
+    user_id integer,
+    title character varying(255),
+    url character varying(255),
+    comments text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    status character varying(255)
+);
+
+
+ALTER TABLE public.submissions OWNER TO hong;
+
+--
+-- Name: submissions_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE submissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.submissions_id_seq OWNER TO hong;
+
+--
+-- Name: submissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE submissions_id_seq OWNED BY submissions.id;
+
+
+--
+-- Name: submissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('submissions_id_seq', 3, false);
+
+
+--
+-- Name: taggings; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE taggings (
+    id integer NOT NULL,
+    tag_id integer,
+    taggable_id integer,
+    tagger_id integer,
+    tagger_type character varying(255),
+    taggable_type character varying(255),
+    context character varying(255),
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.taggings OWNER TO hong;
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE taggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.taggings_id_seq OWNER TO hong;
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('taggings_id_seq', 43, false);
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE tags (
+    id integer NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE public.tags OWNER TO hong;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tags_id_seq OWNER TO hong;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('tags_id_seq', 14, false);
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255),
+    crypted_password character varying(255),
+    password_salt character varying(255),
+    persistence_token character varying(255),
+    single_access_token character varying(255),
+    perishable_token character varying(255),
+    login_count integer DEFAULT 0,
+    failed_login_count integer DEFAULT 0,
+    last_request_at timestamp without time zone,
+    current_login_at timestamp without time zone,
+    last_login_at timestamp without time zone,
+    current_login_ip character varying(255),
+    last_login_ip character varying(255),
+    confirmed_at timestamp without time zone,
+    openid_identifier character varying(255),
+    display_name character varying(255),
+    api_id character varying(255),
+    list_opt_in boolean DEFAULT false,
+    city character varying(255),
+    personal_url character varying(255),
+    telephone_number character varying(255),
+    user_type character varying(255),
+    role character varying(255),
+    updated_at timestamp without time zone,
+    created_at timestamp without time zone,
+    affiliation_id integer,
+    location_id integer
+);
+
+
+ALTER TABLE public.users OWNER TO hong;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO hong;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('users_id_seq', 20, false);
+
+
+--
+-- Name: votes; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE votes (
+    id integer NOT NULL,
+    vote boolean DEFAULT true,
+    voteable_id integer,
+    voteable_type character varying(255),
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.votes OWNER TO hong;
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.votes_id_seq OWNER TO hong;
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('votes_id_seq', 3, false);
+
+
+--
+-- Name: wiki_versions; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE wiki_versions (
+    id integer NOT NULL,
+    wiki_id integer,
+    version integer,
+    data_record_id integer,
+    user_id integer,
+    body text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.wiki_versions OWNER TO hong;
+
+--
+-- Name: wiki_versions_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE wiki_versions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wiki_versions_id_seq OWNER TO hong;
+
+--
+-- Name: wiki_versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE wiki_versions_id_seq OWNED BY wiki_versions.id;
+
+
+--
+-- Name: wiki_versions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('wiki_versions_id_seq', 8, false);
+
+
+--
+-- Name: wikis; Type: TABLE; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE TABLE wikis (
+    id integer NOT NULL,
+    data_record_id integer,
+    user_id integer,
+    body text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    version integer
+);
+
+
+ALTER TABLE public.wikis OWNER TO hong;
+
+--
+-- Name: wikis_id_seq; Type: SEQUENCE; Schema: public; Owner: hong
+--
+
+CREATE SEQUENCE wikis_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wikis_id_seq OWNER TO hong;
+
+--
+-- Name: wikis_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: hong
+--
+
+ALTER SEQUENCE wikis_id_seq OWNED BY wikis.id;
+
+
+--
+-- Name: wikis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hong
+--
+
+SELECT pg_catalog.setval('wikis_id_seq', 5, false);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE catalogs ALTER COLUMN id SET DEFAULT nextval('catalogs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE data_record_locations ALTER COLUMN id SET DEFAULT nextval('data_record_locations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE data_records ALTER COLUMN id SET DEFAULT nextval('data_records_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE notes ALTER COLUMN id SET DEFAULT nextval('notes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE open_id_authentication_associations ALTER COLUMN id SET DEFAULT nextval('open_id_authentication_associations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE open_id_authentication_nonces ALTER COLUMN id SET DEFAULT nextval('open_id_authentication_nonces_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE ratings ALTER COLUMN id SET DEFAULT nextval('ratings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE sponsors ALTER COLUMN id SET DEFAULT nextval('sponsors_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE submissions ALTER COLUMN id SET DEFAULT nextval('submissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE wiki_versions ALTER COLUMN id SET DEFAULT nextval('wiki_versions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: hong
+--
+
+ALTER TABLE wikis ALTER COLUMN id SET DEFAULT nextval('wikis_id_seq'::regclass);
+
+
+--
+-- Data for Name: catalogs; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY catalogs (id, title, url, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY comments (id, commentable_id, commentable_type, body, reports_problem, user_id, parent_id, lft, rgt, created_at, updated_at) FROM stdin;
+1	10	DataRecord	test comment	f	3	\N	1	2	2010-09-20 21:00:02.665941	2010-09-20 21:00:02.665941
+2	1	DataRecord	Test Comment	f	3	\N	1	2	2010-09-20 21:08:56.067813	2010-09-20 21:08:56.067813
+3	2	DataRecord	This is great.	f	9	\N	1	4	2010-10-04 18:20:59.062229	2010-10-04 18:20:59.062229
+4	2	DataRecord	i agree.	f	9	3	2	3	2010-10-04 18:21:57.636367	2010-10-04 18:21:57.636367
+5	2	DataRecord	I hate this data.	t	9	\N	5	6	2010-10-04 18:22:07.2228	2010-10-04 18:22:07.2228
+6	13	DataRecord	this is a different way to report a problem	t	9	\N	1	2	2010-10-04 18:23:18.577302	2010-10-04 18:23:18.577302
+\.
+
+
+--
+-- Data for Name: data_record_locations; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY data_record_locations (id, data_record_id, location_id, created_at, updated_at) FROM stdin;
+1	1	157	2010-09-30 21:09:02.334336	2010-09-30 21:09:02.334336
+2	2	155	2010-09-30 21:09:02.352282	2010-09-30 21:09:02.352282
+3	3	157	2010-09-30 21:09:02.355381	2010-09-30 21:09:02.355381
+4	4	157	2010-09-30 21:09:02.358298	2010-09-30 21:09:02.358298
+5	5	157	2010-09-30 21:09:02.36107	2010-09-30 21:09:02.36107
+6	6	157	2010-09-30 21:09:02.363851	2010-09-30 21:09:02.363851
+7	7	157	2010-09-30 21:09:02.366479	2010-09-30 21:09:02.366479
+8	8	155	2010-09-30 21:09:02.369407	2010-09-30 21:09:02.369407
+9	9	157	2010-09-30 21:09:02.372038	2010-09-30 21:09:02.372038
+10	10	157	2010-09-30 21:09:02.375007	2010-09-30 21:09:02.375007
+11	11	157	2010-09-30 21:09:02.378002	2010-09-30 21:09:02.378002
+12	12	157	2010-09-30 21:09:02.381006	2010-09-30 21:09:02.381006
+13	13	157	2010-09-30 21:09:02.383685	2010-09-30 21:09:02.383685
+14	14	157	2010-09-30 21:09:02.386418	2010-09-30 21:09:02.386418
+15	15	157	2010-09-30 21:09:02.389517	2010-09-30 21:09:02.389517
+16	16	157	2010-09-30 21:09:02.392148	2010-09-30 21:09:02.392148
+17	17	156	2010-09-30 21:13:44.851881	2010-09-30 21:13:44.851881
+18	18	156	2010-09-30 21:14:19.340325	2010-09-30 21:14:19.340325
+19	18	68	2010-09-30 21:14:19.341842	2010-09-30 21:14:19.341842
+20	19	1	2010-10-01 18:31:12.20208	2010-10-01 18:31:12.20208
+21	20	1	2010-10-04 18:00:53.027023	2010-10-04 18:00:53.027023
+22	21	1	2010-10-04 18:08:11.047075	2010-10-04 18:08:11.047075
+23	22	1	2010-10-04 19:54:09.113543	2010-10-04 19:54:09.113543
+24	23	1	2010-10-04 20:13:06.376938	2010-10-04 20:13:06.376938
+25	24	1	2010-10-06 16:29:12.385776	2010-10-06 16:29:12.385776
+26	25	1	2010-10-07 16:42:13.525902	2010-10-07 16:42:13.525902
+27	26	1	2010-10-19 23:19:11.174173	2010-10-19 23:19:11.174173
+\.
+
+
+--
+-- Data for Name: data_records; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY data_records (id, title, slug, homepage_url, description, project_name, funder, year, owner_id, catalog_id, contact_id, created_at, updated_at, ratings_count, ratings_total) FROM stdin;
+1	Test Data	test-data	http://home.page	Blah			1934	4	\N	2	2010-09-16 18:36:04.306544	2010-10-08 20:31:24.586651	1	4
+2	Eric's Data	eric-s-data	http://www.ericpgreen.com	Testing			2009	4	\N	4	2010-09-17 20:01:50.843154	2010-10-08 20:31:24.628416	1	4
+3	test	test	pepe.com	test			1998	4	\N	6	2010-09-17 20:11:53.333671	2010-10-08 20:31:24.681326	0	0
+4	test title	test-title	dsfadsf	asdasd			1111	4	\N	8	2010-09-17 20:13:12.088728	2010-10-08 20:31:24.713282	0	0
+5	hkjhkj	hkjhkj	jkhlkhlkj	hjgkjgkjh			88888	4	\N	10	2010-09-17 20:36:27.522714	2010-10-08 20:31:24.755603	0	0
+6	lkj;ljkk;l	lkj-ljkk-l	jhjllk	kjlkj;ljl;			99999	4	\N	12	2010-09-17 20:37:37.699982	2010-10-08 20:31:24.783677	0	0
+7	lkj;ljkk;l	lkj-ljkk-l-2		kjlkj;ljl;			99999	4	\N	14	2010-09-17 20:40:26.919419	2010-10-08 20:31:24.829884	0	0
+8	Navarrow's source	navarrow-s-source	http://www.londonberry.com	my source	popcouncil	me	2010	4	\N	16	2010-09-20 16:35:06.420233	2010-10-08 20:31:24.868686	0	0
+9	testing	testing		testing			2009	4	\N	18	2010-09-20 17:12:06.273548	2010-10-08 20:31:24.896843	0	0
+10	test data source	test-data-source	www.test.org	this is a data record for testing			1998	4	\N	20	2010-09-20 20:59:45.687982	2010-10-08 20:31:24.924477	0	0
+11	Other test	other-test		this is other data record test			1999	4	\N	22	2010-09-20 21:12:27.627215	2010-10-08 20:31:24.952437	0	0
+12	Test added by ministry	test-added-by-ministry		testa			1999	7	\N	24	2010-09-21 19:49:17.587003	2010-10-08 20:31:24.989154	2	10
+13	eric min	eric-min	test	test	test	test	test	15	\N	26	2010-09-23 14:14:53.591997	2010-10-08 20:31:25.030745	1	4
+14	new record	new-record	d	d	d	d	d	9	\N	28	2010-09-23 14:16:45.817965	2010-10-08 20:31:25.069083	0	0
+15	Test Record	test-record		Blah			1998	3	\N	30	2010-09-27 21:11:29.790853	2010-10-08 20:31:25.0967	0	0
+16	Blah	blah		Blah			2010	3	\N	32	2010-09-28 19:23:43.246273	2010-10-08 20:31:25.226404	0	0
+17	test coverage	test-coverage		test			2010	3	\N	34	2010-09-30 21:13:44.846209	2010-10-08 20:31:25.265264	0	0
+18	test multiple coverage	test-multiple-coverage		test			2010	3	\N	36	2010-09-30 21:14:19.33849	2010-10-08 20:31:25.294333	1	4
+19	c	c	cc	c	c	c	2010	9	\N	38	2010-10-01 18:31:12.195175	2010-10-08 20:31:25.400479	0	0
+20	test	test-2		tasgd			2010	3	\N	39	2010-10-04 18:00:53.019932	2010-10-08 20:31:25.445016	0	0
+21	test	test-	test	test	test	test	2010	9	\N	41	2010-10-04 18:08:11.043784	2010-10-08 20:31:25.476791	0	0
+22	Test With Two Authors	test-with-two-authors	http://pepe.com	Blah			2010	3	\N	43	2010-10-04 19:54:09.105354	2010-10-08 20:31:25.51566	0	0
+23	author problem	author-problem	www.nytimes.com	test	eeee	eeeee	2010	9	\N	46	2010-10-04 20:13:06.373607	2010-10-08 20:31:25.543444	0	0
+24	test1	test1	http://www.londonberry.com	This is my test upload	test1	navarrow	2010	6	\N	48	2010-10-06 16:29:12.088163	2010-10-08 20:31:25.58064	0	0
+25	New record to test	new-record-to-test-edit		new record			2010	9	\N	50	2010-10-07 16:42:13.495716	2010-10-08 20:31:25.637801	0	0
+26	b	b	f	f	f	f	2010	15	\N	51	2010-10-19 23:19:11.130816	2010-10-19 23:19:11.130816	0	0
+\.
+
+
+--
+-- Data for Name: delayed_jobs; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY delayed_jobs (id, priority, attempts, handler, last_error, run_at, locked_at, failed_at, locked_by, created_at, updated_at) FROM stdin;
+1	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-08-31 20:22:05.491464	\N	\N	\N	2010-08-31 20:22:05.49524	2010-08-31 20:22:05.49524
+2	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-08-31 20:22:05.502095	\N	\N	\N	2010-08-31 20:22:05.502192	2010-08-31 20:22:05.502192
+3	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-08-31 20:27:54.637621	\N	\N	\N	2010-08-31 20:27:54.637715	2010-08-31 20:27:54.637715
+4	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-08-31 20:27:54.649512	\N	\N	\N	2010-08-31 20:27:54.649578	2010-08-31 20:27:54.649578
+5	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-08-31 20:46:24.229417	\N	\N	\N	2010-08-31 20:46:24.231029	2010-08-31 20:46:24.231029
+6	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-08-31 20:46:29.600179	\N	\N	\N	2010-08-31 20:46:29.600276	2010-08-31 20:46:29.600276
+7	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-08-31 20:47:05.730931	\N	\N	\N	2010-08-31 20:47:05.731029	2010-08-31 20:47:05.731029
+8	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-08-31 20:47:05.738764	\N	\N	\N	2010-08-31 20:47:05.73883	2010-08-31 20:47:05.73883
+9	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-08-31 20:47:14.622699	\N	\N	\N	2010-08-31 20:47:14.622792	2010-08-31 20:47:14.622792
+10	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-01 14:40:15.799471	\N	\N	\N	2010-09-01 14:40:15.803275	2010-09-01 14:40:15.803275
+11	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-01 14:40:15.941248	\N	\N	\N	2010-09-01 14:40:15.941343	2010-09-01 14:40:15.941343
+12	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-02 18:21:06.591302	\N	\N	\N	2010-09-02 18:21:06.596154	2010-09-02 18:21:06.596154
+13	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-02 18:21:06.716805	\N	\N	\N	2010-09-02 18:21:06.716905	2010-09-02 18:21:06.716905
+14	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-02 20:13:47.164591	\N	\N	\N	2010-09-02 20:13:47.164687	2010-09-02 20:13:47.164687
+15	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-02 20:46:59.931636	\N	\N	\N	2010-09-02 20:46:59.931742	2010-09-02 20:46:59.931742
+16	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-02 20:47:19.06862	\N	\N	\N	2010-09-02 20:47:19.068704	2010-09-02 20:47:19.068704
+17	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-04 02:14:00.543081	\N	\N	\N	2010-09-04 02:14:00.54754	2010-09-04 02:14:00.54754
+18	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-04 02:14:00.826736	\N	\N	\N	2010-09-04 02:14:00.826844	2010-09-04 02:14:00.826844
+19	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 19:01:27.563442	\N	\N	\N	2010-09-06 19:01:27.563565	2010-09-06 19:01:27.563565
+20	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 19:03:48.395905	\N	\N	\N	2010-09-06 19:03:48.396016	2010-09-06 19:03:48.396016
+21	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 19:08:15.09691	\N	\N	\N	2010-09-06 19:08:15.096984	2010-09-06 19:08:15.096984
+22	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 20:41:56.998184	\N	\N	\N	2010-09-06 20:41:56.998259	2010-09-06 20:41:56.998259
+23	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 22:18:28.955744	\N	\N	\N	2010-09-06 22:18:28.955844	2010-09-06 22:18:28.955844
+24	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-06 22:20:03.292763	\N	\N	\N	2010-09-06 22:20:03.292842	2010-09-06 22:20:03.292842
+25	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-07 02:41:39.494781	\N	\N	\N	2010-09-07 02:41:39.498862	2010-09-07 02:41:39.498862
+26	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-07 02:41:39.514134	\N	\N	\N	2010-09-07 02:41:39.514214	2010-09-07 02:41:39.514214
+27	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-07 14:37:14.497966	\N	\N	\N	2010-09-07 14:37:14.502449	2010-09-07 14:37:14.502449
+28	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-07 14:37:14.727778	\N	\N	\N	2010-09-07 14:37:14.727883	2010-09-07 14:37:14.727883
+29	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-07 19:49:04.374155	\N	\N	\N	2010-09-07 19:49:04.374263	2010-09-07 19:49:04.374263
+30	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-07 20:23:54.675038	\N	\N	\N	2010-09-07 20:23:54.675114	2010-09-07 20:23:54.675114
+31	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-07 20:53:50.689129	\N	\N	\N	2010-09-07 20:53:50.689232	2010-09-07 20:53:50.689232
+32	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-07 20:57:25.195504	\N	\N	\N	2010-09-07 20:57:25.195607	2010-09-07 20:57:25.195607
+33	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-07 21:00:41.928247	\N	\N	\N	2010-09-07 21:00:41.928341	2010-09-07 21:00:41.928341
+34	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 01:43:07.49341	\N	\N	\N	2010-09-08 01:43:07.493501	2010-09-08 01:43:07.493501
+35	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 01:43:30.277889	\N	\N	\N	2010-09-08 01:43:30.277969	2010-09-08 01:43:30.277969
+36	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 13:35:08.657124	\N	\N	\N	2010-09-08 13:35:08.657201	2010-09-08 13:35:08.657201
+37	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 17:16:26.125747	\N	\N	\N	2010-09-08 17:16:26.125836	2010-09-08 17:16:26.125836
+38	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 17:31:23.63904	\N	\N	\N	2010-09-08 17:31:23.639114	2010-09-08 17:31:23.639114
+39	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 18:59:19.4514	\N	\N	\N	2010-09-08 18:59:19.451478	2010-09-08 18:59:19.451478
+40	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 19:03:37.257601	\N	\N	\N	2010-09-08 19:03:37.257676	2010-09-08 19:03:37.257676
+41	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 19:04:13.583412	\N	\N	\N	2010-09-08 19:04:13.583488	2010-09-08 19:04:13.583488
+42	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 19:05:49.129397	\N	\N	\N	2010-09-08 19:05:49.12948	2010-09-08 19:05:49.12948
+43	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-08 19:06:32.249265	\N	\N	\N	2010-09-08 19:06:32.24934	2010-09-08 19:06:32.24934
+44	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-08 19:31:08.61754	\N	\N	\N	2010-09-08 19:31:08.617634	2010-09-08 19:31:08.617634
+45	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-08 19:31:08.621132	\N	\N	\N	2010-09-08 19:31:08.621198	2010-09-08 19:31:08.621198
+46	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-08 19:43:17.761459	\N	\N	\N	2010-09-08 19:43:17.761558	2010-09-08 19:43:17.761558
+47	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-08 19:43:17.764995	\N	\N	\N	2010-09-08 19:43:17.765064	2010-09-08 19:43:17.765064
+48	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-08 20:31:31.793051	\N	\N	\N	2010-09-08 20:31:31.793176	2010-09-08 20:31:31.793176
+49	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-08 20:31:31.797568	\N	\N	\N	2010-09-08 20:31:31.797643	2010-09-08 20:31:31.797643
+50	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-09 12:50:45.926412	\N	\N	\N	2010-09-09 12:50:45.926489	2010-09-09 12:50:45.926489
+51	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-09 12:59:05.877258	\N	\N	\N	2010-09-09 12:59:05.87733	2010-09-09 12:59:05.87733
+52	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-09 12:59:53.141032	\N	\N	\N	2010-09-09 12:59:53.141104	2010-09-09 12:59:53.141104
+53	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-09 16:50:26.757261	\N	\N	\N	2010-09-09 16:50:26.761232	2010-09-09 16:50:26.761232
+54	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-09 16:50:26.904526	\N	\N	\N	2010-09-09 16:50:26.904606	2010-09-09 16:50:26.904606
+55	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-14 17:05:54.282064	\N	\N	\N	2010-09-14 17:05:54.286681	2010-09-14 17:05:54.286681
+56	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-14 17:05:54.397098	\N	\N	\N	2010-09-14 17:05:54.397192	2010-09-14 17:05:54.397192
+57	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:31:53.5789	\N	\N	\N	2010-09-16 18:31:53.578997	2010-09-16 18:31:53.578997
+58	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:31:56.503425	\N	\N	\N	2010-09-16 18:31:56.503511	2010-09-16 18:31:56.503511
+59	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:31:58.8931	\N	\N	\N	2010-09-16 18:31:58.893184	2010-09-16 18:31:58.893184
+60	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:32:35.106369	\N	\N	\N	2010-09-16 18:32:35.10646	2010-09-16 18:32:35.10646
+61	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:34:57.227421	\N	\N	\N	2010-09-16 18:34:57.227502	2010-09-16 18:34:57.227502
+62	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-16 18:35:03.429318	\N	\N	\N	2010-09-16 18:35:03.429399	2010-09-16 18:35:03.429399
+63	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-17 20:09:32.606557	\N	\N	\N	2010-09-17 20:09:32.606639	2010-09-17 20:09:32.606639
+64	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 16:30:34.134619	\N	\N	\N	2010-09-20 16:30:34.134722	2010-09-20 16:30:34.134722
+65	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 16:30:34.338464	\N	\N	\N	2010-09-20 16:30:34.338559	2010-09-20 16:30:34.338559
+66	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 16:30:51.452996	\N	\N	\N	2010-09-20 16:30:51.453111	2010-09-20 16:30:51.453111
+67	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 16:30:51.463379	\N	\N	\N	2010-09-20 16:30:51.463466	2010-09-20 16:30:51.463466
+68	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 17:09:42.586793	\N	\N	\N	2010-09-20 17:09:42.586929	2010-09-20 17:09:42.586929
+69	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 17:09:42.598355	\N	\N	\N	2010-09-20 17:09:42.598489	2010-09-20 17:09:42.598489
+70	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 17:12:12.330465	\N	\N	\N	2010-09-20 17:12:12.330587	2010-09-20 17:12:12.330587
+71	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 17:12:12.335584	\N	\N	\N	2010-09-20 17:12:12.335675	2010-09-20 17:12:12.335675
+72	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 17:18:32.935965	\N	\N	\N	2010-09-20 17:18:32.936066	2010-09-20 17:18:32.936066
+73	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 17:18:32.939789	\N	\N	\N	2010-09-20 17:18:32.939861	2010-09-20 17:18:32.939861
+74	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 17:20:19.297893	\N	\N	\N	2010-09-20 17:20:19.298013	2010-09-20 17:20:19.298013
+75	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 17:20:19.302782	\N	\N	\N	2010-09-20 17:20:19.30287	2010-09-20 17:20:19.30287
+76	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :jurisdictions\n	\N	2010-09-20 17:20:49.724214	\N	\N	\N	2010-09-20 17:20:49.724324	2010-09-20 17:20:49.724324
+77	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :active_organizations\n	\N	2010-09-20 17:20:49.727955	\N	\N	\N	2010-09-20 17:20:49.728027	2010-09-20 17:20:49.728027
+78	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-20 20:56:27.55923	\N	\N	\N	2010-09-20 20:56:27.559405	2010-09-20 20:56:27.559405
+79	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-20 20:58:36.102072	\N	\N	\N	2010-09-20 20:58:36.102158	2010-09-20 20:58:36.102158
+80	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-20 21:00:40.278258	\N	\N	\N	2010-09-20 21:00:40.278354	2010-09-20 21:00:40.278354
+81	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-20 21:04:48.577148	\N	\N	\N	2010-09-20 21:04:48.577262	2010-09-20 21:04:48.577262
+82	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-20 21:10:11.757656	\N	\N	\N	2010-09-20 21:10:11.757766	2010-09-20 21:10:11.757766
+83	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-21 15:57:28.96145	\N	\N	\N	2010-09-21 15:57:28.961534	2010-09-21 15:57:28.961534
+84	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-21 17:02:01.051592	\N	\N	\N	2010-09-21 17:02:01.05169	2010-09-21 17:02:01.05169
+85	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-21 17:20:44.362852	\N	\N	\N	2010-09-21 17:20:44.362933	2010-09-21 17:20:44.362933
+86	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-21 17:20:51.079479	\N	\N	\N	2010-09-21 17:20:51.079558	2010-09-21 17:20:51.079558
+87	0	0	--- !ruby/struct:Delayed::PerformableMethod \nobject: !ruby/object:Cache {}\n\nmethod: :run_query\nargs: \n- :organizations\n	\N	2010-09-21 18:39:18.52376	\N	\N	\N	2010-09-21 18:39:18.523848	2010-09-21 18:39:18.523848
+\.
+
+
+--
+-- Data for Name: documents; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY documents (id, data_record_id, external_url, file_file_name, file_content_type, file_file_size, file_updated_at, created_at, updated_at, document_type, title) FROM stdin;
+1	1		oboxodo.jpg	image/jpeg	1398	2010-09-16 18:36:04.159385	2010-09-16 18:36:04.31448	2010-09-16 18:36:04.31448	ANY	\N
+2	2	http://www.ericpgreen.com	\N	\N	\N	\N	2010-09-17 20:01:50.89386	2010-09-17 20:01:50.89386	ANY	\N
+3	3	http://google.com	oboxodo.jpg	image/jpeg	1398	2010-09-17 20:11:53.300102	2010-09-17 20:11:53.447505	2010-09-17 20:11:53.447505	ANY	\N
+4	4	google.com	\N	\N	\N	\N	2010-09-17 20:13:12.090518	2010-09-17 20:13:12.090518	ANY	\N
+5	5	khkjhlj	\N	\N	\N	\N	2010-09-17 20:36:27.527089	2010-09-17 20:36:27.527089	ANY	\N
+6	6	hlkhllk	\N	\N	\N	\N	2010-09-17 20:37:37.701872	2010-09-17 20:37:37.701872	ANY	\N
+7	7	hlkhllk	\N	\N	\N	\N	2010-09-17 20:40:26.927	2010-09-17 20:40:26.927	ANY	\N
+8	8		Pop councildummydoc.docx	application/vnd.openxmlformats-officedocument.wordprocessingml.document	23560	2010-09-20 16:35:06.130877	2010-09-20 16:35:06.445529	2010-09-20 16:35:06.445529	ANY	\N
+9	9	www.test.com	\N	\N	\N	\N	2010-09-20 17:12:06.275908	2010-09-20 17:12:06.275908	ANY	\N
+10	10	http://google.com	\N	\N	\N	\N	2010-09-20 20:59:45.695727	2010-09-20 20:59:45.695727	ANY	\N
+11	11	http://www.pepe.com	\N	\N	\N	\N	2010-09-20 21:12:27.709737	2010-09-20 21:12:27.709737	ANY	\N
+12	12	http://www.google.com	\N	\N	\N	\N	2010-09-21 19:49:17.648286	2010-09-21 19:49:17.648286	ANY	\N
+13	13	tesst	\N	\N	\N	\N	2010-09-23 14:14:53.601103	2010-09-23 14:14:53.601103	ANY	\N
+14	14	d	\N	\N	\N	\N	2010-09-23 14:16:45.82124	2010-09-23 14:16:45.82124	ANY	\N
+15	15	http://google.com	\N	\N	\N	\N	2010-09-27 21:11:29.795679	2010-09-27 21:11:29.795679	WEB	\N
+16	16	http://google.com	\N	\N	\N	\N	2010-09-28 19:23:43.258396	2010-09-28 19:23:43.258396	SEARCH	\N
+17	17	http://google.com	\N	\N	\N	\N	2010-09-30 21:13:44.898078	2010-09-30 21:13:44.898078	www	\N
+18	18	http://google.com	\N	\N	\N	\N	2010-09-30 21:14:19.343391	2010-09-30 21:14:19.343391	www	\N
+19	19	www.ericpgreen.com	\N	\N	\N	\N	2010-10-01 18:31:12.209596	2010-10-01 18:31:12.209596	web	\N
+20	20	http://google.com	\N	\N	\N	\N	2010-10-04 18:00:53.06502	2010-10-04 18:00:53.06502	ass	\N
+21	21	www.test.com	\N	\N	\N	\N	2010-10-04 18:08:11.091839	2010-10-04 18:08:11.091839	web	\N
+22	22	http://google.com	\N	\N	\N	\N	2010-10-04 19:54:09.160101	2010-10-04 19:54:09.160101	Data	
+23	23	www.eee.com	\N	\N	\N	\N	2010-10-04 20:13:06.386924	2010-10-04 20:13:06.386924	Data	eeee
+24	24	http://www.techcrunch.com	\N	\N	\N	\N	2010-10-06 16:29:12.472098	2010-10-06 16:29:12.472098	News Article	tech stuff
+25	24		test.docx	application/vnd.openxmlformats-officedocument.wordprocessingml.document	23306	2010-10-06 16:29:11.58793	2010-10-06 16:29:12.714801	2010-10-06 16:29:12.714801	Journal Article	test
+26	25	www.test.com	\N	\N	\N	\N	2010-10-07 16:42:13.562512	2010-10-07 16:42:13.562512	Data	no name
+27	26	f	\N	\N	\N	\N	2010-10-19 23:19:11.195473	2010-10-19 23:19:11.195473	Data	f
+\.
+
+
+--
+-- Data for Name: favorites; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY favorites (id, user_id, data_record_id, created_at, updated_at) FROM stdin;
+1	3	1	2010-09-20 21:08:45.56728	2010-09-20 21:08:45.56728
+2	9	2	2010-09-23 14:12:08.53011	2010-09-23 14:12:08.53011
+3	9	18	2010-10-04 18:29:04.379367	2010-10-04 18:29:04.379367
+4	9	13	2010-10-06 19:30:16.529245	2010-10-06 19:30:16.529245
+\.
+
+
+--
+-- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY locations (id, name, parent_id, lft, rgt, created_at, updated_at) FROM stdin;
+1	Global	\N	1	400	2010-09-30 21:08:57.015109	2010-09-30 21:08:57.015109
+2	Oceania	1	2	31	2010-09-30 21:08:57.025684	2010-09-30 21:08:57.025684
+3	Australia	2	3	4	2010-09-30 21:08:57.054811	2010-09-30 21:08:57.054811
+4	Fiji	2	5	6	2010-09-30 21:08:57.064124	2010-09-30 21:08:57.064124
+5	Kiribati	2	7	8	2010-09-30 21:08:57.074061	2010-09-30 21:08:57.074061
+6	Marshall Islands	2	9	10	2010-09-30 21:08:57.085449	2010-09-30 21:08:57.085449
+7	Micronesia	2	11	12	2010-09-30 21:08:57.169365	2010-09-30 21:08:57.169365
+8	Nauru	2	13	14	2010-09-30 21:08:57.180559	2010-09-30 21:08:57.180559
+9	New Zealand	2	15	16	2010-09-30 21:08:57.190221	2010-09-30 21:08:57.190221
+10	Palau	2	17	18	2010-09-30 21:08:57.200564	2010-09-30 21:08:57.200564
+11	Papua New Guinea	2	19	20	2010-09-30 21:08:57.209995	2010-09-30 21:08:57.209995
+12	Samoa	2	21	22	2010-09-30 21:08:57.219491	2010-09-30 21:08:57.219491
+13	Solomon Islands	2	23	24	2010-09-30 21:08:57.228548	2010-09-30 21:08:57.228548
+14	Tonga	2	25	26	2010-09-30 21:08:57.33732	2010-09-30 21:08:57.33732
+15	Tuvalu	2	27	28	2010-09-30 21:08:57.348385	2010-09-30 21:08:57.348385
+16	Vanuatu	2	29	30	2010-09-30 21:08:57.357896	2010-09-30 21:08:57.357896
+17	Europe	1	32	127	2010-09-30 21:08:57.367063	2010-09-30 21:08:57.367063
+18	Albania	17	33	34	2010-09-30 21:08:57.376225	2010-09-30 21:08:57.376225
+19	Andorra	17	35	36	2010-09-30 21:08:57.407604	2010-09-30 21:08:57.407604
+20	Armenia	17	37	38	2010-09-30 21:08:57.418248	2010-09-30 21:08:57.418248
+21	Austria	17	39	40	2010-09-30 21:08:57.428937	2010-09-30 21:08:57.428937
+22	Azerbaijan	17	41	42	2010-09-30 21:08:57.438675	2010-09-30 21:08:57.438675
+23	Belarus	17	43	44	2010-09-30 21:08:57.448152	2010-09-30 21:08:57.448152
+24	Belgium	17	45	46	2010-09-30 21:08:57.457623	2010-09-30 21:08:57.457623
+25	Bosnia and Herzegovina	17	47	48	2010-09-30 21:08:57.467081	2010-09-30 21:08:57.467081
+26	Bulgaria	17	49	50	2010-09-30 21:08:57.487744	2010-09-30 21:08:57.487744
+27	Croatia	17	51	52	2010-09-30 21:08:57.500139	2010-09-30 21:08:57.500139
+28	Cyprus	17	53	54	2010-09-30 21:08:57.509725	2010-09-30 21:08:57.509725
+29	Czech Republic	17	55	56	2010-09-30 21:08:57.520935	2010-09-30 21:08:57.520935
+30	Denmark	17	57	58	2010-09-30 21:08:57.536005	2010-09-30 21:08:57.536005
+31	Estonia	17	59	60	2010-09-30 21:08:57.546588	2010-09-30 21:08:57.546588
+32	Finland	17	61	62	2010-09-30 21:08:57.560535	2010-09-30 21:08:57.560535
+33	France	17	63	64	2010-09-30 21:08:57.571042	2010-09-30 21:08:57.571042
+34	Georgia	17	65	66	2010-09-30 21:08:57.596448	2010-09-30 21:08:57.596448
+35	Germany	17	67	68	2010-09-30 21:08:57.608208	2010-09-30 21:08:57.608208
+36	Greece	17	69	70	2010-09-30 21:08:57.632912	2010-09-30 21:08:57.632912
+37	Hungary	17	71	72	2010-09-30 21:08:57.644197	2010-09-30 21:08:57.644197
+38	Iceland	17	73	74	2010-09-30 21:08:57.654469	2010-09-30 21:08:57.654469
+39	Ireland	17	75	76	2010-09-30 21:08:57.665597	2010-09-30 21:08:57.665597
+40	Italy	17	77	78	2010-09-30 21:08:57.675394	2010-09-30 21:08:57.675394
+41	Latvia	17	79	80	2010-09-30 21:08:57.685276	2010-09-30 21:08:57.685276
+42	Liechtenstein	17	81	82	2010-09-30 21:08:57.695034	2010-09-30 21:08:57.695034
+43	Lithuania	17	83	84	2010-09-30 21:08:57.70511	2010-09-30 21:08:57.70511
+44	Luxembourg	17	85	86	2010-09-30 21:08:57.715655	2010-09-30 21:08:57.715655
+45	Macedonia	17	87	88	2010-09-30 21:08:57.770912	2010-09-30 21:08:57.770912
+46	Malta	17	89	90	2010-09-30 21:08:57.785272	2010-09-30 21:08:57.785272
+47	Moldova	17	91	92	2010-09-30 21:08:57.794965	2010-09-30 21:08:57.794965
+48	Monaco	17	93	94	2010-09-30 21:08:57.816655	2010-09-30 21:08:57.816655
+49	Montenegro	17	95	96	2010-09-30 21:08:57.826327	2010-09-30 21:08:57.826327
+50	Netherlands	17	97	98	2010-09-30 21:08:57.836544	2010-09-30 21:08:57.836544
+51	Norway	17	99	100	2010-09-30 21:08:57.847314	2010-09-30 21:08:57.847314
+52	Poland	17	101	102	2010-09-30 21:08:57.935547	2010-09-30 21:08:57.935547
+53	Portugal	17	103	104	2010-09-30 21:08:57.955364	2010-09-30 21:08:57.955364
+54	Romania	17	105	106	2010-09-30 21:08:57.96628	2010-09-30 21:08:57.96628
+55	San Marino	17	107	108	2010-09-30 21:08:57.981784	2010-09-30 21:08:57.981784
+56	Serbia	17	109	110	2010-09-30 21:08:57.991538	2010-09-30 21:08:57.991538
+57	Slovakia	17	111	112	2010-09-30 21:08:58.001342	2010-09-30 21:08:58.001342
+58	Slovenia	17	113	114	2010-09-30 21:08:58.012178	2010-09-30 21:08:58.012178
+59	Spain	17	115	116	2010-09-30 21:08:58.021823	2010-09-30 21:08:58.021823
+60	Sweden	17	117	118	2010-09-30 21:08:58.031555	2010-09-30 21:08:58.031555
+61	Switzerland	17	119	120	2010-09-30 21:08:58.041332	2010-09-30 21:08:58.041332
+62	Ukraine	17	121	122	2010-09-30 21:08:58.052534	2010-09-30 21:08:58.052534
+63	United Kingdom	17	123	124	2010-09-30 21:08:58.063176	2010-09-30 21:08:58.063176
+64	Vatican City	17	125	126	2010-09-30 21:08:58.109516	2010-09-30 21:08:58.109516
+65	Africa	1	128	235	2010-09-30 21:08:58.128645	2010-09-30 21:08:58.128645
+66	Algeria	65	129	130	2010-09-30 21:08:58.14157	2010-09-30 21:08:58.14157
+67	Angola	65	131	132	2010-09-30 21:08:58.15234	2010-09-30 21:08:58.15234
+68	Benin	65	133	134	2010-09-30 21:08:58.176534	2010-09-30 21:08:58.176534
+69	Botswana	65	135	136	2010-09-30 21:08:58.186833	2010-09-30 21:08:58.186833
+70	Burkina	65	137	138	2010-09-30 21:08:58.197108	2010-09-30 21:08:58.197108
+71	Burundi	65	139	140	2010-09-30 21:08:58.207106	2010-09-30 21:08:58.207106
+72	Cameroon	65	141	142	2010-09-30 21:08:58.2186	2010-09-30 21:08:58.2186
+73	Cape Verde	65	143	144	2010-09-30 21:08:58.234769	2010-09-30 21:08:58.234769
+74	Central African Republic	65	145	146	2010-09-30 21:08:58.245117	2010-09-30 21:08:58.245117
+75	Chad	65	147	148	2010-09-30 21:08:58.291713	2010-09-30 21:08:58.291713
+76	Comoros	65	149	150	2010-09-30 21:08:58.301811	2010-09-30 21:08:58.301811
+77	Congo	65	151	152	2010-09-30 21:08:58.312964	2010-09-30 21:08:58.312964
+78	Congo, the Democratic Republic of the	65	153	154	2010-09-30 21:08:58.327535	2010-09-30 21:08:58.327535
+79	Djibouti	65	155	156	2010-09-30 21:08:58.348397	2010-09-30 21:08:58.348397
+80	Egypt	65	157	158	2010-09-30 21:08:58.3611	2010-09-30 21:08:58.3611
+81	Equatorial Guinea	65	159	160	2010-09-30 21:08:58.370982	2010-09-30 21:08:58.370982
+82	Eritrea	65	161	162	2010-09-30 21:08:58.381935	2010-09-30 21:08:58.381935
+83	Ethiopia	65	163	164	2010-09-30 21:08:58.391557	2010-09-30 21:08:58.391557
+84	Gabon	65	165	166	2010-09-30 21:08:58.402741	2010-09-30 21:08:58.402741
+85	Gambia	65	167	168	2010-09-30 21:08:58.416285	2010-09-30 21:08:58.416285
+86	Ghana	65	169	170	2010-09-30 21:08:58.485546	2010-09-30 21:08:58.485546
+87	Guinea	65	171	172	2010-09-30 21:08:58.496175	2010-09-30 21:08:58.496175
+88	Guinea-Bissau	65	173	174	2010-09-30 21:08:58.505961	2010-09-30 21:08:58.505961
+89	Ivory Coast	65	175	176	2010-09-30 21:08:58.636627	2010-09-30 21:08:58.636627
+90	Kenya	65	177	178	2010-09-30 21:08:58.727027	2010-09-30 21:08:58.727027
+91	Lesotho	65	179	180	2010-09-30 21:08:58.7385	2010-09-30 21:08:58.7385
+92	Liberia	65	181	182	2010-09-30 21:08:58.749455	2010-09-30 21:08:58.749455
+93	Libya	65	183	184	2010-09-30 21:08:58.773273	2010-09-30 21:08:58.773273
+94	Madagascar	65	185	186	2010-09-30 21:08:58.784279	2010-09-30 21:08:58.784279
+95	Malawi	65	187	188	2010-09-30 21:08:58.795245	2010-09-30 21:08:58.795245
+96	Mali	65	189	190	2010-09-30 21:08:58.806153	2010-09-30 21:08:58.806153
+97	Mauritania	65	191	192	2010-09-30 21:08:58.816702	2010-09-30 21:08:58.816702
+98	Mauritius	65	193	194	2010-09-30 21:08:58.827398	2010-09-30 21:08:58.827398
+99	Morocco	65	195	196	2010-09-30 21:08:58.838064	2010-09-30 21:08:58.838064
+100	Mozambique	65	197	198	2010-09-30 21:08:58.848736	2010-09-30 21:08:58.848736
+101	Namibia	65	199	200	2010-09-30 21:08:58.872436	2010-09-30 21:08:58.872436
+102	Niger	65	201	202	2010-09-30 21:08:58.883889	2010-09-30 21:08:58.883889
+103	Nigeria	65	203	204	2010-09-30 21:08:58.894646	2010-09-30 21:08:58.894646
+104	Rwanda	65	205	206	2010-09-30 21:08:58.90562	2010-09-30 21:08:58.90562
+105	Sao Tome and Principe	65	207	208	2010-09-30 21:08:58.916427	2010-09-30 21:08:58.916427
+106	Senegal	65	209	210	2010-09-30 21:08:58.928427	2010-09-30 21:08:58.928427
+107	Seychelles	65	211	212	2010-09-30 21:08:58.940567	2010-09-30 21:08:58.940567
+108	Sierra Leone	65	213	214	2010-09-30 21:08:58.951836	2010-09-30 21:08:58.951836
+109	Somalia	65	215	216	2010-09-30 21:08:58.972632	2010-09-30 21:08:58.972632
+110	South Africa	65	217	218	2010-09-30 21:08:58.98406	2010-09-30 21:08:58.98406
+111	Sudan	65	219	220	2010-09-30 21:08:58.995431	2010-09-30 21:08:58.995431
+112	Swaziland	65	221	222	2010-09-30 21:08:59.006961	2010-09-30 21:08:59.006961
+113	Tanzania	65	223	224	2010-09-30 21:08:59.018448	2010-09-30 21:08:59.018448
+114	Togo	65	225	226	2010-09-30 21:08:59.080471	2010-09-30 21:08:59.080471
+115	Tunisia	65	227	228	2010-09-30 21:08:59.092578	2010-09-30 21:08:59.092578
+116	Uganda	65	229	230	2010-09-30 21:08:59.104747	2010-09-30 21:08:59.104747
+117	Zambia	65	231	232	2010-09-30 21:08:59.117584	2010-09-30 21:08:59.117584
+118	Zimbabwe	65	233	234	2010-09-30 21:08:59.129435	2010-09-30 21:08:59.129435
+119	South America	1	236	301	2010-09-30 21:08:59.142255	2010-09-30 21:08:59.142255
+120	Antigua and Barbuda	119	237	238	2010-09-30 21:08:59.154665	2010-09-30 21:08:59.154665
+121	Argentina	119	239	240	2010-09-30 21:08:59.166675	2010-09-30 21:08:59.166675
+122	Bahamas	119	241	242	2010-09-30 21:08:59.178647	2010-09-30 21:08:59.178647
+123	Barbados	119	243	244	2010-09-30 21:08:59.190758	2010-09-30 21:08:59.190758
+124	Belize	119	245	246	2010-09-30 21:08:59.22174	2010-09-30 21:08:59.22174
+125	Bolivia	119	247	248	2010-09-30 21:08:59.234019	2010-09-30 21:08:59.234019
+126	Brazil	119	249	250	2010-09-30 21:08:59.246443	2010-09-30 21:08:59.246443
+127	Chile	119	251	252	2010-09-30 21:08:59.346108	2010-09-30 21:08:59.346108
+128	Colombia	119	253	254	2010-09-30 21:08:59.359613	2010-09-30 21:08:59.359613
+129	Costa Rica	119	255	256	2010-09-30 21:08:59.372553	2010-09-30 21:08:59.372553
+130	Cuba	119	257	258	2010-09-30 21:08:59.429047	2010-09-30 21:08:59.429047
+131	Dominica	119	259	260	2010-09-30 21:08:59.442505	2010-09-30 21:08:59.442505
+132	Dominican Republic	119	261	262	2010-09-30 21:08:59.45605	2010-09-30 21:08:59.45605
+133	Ecuador	119	263	264	2010-09-30 21:08:59.469193	2010-09-30 21:08:59.469193
+134	El Salvador	119	265	266	2010-09-30 21:08:59.482481	2010-09-30 21:08:59.482481
+135	Grenada	119	267	268	2010-09-30 21:08:59.495953	2010-09-30 21:08:59.495953
+136	Guatemala	119	269	270	2010-09-30 21:08:59.509437	2010-09-30 21:08:59.509437
+137	Guyana	119	271	272	2010-09-30 21:08:59.532211	2010-09-30 21:08:59.532211
+138	Haiti	119	273	274	2010-09-30 21:08:59.574969	2010-09-30 21:08:59.574969
+139	Honduras	119	275	276	2010-09-30 21:08:59.591249	2010-09-30 21:08:59.591249
+140	Jamaica	119	277	278	2010-09-30 21:08:59.610488	2010-09-30 21:08:59.610488
+141	Nicaragua	119	279	280	2010-09-30 21:08:59.625155	2010-09-30 21:08:59.625155
+142	Panama	119	281	282	2010-09-30 21:08:59.655396	2010-09-30 21:08:59.655396
+143	Paraguay	119	283	284	2010-09-30 21:08:59.671233	2010-09-30 21:08:59.671233
+144	Peru	119	285	286	2010-09-30 21:08:59.720229	2010-09-30 21:08:59.720229
+145	Saint Kitts & Nevis	119	287	288	2010-09-30 21:08:59.893957	2010-09-30 21:08:59.893957
+146	Saint Lucia	119	289	290	2010-09-30 21:08:59.910102	2010-09-30 21:08:59.910102
+147	Saint Vincent & the Grenadines	119	291	292	2010-09-30 21:08:59.927153	2010-09-30 21:08:59.927153
+148	Suriname	119	293	294	2010-09-30 21:08:59.960922	2010-09-30 21:08:59.960922
+149	Trinidad & Tobago	119	295	296	2010-09-30 21:08:59.975874	2010-09-30 21:08:59.975874
+150	Uruguay	119	297	298	2010-09-30 21:08:59.994018	2010-09-30 21:08:59.994018
+151	Venezuela	119	299	300	2010-09-30 21:09:00.043881	2010-09-30 21:09:00.043881
+152	North America	1	302	309	2010-09-30 21:09:00.06033	2010-09-30 21:09:00.06033
+153	Canada	152	303	304	2010-09-30 21:09:00.076261	2010-09-30 21:09:00.076261
+154	Mexico	152	305	306	2010-09-30 21:09:00.111809	2010-09-30 21:09:00.111809
+155	United States	152	307	308	2010-09-30 21:09:00.127408	2010-09-30 21:09:00.127408
+156	Asia	1	310	399	2010-09-30 21:09:00.142941	2010-09-30 21:09:00.142941
+157	Afghanistan	156	311	312	2010-09-30 21:09:00.159439	2010-09-30 21:09:00.159439
+158	Bahrain	156	313	314	2010-09-30 21:09:00.184812	2010-09-30 21:09:00.184812
+159	Bangladesh	156	315	316	2010-09-30 21:09:00.23886	2010-09-30 21:09:00.23886
+160	Bhutan	156	317	318	2010-09-30 21:09:00.271076	2010-09-30 21:09:00.271076
+161	Brunei	156	319	320	2010-09-30 21:09:00.286562	2010-09-30 21:09:00.286562
+162	Burma (Myanmar)	156	321	322	2010-09-30 21:09:00.301724	2010-09-30 21:09:00.301724
+163	Cambodia	156	323	324	2010-09-30 21:09:00.319746	2010-09-30 21:09:00.319746
+164	China	156	325	326	2010-09-30 21:09:00.437977	2010-09-30 21:09:00.437977
+165	East Timor	156	327	328	2010-09-30 21:09:00.465074	2010-09-30 21:09:00.465074
+166	India	156	329	330	2010-09-30 21:09:00.494842	2010-09-30 21:09:00.494842
+167	Indonesia	156	331	332	2010-09-30 21:09:00.51251	2010-09-30 21:09:00.51251
+168	Iran	156	333	334	2010-09-30 21:09:00.53065	2010-09-30 21:09:00.53065
+169	Iraq	156	335	336	2010-09-30 21:09:00.56006	2010-09-30 21:09:00.56006
+170	Israel	156	337	338	2010-09-30 21:09:00.579627	2010-09-30 21:09:00.579627
+171	Japan	156	339	340	2010-09-30 21:09:00.607507	2010-09-30 21:09:00.607507
+172	Jordan	156	341	342	2010-09-30 21:09:00.62655	2010-09-30 21:09:00.62655
+173	Kazakhstan	156	343	344	2010-09-30 21:09:00.643229	2010-09-30 21:09:00.643229
+174	Korea, Democratic People's Republic of	156	345	346	2010-09-30 21:09:00.660449	2010-09-30 21:09:00.660449
+175	Korea, Republic of	156	347	348	2010-09-30 21:09:00.677675	2010-09-30 21:09:00.677675
+176	Kuwait	156	349	350	2010-09-30 21:09:00.695678	2010-09-30 21:09:00.695678
+177	Kyrgyzstan	156	351	352	2010-09-30 21:09:00.714365	2010-09-30 21:09:00.714365
+178	Laos	156	353	354	2010-09-30 21:09:00.801344	2010-09-30 21:09:00.801344
+179	Lebanon	156	355	356	2010-09-30 21:09:00.820554	2010-09-30 21:09:00.820554
+180	Malaysia	156	357	358	2010-09-30 21:09:00.840353	2010-09-30 21:09:00.840353
+181	Maldives	156	359	360	2010-09-30 21:09:00.871085	2010-09-30 21:09:00.871085
+182	Mongolia	156	361	362	2010-09-30 21:09:00.888607	2010-09-30 21:09:00.888607
+183	Nepal	156	363	364	2010-09-30 21:09:00.918558	2010-09-30 21:09:00.918558
+184	Oman	156	365	366	2010-09-30 21:09:00.949686	2010-09-30 21:09:00.949686
+185	Pakistan	156	367	368	2010-09-30 21:09:00.973375	2010-09-30 21:09:00.973375
+186	Philippines	156	369	370	2010-09-30 21:09:00.998286	2010-09-30 21:09:00.998286
+187	Qatar	156	371	372	2010-09-30 21:09:01.024147	2010-09-30 21:09:01.024147
+188	Russian Federation	156	373	374	2010-09-30 21:09:01.046499	2010-09-30 21:09:01.046499
+189	Saudi Arabia	156	375	376	2010-09-30 21:09:01.0726	2010-09-30 21:09:01.0726
+190	Singapore	156	377	378	2010-09-30 21:09:01.093973	2010-09-30 21:09:01.093973
+191	Sri Lanka	156	379	380	2010-09-30 21:09:01.113371	2010-09-30 21:09:01.113371
+192	Syria	156	381	382	2010-09-30 21:09:01.136229	2010-09-30 21:09:01.136229
+193	Tajikistan	156	383	384	2010-09-30 21:09:01.158324	2010-09-30 21:09:01.158324
+194	Thailand	156	385	386	2010-09-30 21:09:01.190826	2010-09-30 21:09:01.190826
+195	Turkey	156	387	388	2010-09-30 21:09:01.226812	2010-09-30 21:09:01.226812
+196	Turkmenistan	156	389	390	2010-09-30 21:09:01.248858	2010-09-30 21:09:01.248858
+197	United Arab Emirates	156	391	392	2010-09-30 21:09:01.270667	2010-09-30 21:09:01.270667
+198	Uzbekistan	156	393	394	2010-09-30 21:09:01.292567	2010-09-30 21:09:01.292567
+199	Vietnam	156	395	396	2010-09-30 21:09:01.315506	2010-09-30 21:09:01.315506
+200	Yemen	156	397	398	2010-09-30 21:09:01.344273	2010-09-30 21:09:01.344273
+\.
+
+
+--
+-- Data for Name: notes; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY notes (id, user_id, data_record_id, text, created_at, updated_at) FROM stdin;
+1	3	1	This is my note. I love it very much	2010-09-20 21:09:05.131827	2010-09-20 21:09:05.131827
+2	9	18	Does this work?	2010-10-04 18:28:33.282547	2010-10-04 18:28:33.282547
+\.
+
+
+--
+-- Data for Name: open_id_authentication_associations; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY open_id_authentication_associations (id, issued, lifetime, handle, assoc_type, server_url, secret) FROM stdin;
+\.
+
+
+--
+-- Data for Name: open_id_authentication_nonces; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY open_id_authentication_nonces (id, "timestamp", server_url, salt) FROM stdin;
+\.
+
+
+--
+-- Data for Name: organizations; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY organizations (id, name, acronym, org_type, description, slug, url, homepage_url, parent_id, lft, rgt, created_at, updated_at, location_id) FROM stdin;
+1	testOrg	org	Not-For-Profit	this is an org for testing	testorg	www.test.org	www.test.org	\N	1	2	2010-09-20 20:59:05.541963	2010-10-08 20:31:25.072186	157
+3	Cubox	\N	\N	\N	cubox	\N	\N	\N	3	4	2010-09-27 21:11:29.784232	2010-10-08 20:31:25.518819	4
+4	UN	\N	\N	\N	un	\N	\N	\N	5	6	2010-09-28 19:23:43.319808	2010-09-30 21:09:02.143987	4
+5	Red Cross	\N	\N	\N	red-cross	\N	\N	\N	7	8	2010-09-28 19:23:43.351471	2010-09-30 21:09:02.146516	4
+6	londonberry	\N	\N	\N	londonberry	\N	\N	\N	9	10	2010-09-28 20:38:47.488878	2010-10-08 20:31:25.583784	4
+7	Ghana	\N	\N	\N	ghana	\N	\N	\N	11	12	2010-09-28 20:38:47.504799	2010-09-30 21:09:02.151832	4
+8	PC	\N	\N	\N	pc	\N	\N	\N	13	14	2010-09-28 20:38:47.553878	2010-09-30 21:09:02.15435	4
+9	No affiliation	\N	\N	\N	no-affiliation	\N	\N	\N	15	16	2010-09-28 20:38:47.574901	2010-09-30 21:09:02.249189	4
+10	me	\N	\N	\N	me	\N	\N	\N	17	18	2010-10-01 18:31:12.272446	2010-10-08 20:31:25.403821	\N
+11	pop council	\N	\N	\N	pop-council	\N	\N	\N	19	20	2010-10-01 18:31:12.388866	2010-10-08 20:31:25.546654	\N
+12	un	\N	\N	\N	un-2	\N	\N	\N	21	22	2010-10-01 18:31:12.408813	2010-10-01 18:31:12.408813	\N
+13	test	\N	\N	\N	test	\N	\N	\N	23	24	2010-10-01 20:34:59.810183	2010-10-08 20:31:25.490477	\N
+14	d	\N	\N	\N	d	\N	\N	\N	25	26	2010-10-01 20:34:59.833882	2010-10-01 20:34:59.833882	\N
+15	c	\N	\N	\N	c	\N	\N	\N	27	28	2010-10-01 20:34:59.842492	2010-10-01 20:34:59.842492	\N
+16	???	\N	\N	\N		\N	\N	\N	29	30	2010-10-04 18:08:11.080381	2010-10-04 18:08:11.080381	\N
+17	ben	\N	\N	\N	ben	\N	\N	\N	31	32	2010-10-06 16:29:13.149611	2010-10-06 16:29:13.149611	\N
+18	Eric	\N	\N	\N	eric	\N	\N	\N	33	34	2010-10-06 16:29:13.22589	2010-10-06 16:29:13.22589	\N
+19	world bank	\N	\N	\N	world-bank	\N	\N	\N	35	36	2010-10-07 16:42:13.665894	2010-10-08 20:31:25.641498	\N
+20	f	\N	\N	\N	f	\N	\N	\N	37	38	2010-10-19 23:19:11.268504	2010-10-19 23:19:11.268504	\N
+\.
+
+
+--
+-- Data for Name: people; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY people (id, name, phone, email, type, created_at, updated_at, affiliation_id, data_record_id) FROM stdin;
+2	Name		Email	Contact	2010-09-16 18:36:04.279052	2010-09-16 18:36:04.279052	\N	\N
+3	Eric	\N	\N	Author	2010-09-17 20:01:50.816804	2010-10-01 20:34:59.726805	\N	2
+4	Eric Green		egreen@popcouncil.org	Contact	2010-09-17 20:01:50.839263	2010-09-17 20:01:50.839263	\N	\N
+6	Gabriela		gabriela@example.com	Contact	2010-09-17 20:11:53.331805	2010-09-17 20:11:53.331805	\N	\N
+8	adf		asdf	Contact	2010-09-17 20:13:12.086971	2010-09-17 20:13:12.086971	\N	\N
+10	ljklj		lkjlkj	Contact	2010-09-17 20:36:27.499691	2010-09-17 20:36:27.499691	\N	\N
+12	kjhlkl		hlkjl;	Contact	2010-09-17 20:37:37.69475	2010-09-17 20:37:37.69475	\N	\N
+14	kjhlkl		hlkjl;	Contact	2010-09-17 20:40:26.912501	2010-09-17 20:40:26.912501	\N	\N
+15	Navarrow	\N	\N	Author	2010-09-20 16:35:06.155118	2010-10-01 20:34:59.74079	6	8
+16	Navarrow Wright	856-437-0324	navarrow@londonberry,com	Contact	2010-09-20 16:35:06.415226	2010-09-20 16:35:06.415226	\N	\N
+18	Not required		notrequired@notrequired.com	Contact	2010-09-20 17:12:06.271509	2010-09-20 17:12:06.271509	\N	\N
+20	Gabriela		gaba@test.com	Contact	2010-09-20 20:59:45.680583	2010-09-20 20:59:45.680583	\N	\N
+22	Pepe		pepe@example.com	Contact	2010-09-20 21:12:27.623741	2010-09-20 21:12:27.623741	\N	\N
+24	Gabriela		gabelula+juana@gmail.com	Contact	2010-09-21 19:49:17.579336	2010-09-21 19:49:17.579336	\N	\N
+25	test	\N	\N	Author	2010-09-23 14:14:53.558838	2010-10-01 20:34:59.815556	13	13
+26	test		test	Contact	2010-09-23 14:14:53.580606	2010-09-23 14:14:53.580606	\N	\N
+27	d	\N	\N	Author	2010-09-23 14:16:45.811467	2010-10-01 20:34:59.835469	14	14
+28	d		d	Contact	2010-09-23 14:16:45.814866	2010-09-23 14:16:45.814866	\N	\N
+30	Juana		juana@example.com	Contact	2010-09-27 21:11:29.763354	2010-09-27 21:11:29.763354	\N	\N
+32	Name		Email	Contact	2010-09-28 19:23:43.235392	2010-09-28 19:23:43.235392	\N	\N
+34	pepe		pepe@example.com	Contact	2010-09-30 21:13:44.841488	2010-09-30 21:13:44.841488	\N	\N
+36	pepe		pepe@example.com	Contact	2010-09-30 21:14:19.336409	2010-09-30 21:14:19.336409	\N	\N
+37	c	\N	\N	Author	2010-10-01 18:31:12.178788	2010-10-01 20:34:59.844172	15	19
+38	Eric		epgreen@gmail.com	Contact	2010-10-01 18:31:12.188207	2010-10-01 18:31:12.188207	\N	\N
+39	tete		asdf	Contact	2010-10-04 18:00:52.996594	2010-10-04 18:00:52.996594	\N	\N
+40	Toto	\N	\N	Author	2010-10-04 18:00:53.058273	2010-10-04 18:00:53.058273	3	20
+41	test		test@test.com	Contact	2010-10-04 18:08:11.04011	2010-10-04 18:08:11.04011	\N	\N
+42	test	\N	\N	Author	2010-10-04 18:08:11.088673	2010-10-04 18:08:11.088673	16	21
+43	Contact		Email	Contact	2010-10-04 19:54:09.096094	2010-10-04 19:54:09.096094	\N	\N
+44	First Author	\N	\N	Author	2010-10-04 19:54:09.126673	2010-10-04 19:54:09.126673	3	22
+45	Second Author	\N	\N	Author	2010-10-04 19:54:09.15007	2010-10-04 19:54:09.15007	3	22
+46	eeee		eeeee@eee.com	Contact	2010-10-04 20:13:06.369921	2010-10-04 20:13:06.369921	\N	\N
+47	second author	\N	\N	Author	2010-10-04 20:13:06.383458	2010-10-04 20:13:06.383458	11	23
+48	Navarrow Wright	856-437-0324	navarrow.w@gmail.com	Contact	2010-10-06 16:29:11.653746	2010-10-06 16:29:11.653746	\N	\N
+49	test author	\N	\N	Author	2010-10-06 16:29:12.467274	2010-10-06 16:29:12.467274	6	24
+50	Eric Green		egreen@popcouncil.org	Contact	2010-10-07 16:42:13.367038	2010-10-07 16:42:13.367038	\N	\N
+51	Eric Ministry		eric.green@nyu.edu	Contact	2010-10-19 23:19:10.832994	2010-10-19 23:19:10.832994	\N	\N
+\.
+
+
+--
+-- Data for Name: ratings; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY ratings (id, user_id, data_record_id, value, created_at, updated_at) FROM stdin;
+1	3	1	4	2010-09-20 21:08:37.854103	2010-09-20 21:08:37.854103
+2	9	18	4	2010-10-04 18:29:09.327106	2010-10-04 18:29:09.327106
+3	9	2	4	2010-10-04 18:45:44.033763	2010-10-04 18:45:44.033763
+4	9	13	4	2010-10-06 19:29:57.072506	2010-10-06 20:41:47.219771
+5	9	12	5	2010-10-06 20:42:10.259487	2010-10-06 20:42:10.259487
+6	3	12	5	2010-10-07 18:35:35.023804	2010-10-07 18:35:47.518809
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY schema_migrations (version) FROM stdin;
+20091211215757
+20090715214821
+20090727190745
+20090729192829
+20090729192920
+20090730151335
+20090825215426
+20090921202057
+20091009212531
+20091013181931
+20091109213740
+20091211205545
+20100831205557
+20100914185326
+20100915162515
+20100915192414
+20100915203750
+20100916185354
+20100916204450
+20100917173030
+20100917184449
+20100917205805
+20100917214827
+20100920182657
+20100922211801
+20100927193134
+20100928172943
+20100928195635
+20100928204334
+20100929174015
+20100930172445
+20101001181308
+20101001185311
+20101004180417
+20101007175355
+20101007192708
+\.
+
+
+--
+-- Data for Name: sponsors; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY sponsors (id, data_record_id, organization_id, lead, created_at, updated_at) FROM stdin;
+1	1	1	t	2010-09-28 19:22:36.506174	2010-09-28 19:22:36.506174
+2	2	1	t	2010-09-28 19:22:36.51709	2010-09-28 19:22:36.51709
+3	3	1	t	2010-09-28 19:22:36.522727	2010-09-28 19:22:36.522727
+4	4	1	t	2010-09-28 19:22:36.528421	2010-09-28 19:22:36.528421
+5	5	1	t	2010-09-28 19:22:36.53457	2010-09-28 19:22:36.53457
+6	6	1	t	2010-09-28 19:22:36.540153	2010-09-28 19:22:36.540153
+7	7	1	t	2010-09-28 19:22:36.545873	2010-09-28 19:22:36.545873
+8	8	1	t	2010-09-28 19:22:36.551509	2010-09-28 19:22:36.551509
+9	9	1	t	2010-09-28 19:22:36.557074	2010-09-28 19:22:36.557074
+10	10	1	t	2010-09-28 19:22:36.562692	2010-09-28 19:22:36.562692
+11	11	1	t	2010-09-28 19:22:36.568272	2010-09-28 19:22:36.568272
+12	12	1	t	2010-09-28 19:22:36.573809	2010-09-28 19:22:36.573809
+13	13	1	t	2010-09-28 19:22:36.579401	2010-09-28 19:22:36.579401
+14	14	1	t	2010-09-28 19:22:36.584922	2010-09-28 19:22:36.584922
+15	15	3	t	2010-09-28 19:22:36.590445	2010-09-28 19:22:36.590445
+16	16	3	t	2010-09-28 19:23:43.29336	2010-09-28 19:23:43.29336
+17	16	4	f	2010-09-28 19:23:43.330147	2010-09-28 19:23:43.330147
+18	16	5	f	2010-09-28 19:23:43.357599	2010-09-28 19:23:43.357599
+35	17	3	t	2010-09-30 21:13:44.931918	2010-09-30 21:13:44.931918
+36	18	3	t	2010-09-30 21:14:19.347238	2010-09-30 21:14:19.347238
+51	19	10	t	2010-10-01 18:31:12.373245	2010-10-01 18:31:12.373245
+52	19	11	f	2010-10-01 18:31:12.395362	2010-10-01 18:31:12.395362
+53	19	12	f	2010-10-01 18:31:12.426646	2010-10-01 18:31:12.426646
+54	20	3	t	2010-10-04 18:00:53.089512	2010-10-04 18:00:53.089512
+55	21	13	t	2010-10-04 18:08:11.099007	2010-10-04 18:08:11.099007
+56	22	3	t	2010-10-04 19:54:09.171721	2010-10-04 19:54:09.171721
+57	23	11	t	2010-10-04 20:13:06.394539	2010-10-04 20:13:06.394539
+58	24	6	t	2010-10-06 16:29:12.896262	2010-10-06 16:29:12.896262
+59	24	17	f	2010-10-06 16:29:13.219843	2010-10-06 16:29:13.219843
+60	24	18	f	2010-10-06 16:29:13.229474	2010-10-06 16:29:13.229474
+61	25	19	t	2010-10-07 16:42:13.699227	2010-10-07 16:42:13.699227
+74	26	20	t	2010-10-19 23:19:11.27914	2010-10-19 23:19:11.27914
+\.
+
+
+--
+-- Data for Name: submissions; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY submissions (id, type, name, email, user_id, title, url, comments, created_at, updated_at, status) FROM stdin;
+1	DataSuggestion	\N	\N	2	test Housing Code Enforcement	http://data.dc.gov/Metadata.aspx?id=7	Testing suggesting a data source	2010-08-31 20:29:47.138817	2010-08-31 20:29:47.138817	Unread
+2	ContactSubmission	\N	\N	9	\N	\N	I have a question.	2010-10-04 18:43:15.290602	2010-10-04 18:43:15.290602	Unread
+\.
+
+
+--
+-- Data for Name: taggings; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY taggings (id, tag_id, taggable_id, tagger_id, tagger_type, taggable_type, context, created_at) FROM stdin;
+1	1	1	\N	\N	Submission	folders	2010-08-31 20:29:47.238368
+2	2	8	\N	\N	DataRecord	tags	2010-09-20 16:35:06.849741
+3	3	13	\N	\N	DataRecord	tags	2010-09-23 14:14:53.698026
+4	4	14	\N	\N	DataRecord	tags	2010-09-23 14:16:45.836171
+5	5	15	\N	\N	DataRecord	tags	2010-09-27 21:11:30.000958
+6	6	15	\N	\N	DataRecord	tags	2010-09-27 21:11:30.044356
+7	7	15	\N	\N	DataRecord	tags	2010-09-27 21:11:30.055191
+8	5	16	\N	\N	DataRecord	tags	2010-09-28 19:23:43.370425
+9	6	16	\N	\N	DataRecord	tags	2010-09-28 19:23:43.448761
+10	7	16	\N	\N	DataRecord	tags	2010-09-28 19:23:43.45467
+11	5	17	\N	\N	DataRecord	tags	2010-09-30 21:13:44.95698
+12	6	17	\N	\N	DataRecord	tags	2010-09-30 21:13:45.008071
+13	7	17	\N	\N	DataRecord	tags	2010-09-30 21:13:45.011346
+14	5	18	\N	\N	DataRecord	tags	2010-09-30 21:14:19.352614
+15	6	18	\N	\N	DataRecord	tags	2010-09-30 21:14:19.355762
+16	7	18	\N	\N	DataRecord	tags	2010-09-30 21:14:19.375342
+17	8	19	\N	\N	DataRecord	tags	2010-10-01 18:31:12.487605
+18	5	20	\N	\N	DataRecord	tags	2010-10-04 18:00:53.137981
+19	6	20	\N	\N	DataRecord	tags	2010-10-04 18:00:53.21167
+20	7	20	\N	\N	DataRecord	tags	2010-10-04 18:00:53.218079
+21	3	21	\N	\N	DataRecord	tags	2010-10-04 18:08:11.178135
+22	1	2	\N	\N	Submission	folders	2010-10-04 18:43:15.33037
+23	5	22	\N	\N	DataRecord	tags	2010-10-04 19:54:09.193377
+24	6	22	\N	\N	DataRecord	tags	2010-10-04 19:54:09.203894
+25	7	22	\N	\N	DataRecord	tags	2010-10-04 19:54:09.210247
+26	9	23	\N	\N	DataRecord	tags	2010-10-04 20:13:06.490578
+27	3	24	\N	\N	DataRecord	tags	2010-10-06 16:29:13.260032
+28	10	24	\N	\N	DataRecord	tags	2010-10-06 16:29:13.309956
+29	11	24	\N	\N	DataRecord	tags	2010-10-06 16:29:13.392001
+30	12	25	\N	\N	DataRecord	tags	2010-10-07 16:42:13.756617
+31	5	1	\N	\N	DataRecord	tags	2010-10-07 18:27:06.754839
+32	5	2	\N	\N	DataRecord	tags	2010-10-07 18:27:06.811031
+33	5	3	\N	\N	DataRecord	tags	2010-10-07 18:27:06.951084
+34	5	4	\N	\N	DataRecord	tags	2010-10-07 18:27:07.04213
+35	5	5	\N	\N	DataRecord	tags	2010-10-07 18:27:07.10478
+36	5	6	\N	\N	DataRecord	tags	2010-10-07 18:27:07.155368
+37	5	7	\N	\N	DataRecord	tags	2010-10-07 18:27:07.211486
+38	5	9	\N	\N	DataRecord	tags	2010-10-07 18:27:07.279637
+39	5	10	\N	\N	DataRecord	tags	2010-10-07 18:27:07.335083
+40	5	11	\N	\N	DataRecord	tags	2010-10-07 18:27:07.38468
+41	5	12	\N	\N	DataRecord	tags	2010-10-07 18:27:07.57547
+42	13	26	\N	\N	DataRecord	tags	2010-10-19 23:19:11.510464
+\.
+
+
+--
+-- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY tags (id, name) FROM stdin;
+1	Inbox
+2	development
+3	test
+4	d
+5	foo
+6	bar
+7	baz
+8	ccc
+9	eeee
+10	Navarrow
+11	me
+12	yes
+13	f
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY users (id, email, crypted_password, password_salt, persistence_token, single_access_token, perishable_token, login_count, failed_login_count, last_request_at, current_login_at, last_login_at, current_login_ip, last_login_ip, confirmed_at, openid_identifier, display_name, api_id, list_opt_in, city, personal_url, telephone_number, user_type, role, updated_at, created_at, affiliation_id, location_id) FROM stdin;
+2	gabelula@gmail.com	a3c3ea50fb52539bdd29fb624be3f3719afa5236964199ac4a070f83183ad89785f0b6ca415a45de3523a643af2e30a8e13b9f01976bfcf1c45061f3ac33d733	CrXj5ry25pnTT3UyGQF	e2400940269cd3e785a610f9007f170b6aa88ff3689be2440aadb6d6c33490f686174cb5e0694035bf98e3aa80463761d17ee64a7c130a97a67874f7916bb30a	3yroNyb2nEgGN6W1H7Wz	Sse7RWn9yd8USLNtZru	2	0	2010-08-31 20:46:01.518029	2010-08-31 20:27:46.022064	2010-08-31 20:25:45.957971	190.134.47.54	190.134.47.54	2010-08-31 20:25:45.467574	\N	gaba	4c7d6548b43ed80804000001	t	\N	\N	\N	\N	basic	2010-09-30 21:09:01.591845	\N	\N	4
+3	gaba@cuboxsa.com	b31315ce6e63d9acfefafbb02d74ec77b9eba1f1da204b0f99899b8cab203b2302465936d3a92835bec76ac8278f4040f382e98146f4f6d207f497c4f8f8d0c9	8pZwpK4y1unH0KylSM0M	3806279bafdeee014844a8df42e48fb7c9cd0c3dd40b21e35b7b454cae3642df23132f9f289f0dabd4d34f7d7ff398b67703fcbaba4bbc892a416e9d56ef36f6	Ou3oHaEZEVRFNBnBaWM	7cjspAtLOlrrrzkUHgVf	20	0	2010-10-13 16:39:41.355078	2010-10-13 16:25:49.938397	2010-10-12 17:42:34.140529	190.135.3.144	190.135.49.99	2010-08-31 20:46:06.911714	\N	gaba	4c7d5b964a4854458d000001	t	Montevideo			Journalist	admin	2010-10-13 16:39:41.360679	\N	3	150
+4	foca@cuboxsa.com	5cd53df55735abcd991894006931c3c0827892d6b1e4907d79ef02f1a67da5c39b04c0a426934bfadaf3c6652ab7d1b95d3d49dffa537d97d5bffecbd5355ec4	cI2FuzqUoiIZSrBwPUU8	e99bf20d3596009ee1652b348759bbf82061146a5f63acdb1f09f95d810f1ef49066bf0110b74784ba5ae7de70517eedad1371c438837412268fb18ddd0f1fb4	lfBsTvKYvXWFCdaXL4rW	0CI0w8tiLX0o78fnq4d	2	0	2010-09-06 18:59:52.899786	2010-09-03 17:24:59.597347	2010-09-03 17:22:16.013345	190.134.44.70	190.134.44.70	2010-09-03 17:22:15.430527	\N	foca	4c812ec7f54ac9022b000001	f	Montevideo			Researcher	basic	2010-09-30 21:09:01.666322	\N	\N	150
+5	hi+johnny@nicolassanguinetti.info	e7cf4d81f82b4a77011f687c0108a17c7dd14039e25980ef0c1b5a3c85f26c922ea39d6d5fb662d77d89c1924fa31b22b4177b80cf7fff83de57408d2ac3b5db	EZuzHwIFBHTm6on1xTw	8b967decae2306cb8a7d33136a3d8a3d109211c9d1e0601a6f81f230f8868345e9262f8a8bb70a5982b89a06720164bc912f1b4d08b941695e0c853d0ebf5575	DwhzcS7s84JRumXWBvn	Dj4n7lY6dqAQYvvX3N	1	0	2010-09-07 20:56:29.397272	2010-09-06 22:20:00.060838	\N	190.134.9.39	\N	2010-09-06 22:19:38.974965	\N	Johnny the Admin	4c8568fa32aed670c5000001	f	Oranjestad			Student	basic	2010-09-30 21:09:01.682553	\N	\N	4
+6	navarrow.w@gmail.com	ad4521800defaf5175fc6013c3ba9d9c4a140950d842daed3cbb4bc76fd2052298298c7298252c89ac3c066723e3fcedb6b6007742f4a2e17bdf0ccf35ec7339	eh41sRFfNGFETjW9bmW	0c6a618aa055beeba50319fddb78018e4f94b5fb9cd0869b36cf82d3a1796458bc980e7080db664a452fdc73ffda4771853d537b0bb8a27ed8f8fe85e2d96b27	LYg98kCKVQZx6sOFw3	deror39WKGzzbB6SAocY	12	0	2010-11-24 22:42:02.600662	2010-11-24 22:35:59.303072	2010-11-17 19:56:22.773297	68.44.234.186	63.89.29.6	2010-09-07 17:34:30.545872	\N	Navarrow Wright	4c8677a660d3194672000001	t	mount laurel	londonberry.com	856-437-0324	Other	admin	2010-11-24 22:42:02.605479	\N	6	155
+7	gabelula+ministry@gmail.com	ce539a3b117fec37c22f570d39aca0ed76a82a0aea19a576aa28edd3a31b99754bb51d5b8a91da5d2ac6fb8eabf9602118108f05a60bdcd71b98adbdfb03bfa8	fb0r0MScU2ZEWfybJ9j	726121033582e14a4c73038b787fed74b76b06c6dce5282753dc313dcb184e5b7a99e7f502fed027fcbf61a3b00e90d9c29810efeaa99f8b178083c083858fe2	CyHXxFOrNfl0I8oCRJLS	wSUXR2PCUv3ke53GKgtv	1	0	2010-09-21 18:39:18.506197	2010-09-21 16:05:49.115381	\N	190.134.7.235	\N	2010-09-07 20:55:59.822635	\N	Gabriela Ministry	4c86a6df13adc81854000001	t	Accra			Other	ministry_user	2010-09-30 21:09:01.697314	\N	7	86
+8	gabelula+doe@gmail.com	a73727f9e01253ee0fba930f5ec033f1e589db258df7b8463ba255f1efbb64539ff54d94352de3f897d663da41cd219689172e3e532c5e6a33f8fd3655d56bbd	JW2PussNINB60HF5Ubum	92d162697fbe0cd2ce25007804bb26c711b47c7dcf550817f5682e7781a1b626f800d590cb4156f10c2d9cdb9d79c9eecfddaddf977b95a26f32bc784eb87932	diMi3ctXSbZoTUGDyplg	q3ygOXPQHWWh47q7Fb	1	0	2010-09-07 21:01:18.12314	2010-09-07 21:01:17.051396	\N	190.134.4.104	\N	2010-09-07 21:01:16.519737	\N	John Doe	4c86a81c13adc81854000003	f	Kabul			Researcher	basic	2010-09-30 21:09:01.700884	\N	\N	157
+9	egreen@popcouncil.org	5d0e681d2b89f9ae388e80a790a30d16b9b84ce34937ff828a06bd67cb5b565f6defbe0cf4710933cb8060d5d12fe78149bbb604f3ccab176b05d140780895c5	tl5wRKEWWIGOq1L5IeU	900cb3dfb9f947f4d1331f6e1c7c99e2a1576e7fb9551d2749919b9c306637d053c7ab658e367447755ba770e60ae4e39935777616c5906ae4931bdc269160d8	1o5XTaBMNa7UK1kAB66Y	naFrHVs3OvqNWCsMEtp	20	0	2010-11-18 16:47:11.363239	2010-11-18 16:46:56.669242	2010-10-19 21:50:57.097632	216.57.38.43	216.57.38.43	2010-09-08 02:08:51.784712	\N	Eric Green	4c86f033da2c34263c000001	f	New york			Other	admin	2010-11-18 16:47:11.366682	\N	\N	155
+10	epgreen@gmail.com	0c4772f14d9d63f15b55cef87d3db0b247bdbb59b4f9d3553fae68928e2347e75fd4d070590e29530cf488e61475931347a7a9178d4ae9e59e29cba7aa7423bd	7Ht65D5YvrE1TOYfVoVH	4c723c7cf649786baa1fe35a7a6fba8117ce4932e6e68b1aa15f3628c6729c6030a730293eb4524e6ef2b68761d9e52920360348a3b309cf2cee797b18ad91d7	SPLDaMcxGcniiXGXiuDH	o6xveYO7rbipbpSxSJN	2	0	2010-09-08 06:55:23.463456	2010-09-08 06:55:14.368341	2010-09-08 06:51:34.946317	196.201.217.247	196.201.217.247	2010-09-08 06:51:34.439258	\N	Random User	4c8732769bf6d1229d000001	f	Muhuru Bay			Researcher	basic	2010-09-30 21:09:01.710838	\N	8	90
+11	gabelula+juana@gmail.com	a0d77bdcab03cc24e27587e787dbaf57b69a149ee086a2d38c05be1d780f339ee16f0bfef0f86e2065bdc9d80378e233c0a526687764a811fc347b58e9f850ad	mHzRuSWp61rYHOjSTZr	20469a66d40555f8de526cc60b082ed32731914ed4008e1ccfb654da8ccb3de9cb3f8195550f30da88163aa6808cd20ded9facea2f73ae4d1cd39af79af6bfe4	IDyPoDWdQy881KyK0VgT	S8JlCrMO0Nz7PYVuS	1	0	2010-09-08 18:48:21.532223	2010-09-08 17:34:51.322244	\N	190.134.73.230	\N	2010-09-08 17:34:50.86328	\N	juana	4c87c93aa46a121785000001	f	Kabul			Journalist	basic	2010-09-30 21:09:01.714681	\N	\N	157
+12	gabelula+test@gmail.com	546426defd8b4d62f47fc81516ff9a340146e980f7647a558d412a6e13ef27bc9b3d05579327e7e855979b92cf9b25eec52e70690baaca579cc22d266dd56cac	udQWWbDBSUKJItgQvDbo	57e4f2ab41da0a83f4da397ceab39b9f24befd2dc4d0a6f07e43b42321a44434fad0efccaec7078e46184720cb81ff451bf0a73adf6b4d18b995d453956ff300	1oLUncYDloYAgjUTbGeB	KgTmQKMr5QFSinV4HM	0	0	\N	\N	\N	\N	\N	2010-09-08 18:55:07.527469	\N	test	4c87dc0bd3d2295543000001	f	kabul			Researcher	basic	2010-09-30 21:09:01.717809	\N	\N	157
+13	gabelula+testadmin@gmail.com	9b2f221f298a8e570d4667c2d5ff450e4f983e4c577cabd6a285b5f1f86ea431382a6b78fd0aaa675a6cb1ceace6b70e792da257c6cffb3e37d13ec1c5a9d6e1	46JmOZU41jqsAcDdeVJC	3b23cf79f4724eb09e93d0c3548205964f1e06249ce260845bc747a419234c7a9cb653e2544b9a603dc30bf6d767c1b78022fa22ddd90a8081fa80b3848d6bdd	L5PhIYvn9qwhkte8AmY	aHCM0eGXLR38iO2BX	0	0	\N	\N	\N	\N	\N	2010-09-08 18:55:52.016254	\N	testadmin	4c87dc37d3d2295543000003	f	kabul			Researcher	basic	2010-09-30 21:09:01.721048	\N	\N	157
+14	ericpgreen@gmail.com	ff3413f771df169747d7902316d2db898c2b5813ab79e23d0e8e4815238a2acc394dbb946911d497703ba58be243b7411f707af78dea4e920d54358c4b3eed26	EEc82opf0nIhnuLFnf13	00148578d5963c2f84121c0eb6620f47297438d7dffab17364ad75a971ab8445f968d1200643dc48f9bdf0fa395dd5c3ac95bb4c936a29d828066db0d5927e84	lUONuLk5vLXbjV2QAigX	GIigfzVVVt8pDHeSBJRi	0	0	\N	\N	\N	\N	\N	2010-09-09 13:01:07.690194	\N	Eric New Admin	4c88da939bf6d1368c000001	f	Kabul			Researcher	basic	2010-09-30 21:09:01.724101	\N	\N	157
+15	eric.green@nyu.edu	852505a338ac7336a37a43af524e4580871069c44bd3b7c99b0b2755f1fca2e55a93d87691bdc30f9b8ef4b2b4bdf275eccd4013df7cad6939073d0c37cdab32	jxfEYOvfKvh3iXfPluyK	69221a9399052d0b577da0ad04f79423e9438cb835f1f0e100190d7bf407bb40572b434b130718eb9fa50713dfb7f505d39bcacf0b45ca746c8cfdaea7573a8b	BYG4zXPfOXmqzPMDny7	4DWZMNATU9jaK1paBCle	5	0	2010-10-20 00:05:32.811014	2010-10-19 22:23:05.230886	2010-10-06 20:45:28.774749	216.57.38.43	216.57.38.43	2010-09-09 13:03:25.871391	\N	Eric Ministry	4c88db1d9bf6d1368c000003	f	anytown			Researcher	ministry_user	2010-10-20 00:05:32.814174	\N	\N	4
+16	greene08@nyu.edu	c30e6ea9e9b1c12597bb30d6cda5b1814db2c865072d15a029ac535ebe41408ba7463575159f951dbebb45719a0d24b8de46518e52d7927fdf2fb1e23c82e5c1	ErnAz42En3KmXcMnbKN	94f3baa1d8a4887aaa71700a871860480036ca33989db23631758d1ca513c81860eafccae9135bcbbbb8bd8286151d51bca214c73f666130330f04dbd33691fa	jhedOSgZnB28B8haKZda	SD26uEzvDO4O7BVs66P	3	0	2010-09-24 20:36:18.131261	2010-09-24 20:36:01.01789	2010-09-24 10:51:08.31003	216.57.38.43	216.57.38.43	2010-09-23 14:22:01.020995	\N	Eric general user	\N	f	New York			Other	basic	2010-09-30 21:09:01.733383	2010-09-23 14:21:30.749831	9	157
+17	mail@ericpgreen.com	21c04b0a016f8e9379ed4769ec2005b23d3ebe67b1519b70625f3542b078b8ba71119397743962308736f40c6c373abee6a599b140e14b76406d2b26f8c4943c	yYqdcRrRbFnKFOy6yueP	3765c081e8bf6131db4d4abd1ca99ed8fa4da357f78ca08b12f043d0fc30a51f6154207954077b0e5b027800e32b67220c77e9a1c98ece7b9d839ee50fc887e9	VJ2bMf1UO4h8SjFhsdDD	Ls8MjW4yopHnFPB2Ig7	0	0	\N	\N	\N	\N	\N	2010-10-04 18:19:44.656324	\N	Data Lover	\N	f	New York			Researcher	basic	2010-10-04 18:19:44.678502	2010-10-04 18:19:44.645412	\N	155
+18	craigsavel@earthlink.net	394207590a5f1276aaf405f2c81b5c7c942fd2db3aecf69b8e29e606c4f96a6bf739ef357e8988e33c7331dd38ab2c9595acd50dba6c46457e6a13e7c65f97c8	miO6SX6RbTJp4TclbMNx	2a522dfb208243bbd65aea77da451eca6d33be26c1de4d5e550af5624cbfdee69c19b8b8071dd053f561d41a715be13633da710b80581670a00bfbfdb20346c7	AqDOZzgrYk6T8OCUopn4	31MbCiMLfB3rZeClJ0oO	0	0	\N	\N	\N	\N	\N	\N	\N	Craig	\N	f	Kabul			Researcher	basic	2010-11-08 21:26:37.170993	2010-11-08 21:26:37.146819	\N	157
+19	csavel@popcouncil.org	679de6fee2abdae0f188bfc8c1302fd8f66e0e83cd1e36b051776fe4259364fea3d889b240377640ad4f5828985912380f1d243c92ef233fdcaaf20766f01c41	KzDYinaoliB3MF4iavqE	5c336002f21756f7c97c8e721d2bf1a5d0353237d8023e8da30461cbe51f26b9f39454c4d835dad812a1f1ace449daa1bc251bc1224fee7fbd2df75599d971d8	YoFUxOL02zRuxYgepU7Q	StaDBIUJpUAkwdxxHdUz	1	0	2010-11-08 21:29:17.740764	2010-11-08 21:28:55.696174	\N	216.57.38.43	\N	2010-11-08 21:28:54.502472	\N	craig	\N	f	New york			Researcher	basic	2010-11-08 21:29:17.742017	2010-11-08 21:28:13.203867	\N	155
+\.
+
+
+--
+-- Data for Name: votes; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY votes (id, vote, voteable_id, voteable_type, user_id, created_at, updated_at) FROM stdin;
+1	t	6	Comment	9	2010-10-04 18:24:10.539625	2010-10-04 18:24:10.539625
+2	t	6	Comment	4	2010-10-04 21:10:43.098032	2010-10-04 21:10:43.098032
+\.
+
+
+--
+-- Data for Name: wiki_versions; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY wiki_versions (id, wiki_id, version, data_record_id, user_id, body, created_at, updated_at) FROM stdin;
+1	1	1	1	3	This is the test documentation.	2010-09-20 21:09:21.675314	2010-09-20 21:09:21.675314
+2	1	2	1	3	This is the updated test documentation.	2010-09-20 21:09:21.675314	2010-09-20 21:09:28.143294
+3	2	1	18	9	DOes this work?	2010-10-04 18:28:46.510144	2010-10-04 18:28:46.510144
+4	3	1	13	4	drgergtgetr	2010-10-04 21:11:20.974584	2010-10-04 21:11:20.974584
+5	3	2	13	4	drgergtgetr\r\n\r\n\r\nergergergerger	2010-10-04 21:11:20.974584	2010-10-04 21:11:35.49408
+6	3	3	13	4	drgergtgetr\r\n\r\n\r\nergergergerger\r\n\r\nblah	2010-10-04 21:11:20.974584	2010-10-05 16:37:53.457754
+7	4	1	11	9	edededed	2010-10-05 17:36:27.061854	2010-10-05 17:36:27.061854
+\.
+
+
+--
+-- Data for Name: wikis; Type: TABLE DATA; Schema: public; Owner: hong
+--
+
+COPY wikis (id, data_record_id, user_id, body, created_at, updated_at, version) FROM stdin;
+1	1	3	This is the updated test documentation.	2010-09-20 21:09:21.675314	2010-09-20 21:09:28.143294	2
+2	18	9	DOes this work?	2010-10-04 18:28:46.510144	2010-10-04 18:28:46.510144	1
+3	13	4	drgergtgetr\r\n\r\n\r\nergergergerger\r\n\r\nblah	2010-10-04 21:11:20.974584	2010-10-05 16:37:53.457754	3
+4	11	9	edededed	2010-10-05 17:36:27.061854	2010-10-05 17:36:27.061854	1
+\.
+
+
+--
+-- Name: catalogs_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY catalogs
+    ADD CONSTRAINT catalogs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: data_record_locations_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY data_record_locations
+    ADD CONSTRAINT data_record_locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: data_records_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY data_records
+    ADD CONSTRAINT data_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY delayed_jobs
+    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY documents
+    ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY locations
+    ADD CONSTRAINT locations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notes_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY notes
+    ADD CONSTRAINT notes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: open_id_authentication_associations_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY open_id_authentication_associations
+    ADD CONSTRAINT open_id_authentication_associations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: open_id_authentication_nonces_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY open_id_authentication_nonces
+    ADD CONSTRAINT open_id_authentication_nonces_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY organizations
+    ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY ratings
+    ADD CONSTRAINT ratings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sponsors_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY sponsors
+    ADD CONSTRAINT sponsors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: submissions_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY submissions
+    ADD CONSTRAINT submissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY votes
+    ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wiki_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY wiki_versions
+    ADD CONSTRAINT wiki_versions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wikis_pkey; Type: CONSTRAINT; Schema: public; Owner: hong; Tablespace: 
+--
+
+ALTER TABLE ONLY wikis
+    ADD CONSTRAINT wikis_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_comments_on_commentable_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_commentable_id ON comments USING btree (commentable_id);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
+
+
+--
+-- Name: index_submissions_on_type; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_submissions_on_type ON submissions USING btree (type);
+
+
+--
+-- Name: index_submissions_on_user_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_submissions_on_user_id ON submissions USING btree (user_id);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id_and_taggable_type_and_context; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_taggable_id_and_taggable_type_and_context ON taggings USING btree (taggable_id, taggable_type, context);
+
+
+--
+-- Name: index_votes_on_user_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_votes_on_user_id ON votes USING btree (user_id);
+
+
+--
+-- Name: index_wiki_versions_on_wiki_id; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE INDEX index_wiki_versions_on_wiki_id ON wiki_versions USING btree (wiki_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: hong; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
