@@ -12,6 +12,7 @@ require 'cucumber/rails/rspec'
 require 'database_cleaner'
 require 'database_cleaner/cucumber'
 require File.expand_path('../blueprints', __FILE__)
+require File.expand_path('../paths',__FILE__)
 
 DatabaseCleaner.strategy = :truncation, {:except => %w[locations]}
 
