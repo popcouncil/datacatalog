@@ -15,7 +15,7 @@ gem 'paperclip', '>= 2.3.3'
 gem 'aws-s3', '>= 0.6.2'
 gem 'awesome_nested_set', '1.4.3'
 gem 'will_paginate', '2.3.15'
-gem 'acts_as_versioned', '0.2.3'
+gem 'acts_as_versioned', :git => "git://github.com/technoweenie/acts_as_versioned.git", :tag => "rails_2"
 
 group :test do
   gem "rspec-rails", ">= 1.2.0", :require => false
@@ -24,6 +24,7 @@ group :test do
   gem 'machinist', ">= 1.0.6"
   gem 'faker', '>= 0.3.1'
 
+  gem 'gherkin', '1.0.30'
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'database_cleaner', '0.5.2'
