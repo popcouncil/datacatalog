@@ -11,4 +11,16 @@ module UsersHelper
   def ministries_for_select
     ["All", "-------------"] + User.ministry_users.map {|u| [u.display_name, u.id.to_s] }
   end
+  
+  def organization_tree_except(org)
+    nested_set_options(Organization, org) {|i| "#{'-' * i.level} #{i.name}" }
+  end
+
+  def ministries_and_organizations_for_select(selected = nil)
+    regular_options = options_for_select(["All", "-------------"], :disabled => "-------------")
+    grouped_options = {"Ministry" =>  User.ministry_users.map {|u| [u.display_name, "ministry-#{u.id.to_s}"] }}
+    grouped_options["Organization"] = organization_tree_except(nil).map { |name, id| [name, "organization-#{id.to_s}"] }
+    grouped_options = grouped_options_for_select(grouped_options, :selected => selected)
+    "#{regular_options}#{grouped_options}" 
+  end
 end

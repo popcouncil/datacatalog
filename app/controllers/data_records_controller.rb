@@ -2,6 +2,7 @@ class DataRecordsController < ApplicationController
   before_filter :require_user, :only => [:new, :create]
   before_filter :find_data_record, :only => [:show, :edit, :update]
   before_filter :require_owner_or_admin, :only => [:edit, :update]
+  before_filter :format_ministry_organization_params, :only => [:index]
 
   include BrowseTableSorts
 
@@ -72,6 +73,18 @@ class DataRecordsController < ApplicationController
 
   def find_data_record
     @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :authors, :contact, :tags, :comment_threads, :ratings, :favorites])
+  end
+  
+  def format_ministry_organization_params
+    if params[:filters].present? && params[:filters][:ministry_organization].present?
+      if params[:filters][:ministry_organization].present?
+        kind, id = params[:filters][:ministry_organization].split("-")
+        params[:filters][kind.to_sym] = id
+      else
+        params[:filters][:ministry] = "All"
+        params[:filters][:organization] = "All"
+      end
+    end
   end
 
   def require_owner_or_admin

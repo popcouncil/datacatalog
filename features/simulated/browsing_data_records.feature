@@ -46,11 +46,11 @@ Feature: Browsing data records
     Then I should only see 2 records
     And I should see "Cyprus"
     And I should see "Europe"
-
+  
   Scenario: Filtering by Ministry
     Given I am a site visitor
     When I follow "Browse"
-    And I select "Ministry of Health" from "Ministry"
+    And I select "Ministry of Health" from "Ministry/Organization"
     And I press "Filter Data"
     Then I should only see 1 record
     And I should see "AIDS"
@@ -61,7 +61,7 @@ Feature: Browsing data records
   Scenario: Filtering by Organization
     Given I am a site visitor
     When I follow "Browse"
-    And I select "Red Cross" from "Organization"
+    And I select "Red Cross" from "Ministry/Organization"
     And I press "Filter Data"
     Then I should only see 3 records
     And I should see "Child Birth"
