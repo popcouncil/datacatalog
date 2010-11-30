@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
   before_validation_on_create :set_default_role
   before_save :link_organization
 
+  after_save :save_wordpress
+  after_destroy :destroy_wordpress
+  before_save :'call_wordpress?'
+  before_destroy :'call_wordpress?'
+
   named_scope :alphabetical, :order => 'display_name'
 
   named_scope :admins,         :conditions => { :role => "admin" }
@@ -107,6 +112,47 @@ class User < ActiveRecord::Base
     else
       affiliation.try(:name)
     end
+  end
+
+  def save_wordpress
+    return unless @call_wordpress
+    begin
+      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:action => 'save', :payload => self.wpdata})
+    rescue
+      false
+    end
+  end
+
+  def destroy_wordpress
+    return unless @call_wordpress
+    begin
+      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:action => 'destroy', :payload => self.wpdata})
+    rescue
+      false
+    end
+  end
+
+  def call_wordpress?
+    @call_wordpress = (self.changed & ['email', 'display_name', 'personal_url']).length > 1
+  end
+  
+  def wpdata
+    data = {:ID => self.id,
+      :user_login => self.email,
+      :user_email => self.email,
+      :user_nicename => self.display_name,
+      :display_name => self.display_name,
+      :user_url => self.personal_url
+      }
+    data.merge!(:user_pass => self.password) unless self.password.blank?
+    data.merge!(:role => 'administrator') if self.admin?
+    result = ''
+    cipher = OpenSSL::Cipher::Cipher.new('AES-128-CBC')
+    cipher.encrypt
+    cipher.key = OpenSSL::Digest.digest('sha1', ENV['WORDPRESS_KEYCODE'])
+    cipher.update(data.to_json, result)
+    result << cipher.final
+    Base64.encode64(result)
   end
 
   private
