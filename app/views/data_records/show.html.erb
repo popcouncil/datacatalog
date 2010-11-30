@@ -19,6 +19,15 @@
           <dt>Geographical Coverage</dt>
           <dd><%= @data_record.locations.map {|loc| link_to loc.name, data_records_path(:filters => { :location => loc.id }) }.join(", ") %></dd>
 
+          <dt>Lowest Level of Disaggregation</dt>
+          <dd><%= @data_record.level_disaggregation %>
+
+          <dt>Publication Year</dt>
+          <dd><%= link_to @data_record.year, data_records_path(:filters => { :release_year => @data_record.year }) %></dd>
+
+          <dt>Tags</dt>
+          <dd><%= linked_tags(@data_record) %></dd>
+
           <% if @data_record.ministry.present? %>
             <dt>Ministry</dt>
             <dd><%= link_to @data_record.ministry.display_name, data_records_path(:filters => { :ministry => @data_record.ministry.id }) %></dd>
@@ -33,20 +42,15 @@
           <% end %>
 
           <% if @data_record.homepage_url.present? %>
-            <dt>Homepage URL</dt>
+            <dt>URL</dt>
             <dd><%= link_to @data_record.homepage_url, @data_record.homepage_url %></dd>
           <% end %>
 
           <% if @data_record.authors.any? %>
-            <dt>Author</dt>
+            <dt>Authors (Affiliation)</dt>
             <dd>
               <%= authors_of @data_record %>
             </dd>
-          <% end %>
-
-          <% if @data_record.project_name.present? %>
-            <dt>Project Name</dt>
-            <dd><%=h @data_record.project_name %></dd>
           <% end %>
 
           <% if @data_record.funder.present? %>
@@ -54,11 +58,10 @@
             <dd><%=h @data_record.funder %></dd>
           <% end %>
 
-          <dt>Publication Year</dt>
-          <dd><%= link_to @data_record.year, data_records_path(:filters => { :release_year => @data_record.year }) %></dd>
-
-          <dt>Tags</dt>
-          <dd><%= linked_tags(@data_record) %></dd>
+          <% if @data_record.project_name.present? %>
+            <dt>Project Name</dt>
+            <dd><%=h @data_record.project_name %></dd>
+          <% end %>
         </dl>
       </div>
 
