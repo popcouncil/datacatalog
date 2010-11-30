@@ -9,28 +9,40 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </li>
+  <ul id="location_fields">
+    <% form.fields_for :data_record_locations do |location_form| %>
+      <li>
+        <%= location_form.label :location_id, "Geographical Coverage" %>
+        <%= location_form.select :location_id, all_locations_for_select(:stringify_ids => false), :disabled => "-------------" %>
+        <span class="remove_checkbox">
+          <% unless location_form.object.new_record? %>
+            <%= location_form.check_box '_destroy' %>
+            <%= location_form.label '_destroy', 'Remove' %>
+          <% end %>
+        </span>
+      </li>
+
+    <% end %>
+    <li class="add_another">
+      <%= link_to "+ Add Location", "javascript:" %>
+    </li>
+  </ul>
   <li>
     <%= form.label :description %>
     <%= form.text_area :description %>
   </li>
-</ul>
-<ul id="location_fields">
-  <% form.fields_for :data_record_locations do |location_form| %>
-    <li>
-      <%= location_form.label :location_id, "Geographical Coverage" %>
-      <%= location_form.select :location_id, all_locations_for_select(:stringify_ids => false), :disabled => "-------------" %>
-      <span class="remove_checkbox">
-        <% unless location_form.object.new_record? %>
-          <%= location_form.check_box '_destroy' %>
-          <%= location_form.label '_destroy', 'Remove' %>
-        <% end %>
-      </span>
-    </li>
-
-  <% end %>
-  <li class="add_another">
-    <%= link_to "+ Add Location", "javascript:" %>
+  <li>
+    <%= form.label :level_disaggregation, "Lowest Level of Disaggregation" %>
+    <%= form.text_field :level_disaggregation %>
   </li>
+  <li>
+    <%= form.label :year, "Publication Year" %>
+    <%= form.select :year, (1950..Date.today.year).to_a.reverse %>
+  </li>
+  <li>
+    <%= form.label :tag_list, "Tags" %>
+    <%= form.text_field :tag_list %>
+  </li>  
 </ul>
 <ul>
   <li>
@@ -43,7 +55,7 @@
     <p class="tip">Separate names with commas.</p>
   </li>
   <li>
-    <%= form.label :homepage_url, "Homepage URL" %>
+    <%= form.label :homepage_url, "URL" %>
     <%= form.text_field :homepage_url %>
   </li>
 </ul>
@@ -75,20 +87,12 @@
 
 <ul>
   <li>
-    <%= form.label :project_name, "Project Name" %>
-    <%= form.text_field :project_name %>
-  </li>
-  <li>
     <%= form.label :funder %>
     <%= form.text_field:funder %>
   </li>
   <li>
-    <%= form.label :year, "Publication Year" %>
-    <%= form.select :year, (1950..Date.today.year).to_a.reverse %>
-  </li>
-  <li>
-    <%= form.label :tag_list, "Tags" %>
-    <%= form.text_field :tag_list %>
+    <%= form.label :project_name, "Project Name" %>
+    <%= form.text_field :project_name %>
   </li>
 </ul>
 
