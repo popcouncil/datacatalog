@@ -77,13 +77,8 @@ class DataRecordsController < ApplicationController
   
   def format_ministry_organization_params
     if params[:filters].present? && params[:filters][:ministry_organization].present?
-      if params[:filters][:ministry_organization].present?
-        kind, id = params[:filters][:ministry_organization].split("-")
-        params[:filters][kind.to_sym] = id
-      else
-        params[:filters][:ministry] = "All"
-        params[:filters][:organization] = "All"
-      end
+      kind, id = params[:filters][:ministry_organization].split("-")
+      params[:filters][kind.to_sym] = id
     end
   end
 
