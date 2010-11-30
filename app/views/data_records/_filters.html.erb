@@ -16,6 +16,11 @@
         <%= form.select :release_year, years_for_select, :disabled => "-------------" %>
       </li>
 
+      <li>
+        <%= form.label :document_type, "Record Type" %>
+        <%= form.select :document_type, document_types_for_select, :disabled => "-------------" %>
+      </li>
+
       <li id="submit">
         <button class="filterBtn" type="submit">
           <span>Filter Data</span>

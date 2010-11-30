@@ -68,6 +68,10 @@ class DataRecord < ActiveRecord::Base
   named_scope :by_tags, lambda {|*tags|
     { :include => :tags, :conditions => { "tags.name" => tags }}
   }
+  
+  named_scope :by_document_type, lambda {|document_type|
+    { :include => :documents, :conditions => {"documents.document_type" => document_type} }
+  }
 
   accepts_nested_attributes_for :authors, :allow_destroy => true, :reject_if => lambda {|author| author[:name].blank? }
   accepts_nested_attributes_for :contact

@@ -86,6 +86,18 @@ Feature: Browsing data records
     But I should not see "Child Birth"
     And I should not see "AIDS"
     And I should not see "Sex Trafficking"
+    
+  Scenario: Filtering by Record Type
+    Given I am a site visitor
+    When I follow "Browse"
+    And I select "News Article" from "Record Type"
+    And I press "Filter Data"
+    Then I should see "Child Birth 1"
+    And I should not see "Child Birth 2"
+    And I should not see "AIDS"
+    And I should not see "Malaria"
+    And I should not see "Sex Trafficking"
+    And I should not see "Child Abuse"
 
   Scenario: Filtering by more than one criteria
     Given I am a site visitor
@@ -127,7 +139,7 @@ Feature: Browsing data records
       | Ministry     | ascending  | Child Birth 1   | AIDS 2          | Sex Trafficking |
       | Organization | descending | AIDS 2          | Child Birth 2   | Child Abuse     |
       | Organization | ascending  | Child Birth 2   | AIDS 2          | Child Abuse     |
-      | Formats      | descending | AIDS 2          | Child Birth 2   | Sex Trafficking |
-      | Formats      | ascending  | Child Birth 2   | AIDS 2          | Sex Trafficking |
+      | Record Type  | descending | Child Birth 2   | AIDS 2          | Sex Trafficking |
+      | Record Type  | ascending  | AIDS 2          | Child Birth 2   | Sex Trafficking |
       | Tags         | descending | Child Birth 1   | Malaria         | Child Abuse     |
       | Tags         | ascending  | Malaria         | Child Birth 1   | Child Abuse     |
