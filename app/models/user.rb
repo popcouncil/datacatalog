@@ -135,6 +135,7 @@ class User < ActiveRecord::Base
 
   def call_wordpress?
     @call_wordpress = (self.changed & ['email', 'display_name', 'personal_url']).length > 1
+    true
   end
   
   def wpdata
