@@ -1,0 +1,3 @@
+development:
+  keycode: 'the secret code for rails rider'
+  wordpress_url: http://localhost/wordpress/

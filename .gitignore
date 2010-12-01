@@ -13,6 +13,7 @@ config/mail_settings.yml
 config/mailer.yml
 config/analytics.yml
 config/server.yml
+config/wordpress.yml
 public/javascripts/all.js
 public/stylesheets/all.css
 public/system/files

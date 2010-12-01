@@ -12,6 +12,9 @@ class UserSessionsController < ApplicationController
 
     if @user_session.save
       flash[:notice] = "You have been signed in."
+      @user_session.user.call_wordpress = true
+      @user_session.user.password = params[:user_session][:password]
+      @user_session.user.save_wordpress
       redirect_to session.delete(:return_to) || root_path
     else
       render :action => "new" and return
