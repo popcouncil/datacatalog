@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
 
   # It really should be name, not display_name
   alias_attribute :name, :display_name
+  attr_accessor :call_wordpress
 
   def self.search(term)
     return alphabetical if term.blank?

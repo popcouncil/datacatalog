@@ -32,7 +32,7 @@ function rails_rider($userdata) {
 	// Hash the password
 	$user_pass = wp_hash_password($user_pass);
 
-	$user_login = sanitize_user($user_login, true);
+	$user_login = sanitize_user($user_login);
 	$user_login = apply_filters('pre_user_login', $user_login);
 
 	//Remove any non-printable chars from the login string to see if we have ended up with an empty username
