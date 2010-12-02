@@ -10,9 +10,26 @@ Feature: Adding data source
     And I should not see "Add Data Source"
 
   @javascript
-  Scenario Outline: A user adds a new data source
+  Scenario Outline: A user adds a new data record
     Given I am a signed in <role>
     When I follow "Add Data"
+    And I fill in the data record fields
+    And I press "Submit"
+    Then I should see "Your Data has been submitted"
+    And the data record should be created by a <role>
+
+    Examples:
+    | role          |
+    | admin         |
+    | ministry user |
+    | user          |
+
+  @javascript
+  Scenario Outline: A user adds a new data record with level of disaggregation
+    Given I am a signed in <role>
+    When I follow "Add Data"
+    And I select "Colombia" from "Geographical Coverage"
+    And I select "City" from "data_record_data_record_locations_attributes_0_disaggregation_level"
     And I fill in the data record fields
     And I press "Submit"
     Then I should see "Your Data has been submitted"
@@ -69,6 +86,8 @@ Feature: Adding data source
     And I am affiliated to "Red Cross International"
     When I follow "Add Data"
     Then the "Lead Organization" field should contain "Red Cross International"
+
+  Scenario: A user set
 
   @javascript
   Scenario: A user adds a data record covering multiple regions

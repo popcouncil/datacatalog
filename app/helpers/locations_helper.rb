@@ -24,4 +24,11 @@ module LocationsHelper
     locations += Location.countries.map {|c| [c.name, get_id[c]] }.sort_by {|name, _| name }
     locations
   end
+  
+  def disaggregation_levels_for_select
+    levels = DataRecordLocation::DISAGGREGATION_LEVELS
+    levels.insert(0, "UNKNOWN", "-------------")
+    levels.insert(5, "-------------")
+    levels
+  end
 end

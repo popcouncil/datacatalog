@@ -140,7 +140,10 @@ $(document).ready(function(){
       elem.attr("name", name);
       elem.attr("id", id);
     });
-
+    
+    // hide elements flagged to do so
+    cloned.find(".hide-on-clone").hide();
+    
     addAnother.before(cloned.show())
 
     container.trigger("fieldAdded", [cloned]);
@@ -177,8 +180,8 @@ $(document).ready(function(){
   });
 
   var removeGlobalOption = function(container) {
-    container.find("option:first-child").remove(); // Global
-    container.find("option:first-child").remove(); // ----------
+    container.find("select.geo-location > option:first-child").remove(); // Global
+    container.find("select.geo-location > option:first-child").remove(); // ----------
     container.find("label").css({ visibility: "hidden" });
   }
 
@@ -193,20 +196,40 @@ $(document).ready(function(){
     });
   });
 
-  var toggleLocationsAddAnother = function() {
-    var container = $(this).parents("#location_fields"),
+  var toggleLocationsAddAnother = function(self) {
+    var container = self.parents("#location_fields"),
         addAnother = container.find(".add_another");
 
-    if ($(this).find("option:selected").text() == "Global") {
+    if (self.find("option:selected").text() == "Global") {
       addAnother.hide();
       container.find("li:not(.add_another):not(:first-child)").remove();
     } else {
       addAnother.show();
     }
-  }
-
-  $("#location_fields select").each(toggleLocationsAddAnother);
-  $("#location_fields select").change(toggleLocationsAddAnother);
+  };
+  
+  var toggleDisaggregationLevelSelector = function(self) {
+    var disabled_options = ["Global","Africa","Asia","Europe","North America","Oceania","South America"];
+    var selected_choice = self.find("option:selected").text();
+    var disaggregation_widget = self.parent().find(".disaggregation-level");
+    // show if selected option is not global or world region (continent)
+    if ( jQuery.inArray(selected_choice, disabled_options) == -1 ) {
+      disaggregation_widget.find(".tip").text("Select level of disaggregation for " + selected_choice);
+      disaggregation_widget.show();
+    } else {
+      disaggregation_widget.hide();
+    }
+  };
+  
+  $("#location_fields select.geo-location").each(function() {
+    toggleLocationsAddAnother($(this));
+    toggleDisaggregationLevelSelector($(this));
+  });
+  
+  $("#location_fields select.geo-location").live('change', function(){
+    toggleLocationsAddAnother($(this));
+    toggleDisaggregationLevelSelector($(this));
+  });
 
   // Handle Add Author for Data Records
 

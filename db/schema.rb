@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20101130194744) do
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "disaggregation_level"
   end
 
   create_table "data_records", :force => true do |t|

@@ -15,4 +15,12 @@ class Location < ActiveRecord::Base
   def self.countries
     global.leaves
   end
+  
+  def global?
+    self.name == "Global"
+  end
+  
+  def region?
+    Location.continents.include?(self)
+  end
 end

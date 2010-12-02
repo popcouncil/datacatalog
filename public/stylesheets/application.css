@@ -179,6 +179,7 @@ div#downloadFormats li { margin-right: 25px;}
 div#downloadFormats a { margin-right: 5px;}
 
 .add_another { padding-left: 160px; }
+.disaggregation-level { padding-left: 160px; }
 .remove_link { float: right; }
 
 .tip, div#downloadFormats span, ul.downloadFormats span, span.commentDate, span.author{ font-size: 95%; font-style: oblique; color: #928f8c; line-height: 16px; margin-top: 3px; margin-bottom: 15px;}
