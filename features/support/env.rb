@@ -29,5 +29,7 @@ end
 World(DefiniteArticleHelper)
 
 Before do
+  if Location.count == 0
   require Rails.root.join("db/seeds.rb")
+  end
 end

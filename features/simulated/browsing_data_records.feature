@@ -133,10 +133,8 @@ Feature: Browsing data records
       | Data Record  | ascending  | AIDS 1          | Child Birth 1   | Child Abuse     |
       | Rating       | descending | Child Birth 2   | Child Birth 1   | Child Abuse     |
       | Rating       | ascending  | Child Birth 1   | Child Birth 2   | Child Abuse     |
-      | Location     | descending | AIDS 2          | Child Birth 2   | Sex Trafficking |
-      | Location     | ascending  | Child Birth 2   | AIDS 2          | Sex Trafficking |
-      | Ministry     | descending | AIDS 2          | Child Birth 1   | Sex Trafficking |
-      | Ministry     | ascending  | Child Birth 1   | AIDS 2          | Sex Trafficking |
+      | Coverage     | descending | AIDS 2          | Child Birth 2   | Sex Trafficking |
+      | Coverage     | ascending  | Child Birth 2   | AIDS 2          | Sex Trafficking |      
       | Organization | descending | AIDS 2          | Child Birth 2   | Child Abuse     |
       | Organization | ascending  | Child Birth 2   | AIDS 2          | Child Abuse     |
       | Record Type  | descending | Child Birth 2   | AIDS 2          | Sex Trafficking |

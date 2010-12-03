@@ -41,7 +41,7 @@ When /^I fill in the data record fields$/ do
   When %Q(I select "Uruguay" from "Geographical Coverage")
   When %Q(I fill in "Lead Organization" with "Red Cross International")
   When %Q(I fill in "Other Institutional Collaborators" with "Doctors Without Borders, United Nations")
-  When %Q(I fill in "URL" with "http://data.dc.gov/foo")
+  When %Q(I fill in "data_record_homepage_url" with "http://data.dc.gov/foo")
   When %Q(I fill in "Project Name" with "The Project")
   When %Q(I fill in "Funder" with "Uncle Sam")
   When %Q(I select "2008" from "Year")
