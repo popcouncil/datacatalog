@@ -10,6 +10,12 @@ require '../../../wp-includes/pluggable.php';
 $keycode = get_option('rails-rider_keycode');
 $payload = json_decode(openssl_decrypt(base64_decode($_POST['payload']), 'AES-128-CBC', sha1($keycode, true), true), true);
 
+remove_action('wp_login', 'rr_save_callback');
+remove_action('user_register', 'rr_save_callback');
+remove_action('profile_update', 'rr_save_callback');
+remove_action('wp_login', 'rr_login_cookie');
+remove_action('wp_logout', 'rr_logout_cookie');
+
 if($_POST['callback'] == 'save'){
   wp_die(rails_rider($payload));
 }
