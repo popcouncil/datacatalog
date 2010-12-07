@@ -15,6 +15,8 @@ class UserSessionsController < ApplicationController
       @user_session.user.call_wordpress = true
       @user_session.user.password = params[:user_session][:password]
       @user_session.user.save_wordpress
+      #Would be cleaner as a script tag, however, wordpress doesn't like returning a blank page
+      flash[:login_callback] = "<iframe height=0 width=0 frameborder=0 src='#{(ENV['WORDPRESS_URL'] || '')}?callback=login&payload=#{CGI.escape(@user_session.user.wpdata(true).gsub("\n", ''))}'></iframe>"
       redirect_to session.delete(:return_to) || root_path
     else
       render :action => "new" and return
@@ -26,8 +28,10 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     current_user_session.destroy
     flash[:notice] = "You have been signed out."
+    flash[:logout_callback] = "<iframe height=0 width=0 frameborder=0 src='#{(ENV['WORDPRESS_URL'] || '')}?callback=logout'></iframe>"
     redirect_to root_url
   end
 

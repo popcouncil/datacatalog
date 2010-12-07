@@ -1,21 +1,36 @@
 <?php
 // Sanity check
-if($_POST['action'] != 'save' and $_POST['action'] != 'destroy'){ die('BAD ACTION'); }
-if(empty($_POST['payload'])){ die('NO DATA');}
+if($_POST['callback'] != 'save' and $_POST['callback'] != 'destroy' and $_GET['callback'] != 'login' and $_GET['callback'] != 'logout'){ die('BAD ACTION'); }
 
 // Start!
 require '../../../wp-config.php';
 require '../../../wp-includes/registration.php';
+require '../../../wp-includes/pluggable.php';
 
 $keycode = get_option('rails-rider_keycode');
 $payload = json_decode(openssl_decrypt(base64_decode($_POST['payload']), 'AES-128-CBC', sha1($keycode, true), true), true);
 
-if($_POST['action'] == 'save'){
+if($_POST['callback'] == 'save'){
   wp_die(rails_rider($payload));
 }
 
-if($_POST['action'] == 'destroy'){
+if($_POST['callback'] == 'destroy'){
   wp_die(wp_delete_user($payload));
+}
+
+if($_GET['callback'] == 'login'){
+  $payload = json_decode(openssl_decrypt(base64_decode($_GET['payload']), 'AES-128-CBC', sha1($keycode, true), true), true);
+  if($payload['time'] < time() + 300 and $payload['time'] > time() - 300){
+    wp_set_auth_cookie($payload['ID']);
+    headers('Content-Type: text/plain');
+    wp_die('');
+  }
+}
+
+if($_GET['callback'] == 'logout'){
+  wp_logout();
+  headers('Content-Type: text/plain');
+  wp_die('');
 }
 
 

@@ -115,10 +115,12 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  # Wordpress related stuff
   def save_wordpress
     return unless @call_wordpress
     begin
-      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:action => 'save', :payload => self.wpdata})
+      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:callback => 'save', :payload => self.wpdata})
     rescue
       false
     end
@@ -127,7 +129,7 @@ class User < ActiveRecord::Base
   def destroy_wordpress
     return unless @call_wordpress
     begin
-      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:action => 'destroy', :payload => self.wpdata})
+      Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:callback => 'destroy', :payload => self.wpdata})
     rescue
       false
     end
@@ -138,16 +140,20 @@ class User < ActiveRecord::Base
     true
   end
   
-  def wpdata
-    data = {:ID => self.id,
-      :user_login => self.email,
-      :user_email => self.email,
-      :user_nicename => self.display_name,
-      :display_name => self.display_name,
-      :user_url => self.personal_url
-      }
-    data.merge!(:user_pass => self.password) unless self.password.blank?
-    data.merge!(:role => 'administrator') if self.admin?
+  def wpdata(login = false)
+    if login
+      data = {:ID => self.id, :time => Time.now.to_i}
+    else
+      data = {:ID => self.id,
+        :user_login => self.email,
+        :user_email => self.email,
+        :user_nicename => self.display_name,
+        :display_name => self.display_name,
+        :user_url => self.personal_url
+        }
+      data.merge!(:user_pass => self.password) unless self.password.blank?
+      data.merge!(:role => 'administrator') if self.admin?
+    end
     result = ''
     cipher = OpenSSL::Cipher::Cipher.new('AES-128-CBC')
     cipher.encrypt
@@ -156,6 +162,18 @@ class User < ActiveRecord::Base
     result << cipher.final
     Base64.encode64(result)
   end
+
+  def self.from_wpdata(data)
+    cipher = OpenSSL::Cipher::Cipher.new('AES-128-CBC')
+    cipher.decrypt
+    cipher.key = OpenSSL::Digest.digest('sha1', ENV['WORDPRESS_KEYCODE'])
+    result = ''
+    data = Base64.decode64(data)
+    cipher.update(data, result)
+    result << cipher.final
+    JSON.parse(result)
+  end
+  # End wordpress related stuff
 
   private
 

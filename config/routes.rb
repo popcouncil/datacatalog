@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.source_show_doc    "data/:slug/docs/:id",                   :controller => "data",            :action => "show_doc"
   map.source_update_doc  "data/:slug/docs/:id/update",            :controller => "data",            :action => "update_doc"
   map.source_usages      "data/:slug/usages",                     :controller => "data",            :action => "usages"
+  map.wordpress_callback "wordpress/callback", :controller => 'wordpress', :action => 'callback'
 
   map.connect ":controller/:action/:id"
   map.connect ":controller/:action/:id.:format"
