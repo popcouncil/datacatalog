@@ -77,12 +77,12 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = "You must be logged out to take that action."
-      redirect_to profile_url
+      redirect_to root_path #profile_url throws ActionController::MethodNotAllowed
     end
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.request_uri if request.method == :get
   end
 
   def mailer_set_url_options
