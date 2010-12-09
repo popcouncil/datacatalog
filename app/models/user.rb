@@ -51,7 +51,9 @@ class User < ActiveRecord::Base
   end
 
   def confirmed?
-    confirmed_at ? true : false
+    return true
+    # disabling confirmation because it seems the confirmation link says it's not necessary
+    #confirmed_at ? true : false
   end
 
   def confirm!
