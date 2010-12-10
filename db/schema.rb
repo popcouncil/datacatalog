@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130194744) do
+ActiveRecord::Schema.define(:version => 20101210212459) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -208,8 +208,8 @@ ActiveRecord::Schema.define(:version => 20101130194744) do
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
-    t.integer  "login_count",         :default => 0
-    t.integer  "failed_login_count",  :default => 0
+    t.integer  "login_count",           :default => 0
+    t.integer  "failed_login_count",    :default => 0
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -219,7 +219,7 @@ ActiveRecord::Schema.define(:version => 20101130194744) do
     t.string   "openid_identifier"
     t.string   "display_name"
     t.string   "api_id"
-    t.boolean  "list_opt_in",         :default => false
+    t.boolean  "list_opt_in",           :default => false
     t.string   "city"
     t.string   "personal_url"
     t.string   "telephone_number"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(:version => 20101130194744) do
     t.datetime "created_at"
     t.integer  "affiliation_id"
     t.integer  "location_id"
+    t.boolean  "data_uncovered_opt_in"
   end
 
   create_table "votes", :force => true do |t|

@@ -20,10 +20,10 @@ class WordpressController < ApplicationController
       @user.email = @wpdata['user_email']
       @user.display_name = @wpdata['display_name']
       @user.personal_url = @wpdata['user_url']
-#      if @wpdata['user_pass']
-#        @user.password = @wpdata['user_pass']
-#        @user.password_confirmation = @wpdata['user_pass']
-#      end
+      if @wpdata['user_pass']
+        @user.password = @wpdata['user_pass']
+        @user.password_confirmation = @wpdata['user_pass']
+      end
       @user.save
     end
 
