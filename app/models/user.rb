@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
   end
 
   def destroy_wordpress
-    return unless @call_wordpress
+    return if @call_wordpress
     begin
       Net::HTTP.post_form(URI.parse(ENV['WORDPRESS_URL']), {:callback => 'destroy', :payload => self.wpdata})
     rescue
@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
   end
 
   def call_wordpress?
-    @call_wordpress = (self.changed & ['email', 'display_name', 'personal_url']).length > 1
+    @call_wordpress = !ENV['WORDPRESS_URL'].blank? and (self.changed & ['email', 'display_name', 'personal_url']).length > 1
     true
   end
   
