@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210212459) do
+ActiveRecord::Schema.define(:version => 20101214202255) do
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20101210212459) do
     t.integer  "ratings_count",        :default => 0
     t.integer  "ratings_total",        :default => 0
     t.string   "level_disaggregation"
+    t.boolean  "completed",            :default => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
