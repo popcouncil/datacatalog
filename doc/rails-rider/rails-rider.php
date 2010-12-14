@@ -3,7 +3,7 @@
 Plugin Name: Rails Rider
 Plugin URI: http://threed-staging.heroku.com/
 Description: Rails Rider helps integrate your WordPress blog's users with your Ruby on Rails users.
-Version: 0.1
+Version: 0.4
 Author: Hong Quach
 Author URI: http://hybridgroup.com/
 License: Copyright Eric Green?
