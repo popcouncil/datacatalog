@@ -135,6 +135,10 @@ add_action('in_admin_header', 'rr_head_callback');
 
 function rr_register_callback($link){
   $rails_link = get_option('rails-rider_register');
-  return (strlen($rails_link) > 0 ? "<li><a href='{$rails_link}'>Register</a></li>" : $link);
+  if(strlen($rails_link) > 0 and strlen($link) == 0){
+    return "<li><a href='{$rails_link}'>" . __('Register') . "</a></li>";
+  } else {
+    return $link;
+  }
 }
 add_filter('register', 'rr_register_callback'); # Might need to raise the priority
