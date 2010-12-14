@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    if params[:from] == 'wordpress' and !ENV['WORDPRESS_URL'].blank?
+      session[:after_registration] = ENV['WORDPRESS_URL'] #use :return_to ?
+    end
   end
 
   def create

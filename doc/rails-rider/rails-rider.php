@@ -24,13 +24,16 @@ function rails_rider_options(){
   }
   $keycode = get_option('rails-rider_keycode');
   $callback = get_option('rails-rider_callback');
+  $register = get_option('rails-rider_register');
   $updated = '';
-  if(isset($_POST['rails-rider_keycode']) and isset($_POST['rails-rider_callback'])){
+  if(isset($_POST['rails-rider_keycode']) and isset($_POST['rails-rider_callback']) and isset($_POST['rails-rider_register'])){
     update_option('rails-rider_keycode', $_POST['rails-rider_keycode']);
     update_option('rails-rider_callback', $_POST['rails-rider_callback']);
+    update_option('rails-rider_register', $_POST['rails-rider_register']);
     $keycode = $_POST['rails-rider_keycode'];
     $callback = $_POST['rails-rider_callback'];
-    $updated = "<div id='message' class='updated'><p>Successfully updated keycode and callback url.</p></div>";
+    $register = $_POST['rails-rider_register'];
+    $updated = "<div id='message' class='updated'><p>Successfully updated settings.</p></div>";
   }
 $output = <<<EOF
 <div id="rails-rider-page" class="wrap">
@@ -46,7 +49,14 @@ $output = <<<EOF
     <p>
       <label>Ruby on Rails Callback URL</label>
       <input type="text" name='rails-rider_callback' value="{$callback}" size=100>
+      <br>
       <span>This is the url to the ruby on rails site where we will send the update callback whenever a user changes their data or logs into the Wordpress.</span>
+    </p>
+    <p>
+      <label>Ruby on Rails Registration URL</label>
+      <input type="text" name='rails-rider_register' value="{$register}" size=100>
+      <br>
+      <span>This is the url to the ruby on rails site where we will send the user when they click the register link.</span>
     </p>
     <p><input type="submit" name="Submit" class="button-primary" value="Save Secrets"></p>
   </form>
@@ -63,6 +73,9 @@ function rrdata($user, $login = false){
     $data = array('ID' => $user->ID, 'time' => time());
   } else {
     $data = array('ID' => $user->ID, 'user_login' => $user->user_login, 'user_email' => $user->user_email, 'user_nicename' => $user->user_nicename, 'display_name' => $user->display_name, 'user_url' => $user->user_url);
+    if(!empty($_POST['pass1']) and $_POST['pass1'] == $_POST['pass2']){
+      $data['user_pass'] = $_POST['pass1'];
+    }
   }
   $data = json_encode($data);
   $keycode = get_option('rails-rider_keycode');
@@ -119,3 +132,9 @@ function rr_head_callback(){
 add_action('wp_head', 'rr_head_callback');
 add_action('login_head', 'rr_head_callback');
 add_action('in_admin_header', 'rr_head_callback');
+
+function rr_register_callback($link){
+  $rails_link = get_option('rails-rider_register');
+  return (strlen($rails_link) > 0 ? "<li><a href='{$rails_link}'>Register</a></li>" : $link);
+}
+add_filter('register', 'rr_register_callback'); # Might need to raise the priority
