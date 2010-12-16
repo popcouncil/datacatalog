@@ -1,12 +1,12 @@
 Given /^a data record titled "(.*)" exists$/ do |title|
   Given %Q(an organization named "Red Cross" exists)
 
-  the.data_record = DataRecord.make(:title => title, :lead_organization_name => the.organization.name)
+  the.data_record = DataRecord.make(:title => title, :lead_organization_name => the.organization.name, :completed => true)
 end
 
 Given /^a data record titled "(.*)" exists whose owner's email is "(.*)"$/ do |title, owner_email|
   Given %Q(an user named "John Doe" with "#{owner_email}" exists)
-  the.data_record = DataRecord.make(:title => title, :owner => the.user)
+  the.data_record = DataRecord.make(:title => title, :owner => the.user, :completed => true)
 end
 
 Given /^the following data records exist:$/ do |table|
