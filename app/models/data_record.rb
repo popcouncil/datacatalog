@@ -41,6 +41,8 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :year, :if => :first_step?
   validates_presence_of :owner_id, :if => :first_step?
 
+  default_scope :conditions => "completed = '1'"
+
   named_scope :sorted, lambda {|sort|
     { :include => [:organizations, :owner, :locations, :documents, :tags],
       :order   => ["users.role = 'ministry_user' DESC", sort.presence, "locations.lft DESC", "data_records.created_at DESC"].compact.join(", ") }
