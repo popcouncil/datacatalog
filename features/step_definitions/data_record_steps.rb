@@ -35,6 +35,32 @@ Given /^I favorited the data record$/ do
   the.user.favorite_records << the.data_record
 end
 
+When /^I fill in the data record fields in the first screen$/ do
+  When %Q(I fill in "Title" with "Housing Code Enforcement")
+  When %Q(I fill in "Description" with "Blah blah blah blah")
+  When %Q(I select "Uruguay" from "Geographical Coverage")
+  When %Q(I select "2008" from "Year")
+  When %Q(I fill in "Tags" with "housing, code enforcement, something else")
+
+  # documents
+  When %Q(I choose "Provide an URL to an external file")
+  When %Q(I fill in "External URL" with "http://document.url/file.csv")
+  When %Q(I select "Data" from "Type")
+end
+
+When /^I fill in the data record fields in the second screen$/ do
+  When %Q(I fill in "Lead Organization" with "Red Cross International")
+  When %Q(I fill in "Other Institutional Collaborators" with "Doctors Without Borders, United Nations")
+  When %Q(I fill in "data_record_homepage_url" with "http://data.dc.gov/foo")
+  When %Q(I fill in "Project Name" with "The Project")
+  When %Q(I fill in "Funder" with "Uncle Sam")
+
+  # contact
+  When %Q(I fill in "Name" with "John Doe")
+  When %Q(I fill in "Phone" with "+1 (234) 567 8900")
+  When %Q(I fill in "Email" with "john.doe@example.org")
+end
+
 When /^I fill in the data record fields$/ do
   When %Q(I fill in "Title" with "Housing Code Enforcement")
   When %Q(I fill in "Description" with "Blah blah blah blah")
@@ -71,6 +97,11 @@ end
 
 Then /^I should see the favorited data record$/ do
   Then %Q(I should see "#{the.data_record.title}")
+end
+
+Then /^the data record should not be created yet$/ do
+  # FIXME: This should be featured in the UI, not checked in the database
+  DataRecord.last.should be_nil
 end
 
 Then /^the data record should be created by a (.+)$/ do |role|

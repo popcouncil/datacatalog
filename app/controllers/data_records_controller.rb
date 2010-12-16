@@ -26,7 +26,7 @@ class DataRecordsController < ApplicationController
 
   def create
     if params[:id].present?
-      @data_record = DataRecord.find_by_slug(params[:id])
+      @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else
       @data_record = DataRecord.new(params[:data_record])
     end

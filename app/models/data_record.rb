@@ -96,6 +96,10 @@ class DataRecord < ActiveRecord::Base
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
   end
 
+  def self.unscoped_find(*args)
+    self.with_exclusive_scope { find(*args) }
+  end
+
   # multi-step form methods
   def current_step
     @current_step || STEPS.first
