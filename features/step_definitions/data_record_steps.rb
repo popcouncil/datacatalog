@@ -27,6 +27,9 @@ Given /^the following data records exist:$/ do |table|
       attr["documents"] = documents.map {|type| Document.make_unsaved(:document_type => type) }
     end
 
+    # create completed data record
+    attr["completed"] = true
+
     DataRecord.make(attr)
   end
 end
