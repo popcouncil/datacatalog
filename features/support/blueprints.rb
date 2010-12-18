@@ -41,3 +41,4 @@ Contact.blueprint do
   name  "John Doe"
   email "john@doe.com"
 end
+

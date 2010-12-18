@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101214202255) do
+ActiveRecord::Schema.define(:version => 20101215045718) do
+
+  create_table "alerts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
+    t.integer  "location_id"
+    t.boolean  "by_email"
+    t.boolean  "by_sms"
+    t.string   "sms"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "catalogs", :force => true do |t|
     t.string   "title"

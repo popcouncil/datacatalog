@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :favorites, :dependent => :destroy
   has_many :favorite_records, :through => :favorites, :source => :data_record
   has_many :data_records, :foreign_key => :owner_id, :dependent => :nullify
+  has_many :alerts, :dependent => :destroy
 
   belongs_to :affiliation, :class_name => "Organization"
   belongs_to :location

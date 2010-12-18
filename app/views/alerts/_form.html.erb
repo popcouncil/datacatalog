@@ -1,0 +1,20 @@
+<li>
+  <%= form.label :tag_id, 'Topic' %>
+  <%= form.select :tag_id, Alert.tags, :disabled => "-------------" %>
+</li>
+
+<li>
+  <%= form.label :location_id, "Geographic Coverage" %>
+  <%= form.select :location_id, all_locations_for_select, :disabled => "-------------" %>
+</li>
+
+<li>
+  <%= form.check_box :by_email, {:class => 'checkbox'} %>
+  <%= form.label :by_email, 'by email', {:class => 'inline'} %>
+</li>
+
+<li>
+  <%= form.check_box :by_sms, {:class => 'checkbox'} %>
+  <%= form.label :by_sms, 'by sms', {:class => 'inline'} %>
+  <%= form.text_field :sms %>
+</li>

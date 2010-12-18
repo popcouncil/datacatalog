@@ -56,3 +56,7 @@ Then /^my account should not be created$/ do
   @user = User.find_by_email('jack@test.com')
   @user.should be(nil)
 end
+
+Then /^I should receive the "(.*)" email$/ do |email|
+  Notifier.should_receive("deliver_#{email}".to_sym)
+end

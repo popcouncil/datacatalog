@@ -9,7 +9,7 @@
   <% form_for @user, :url => profile_path, :html => { :method => :put } do |form| %>
     <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:" %>
     <ul>
-      <%= render "form", :form => form %>
+      <%= render "users/form", :form => form %>
       <li>
       <button class="update_admin" id="user_submit" type="submit" value="Update" name="commit">
           <span>Update</span>
@@ -20,5 +20,16 @@
 </div>
 
 <div id="rtColumn">
-  
+  <h2>Notify me when new data records are created</h2>
+  <% @alerts.each do |alert| %>
+    <% form_for alert do |form| %>
+      <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occured:" %>
+      <ul>
+        <%= render 'alerts/form', :form => form %>
+        <li>
+          <button class="update_admin" id="user_submit" type="submit" value="Save" name='commit'>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
 </div>

@@ -4,3 +4,7 @@ development:
   wordpress_registered: http://localhost/wordpress/
 
 # leave wordpress_url blank if you want to disable wordpress callbacks
+cucumber:
+  keycode: 'tehu'
+  wordpress_url:
+  wordpress_registered:

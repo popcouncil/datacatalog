@@ -17,6 +17,8 @@ module NavigationHelpers
       '/contact'
     when 'my dashboard'
       dashboard_path
+    when 'my profile edit page'
+      edit_profile_path
     when 'the admin dashboard'
       admin_data_records_path
     when "the data record's page"
