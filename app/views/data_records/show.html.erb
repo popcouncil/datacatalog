@@ -18,9 +18,11 @@
 
           <dt>Geographical Coverage</dt>
           <dd><%= @data_record.locations.map {|loc| link_to loc.name, data_records_path(:filters => { :location => loc.id }) }.join(", ") %></dd>
-
-          <dt>Lowest Level of Disaggregation</dt>
-          <dd><%= @data_record.level_disaggregation %>
+          
+          <% if @data_record.level_disaggregation.present? %>
+            <dt>Lowest Level of Disaggregation</dt>
+            <dd><%= @data_record.level_disaggregation %>
+          <% end %>
 
           <dt>Publication Year</dt>
           <dd><%= link_to @data_record.year, data_records_path(:filters => { :release_year => @data_record.year }) %></dd>
