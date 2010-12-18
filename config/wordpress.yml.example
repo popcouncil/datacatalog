@@ -1,3 +1,6 @@
 development:
   keycode: 'the secret code for rails rider'
   wordpress_url: http://localhost/wordpress/
+  wordpress_registered: http://localhost/wordpress/
+
+# leave wordpress_url blank if you want to disable wordpress callbacks

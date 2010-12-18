@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    if params[:from] == 'wordpress' and !ENV['WORDPRESS_URL'].blank?
-      session[:after_registration] = ENV['WORDPRESS_URL'] #use :return_to ?
+    if params[:from] == 'wordpress' and !ENV['WORDPRESS_REGISTERED'].blank?
+      session[:after_registration] = ENV['WORDPRESS_REGISTERED'] #use :return_to ?
     end
   end
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      @user.confirm!
+      #@user.confirm!
       if @user.openid_identifier.present?
         @user.deliver_welcome_message!
         UserSession.create(@user)
