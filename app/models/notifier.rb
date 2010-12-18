@@ -59,10 +59,10 @@ class Notifier < ActionMailer::Base
       From:
       #{data_suggestion.name} <#{data_suggestion.email}>
 
-      Data Source Title:
+      Data Record Title:
       #{data_suggestion.title}
 
-      Data Source URL:
+      Data Record URL:
       #{data_suggestion.url}
 
       Comments:

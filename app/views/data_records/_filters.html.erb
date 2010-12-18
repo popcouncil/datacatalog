@@ -2,12 +2,12 @@
   <div id="filterData">
     <ul>
       <li>
-        <%= form.label :location %>
+        <%= form.label :location, "Coverage" %>
         <%= form.select :location, all_locations_for_select("All", "-------------"), :disabled => "-------------" %>
       </li>
 
       <li>
-        <%= form.label :ministry_organization, "Ministry/Organization" %>
+        <%= form.label :ministry_organization, "Organization" %>
         <%= form.select :ministry_organization, ministries_and_organizations_for_select(@filters.ministry_organization) %>
       </li>
 

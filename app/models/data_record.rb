@@ -1,4 +1,7 @@
 class DataRecord < ActiveRecord::Base
+  STEPS = %w[screen1 screen2]
+  attr_writer :current_step
+
   belongs_to :owner,        :class_name => "User"
   belongs_to :contact,      :dependent => :destroy
   belongs_to :catalog,      :dependent => :destroy
@@ -27,15 +30,18 @@ class DataRecord < ActiveRecord::Base
   before_validation_on_create :make_slug
   after_save :link_organizations
 
-  validate :at_least_one_location
+  # - validations -
+  validate :at_least_one_location, :if => :first_step?
   validate :no_duplicate_locations
-  validates_presence_of :description
-  validates_presence_of :lead_organization_name
-  validates_presence_of :tag_list, :message => "can't be empty"
+  validates_presence_of :description, :if => :first_step?
+  validates_presence_of :lead_organization_name, :if => :last_step?
+  validates_presence_of :tag_list, :message => "can't be empty", :if => :first_step?
   validates_presence_of :slug, :if => :has_title?
-  validates_presence_of :title
-  validates_presence_of :year
-  validates_presence_of :owner_id
+  validates_presence_of :title, :if => :first_step?
+  validates_presence_of :year, :if => :first_step?
+  validates_presence_of :owner_id, :if => :first_step?
+
+  default_scope :conditions => "completed = '1'"
 
   named_scope :sorted, lambda {|sort|
     { :include => [:organizations, :owner, :locations, :documents, :tags],
@@ -89,6 +95,32 @@ class DataRecord < ActiveRecord::Base
   def self.available_years
     all(:select => "DISTINCT(year)", :order => "year DESC").map(&:year)
   end
+
+  def self.unscoped_find(*args)
+    self.with_exclusive_scope { find(*args) }
+  end
+
+  # multi-step form methods
+  def current_step
+    @current_step || STEPS.first
+  end
+
+  def first_step?
+    self.current_step == STEPS.first
+  end
+
+  def last_step?
+    self.current_step == STEPS.last
+  end
+
+  def next_step
+    self.current_step = STEPS[STEPS.index(current_step)+1] unless last_step?
+  end
+
+  def previous_step
+    self.current_step = STEPS[STEPS.index(current_step)-1] unless first_step?
+  end
+  # end multi-step form methods
 
   def lead_organization_name=(name)
     @lead_organization_name = name

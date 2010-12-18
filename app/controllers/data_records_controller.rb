@@ -25,21 +25,30 @@ class DataRecordsController < ApplicationController
   end
 
   def create
-    @data_record = DataRecord.new(params[:data_record])
-
-    if current_user.admin?
-      @data_record.owner_id = params[:data_record][:owner_id]
+    if params[:id].present?
+      @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else
-      @data_record.owner_id = current_user.id
+      @data_record = DataRecord.new(params[:data_record])
     end
 
-    if @data_record.save
-      flash[:notice] = "Your Data has been submitted"
-      redirect_to @data_record
-    else
-      initialize_data_record_associations
-      render :new
+    if @data_record.owner_id.blank?
+      if current_user.admin?
+        @data_record.owner_id = params[:data_record][:owner_id]
+      else
+        @data_record.owner_id = current_user.id
+      end
     end
+
+    if (@data_record.new_record? ? @data_record.save : @data_record.update_attributes(params[:data_record]) )
+      if @data_record.completed?
+        flash[:notice] = "Your Data has been submitted"
+        redirect_to @data_record and return
+      else
+        @data_record.next_step
+      end
+    end
+    initialize_data_record_associations
+    render :new
   end
 
   def edit

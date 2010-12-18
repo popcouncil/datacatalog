@@ -13,7 +13,11 @@ Feature: Adding data source
   Scenario Outline: A user adds a new data record
     Given I am a signed in <role>
     When I follow "Add Data"
-    And I fill in the data record fields
+    And I fill in the data record fields in the first screen
+    And I press "Submit"
+    Then I should see "Tell us who did the work"
+    And the data record should not be created yet
+    Then I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And the data record should be created by a <role>
@@ -28,9 +32,11 @@ Feature: Adding data source
   Scenario Outline: A user adds a new data record with level of disaggregation
     Given I am a signed in <role>
     When I follow "Add Data"
+    And I fill in the data record fields in the first screen
     And I select "Colombia" from "Geographical Coverage"
     And I select "City" from "data_record_data_record_locations_attributes_0_disaggregation_level"
-    And I fill in the data record fields
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And the data record should be created by a <role>
@@ -46,8 +52,10 @@ Feature: Adding data source
     Given I am a signed in admin
     And a ministry user named "Johnny Minister" with "johnny@ministry.com" exists
     When I follow "Add Data"
+    And I fill in the data record fields in the first screen
     And I select "Johnny Minister" from "Added By"
-    And I fill in the data record fields
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And the data record should be created by a ministry user
@@ -56,7 +64,6 @@ Feature: Adding data source
     Given I am a signed in admin
     When I follow "Add Data"
     And I fill in "Title" with ""
-    And I fill in "Lead Organization" with "Some Org"
     And I press "Submit"
     Then I should not see "Your Data has been submitted"
     And I should see "Title can't be blank"
@@ -66,7 +73,9 @@ Feature: Adding data source
     Given I am a signed in user
     And an organization named "DCRA" exists
     When I follow "Add Data"
-    And I fill in the data record fields
+    And I fill in the data record fields in the first screen
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I fill in "Lead Organization" with "<name>"
     And I fill in "Other Institutional Collaborators" with "<collaborators>"
     And I press "Submit"
@@ -85,6 +94,8 @@ Feature: Adding data source
     Given I am a signed in user
     And I am affiliated to "Red Cross International"
     When I follow "Add Data"
+    And I fill in the data record fields in the first screen
+    And I press "Submit"
     Then the "Lead Organization" field should contain "Red Cross International"
 
   Scenario: A user set
@@ -93,10 +104,12 @@ Feature: Adding data source
   Scenario: A user adds a data record covering multiple regions
     Given I am a signed in user
     When I follow "Add Data"
-    And I fill in the data record fields
+    And I fill in the data record fields in the first screen
     And I select "Africa" from "Geographical Coverage"
     And I follow "+ Add Location"
     And I select "Asia" from the 2nd "Geographical Coverage"
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And I should see "Africa, Asia"
@@ -105,11 +118,13 @@ Feature: Adding data source
   Scenario: Setting a data record to have Global coverage should delete any other region
     Given I am a signed in user
     When I follow "Add Data"
-    And I fill in the data record fields
+    And I fill in the data record fields in the first screen
     And I select "Africa" from "Geographical Coverage"
     And I follow "+ Add Location"
     And I select "Asia" from the 2nd "Geographical Coverage"
     And I select "Global" from "Geographical Coverage"
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And I should see "Global"
@@ -120,7 +135,7 @@ Feature: Adding data source
   Scenario: A data record can have multiple documents
     Given I am a signed in user
     When I follow "Add Data"
-    And I fill in the data record fields
+    And I fill in the data record fields in the first screen
     And I select "Map" from "Type"
     And I choose "Provide an URL to an external file"
     And I fill in "External URL" with "http://maps.google.com"
@@ -128,6 +143,8 @@ Feature: Adding data source
     And I select "News Article" from the 2nd "Type"
     And I choose the 2nd "Provide an URL to an external file"
     And I fill in the 2nd "External URL" with "http://nytimes.com"
+    And I press "Submit"
+    And I fill in the data record fields in the second screen
     And I press "Submit"
     Then I should see "Your Data has been submitted"
     And I should see a link to "http://maps.google.com" labelled "MAP"
@@ -167,6 +184,8 @@ Feature: Adding data source
   Scenario: By default the contact information is pre-filled from the user's information
     Given I am a signed in user
     When I follow "Add Data"
+    And I fill in the data record fields in the first screen
+    And I press "Submit"
     Then the contact name field should contain the user's name
     And the contact email field should contain the user's email
     But the contact phone field should be blank

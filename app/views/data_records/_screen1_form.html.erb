@@ -1,3 +1,4 @@
+<h2>Describe the record you want to add</h2>
 <ul>
   <% if current_user.admin? %> 
     <li>
@@ -45,55 +46,8 @@
     <%= form.text_field :tag_list %>
   </li>  
 </ul>
-<ul>
-  <li>
-    <%= form.label :lead_organization_name, "Lead Organization" %>
-    <%= form.text_field :lead_organization_name %>
-  </li>
-  <li>
-    <%= form.label :collaborator_list, "Other Institutional Collaborators" %>
-    <%= form.text_field :collaborator_list %>
-    <p class="tip">Separate names with commas.</p>
-  </li>
-  <li>
-    <%= form.label :homepage_url, "URL" %>
-    <%= form.text_field :homepage_url %>
-  </li>
-</ul>
 
-<h2>Authors</h2>
-<ul id="authors">
-  <% form.fields_for :authors do |author_form| %>
-    <li>
-      <div>
-        <%= author_form.label :name, "Author Name" %>
-        <%= author_form.text_field :name, :class => "required" %>
-      </div>
-      <div>
-        <%= author_form.label :affiliation_name, "Author Affiliation" %>
-        <%= author_form.text_field :affiliation_name %>
-      </div>
-      <div class="remove_checkbox">
-        <% unless author_form.object.new_record? %>
-          <%= author_form.check_box '_destroy' %>
-          <%= author_form.label '_destroy', 'Remove' %>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
-  <li class="add_another">
-    <%= link_to "+ Add Author", "javascript:" %>
-  </li>
-</ul>
-
-<ul>
-  <li>
-    <%= form.label :funder %>
-    <%= form.text_field:funder %>
-  </li>
-</ul>
-
-<h2>Attached Documents</h2>
+<h2>Add Documents</h2>
 <ul id="documents_fields">
   <% form.fields_for :documents do |document_form| %>
     <li>
@@ -138,22 +92,4 @@
   <li class="add_another">
     <%= link_to "+ Add Document", "javascript:" %>
   </li>
-</ul>
-
-<h2>Contact details to request more information</h2>
-<ul>
-<% form.fields_for :contact do |contact_form| %>
-  <li>
-    <%= contact_form.label :name %>
-    <%= contact_form.text_field :name %>
-  </li>
-  <li>
-    <%= contact_form.label :email %>
-    <%= contact_form.text_field :email %>
-  </li>
-  <li>
-    <%= contact_form.label :phone %>
-    <%= contact_form.text_field :phone %>
-  </li>
-<% end %>
 </ul>

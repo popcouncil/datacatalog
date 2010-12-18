@@ -214,7 +214,7 @@ $(document).ready(function(){
     var disaggregation_widget = self.parent().find(".disaggregation-level");
     // show if selected option is not global or world region (continent)
     if ( jQuery.inArray(selected_choice, disabled_options) == -1 ) {
-      disaggregation_widget.find(".tip").text("Select level of disaggregation for " + selected_choice);
+      disaggregation_widget.find(".tip").text("Select lowest level of disaggregation for " + selected_choice);
       disaggregation_widget.show();
     } else {
       disaggregation_widget.hide();
