@@ -22,7 +22,7 @@
         <% end %>
       </span>
       <div class="disaggregation-level hide-on-clone" style="display:none;">
-        <span class="tip">Select level of disaggregation</span>
+        <span class="tip">Select lowest level of disaggregation</span>
         <%= location_form.select :disaggregation_level, disaggregation_levels_for_select, :disabled => "-------------" %>
       </div>
     </li>
@@ -90,10 +90,6 @@
   <li>
     <%= form.label :funder %>
     <%= form.text_field:funder %>
-  </li>
-  <li>
-    <%= form.label :project_name, "Project Name" %>
-    <%= form.text_field :project_name %>
   </li>
 </ul>
 

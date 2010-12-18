@@ -5,7 +5,7 @@
     <%= link_to "Remove as Favorite", data_record_favorite_path(@data_record), :class => "favorited", :method => "delete" %>
   <% else -%>
     <h3>Favorite This Data</h3>
-    <%= link_to "Favorite this Data Source", data_record_favorite_path(@data_record), :class => "favorite", :method => "post" %>
+    <%= link_to "Favorite this Data Record", data_record_favorite_path(@data_record), :class => "favorite", :method => "post" %>
   <% end -%>
 </div>
 <% end -%>
