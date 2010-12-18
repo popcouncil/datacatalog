@@ -13,16 +13,16 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      #@user.confirm!
       if @user.openid_identifier.present?
         @user.deliver_welcome_message!
+        @user.confirm!
         UserSession.create(@user)
         flash[:notice] = "Success! You have been signed in."
         redirect_to edit_profile_path
       else
         @user.deliver_confirmation_instructions!
         flash[:notice] = "Your account has been created. Please check your email inbox to confirm your email address."
-        redirect_to edit_profile_path
+        redirect_to signin_path
       end
     else
       render :action => :new
@@ -53,6 +53,10 @@ class UsersController < ApplicationController
       @user.deliver_welcome_message!
       UserSession.create(@user)
       flash[:notice] = "Thanks! Your email address has been confirmed and you're now signed in."
+      if session[:after_registration]
+        flash[:notice] += "<a href='#{ENV['WORDPRESS_REGISTERED']}'>Click here</a> to go back to the blog.</a>"
+        session.delete(:after_registration)
+      end
       redirect_to edit_profile_path
     else
       flash[:error] = "Sorry, could not confirm the email address."
