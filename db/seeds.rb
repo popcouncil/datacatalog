@@ -217,3 +217,23 @@ Location.transaction do
     end
   end
 end
+
+['Agriculture & Rural Development',
+  'Aid Effectiveness',
+  'Economic Policy and External Debt',
+  'Education',
+  'Energy & Mining',
+  'Environment',
+  'Financial sector',
+  'Health',
+  'Infrastructure',
+  'Labor & Social Protection',
+  'Poverty',
+  'Private Sector',
+  'Public Sector',
+  'Science & Technology',
+  'Social Development',
+  'Urban Development',
+  'Other'].each do |name|
+    Tag.create(:name => name, :kind => 'topics')
+  end

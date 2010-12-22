@@ -16,4 +16,8 @@ module DataRecordsHelper
       author.affiliation.present? ?  "#{author.name} (#{link_to author.affiliation.name, author.affiliation})" : author.name
     end.join(", ")
   end
+
+  def topic_tags
+    @topic_tags ||= Tag.all(:conditions => {:kind => 'topics'}).collect { |i| [i.name] }
+  end
 end
