@@ -21,7 +21,7 @@ class AlertsController < ApplicationController
       redirect_to(edit_profile_path)
       return 
     end
-
+    params[:alert].delete(:tag_id) if params[:alert][:tag_id] == 'All'
     @alert = current_user.alerts.new(params[:alert])
     if @alert.save
       flash[:notice] = 'Successfully created the notification.'

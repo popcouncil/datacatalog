@@ -31,8 +31,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    @alerts = current_user.alerts.all
-    @alerts << Alert.new(:location_id => '1') if @alerts.length < 5 
+    @alerts = current_user.alerts.all(:limit => 1)
+    @alerts << Alert.new(:location_id => '1') if @alerts.length < 1
   end
 
   def update

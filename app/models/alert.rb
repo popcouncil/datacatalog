@@ -4,7 +4,7 @@ class Alert < ActiveRecord::Base
   belongs_to :location
 
   validates_presence_of :user
-  validates_presence_of :tag
+  #validates_presence_of :tag
   validates_presence_of :location
 
   def self.tags
