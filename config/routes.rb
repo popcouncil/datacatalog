@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :data_records, :as => "data", :except => :destroy do |data_record|
+  map.resources :data_records, :as => "data", :except => [:destroy, :new] do |data_record|
     data_record.resource :favorite, :only => [:create, :destroy]
     data_record.resource :rating, :only => [:update]
     data_record.resources :notes, :only => [:index, :create]
@@ -8,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
     end
     data_record.resource :wiki, :as => "docs", :only => [:show, :edit, :update]
   end
+
+  map.new_data_record '/data-new', :controller => 'data_records', :action => 'new'
 
   map.resources :organizations, :as => :org, :only => [:show]
 
