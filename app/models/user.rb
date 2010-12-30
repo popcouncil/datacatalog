@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/
 
-  USER_TYPES = %w(Researcher Journalist Student Other)
+  USER_TYPES = %w(Government Journalism Non-Profit Policy Student Research) << 'Other data lover'
   ROLES = { "Admin" => :admin, "Ministry User" => :ministry_user, "Normal User" => :basic }
 
   has_many :notes,     :dependent => :destroy
@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
   belongs_to :affiliation, :class_name => "Organization"
   belongs_to :location
 
-  validates_presence_of :email, :display_name, :location, :city, :user_type
-  validates_inclusion_of :user_type, :in => USER_TYPES
+  validates_presence_of :email, :display_name#, :location, :city, :user_type
+  validates_inclusion_of :user_type, :in => USER_TYPES, :allow_blank => true
   validates_inclusion_of :role, :in => ROLES.values.map(&:to_s)
 
   before_validation_on_create :set_default_role

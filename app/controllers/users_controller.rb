@@ -42,6 +42,8 @@ class UsersController < ApplicationController
       flash[:notice] = "Profile updated!"
       redirect_to edit_profile_path
     else
+      @alerts = current_user.alerts.all(:limit => 1)
+      @alerts << Alert.new(:location_id => '1') if @alerts.length < 1
       render :edit
     end
   end

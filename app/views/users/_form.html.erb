@@ -31,24 +31,16 @@
     <%= form.text_field :affiliation_name %>
 </li>
 <li>
-    <%= form.label :location_id, "Country" %>
-    <%= form.select :location_id, all_countries_for_select %>
+    <%= form.label :location_id, "Country (optional)" %>
+    <%= form.select :location_id, all_countries_for_select(true) %>
 </li>
 <li>
-    <%= form.label :city %>
+    <%= form.label :city, 'City (optional)' %>
     <%= form.text_field :city %>
 </li>
 <li>
-    <%= form.label :user_type, 'User Type' %>
+    <%= form.label :user_type, 'Select Field (optional)' %>
     <%= form.select :user_type, User::USER_TYPES, :include_blank => true %>
-</li>
-<li>
-    <%= form.label :personal_url, 'Site Url (optional)'%>
-    <%= form.text_field :personal_url %>
-</li>
-<li>
-    <%= form.label :telephone_number, 'Cell Phone (optional)'%>
-    <%= form.text_field :telephone_number %>
 </li>
 
 <li class="signIn_cues">

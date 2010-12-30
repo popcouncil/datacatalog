@@ -395,7 +395,8 @@ button.signUp_openID { background: url(/images/btn_signUp_openID.png) top left n
 button.update, a#btn_update { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; }
 button.update_admin { background: url(/images/btn_update.png) top left no-repeat; width: 93px; margin-top: 20px; margin-left: 150px;}
 a#lg_signup { background: url(/images/btn_signUp_lg.png) top left no-repeat; width: 183px; height: 42px; margin: 15px auto 0;}
-a#btn_update { float: right; margin-top: 0; margin-left: 10px; }
+a#btn_update, a#btn_edit_record { float: right; margin-top: 0; margin-left: 10px; }
+a#btn_edit_record {background: url(/images/btn_edit_record.png) top left no-repeat; width: 93px;}
 
 ul.editAPI button.update { margin-left: 150px;}
 button.generate { background: url(/images/btn_generateAPI.png) top left no-repeat; width: 157px; margin-top: 20px; margin-left: 150px;}

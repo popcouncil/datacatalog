@@ -1,6 +1,8 @@
 module LocationsHelper
-  def all_countries_for_select
-    Location.countries.map {|c| [c.name, c.id.to_s] }.sort_by {|name, _| name }
+  def all_countries_for_select(blank = false)
+    locations = Location.countries.map {|c| [c.name, c.id] }.sort_by {|name, _| name }
+    locations = ['Select Country', ''] + locations if blank
+    locations
   end
 
   def all_locations_for_select(*preferential)
