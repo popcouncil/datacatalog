@@ -16,7 +16,7 @@
 </div>
 
 <% if current_user == @data_record.owner || (current_user && current_user.admin?) %>
-  <%= link_to "Update", edit_data_record_path(@data_record), :id => "btn_update", :class => "buttonLink" %>
+  <%= link_to "Edit Record", edit_data_record_path(@data_record), :id => "btn_update", :class => "buttonLink" %>
 <% end %>
 
 <%= link_to "Report a Problem", data_record_path(@data_record, :anchor => "comment_form", :reports_problem => 1), :id => "btn_reportProblem", :class => "buttonLink" %>
