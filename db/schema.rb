@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(:version => 20101230220721) do
     t.integer  "ratings_total",        :default => 0
     t.string   "level_disaggregation"
     t.boolean  "completed",            :default => false
-    t.integer  "views_count",          :default => 0,     :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|

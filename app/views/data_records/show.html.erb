@@ -72,7 +72,7 @@
       <h3>Files Available for Download</h3>
       <ul>
         <% @data_record.documents.each do |document| %>
-          <li><%= link_to document.document_type.upcase, document.download_url %></li>
+          <li><%= link_to "#{document.title} (#{document.document_type})", document.download_url %></li>
         <% end %>
       </ul>
       <div class="clear"></div>
