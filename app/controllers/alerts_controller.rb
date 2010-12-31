@@ -2,7 +2,8 @@ class AlertsController < ApplicationController
   before_filter :require_user
 
   def update
-    clean_params
+    return unless clean_params
+    
     if params[:user][:alert_sms] == '1' and params[:user][:alert_sms_number].blank?
       @alert_user = current_user.dup
       @user = current_user
@@ -10,6 +11,7 @@ class AlertsController < ApplicationController
       render :template => 'users/edit'
       return
     end
+    
     @alerts = current_user.alerts.dup
     params[:tags].each do |tag_id|
       params[:locations].each do |location_id|
@@ -32,6 +34,17 @@ class AlertsController < ApplicationController
       params[:tags] =[nil] if params[:tags].include?(0)
       params[:locations].collect! {|x| x.to_i }
       params[:locations].uniq!
+      if params[:locations].include?(1) and params[:tags].include?(nil)
+        @alert_topics = params[:tags]
+        @alert_locations = params[:locations]
+        @user = current_user.dup
+        @alert_user = current_user
+        @alert_user.attributes = params[:user]
+        @alert_user.errors.add_to_base('You must include a Topic and a Coverage')
+        render :template => 'users/edit'
+        return false
+      end
+      true
     end
 
 end
