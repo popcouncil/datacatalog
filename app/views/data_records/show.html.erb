@@ -17,14 +17,7 @@
           <dd><%=h @data_record.owner.display_name %></dd>
 
           <dt>Geographical Coverage</dt>
-          <dd><%= @data_record.locations.map {|loc| link_to loc.name, data_records_path(:filters => { :location => loc.id }) }.join(", ") %></dd>
-          
-          <% if @data_record.data_record_locations.present? %>
-            <dt>Lowest Level of Disaggregation</dt>
-            <% for data_record_location in @data_record.data_record_locations do %>
-              <%= data_record_location.disaggregation_level %>
-            <% end %>
-          <% end %>
+          <dd><%= @data_record.data_record_locations.map {|loc| link_to(loc.location.name, data_records_path(:filters => { :location => loc.location.id })) + h("(#{loc.disaggregation_level})") }.join(", ") %></dd>
 
 
           <dt>Publication Year</dt>
