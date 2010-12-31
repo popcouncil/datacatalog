@@ -19,6 +19,6 @@ module DataRecordsHelper
 
   def topic_tags
     @topic_tags_ ||= Tag.all(:conditions => {:kind => 'topics'}).collect { |i| [i.name] }
-    @topic_tags ||= ['Select Tag', '-------------'] + ['All', @topic_tags_.join(',')] + @topic_tags_
+    @topic_tags ||= ['Select Tag', '-------------'] + [['All', @topic_tags_.join(',')]] + @topic_tags_
   end
 end
