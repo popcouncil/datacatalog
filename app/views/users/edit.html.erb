@@ -21,8 +21,7 @@
 
 <div id="rtColumn">
   <h2>Notify me when new data records are created</h2>
-  <% @alerts.each do |alert| %>
-    <% form_for alert do |form| %>
+    <% form_for (@alert_user || @user || current_user), :url => alerts_path, :html => {:class => ''} do |form| %>
       <%= form.error_messages :header_message => "Uh-oh!", :message => "The following problems occured:" %>
       <ul>
         <%= render 'alerts/form', :form => form %>
@@ -31,5 +30,4 @@
         </li>
       </ul>
     <% end %>
-  <% end %>
 </div>

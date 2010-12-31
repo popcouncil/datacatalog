@@ -1,20 +1,37 @@
+
 <li>
-  <%= form.label :tag_id, 'Topic' %>
-  <%= form.select :tag_id, Alert.tags, :disabled => "-------------" %>
+  <%= label_tag :tag_id, 'Topic' %>
+  <% if @alert_topics.blank? %>
+    <%= select_tag 'tags[]', options_for_select(Alert.tags, :disabled => "-------------"), :class => 'alert_tags' %>
+  <% else %>
+    <% @alert_topics.each do |topic| %>
+      <%= select_tag 'tags[]', options_for_select(Alert.tags, :disabled => "-------------", :selected => topic), :class => 'alert_tags' %>
+    <% end %>
+  <% end %>
+  <%= link_to_function '[+]', "$('#add-alert-topic').before(#{select_tag('tags[]', options_for_select(Alert.tags, :disabled => "-------------"), :class => 'alert_tags').to_json})", :id => 'add-alert-topic' %>
+  <%= link_to_function '[-]', "$('.alert_tags:last').remove()" %>
 </li>
 
 <li>
-  <%= form.label :location_id, "Geographic Coverage" %>
-  <%= form.select :location_id, all_locations_for_select, :disabled => "-------------" %>
+  <%= label_tag :location_id, "Geographic Coverage" %>
+  <% if @alert_locations.blank? %>
+    <%= select_tag 'locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations' %>
+  <% else %>
+    <% @alert_locations.each do |location| %>
+      <%= select_tag 'locations[]', options_for_select(all_locations_for_select, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations' %>
+    <% end %>
+  <% end %>
+  <%= link_to_function '[+]', "$('#add_alert_location').before(#{select_tag('locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations').to_json})", :id => 'add_alert_location'%>
+  <%= link_to_function '[-]', "$('.alert_locations:last').remove()" %>
 </li>
 
 <li>
-  <%= form.check_box :by_email, {:class => 'checkbox'} %>
+  <%= form.check_box :alert_email, {:class => 'checkbox'} %>
   <%= form.label :by_email, 'by email', {:class => 'inline'} %>
 </li>
 
 <li>
-  <%= form.check_box :by_sms, {:class => 'checkbox'} %>
+  <%= form.check_box :alert_sms, {:class => 'checkbox'} %>
   <%= form.label :by_sms, 'by sms', {:class => 'inline'} %>
-  <%= form.text_field :sms %>
+  <%= form.text_field :alert_sms_number %>
 </li>

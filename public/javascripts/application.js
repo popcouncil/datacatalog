@@ -286,4 +286,11 @@ $(document).ready(function(){
 
   showOrHideAddDocumentLink();
   showOrHideAddAuthorLink();
+
+  $('#user_alert_email,#user_alert_sms').click(function(){
+    if($('#tags__tag_id').val() == 'All' && $('#locations__location_id').val() == '1'){
+    return false;
+    }
+    return true;
+  });
 });

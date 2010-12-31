@@ -116,6 +116,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def alert_topics
+    self.alerts.all(:select => 'distinct(tag_id)').collect do |x| x.tag_id end
+  end
+
+  def alert_locations
+    self.alerts.all(:select => 'distinct(location_id)').collect do |x| x.location_id end
+  end
 
   # Wordpress related stuff
   def save_wordpress

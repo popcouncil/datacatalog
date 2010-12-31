@@ -31,19 +31,19 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
-    @alerts = current_user.alerts.all(:limit => 1)
-    @alerts << Alert.new(:location_id => '1') if @alerts.length < 1
+    @alert_user = current_user
+    @alert_topics = current_user.alert_topics
+    @alert_locations = current_user.alert_locations
   end
 
   def update
-    @user = current_user
+    @user = current_user.dup
 
     if @user.update_attributes(params[:user])
       flash[:notice] = "Profile updated!"
       redirect_to edit_profile_path
     else
-      @alerts = current_user.alerts.all(:limit => 1)
-      @alerts << Alert.new(:location_id => '1') if @alerts.length < 1
+      @alert_user = current_user
       render :edit
     end
   end

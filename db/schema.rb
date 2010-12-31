@@ -9,15 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101222162943) do
+ActiveRecord::Schema.define(:version => 20101230220721) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "tag_id"
     t.integer  "location_id"
-    t.boolean  "by_email"
-    t.boolean  "by_sms"
-    t.string   "sms"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -70,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20101222162943) do
     t.integer  "ratings_total",        :default => 0
     t.string   "level_disaggregation"
     t.boolean  "completed",            :default => false
+    t.integer  "views_count",          :default => 0,     :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -243,6 +241,9 @@ ActiveRecord::Schema.define(:version => 20101222162943) do
     t.integer  "affiliation_id"
     t.integer  "location_id"
     t.boolean  "data_uncovered_opt_in"
+    t.boolean  "alert_email"
+    t.boolean  "alert_sms"
+    t.string   "alert_sms_number"
   end
 
   create_table "votes", :force => true do |t|
