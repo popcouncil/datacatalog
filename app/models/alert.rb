@@ -16,7 +16,7 @@ class Alert < ActiveRecord::Base
   end
 
   def alert!
-    Notifier.deliver_data_record_alert(self) if self.by_email?
+    Notifier.deliver_data_record_alert(self) if self.user.alert_email?
     # Some other stuff for sms. We don't have an sms framework hooked up yet.
   end
 end
