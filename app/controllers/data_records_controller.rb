@@ -3,6 +3,7 @@ class DataRecordsController < ApplicationController
   before_filter :find_data_record, :only => [:show, :edit, :update]
   before_filter :require_owner_or_admin, :only => [:edit, :update]
   before_filter :format_ministry_organization_params, :only => [:index]
+  before_filter :tag_list, :only => [:update, :create]
 
   include BrowseTableSorts
 
@@ -95,6 +96,14 @@ class DataRecordsController < ApplicationController
     unless current_user == @data_record.owner || current_user.admin?
       flash[:notice] = "You don't have permission to do that"
       redirect_to @data_record
+    end
+  end
+
+  def tag_list # Alert! This method of generating the tag list allows arbitrary tags to slip in if the user tampers with the input
+    if params[:tags]
+      params[:data_record][:tag_list] = params[:tags].uniq
+      params[:data_record][:tag_list].delete('Select Tag')
+      params[:data_record][:tag_list] = params[:data_record][:tag_list].flatten.join(',').split(',').uniq.join(',')
     end
   end
 end

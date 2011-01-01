@@ -313,11 +313,16 @@ $(document).ready(function(){
 
   $('.alert_tags, .alert_locations').live('change', function(){
     hide_alert_links();
-    
   });
 
   $('#del-alert-topic, #del-alert-location, #add-alert-topic, #add-alert-location').live('click', function(){
     hide_alert_links();
+  });
+
+  $('#remove-data-record-tag').live('click', function(){
+    $(this).prev().remove();
+    $(this).remove();
+    return false;
   });
   
   
