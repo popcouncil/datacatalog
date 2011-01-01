@@ -1,1 +1,1 @@
-A new data record with "<%= @alert.tag.name %>" in it has been added to DataUncovered.com go to your dashboard to view it
+A new data record with "<%= @alert.tag.present? ? @alert.tag.name : 'ALL' %>" in it has been added to DataUncovered.com go to your dashboard to view it

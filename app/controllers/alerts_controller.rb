@@ -26,17 +26,8 @@ class AlertsController < ApplicationController
   end
 
   protected
-    def clean_params
-      params[:tags] = [0] if params[:tags].include?('All')
-      params[:locations] = [1] if params[:locations].include?('1')
-      params[:tags].collect! { |x| x.to_i }
-      params[:tags].uniq!
-      params[:tags] =[nil] if params[:tags].include?(0)
-      params[:locations].collect! {|x| x.to_i }
-      params[:locations].uniq!
-      if params[:locations].include?(1) and params[:tags].include?(nil)
-        @alert_topics = params[:tags]
-        @alert_locations = params[:locations]
+    def clean_params # This may be in need of refactoring
+      if params[:locations].include?('Select Coverage') and params[:tags].include?('Select Topics')
         @user = current_user.dup
         @alert_user = current_user
         @alert_user.attributes = params[:user]
@@ -44,6 +35,16 @@ class AlertsController < ApplicationController
         render :template => 'users/edit'
         return false
       end
+      params[:tags].delete('Select Topics') if params[:tags].include?('Select Topics')
+      params[:locations].delete('Select Coverage') if params[:locations].include?('Select Coverage')
+      params[:tags] = [0] if params[:tags].include?('All')
+      params[:locations] = [1] if params[:locations].include?('1')
+      params[:tags].collect! { |x| x.to_i }
+      params[:tags].uniq!
+      params[:tags] =[nil] if params[:tags].include?(0) or params[:tags].blank?
+      params[:locations].collect! {|x| x.to_i }
+      params[:locations].uniq!
+      params[:locations] = [nil] if params[:locations].blank?
       true
     end
 

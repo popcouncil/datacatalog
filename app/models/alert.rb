@@ -5,7 +5,7 @@ class Alert < ActiveRecord::Base
 
   validates_presence_of :user
   #validates_presence_of :tag
-  validates_presence_of :location
+  #validates_presence_of :location
 
   def self.tags
     @tags ||= ['All', '-------------'] + Tag.all(:conditions => {:kind => 'topics'}).collect { |i| [i.name, i.id] }
