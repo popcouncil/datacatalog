@@ -27,7 +27,7 @@ class AlertsController < ApplicationController
 
   protected
     def clean_params # This may be in need of refactoring
-      if params[:locations].include?('Select Coverage') and params[:tags].include?('Select Topics')
+      if params[:locations].include?('0') and params[:tags].include?('Select Topics')
         @user = current_user.dup
         @alert_user = current_user
         @alert_user.attributes = params[:user]
@@ -35,8 +35,8 @@ class AlertsController < ApplicationController
         render :template => 'users/edit'
         return false
       end
-      params[:tags].delete('Select Topics') if params[:tags].include?('Select Topics')
-      params[:locations].delete('Select Coverage') if params[:locations].include?('Select Coverage')
+      params[:tags].delete('0') if params[:tags].include?('0')
+      params[:locations].delete('0') if params[:locations].include?('0')
       params[:tags] = [0] if params[:tags].include?('All')
       params[:locations] = [1] if params[:locations].include?('1')
       params[:tags].collect! { |x| x.to_i }

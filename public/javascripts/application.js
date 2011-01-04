@@ -298,8 +298,8 @@ $(document).ready(function(){
   function hide_alert_links(){
     if($('.alert_tags').length < 2){ $('#del-alert-topic').hide(); } else {  $('#del-alert-topic').show(); }
     if($('.alert_locations').length < 2){ $('#del-alert-location').hide(); } else { $('#del-alert-location').show(); }
-    if($('.alert_tags[value=Select Topics]').length == 1){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
-    if($('.alert_locations[value=Select Coverage]').length == 1){ $('#add-alert-location').hide(); } else {$('#add-alert-location').show();}
+    if($('.alert_tags option:selected[value=All]').length == 1 || $('.alert_tags option:selected[value=0]').length >= 1){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
+    if($('.alert_locations[value=0]').length == 1){ $('#add-alert-location').hide(); } else {$('#add-alert-location').show();}
     if($('.alert_tags[value=Select Topics]').length == 1 && $('.alert_locations[value=Select Coverage]').length == 1){
       $('#user_alert_email').attr('checked', false).attr('disabled', true);
       $('#user_alert_sms').attr('checked', false).attr('disabled', true);
@@ -325,6 +325,5 @@ $(document).ready(function(){
     $(this).remove();
     return false;
   });
-  
   
 });

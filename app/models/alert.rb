@@ -8,7 +8,7 @@ class Alert < ActiveRecord::Base
   #validates_presence_of :location
 
   def self.tags
-    @tags ||= ['All', '-------------'] + Tag.all(:conditions => {:kind => 'topics'}).collect { |i| [i.name, i.id] }
+    @tags ||= [['All', 'All'], '-------------'] + Tag.all(:conditions => {:kind => 'topics'}).collect { |i| [i.name, i.id] }
 #    Better query, but cucumber isn't taking it
 #    Tag.all(:conditions => "taggings.taggable_type = 'DataRecord' AND taggings.taggable_id IS NOT NULL",
 #      :joins => 'LEFT JOIN taggings ON taggings.id = tags.id',
