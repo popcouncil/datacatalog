@@ -14,11 +14,15 @@
 
 <li>
   <%= label_tag :location_id, "Geographic Coverage" %>
+  <% locations = all_locations_for_select; locations.insert(1, ['All', '0']) %>
   <% if @alert_locations.blank? %>
-    <%= select_tag 'locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations' %>
+    <%= select_tag 'locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations' %>
   <% else %>
-    <% @alert_locations.each do |location| %>
-      <%= select_tag 'locations[]', options_for_select(all_locations_for_select, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations' %>
+    <% alert_locations = @alert_locations %>
+    <%= select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => alert_locations.shift.to_s), :class => 'alert_locations' %>
+    <% locations.delete_at(1) %>
+    <% alert_locations.each do |location| %>
+      <%= select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations' %>
     <% end %>
   <% end %>
   <%= link_to_function '[+]', "$('#add-alert-location').before(#{select_tag('locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations').to_json})", :id => 'add-alert-location'%>

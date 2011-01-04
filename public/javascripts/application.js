@@ -180,14 +180,17 @@ $(document).ready(function(){
   });
 
   var removeGlobalOption = function(container) {
-    container.find("select.geo-location > option:first-child[value=1]").remove(); // Global
+    container.find("select.geo-location > option[value=1]").remove(); // Global
     //container.find("select.geo-location > option:first-child").remove(); // ----------
     container.find("label").css({ visibility: "hidden" });
   }
 
+  
+
   $("#location_fields").bind("fieldAdded", function(_, field) {
     removeGlobalOption(field)
     field.find('select.geo-location').val('0');
+    if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
   });
 
   $("#location_fields").each(function() {
@@ -332,6 +335,7 @@ $(document).ready(function(){
     } else {
       $('#add-data-record-tag').show();
     }
+    if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
   }
   $('.data-record-tag').live('change', show_hide_add_tag);
   $('#add-data-record-tag').click(show_hide_add_tag);
