@@ -325,5 +325,16 @@ $(document).ready(function(){
     $(this).remove();
     return false;
   });
+
+  function show_hide_add_tag(){
+    if($('.data-record-tag option:selected[value=Select Tag]').length > 0 || $('.data-record-tag option:selected[value=Agriculture & Rural Development,Aid Effectiveness,Economic Policy and External Debt,Education,Energy & Mining,Environment,Financial sector,Health,Infrastructure,Labor & Social Protection,Poverty,Private Sector,Public Sector,Science & Technology,Social Development,Urban Development,Other]').length > 0 || $('.data-record-tag').length > 16){
+      $('#add-data-record-tag').hide();
+    } else {
+      $('#add-data-record-tag').show();
+    }
+  }
+  $('.data-record-tag').live('change', show_hide_add_tag);
+  $('#add-data-record-tag').click(show_hide_add_tag);
+  show_hide_add_tag();
   
 });

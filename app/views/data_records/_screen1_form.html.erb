@@ -44,14 +44,14 @@
   <li>
     <%= form.label :tag_list, "Tags" %>
     <% if @data_record.tags.blank? %>
-      <%= select_tag 'tags[]', options_for_select(topic_tags) %><%= link_to 'remove', '#', :id => 'remove-data-record-tag' %>
+      <%= select_tag 'tags[]', options_for_select(topic_tags), :class => 'data-record-tag' %><%= link_to 'remove', '#', :id => 'remove-data-record-tag' %>
     <% else %>
       <% @data_record.tags.each do |tag| %>
-        <%= select_tag 'tags[]', options_for_select(topic_tags, :selected => tag.name) %><%= link_to 'remove', '#', :id => 'remove-data-record-tag' %>
+        <%= select_tag 'tags[]', options_for_select(topic_tags, :selected => tag.name), :class => 'data-record-tag' %><%= link_to 'remove', '#', :id => 'remove-data-record-tag' %>
       <% end %>
     <% end %>
     <br>
-    <%= link_to_function 'Add another tag', "$('#add-data-record-tag').prev().before(#{(select_tag('tags[]', options_for_select(topic_tags)) + link_to('remove', '#', :id => 'remove-data-record-tag')).to_json})", :id => 'add-data-record-tag' %>
+    <%= link_to_function 'Add another tag', "$('#add-data-record-tag').prev().before(#{(select_tag('tags[]', options_for_select((x=topic_tags.dup;x.delete_at(2);x)), :class => 'data-record-tag') + link_to('remove', '#', :id => 'remove-data-record-tag')).to_json})", :id => 'add-data-record-tag' %>
   </li>  
 </ul>
 

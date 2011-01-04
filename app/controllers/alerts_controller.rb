@@ -27,7 +27,7 @@ class AlertsController < ApplicationController
 
   protected
     def clean_params # This may be in need of refactoring
-      if params[:locations].include?('0') and params[:tags].include?('Select Topics')
+      if params[:locations].include?('0') and params[:tags].include?('0')
         @user = current_user.dup
         @alert_user = current_user
         @alert_user.attributes = params[:user]
