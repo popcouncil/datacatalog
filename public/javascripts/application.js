@@ -180,13 +180,14 @@ $(document).ready(function(){
   });
 
   var removeGlobalOption = function(container) {
-    container.find("select.geo-location > option:first-child").remove(); // Global
-    container.find("select.geo-location > option:first-child").remove(); // ----------
+    container.find("select.geo-location > option:first-child[value=1]").remove(); // Global
+    //container.find("select.geo-location > option:first-child").remove(); // ----------
     container.find("label").css({ visibility: "hidden" });
   }
 
   $("#location_fields").bind("fieldAdded", function(_, field) {
     removeGlobalOption(field)
+    field.find('select.geo-location').val('0');
   });
 
   $("#location_fields").each(function() {
@@ -209,7 +210,7 @@ $(document).ready(function(){
   };
   
   var toggleDisaggregationLevelSelector = function(self) {
-    var disabled_options = ["Global","Africa","Asia","Europe","North America","Oceania","South America"];
+    var disabled_options = ["Select Geographical Coverage", "Global","Africa","Asia","Europe","North America","Oceania","South America"];
     var selected_choice = self.find("option:selected").text();
     var disaggregation_widget = self.parent().find(".disaggregation-level");
     // show if selected option is not global or world region (continent)

@@ -76,7 +76,7 @@ class DataRecordsController < ApplicationController
 
   def initialize_data_record_associations
     @data_record.documents.build if @data_record.documents.empty?
-    @data_record.data_record_locations.build(:location_id => Location.global.id) if @data_record.locations.empty?
+    @data_record.data_record_locations.build(:location_id => 0) if @data_record.locations.empty?
     @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
     @data_record.build_contact_from_owner if @data_record.contact.blank?
   end
@@ -104,6 +104,9 @@ class DataRecordsController < ApplicationController
       params[:data_record][:tag_list] = params[:tags].uniq
       params[:data_record][:tag_list].delete('Select Tag')
       params[:data_record][:tag_list] = params[:data_record][:tag_list].flatten.join(',').split(',').uniq.join(',')
+    end
+    if params[:data_record] and params[:data_record][:data_record_locations_attributes]
+      params[:data_record][:data_record_locations_attributes].delete_if { |x| x[1][:location_id] == '0' }
     end
   end
 end

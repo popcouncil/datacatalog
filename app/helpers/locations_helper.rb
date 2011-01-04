@@ -17,7 +17,7 @@ module LocationsHelper
       end
     end
 
-    locations = []
+    locations = [['Select Geographical Coverage', 0]]
     locations += preferential
     locations << [Location.global.name, get_id[Location.global]]
     locations << "-------------"
