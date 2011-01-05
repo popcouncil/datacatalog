@@ -28,6 +28,9 @@
         <li>
           <button class="update_admin" id="user_submit" type="submit" value="Save" name='commit'>
         </li>
+        <li>
+          <%= link_to 'Clear All Notifications', alerts_path, :method => :delete, :confirm => 'Are you sure you want to clear all notifications?' %>
+        </li>
       </ul>
     <% end %>
 </div>

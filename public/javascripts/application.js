@@ -259,6 +259,7 @@ $(document).ready(function(){
   // Only show add_another links if all elements in the current field are filled
   $("#authors, #documents_fields").bind("fieldAdded", function() {
     $(this).find(".add_another").hide();
+    $('#documents_fields li:hidden:not(.add_another)').remove();
   });
 
   var showOrHideAddAuthorLink = function() {

@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :users, :only => [:new, :create]
-  map.resource :alerts, :only => [:update]
+  map.resource :alerts, :only => [:update, :destroy]
   map.resource :profile, :controller => "users", :only => [:edit, :update]
   map.resource :user_session
 

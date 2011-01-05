@@ -5,9 +5,14 @@ class AlertsController < ApplicationController
     return unless clean_params
     
     if params[:user][:alert_sms] == '1' and params[:user][:alert_sms_number].blank?
-      @alert_user = current_user.dup
-      @user = current_user
+      alerter
       @alert_user.errors.add_to_base('Please provide an SMS number')
+      render :template => 'users/edit'
+      return
+    end
+    if params[:user][:alert_sms] == '0' and params[:user][:alert_email] == '0'
+      alerter
+      @alert_user.errors.add_to_base('You must select to receive either by email or by SMS')
       render :template => 'users/edit'
       return
     end
@@ -25,6 +30,11 @@ class AlertsController < ApplicationController
     redirect_to edit_profile_path
   end
 
+  def destroy
+    current_user.alerts.all.each do |alert| alert.destroy end
+    redirect_to edit_profile_path
+  end
+  
   protected
     def clean_params # This may be in need of refactoring
       if params[:locations].include?('0') and params[:tags].include?('0')
@@ -48,4 +58,8 @@ class AlertsController < ApplicationController
       true
     end
 
+    def alerter
+      @alert_user = current_user.dup
+      @user = current_user
+    end
 end
