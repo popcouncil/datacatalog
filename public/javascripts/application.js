@@ -110,8 +110,12 @@ $(document).ready(function(){
     }
   })
 
-  // Handle "Add Another" links for nested forms
+  // Handle "Add Another" links for nested forms # This is stupid
   $(".add_another a").click(function() {
+    if($('#documents_fields li:hidden:not(.add_another)').length > 0 && $(this).parent().parent().attr('id') == 'documents_fields'){
+      $('#documents_fields li:hidden:not(.add_another)').show();
+      return false;
+    }
     var addAnother = $(this).parents(".add_another"),
         container = addAnother.parent(),
         target = container.find("li:first-child"),
@@ -254,12 +258,12 @@ $(document).ready(function(){
   $("#documents_fields").bind("fieldAdded", function(_, li) {
     li.find(".toggable").hide();
     li.find(".current_file").remove();
+    
   });
 
   // Only show add_another links if all elements in the current field are filled
   $("#authors, #documents_fields").bind("fieldAdded", function() {
     $(this).find(".add_another").hide();
-    $('#documents_fields li:hidden:not(.add_another)').remove();
   });
 
   var showOrHideAddAuthorLink = function() {
@@ -277,7 +281,7 @@ $(document).ready(function(){
   $("#authors .required").live("keyup", showOrHideAddAuthorLink);
 
   var showOrHideAddDocumentLink = function() {
-    var hasEmpty = $("#documents_fields .toggable-fields").filter(function() {
+    var hasEmpty = $("#documents_fields .toggable-fields:visible").filter(function() {
       return ($(this).find(".upload .required").val() == "") && ($(this).find(".external .required").val() == "") && ($(this).find(".current_file").size() == 0);
     }).size() > 0;
 
@@ -372,7 +376,12 @@ $(document).ready(function(){
   show_hide_add_tag();
 
   $('#documents_fields .remove_link').live('click', function(){
-    if($('#documents_fields .remove_link:visible').length == 0) { $('#documents_fields .add_another').show(); }
+    if($('#documents_fields .remove_link:visible').length == 0){ $('#documents_fields .add_another').show(); setTimeout("$('#documents_fields .add_another').show();", 500); }
+  });
+
+  $('#new_data_record').submit(function(){
+    $('#documents_fields li:hidden:not(.add_another)').remove();
+    return true;
   });
   
 });
