@@ -29,7 +29,7 @@ class DataRecord < ActiveRecord::Base
 
   before_validation_on_create :make_slug
   after_save :link_organizations
-  after_save :check_alert_notifications
+  after_create :check_alert_notifications
 
   # - validations -
   validate :at_least_one_location, :if => :first_step?
@@ -178,6 +178,7 @@ class DataRecord < ActiveRecord::Base
 
   def check_alert_notifications
     alerts = Alert.all(:conditions => ['(tag_id IN (?) or tag_id IS NULL) AND (location_id IN (?) OR location_id IS NULL)', self.tags.collect(&:id), self.locations.collect(&:id)])
+    
     # The notification process could potentially take a long time to process.
     # We will want to offload this into a DelayedJob or Resque worker
     alerts.each { |alert|  alert.alert! }
