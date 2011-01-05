@@ -181,15 +181,18 @@ $(document).ready(function(){
 
   var removeGlobalOption = function(container) {
     container.find("select.geo-location > option[value=1]").remove(); // Global
+    var $select = container.find('select.geo-location');
+    $select.val('0');
+    $('select.geo-location').each(function(){
+      if($(this).val() == '0'){ return; }
+      $select.find('option[value=' + $(this).val() + ']').remove();
+    });
     //container.find("select.geo-location > option:first-child").remove(); // ----------
     container.find("label").css({ visibility: "hidden" });
   }
 
-  
-
   $("#location_fields").bind("fieldAdded", function(_, field) {
     removeGlobalOption(field)
-    field.find('select.geo-location').val('0');
     if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
   });
 
@@ -301,7 +304,7 @@ $(document).ready(function(){
   function hide_alert_links(){
     if($('.alert_tags').length < 2){ $('#del-alert-topic').hide(); } else {  $('#del-alert-topic').show(); }
     if($('.alert_locations').length < 2){ $('#del-alert-location').hide(); } else { $('#del-alert-location').show(); }
-    if($('.alert_tags option:selected[value=All]').length == 1 || $('.alert_tags option:selected[value=0]').length >= 1){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
+    if($('.alert_tags option:selected[value=All]').length == 1 || $('.alert_tags option:selected[value=0]').length >= 1 || $('.alert_tags').length > 16){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
     if($('.alert_locations[value=0]').length == 1){ $('#add-alert-location').hide(); } else {$('#add-alert-location').show();}
     if($('.alert_tags[value=Select Topics]').length == 1 && $('.alert_locations[value=Select Coverage]').length == 1){
       $('#user_alert_email').attr('checked', false).attr('disabled', true);
@@ -319,8 +322,24 @@ $(document).ready(function(){
     hide_alert_links();
   });
 
-  $('#del-alert-topic, #del-alert-location, #add-alert-topic, #add-alert-location').live('click', function(){
+  $('#del-alert-topic, #del-alert-location').live('click', function(){
     hide_alert_links();
+  });
+
+  $('#add-alert-topic').live('click', function(){
+    hide_alert_links();
+    var $item = $('.alert_tags:last');
+    $('.alert_tags:not(:last)').each(function(){
+      $item.find('option[value=' + $(this).val() + ']').remove();
+    });
+  });
+
+  $('#add-alert-location').live('click', function(){
+    hide_alert_links();
+    var $item = $('.alert_locations:last');
+    $('.alert_locations:not(:last)').each(function(){
+      $item.find('option[value=' + $(this).val() + ']').remove();
+    });
   });
 
   $('#remove-data-record-tag').live('click', function(){
@@ -335,8 +354,13 @@ $(document).ready(function(){
     } else {
       $('#add-data-record-tag').show();
     }
+    var $item = $('.data-record-tag:last');
+    $('.data-record-tag:not(:last)').each(function(){
+      $item.find('option[value=' + $(this).val() + ']').remove();
+    });
     if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
   }
+
   $('.data-record-tag').live('change', show_hide_add_tag);
   $('#add-data-record-tag').click(show_hide_add_tag);
   show_hide_add_tag();
