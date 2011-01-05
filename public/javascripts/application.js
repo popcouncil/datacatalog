@@ -364,5 +364,9 @@ $(document).ready(function(){
   $('.data-record-tag').live('change', show_hide_add_tag);
   $('#add-data-record-tag').click(show_hide_add_tag);
   show_hide_add_tag();
+
+  $('#documents_fields .remove_link').live('click', function(){
+    if($('#documents_fields .remove_link').length == 0) { $('#documents_fields .add_another').show(); }
+  });
   
 });

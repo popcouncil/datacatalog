@@ -14,7 +14,7 @@
 
 <li>
   <%= label_tag :location_id, "Geographic Coverage" %>
-  <% locations = all_locations_for_select; locations.insert(1, ['All', '0']) %>
+  <% locations = all_locations_for_select; locations[1] = ['Global (does not select all)', '0']; locations.insert(1, ['All', '0']) %>
   <% if @alert_locations.blank? %>
     <%= select_tag 'locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations' %>
   <% else %>
