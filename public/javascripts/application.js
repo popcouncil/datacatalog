@@ -354,6 +354,11 @@ $(document).ready(function(){
     } else {
       $('#add-data-record-tag').show();
     }
+    if($('#user_alert_sms:checked').length < 1){
+      $('#user_alert_sms_number').attr('disabled', true);
+    } else {
+      $('#user_alert_sms_number').attr('disabled', false);
+    }
     var $item = $('.data-record-tag:last');
     $('.data-record-tag:not(:last)').each(function(){
       $item.find('option[value=' + $(this).val() + ']').remove();
@@ -361,7 +366,7 @@ $(document).ready(function(){
     if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
   }
 
-  $('.data-record-tag').live('change', show_hide_add_tag);
+  $('.data-record-tag, #user_alert_sms').live('change', show_hide_add_tag);
   $('#add-data-record-tag').click(show_hide_add_tag);
   show_hide_add_tag();
 
