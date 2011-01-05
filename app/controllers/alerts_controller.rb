@@ -32,6 +32,10 @@ class AlertsController < ApplicationController
 
   def destroy
     current_user.alerts.all.each do |alert| alert.destroy end
+    current_user.alert_email = false
+    current_user.alert_sms = false
+    current_user.alert_sms_number = ''
+    current_user.save
     redirect_to edit_profile_path
   end
   
