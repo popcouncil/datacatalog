@@ -371,7 +371,7 @@ $(document).ready(function(){
   show_hide_add_tag();
 
   $('#documents_fields .remove_link').live('click', function(){
-    if($('#documents_fields .remove_link').length == 0) { $('#documents_fields .add_another').show(); }
+    if($('#documents_fields .remove_link:visible').length == 0) { $('#documents_fields .add_another').show(); }
   });
   
 });

@@ -31,7 +31,7 @@ class AlertsController < ApplicationController
         @user = current_user.dup
         @alert_user = current_user
         @alert_user.attributes = params[:user]
-        @alert_user.errors.add_to_base('You must include a Topic and a Coverage')
+        @alert_user.errors.add_to_base('You must include at least a Topic or a Coverage')
         render :template => 'users/edit'
         return false
       end
