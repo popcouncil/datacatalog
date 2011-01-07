@@ -18,7 +18,7 @@ P.s. You received this message because you asked us to notify you when new recor
 <br><br>
 <b>Topics:</b> <%= @user.alert_topics_list.collect {|x| "( #{x} )"}.join(' OR ') %><br>
 <br>AND<br><br>
-<b>Geographical Coverages:</b> ( <%= @user.alert_locations_list.collect {|x| "( #{x} )"}.join(' OR ') %> )<br>
+<b>Geographical Coverages:</b> <%= @user.alert_locations_list.collect {|x| "( #{x} )"}.join(' OR ') %><br>
 <br><br>
 To change these preferences or to stop receiving notifications, please visit <a href="http://threed-staging.heroku.com/profile/edit">http://threed-staging.heroku.com/profile/edit</a>.
 </body></html>
