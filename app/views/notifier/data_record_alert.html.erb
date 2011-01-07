@@ -5,20 +5,20 @@ Hi <%= @user.name %>,
 <br><br>
 You might be interested in a new record that was just added to the <a href="http://threed-staging.heroku.com">Development Data Catalog</a>:
 <br><br>
-Title: <%= @record.title %><br>
-Topics: <%= @record.tag_list.join(', ') %><br>
-Geographical Coverage: <%= @record.coverage_list.join(', ') %><br>
+<b>Title:</b> <%= link_to @record.title, data_record_path(@record) %><br>
+<b>Topic(s):</b> <%= @record.tag_list.join(', ') %><br>
+<b>Geographical Coverage(s):</b> <%= @record.coverage_list.join(', ') %><br>
 <br><br>
 Check it out!
 <br><br>
 Cheers,<br>
 Your friends at Data Uncovered
-<br><br>
+<br><br><br>
 P.s. You received this message because you asked us to notify you when new records are added to the catalog that match the following criteria.
 <br><br>
-Topics (any): ( <%= @user.alert_topics_list.join(', ') %> )<br>
-AND<br>
-Geographical Coverages (any): ( <%= @user.alert_locations_list.join(', ') %> )<br>
+<b>Topics:</b> <%= @user.alert_topics_list.collect {|x| "( #{x} )"}.join(' OR ') %><br>
+<br>AND<br><br>
+<b>Geographical Coverages:</b> ( <%= @user.alert_locations_list.collect {|x| "( #{x} )"}.join(' OR ') %> )<br>
 <br><br>
 To change these preferences or to stop receiving notifications, please visit <a href="http://threed-staging.heroku.com/profile/edit">http://threed-staging.heroku.com/profile/edit</a>.
 </body></html>
