@@ -29,7 +29,7 @@ class DataRecord < ActiveRecord::Base
 
   before_validation_on_create :make_slug
   after_save :link_organizations
-  after_create :check_alert_notifications
+  after_update :check_alert_notifications, :if => :last_step?
 
   # - validations -
   validate :at_least_one_location, :if => :first_step?
