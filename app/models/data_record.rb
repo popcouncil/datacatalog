@@ -178,7 +178,9 @@ class DataRecord < ActiveRecord::Base
 
   def check_alert_notifications
     alerts = Alert.all(:conditions => ['(tag_id IN (?) or tag_id IS NULL) AND (location_id IN (?) OR location_id IS NULL)', self.tags.collect(&:id), self.locations.collect(&:id)])
-    alerts.delete_if { |a| alerts.count { |x| x.user_id == a.user_id } > 1 }
+    alerts.dup.each do |a|
+      alerts.delete(a) if alerts.count { |x| x.user_id == a.user_id } > 1
+    end
     # The notification process could potentially take a long time to process.
     # We will want to offload this into a DelayedJob or Resque worker
     alerts.each { |alert|  alert.alert!(self) }

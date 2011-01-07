@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
   end
 
   def alert_topics
-    self.alerts.all.collect do |x| x.tag_id end
+    self.alerts.all.collect do |x| x.tag_id end.uniq
   end
 
   def alert_topics_list
@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
   end
 
   def alert_locations
-    self.alerts.all.collect do |x| x.location_id end
+    self.alerts.all.collect do |x| x.location_id end.uniq
   end
 
   def alert_locations_list
