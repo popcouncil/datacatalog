@@ -39,7 +39,7 @@
   </li>
   <li>
     <%= form.label :year, "Publication Year" %>
-    <%= form.select :year, (1950..Date.today.year).to_a.reverse %>
+    <%= form.select :year, ((1950..Date.today.year).to_a << ['Select Publication Year', '']).reverse %>
   </li>
   <li>
     <%= form.label :tag_list, "Tags" %>

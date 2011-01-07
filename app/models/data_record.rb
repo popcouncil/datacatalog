@@ -39,7 +39,7 @@ class DataRecord < ActiveRecord::Base
   validates_presence_of :tag_list, :message => "can't be empty", :if => :first_step?
   validates_presence_of :slug, :if => :has_title?
   validates_presence_of :title, :if => :first_step?
-  validates_presence_of :year, :if => :first_step?
+  validates_presence_of :year, :allow_blank => false, :if => :first_step?
   validates_presence_of :owner_id, :if => :first_step?
 
   default_scope :conditions => "completed = '1'"
