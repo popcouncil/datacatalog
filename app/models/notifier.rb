@@ -78,6 +78,7 @@ class Notifier < ActionMailer::Base
     from "Data Uncovered <catalog@datauncovered.com>"
     recipients "#{alert.user.name} <#{alert.user.email}>"
     sent_on Time.now
+    content_type 'text/html'
     body :alert => alert, :user => alert.user, :record => record
   end
 
