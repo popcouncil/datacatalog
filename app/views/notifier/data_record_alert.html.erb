@@ -1,20 +1,24 @@
+<html>
+<head><title>New Data Record Alert</title></head>
+<body>
 Hi <%= @user.name %>,
-
+<br><br>
 You might be interested in a new record that was just added to the <a href="http://threed-staging.heroku.com">Development Data Catalog</a>:
-
-Title: <%= @record.title %>
-Topics: <%= @record.tag_list.join(', ') %>
-Geographical Coverage: <%= @record.coverage_list.join(', ') %>
-
+<br><br>
+Title: <%= @record.title %><br>
+Topics: <%= @record.tag_list.join(', ') %><br>
+Geographical Coverage: <%= @record.coverage_list.join(', ') %><br>
+<br><br>
 Check it out!
-
-Cheers,
+<br><br>
+Cheers,<br>
 Your friends at Data Uncovered
-
+<br><br>
 P.s. You received this message because you asked us to notify you when new records are added to the catalog that match the following criteria.
-
-Topics (any): ( <%= @user.alert_topics_list.join(', ') %> )
-AND
-Geographical Coverages (any): ( <%= @user.alert_locations_list.join(', ') %> )
-
+<br><br>
+Topics (any): ( <%= @user.alert_topics_list.join(', ') %> )<br>
+AND<br>
+Geographical Coverages (any): ( <%= @user.alert_locations_list.join(', ') %> )<br>
+<br><br>
 To change these preferences or to stop receiving notifications, please visit <a href="http://threed-staging.heroku.com/profile/edit">http://threed-staging.heroku.com/profile/edit</a>.
+</body></html>
