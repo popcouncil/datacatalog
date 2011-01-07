@@ -17,7 +17,7 @@
           <dd><%=h @data_record.owner.display_name %></dd>
 
           <dt>Geographical Coverage</dt>
-          <dd><%= @data_record.data_record_locations.map {|loc| link_to(loc.location.name, data_records_path(:filters => { :location => loc.location.id })) + h("(#{loc.disaggregation_level})") }.join(", ") %></dd>
+          <dd><%= @data_record.data_record_locations.map {|loc| link_to(loc.location.name, data_records_path(:filters => { :location => loc.location.id })) + h(" (#{loc.disaggregation_level})") }.join(", ") %></dd>
 
 
           <dt>Publication Year</dt>
