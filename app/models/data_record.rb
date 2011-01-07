@@ -174,6 +174,11 @@ class DataRecord < ActiveRecord::Base
                   :email => owner.try(:email))
   end
 
+
+  def coverage_list
+    @coverage_list ||= self.locations.collect(&:name)
+  end
+  
   private
 
   def check_alert_notifications
@@ -193,10 +198,6 @@ class DataRecord < ActiveRecord::Base
 
   def has_title?
     title.present?
-  end
-
-  def coverage_list
-    @coverage_list ||= self.locations.collect(&:name)
   end
 
   def at_least_one_location
