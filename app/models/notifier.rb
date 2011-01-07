@@ -73,12 +73,12 @@ class Notifier < ActionMailer::Base
     BLOCK
   end
 
-  def data_record_alert(alert)
+  def data_record_alert(alert, record)
     subject "New Data Record Alert"
     from "National Data Catalog <natdatcat@sunlightfoundation.com>"
     recipients "#{alert.user.name} <#{alert.user.email}>"
     sent_on Time.now
-    body :alert => alert
+    body :alert => alert, :user => alert.user, :record => record
   end
 
 end

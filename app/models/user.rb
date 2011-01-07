@@ -117,11 +117,19 @@ class User < ActiveRecord::Base
   end
 
   def alert_topics
-    self.alerts.all(:select => 'distinct(tag_id)').collect do |x| x.tag_id end
+    self.alerts.all.collect do |x| x.tag_id end
+  end
+
+  def alert_topics_list
+    self.alerts.all.collect(&:tag_name)
   end
 
   def alert_locations
-    self.alerts.all(:select => 'distinct(location_id)').collect do |x| x.location_id end
+    self.alerts.all.collect do |x| x.location_id end
+  end
+
+  def alert_locations_list
+    self.alerts.all.collect(&:location_name)
   end
 
   # Wordpress related stuff

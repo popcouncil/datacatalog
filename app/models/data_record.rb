@@ -178,10 +178,10 @@ class DataRecord < ActiveRecord::Base
 
   def check_alert_notifications
     alerts = Alert.all(:conditions => ['(tag_id IN (?) or tag_id IS NULL) AND (location_id IN (?) OR location_id IS NULL)', self.tags.collect(&:id), self.locations.collect(&:id)])
-    
+    alerts.delete_if { |a| alerts.count { |x| x.user_id == a.user_id } > 1 }
     # The notification process could potentially take a long time to process.
     # We will want to offload this into a DelayedJob or Resque worker
-    alerts.each { |alert|  alert.alert! }
+    alerts.each { |alert|  alert.alert!(self) }
     true
   end
 
@@ -191,6 +191,10 @@ class DataRecord < ActiveRecord::Base
 
   def has_title?
     title.present?
+  end
+
+  def coverage_list
+    @coverage_list ||= self.locations.collect(&:name)
   end
 
   def at_least_one_location

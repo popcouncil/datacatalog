@@ -1,1 +1,22 @@
 A new data record with "<%= @alert.tag.present? ? @alert.tag.name : 'ALL' %>" in it has been added to DataUncovered.com go to your dashboard to view it
+
+Hi <%= @user.name %>,
+
+You might be interested in a new record that was just added to the <a href="http://threed-staging.heroku.com">Development Data Catalog</a>:
+
+Title: <%= @record.title %>
+Topics: <%= @record.tag_list.join(', ') %>
+Geographical Coverage: <%= @record.coverage_list.join(', ') %>
+
+Check it out!
+
+Cheers,
+Your friends at Data Uncovered
+
+P.s. You received this message because you asked us to notify you when new records are added to the catalog that match the following criteria.
+
+Topics (any): ( <%= @user.alert_topics_list.join(', ') %> )
+AND
+Geographical Coverages (any): ( <%= @user.alert_locations_list.join(', ') %> )
+
+To change these preferences or to stop receiving notifications, please visit <a href="http://threed-staging.heroku.com/profile/edit">http://threed-staging.heroku.com/profile/edit</a>.

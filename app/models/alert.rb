@@ -15,8 +15,16 @@ class Alert < ActiveRecord::Base
 #      :order => 'tags.name').collect { |i| [i.name, i.id] }
   end
 
-  def alert!
-    Notifier.deliver_data_record_alert(self) if self.user.alert_email?
+  def tag_name
+    self.tag.present? ? self.tag.name : 'All'
+  end
+
+  def location_name
+    self.location.present? ? self.location.name : 'All'
+  end
+
+  def alert!(record)
+    Notifier.deliver_data_record_alert(self, record) if self.user.alert_email?
     # Some other stuff for sms. We don't have an sms framework hooked up yet.
   end
 end
