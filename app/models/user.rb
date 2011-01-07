@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
   end
 
   def alert_topics_list
-    self.alerts.all.collect(&:tag_name)
+    self.alerts.all.collect(&:tag_name).uniq
   end
 
   def alert_locations
@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
   end
 
   def alert_locations_list
-    self.alerts.all.collect(&:location_name)
+    self.alerts.all.collect(&:location_name).uniq
   end
 
   # Wordpress related stuff
