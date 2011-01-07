@@ -5,8 +5,8 @@ Hi <%= @user.name %>,
 <br><br>
 You might be interested in a new record that was just added to the <a href="http://threed-staging.heroku.com">Development Data Catalog</a>:
 <br><br>
-<b>Title:</b> <%= link_to @record.title, data_record_path(@record) %><br>
-<b>Topic(s):</b> <%= @record.tag_list.join(', ') %><br>
+<b>Title:</b> <%= link_to @record.title, data_record_url(@record, :host => 'threed-staging.heroku.com') %><br><br>
+<b>Topic(s):</b> <%= @record.tag_list.join(', ') %><br><br>
 <b>Geographical Coverage(s):</b> <%= @record.coverage_list.join(', ') %><br>
 <br><br>
 Check it out!
