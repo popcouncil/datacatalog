@@ -8,8 +8,12 @@ class Document < ActiveRecord::Base
   validate :presence_of_file_or_url
   validates_inclusion_of :document_type, :in => DOCUMENT_TYPES
 
-  def download_url
+  def download_url # Bug alert, XSS?
     external_url.presence || file.url
+  end
+
+  def external?
+    self.file.exists?
   end
 
   def storage
