@@ -1,0 +1,573 @@
+/ block-create
+.block-create
+  %form.form-create{:action => "#"}
+    %fieldset
+      %legend Title
+      .block-title
+        / box-btn
+        .box-btn
+          %ul
+            %li
+              %a.dashboard{:href => "#"} Dashboard
+            %li
+              %a.browse{:href => "#"} Browse
+            %li.active
+              %a.add{:href => "#"} Add Data
+        %h1 Create a record
+        %span.mark All fields are required.
+        / box-error
+        .box-error
+          .frame
+            %p There was a problem creating your record Errors have been highlighted below.
+      / block-step
+      .block-step
+        .box-step
+          .frame
+            .title
+              %h2 Step 1. Describe the record you want to add
+            / row
+            .row
+              %label{:for => "title"} Title
+              .text
+                %input#title.required{:title => "Title", :type => "text", :value => "Title"}/
+            / row
+            .row
+              %label{:for => "description"} Add description
+              .text-area
+                %textarea#description.required{:cols => "30", :rows => "10", :title => "Add description"} Add description
+            .add-block
+              .row.default
+                %label{:for => "coverage-default"} Select geographical coverage
+                %select#coverage-default.sel.default.required-sel
+                  %option Select geographical coverage
+                  %option Africa
+                  %option Asia
+                  %option Europe
+                  %option North America
+                  %option Oceania
+                  %option South America
+                  %option Afghanistan
+                  %option Albania
+                  %option Algeria
+                  %option Andorra
+                  %option Angola
+                  %option Antigua and Barbuda
+                  %option Argentina
+                  %option Armenia
+                  %option Australia
+                  %option Austria
+                  %option Azerbaijan
+                  %option Bahamas
+                  %option Bahrain
+                  %option Bangladesh
+                  %option Barbados
+                  %option Belarus
+                  %option Belgium
+                  %option Belgium
+                  %option Benin
+                  %option Bhutan
+                  %option Bolivia
+                  %option Bosnia and Herzegovina
+                  %option Botswana
+                  %option Brazil
+                  %option Brunei
+                  %option Bulgaria
+                  %option Burkina
+                  %option Burma (Myanmar)
+                  %option Burundi
+                  %option Cambodia
+                  %option Cameroon
+                  %option Canada
+                  %option Cape Verde
+                  %option Central African Republic
+                  %option Chad
+                  %option Chile
+                  %option China
+                  %option Comoros
+                  %option{:value => "77"} Congo
+                  %option{:value => "78"} Congo, the Democratic Republic of the
+                  %option{:value => "129"} Costa Rica
+                  %option{:value => "27"} Croatia
+                  %option{:value => "130"} Cuba
+                  %option{:value => "28"} Cyprus
+                  %option{:value => "29"} Czech Republic
+                  %option{:value => "30"} Denmark
+                  %option{:value => "79"} Djibouti
+                  %option{:value => "131"} Dominica
+                  %option{:value => "132"} Dominican Republic
+                  %option{:value => "165"} East Timor
+                  %option{:value => "133"} Ecuador
+                  %option{:value => "80"} Egypt
+                  %option{:value => "134"} El Salvador
+                  %option{:value => "81"} Equatorial Guinea
+                  %option{:value => "82"} Eritrea
+                  %option{:value => "31"} Estonia
+                  %option{:value => "83"} Ethiopia
+                  %option{:value => "4"} Fiji
+                  %option{:value => "32"} Finland
+                  %option{:value => "33"} France
+                  %option{:value => "84"} Gabon
+                  %option{:value => "85"} Gambia
+                  %option{:value => "34"} Georgia
+                  %option{:value => "35"} Germany
+                  %option{:value => "86"} Ghana
+                  %option{:value => "36"} Greece
+                  %option{:value => "135"} Grenada
+                  %option{:value => "136"} Guatemala
+                  %option{:value => "87"} Guinea
+                  %option{:value => "88"} Guinea-Bissau
+                  %option{:value => "137"} Guyana
+                  %option{:value => "138"} Haiti
+                  %option{:value => "139"} Honduras
+                  %option{:value => "37"} Hungary
+                  %option{:value => "38"} Iceland
+                  %option{:value => "166"} India
+                  %option{:value => "167"} Indonesia
+                  %option{:value => "168"} Iran
+                  %option{:value => "169"} Iraq
+                  %option{:value => "39"} Ireland
+                  %option{:value => "170"} Israel
+                  %option{:value => "40"} Italy
+                  %option{:value => "89"} Ivory Coast
+                  %option{:value => "140"} Jamaica
+                  %option{:value => "171"} Japan
+                  %option{:value => "172"} Jordan
+                  %option{:value => "173"} Kazakhstan
+                  %option{:value => "90"} Kenya
+                  %option{:value => "5"} Kiribati
+                  %option{:value => "174"} Korea, Democratic People's Republic of
+                  %option{:value => "175"} Korea, Republic of
+                  %option{:value => "176"} Kuwait
+                  %option{:value => "177"} Kyrgyzstan
+                  %option{:value => "178"} Laos
+                  %option{:value => "41"} Latvia
+                  %option{:value => "179"} Lebanon
+                  %option{:value => "91"} Lesotho
+                  %option{:value => "92"} Liberia
+                  %option{:value => "93"} Libya
+                  %option{:value => "42"} Liechtenstein
+                  %option{:value => "43"} Lithuania
+                  %option{:value => "44"} Luxembourg
+                  %option{:value => "45"} Macedonia
+                  %option{:value => "94"} Madagascar
+                  %option{:value => "95"} Malawi
+                  %option{:value => "180"} Malaysia
+                  %option{:value => "181"} Maldives
+                  %option{:value => "96"} Mali
+                  %option{:value => "46"} Malta
+                  %option{:value => "6"} Marshall Islands
+                  %option{:value => "97"} Mauritania
+                  %option{:value => "98"} Mauritius
+                  %option{:value => "154"} Mexico
+                  %option{:value => "7"} Micronesia
+                  %option{:value => "47"} Moldova
+                  %option{:value => "48"} Monaco
+                  %option{:value => "182"} Mongolia
+                  %option{:value => "49"} Montenegro
+                  %option{:value => "99"} Morocco
+                  %option{:value => "100"} Mozambique
+                  %option{:value => "101"} Namibia
+                  %option{:value => "8"} Nauru
+                  %option{:value => "183"} Nepal
+                  %option{:value => "50"} Netherlands
+                  %option{:value => "9"} New Zealand
+                  %option{:value => "141"} Nicaragua
+                  %option{:value => "102"} Niger
+                  %option{:value => "103"} Nigeria
+                  %option{:value => "51"} Norway
+                  %option{:value => "184"} Oman
+                  %option{:value => "185"} Pakistan
+                  %option{:value => "10"} Palau
+                  %option{:value => "142"} Panama
+                  %option{:value => "11"} Papua New Guinea
+                  %option{:value => "143"} Paraguay
+                  %option{:value => "144"} Peru
+                  %option{:value => "186"} Philippines
+                  %option{:value => "52"} Poland
+                  %option{:value => "53"} Portugal
+                  %option{:value => "187"} Qatar
+                  %option{:value => "54"} Romania
+                  %option{:value => "188"} Russian Federation
+                  %option{:value => "104"} Rwanda
+                  %option{:value => "145"} Saint Kitts &amp; Nevis
+                  %option{:value => "146"} Saint Lucia
+                  %option{:value => "147"} Saint Vincent &amp; the Grenadines
+                  %option{:value => "12"} Samoa
+                  %option{:value => "55"} San Marino
+                  %option{:value => "105"} Sao Tome and Principe
+                  %option{:value => "189"} Saudi Arabia
+                  %option{:value => "106"} Senegal
+                  %option{:value => "56"} Serbia
+                  %option{:value => "107"} Seychelles
+                  %option{:value => "108"} Sierra Leone
+                  %option{:value => "190"} Singapore
+                  %option{:value => "57"} Slovakia
+                  %option{:value => "58"} Slovenia
+                  %option{:value => "13"} Solomon Islands
+                  %option{:value => "109"} Somalia
+                  %option{:value => "110"} South Africa
+                  %option{:value => "59"} Spain
+                  %option{:value => "191"} Sri Lanka
+                  %option{:value => "111"} Sudan
+                  %option{:value => "148"} Suriname
+                  %option{:value => "112"} Swaziland
+                  %option{:value => "60"} Sweden
+                  %option{:value => "61"} Switzerland
+                  %option{:value => "192"} Syria
+                  %option{:value => "193"} Tajikistan
+                  %option{:value => "113"} Tanzania
+                  %option{:value => "194"} Thailand
+                  %option{:value => "114"} Togo
+                  %option{:value => "14"} Tonga
+                  %option{:value => "149"} Trinidad &amp; Tobago
+                  %option{:value => "115"} Tunisia
+                  %option{:value => "195"} Turkey
+                  %option{:value => "196"} Turkmenistan
+                  %option{:value => "15"} Tuvalu
+                  %option{:value => "116"} Uganda
+                  %option{:value => "62"} Ukraine
+                  %option{:value => "197"} United Arab Emirates
+                  %option{:value => "63"} United Kingdom
+                  %option{:value => "155"} United States
+                  %option{:value => "150"} Uruguay
+                  %option{:value => "198"} Uzbekistan
+                  %option{:value => "16"} Vanuatu
+                  %option{:value => "64"} Vatican City
+                  %option{:value => "151"} Venezuela
+                  %option{:value => "199"} Vietnam
+                  %option{:value => "200"} Yemen
+                  %option{:value => "117"} Zambia
+                  %option{:value => "118"} Zimbabwe
+                %a.link-minus{:href => "#"} minus
+              .row
+                %label{:for => "coverage"} Select geographical coverage
+                %select#coverage.sel.required-sel
+                  %option Select geographical coverage
+                  %option Africa
+                  %option Asia
+                  %option Europe
+                  %option North America
+                  %option Oceania
+                  %option South America
+                  %option Afghanistan
+                  %option Albania
+                  %option Algeria
+                  %option Andorra
+                  %option Angola
+                  %option Antigua and Barbuda
+                  %option Argentina
+                  %option Armenia
+                  %option Australia
+                  %option Austria
+                  %option Azerbaijan
+                  %option Bahamas
+                  %option Bahrain
+                  %option Bangladesh
+                  %option Barbados
+                  %option Belarus
+                  %option Belgium
+                  %option Belgium
+                  %option Benin
+                  %option Bhutan
+                  %option Bolivia
+                  %option Bosnia and Herzegovina
+                  %option Botswana
+                  %option Brazil
+                  %option Brunei
+                  %option Bulgaria
+                  %option Burkina
+                  %option Burma (Myanmar)
+                  %option Burundi
+                  %option Cambodia
+                  %option Cameroon
+                  %option Canada
+                  %option Cape Verde
+                  %option Central African Republic
+                  %option Chad
+                  %option Chile
+                  %option China
+                  %option Comoros
+                  %option{:value => "77"} Congo
+                  %option{:value => "78"} Congo, the Democratic Republic of the
+                  %option{:value => "129"} Costa Rica
+                  %option{:value => "27"} Croatia
+                  %option{:value => "130"} Cuba
+                  %option{:value => "28"} Cyprus
+                  %option{:value => "29"} Czech Republic
+                  %option{:value => "30"} Denmark
+                  %option{:value => "79"} Djibouti
+                  %option{:value => "131"} Dominica
+                  %option{:value => "132"} Dominican Republic
+                  %option{:value => "165"} East Timor
+                  %option{:value => "133"} Ecuador
+                  %option{:value => "80"} Egypt
+                  %option{:value => "134"} El Salvador
+                  %option{:value => "81"} Equatorial Guinea
+                  %option{:value => "82"} Eritrea
+                  %option{:value => "31"} Estonia
+                  %option{:value => "83"} Ethiopia
+                  %option{:value => "4"} Fiji
+                  %option{:value => "32"} Finland
+                  %option{:value => "33"} France
+                  %option{:value => "84"} Gabon
+                  %option{:value => "85"} Gambia
+                  %option{:value => "34"} Georgia
+                  %option{:value => "35"} Germany
+                  %option{:value => "86"} Ghana
+                  %option{:value => "36"} Greece
+                  %option{:value => "135"} Grenada
+                  %option{:value => "136"} Guatemala
+                  %option{:value => "87"} Guinea
+                  %option{:value => "88"} Guinea-Bissau
+                  %option{:value => "137"} Guyana
+                  %option{:value => "138"} Haiti
+                  %option{:value => "139"} Honduras
+                  %option{:value => "37"} Hungary
+                  %option{:value => "38"} Iceland
+                  %option{:value => "166"} India
+                  %option{:value => "167"} Indonesia
+                  %option{:value => "168"} Iran
+                  %option{:value => "169"} Iraq
+                  %option{:value => "39"} Ireland
+                  %option{:value => "170"} Israel
+                  %option{:value => "40"} Italy
+                  %option{:value => "89"} Ivory Coast
+                  %option{:value => "140"} Jamaica
+                  %option{:value => "171"} Japan
+                  %option{:value => "172"} Jordan
+                  %option{:value => "173"} Kazakhstan
+                  %option{:value => "90"} Kenya
+                  %option{:value => "5"} Kiribati
+                  %option{:value => "174"} Korea, Democratic People's Republic of
+                  %option{:value => "175"} Korea, Republic of
+                  %option{:value => "176"} Kuwait
+                  %option{:value => "177"} Kyrgyzstan
+                  %option{:value => "178"} Laos
+                  %option{:value => "41"} Latvia
+                  %option{:value => "179"} Lebanon
+                  %option{:value => "91"} Lesotho
+                  %option{:value => "92"} Liberia
+                  %option{:value => "93"} Libya
+                  %option{:value => "42"} Liechtenstein
+                  %option{:value => "43"} Lithuania
+                  %option{:value => "44"} Luxembourg
+                  %option{:value => "45"} Macedonia
+                  %option{:value => "94"} Madagascar
+                  %option{:value => "95"} Malawi
+                  %option{:value => "180"} Malaysia
+                  %option{:value => "181"} Maldives
+                  %option{:value => "96"} Mali
+                  %option{:value => "46"} Malta
+                  %option{:value => "6"} Marshall Islands
+                  %option{:value => "97"} Mauritania
+                  %option{:value => "98"} Mauritius
+                  %option{:value => "154"} Mexico
+                  %option{:value => "7"} Micronesia
+                  %option{:value => "47"} Moldova
+                  %option{:value => "48"} Monaco
+                  %option{:value => "182"} Mongolia
+                  %option{:value => "49"} Montenegro
+                  %option{:value => "99"} Morocco
+                  %option{:value => "100"} Mozambique
+                  %option{:value => "101"} Namibia
+                  %option{:value => "8"} Nauru
+                  %option{:value => "183"} Nepal
+                  %option{:value => "50"} Netherlands
+                  %option{:value => "9"} New Zealand
+                  %option{:value => "141"} Nicaragua
+                  %option{:value => "102"} Niger
+                  %option{:value => "103"} Nigeria
+                  %option{:value => "51"} Norway
+                  %option{:value => "184"} Oman
+                  %option{:value => "185"} Pakistan
+                  %option{:value => "10"} Palau
+                  %option{:value => "142"} Panama
+                  %option{:value => "11"} Papua New Guinea
+                  %option{:value => "143"} Paraguay
+                  %option{:value => "144"} Peru
+                  %option{:value => "186"} Philippines
+                  %option{:value => "52"} Poland
+                  %option{:value => "53"} Portugal
+                  %option{:value => "187"} Qatar
+                  %option{:value => "54"} Romania
+                  %option{:value => "188"} Russian Federation
+                  %option{:value => "104"} Rwanda
+                  %option{:value => "145"} Saint Kitts &amp; Nevis
+                  %option{:value => "146"} Saint Lucia
+                  %option{:value => "147"} Saint Vincent &amp; the Grenadines
+                  %option{:value => "12"} Samoa
+                  %option{:value => "55"} San Marino
+                  %option{:value => "105"} Sao Tome and Principe
+                  %option{:value => "189"} Saudi Arabia
+                  %option{:value => "106"} Senegal
+                  %option{:value => "56"} Serbia
+                  %option{:value => "107"} Seychelles
+                  %option{:value => "108"} Sierra Leone
+                  %option{:value => "190"} Singapore
+                  %option{:value => "57"} Slovakia
+                  %option{:value => "58"} Slovenia
+                  %option{:value => "13"} Solomon Islands
+                  %option{:value => "109"} Somalia
+                  %option{:value => "110"} South Africa
+                  %option{:value => "59"} Spain
+                  %option{:value => "191"} Sri Lanka
+                  %option{:value => "111"} Sudan
+                  %option{:value => "148"} Suriname
+                  %option{:value => "112"} Swaziland
+                  %option{:value => "60"} Sweden
+                  %option{:value => "61"} Switzerland
+                  %option{:value => "192"} Syria
+                  %option{:value => "193"} Tajikistan
+                  %option{:value => "113"} Tanzania
+                  %option{:value => "194"} Thailand
+                  %option{:value => "114"} Togo
+                  %option{:value => "14"} Tonga
+                  %option{:value => "149"} Trinidad &amp; Tobago
+                  %option{:value => "115"} Tunisia
+                  %option{:value => "195"} Turkey
+                  %option{:value => "196"} Turkmenistan
+                  %option{:value => "15"} Tuvalu
+                  %option{:value => "116"} Uganda
+                  %option{:value => "62"} Ukraine
+                  %option{:value => "197"} United Arab Emirates
+                  %option{:value => "63"} United Kingdom
+                  %option{:value => "155"} United States
+                  %option{:value => "150"} Uruguay
+                  %option{:value => "198"} Uzbekistan
+                  %option{:value => "16"} Vanuatu
+                  %option{:value => "64"} Vatican City
+                  %option{:value => "151"} Venezuela
+                  %option{:value => "199"} Vietnam
+                  %option{:value => "200"} Yemen
+                  %option{:value => "117"} Zambia
+                  %option{:value => "118"} Zimbabwe
+                %a.link.link-add{:href => "#"} plus
+            / row
+            .row
+              %label{:for => "year"} Publication year
+              .text
+                %input#year.required{:title => "Publication year", :type => "text", :value => "Publication year"}/
+            .add-block
+              .row.default
+                %label{:for => "tag-default"} Select tag
+                %select#tag-default.sel.default.required-sel
+                  %option Select tag
+                  %option All
+                  %option Agriculture &amp; Rural Development
+                  %option Aid Effectiveness
+                  %option Economic Policy and External Debt
+                  %option Education
+                  %option Energy &amp; Mining
+                  %option Environment
+                  %option Financial sector
+                  %option Health
+                  %option Infrastructure
+                  %option Labor &amp; Social Protection
+                  %option Poverty
+                  %option Private Sector
+                  %option Public Sector
+                  %option Science &amp; Technology
+                  %option Social Development
+                  %option Urban Development
+                  %option Other
+                %a.link-minus{:href => "#"} plus
+              .row
+                %label{:for => "tag"} Select tag
+                %select#tag.sel.required-sel
+                  %option Select tag
+                  %option All
+                  %option Agriculture &amp; Rural Development
+                  %option Aid Effectiveness
+                  %option Economic Policy and External Debt
+                  %option Education
+                  %option Energy &amp; Mining
+                  %option Environment
+                  %option Financial sector
+                  %option Health
+                  %option Infrastructure
+                  %option Labor &amp; Social Protection
+                  %option Poverty
+                  %option Private Sector
+                  %option Public Sector
+                  %option Science &amp; Technology
+                  %option Social Development
+                  %option Urban Development
+                  %option Other
+                %a.link.link-add{:href => "#"} plus
+        .box-step
+          .frame
+            .title
+              %h2 Step 2. Add documents (at least one document required)
+            / row
+            .add-block
+              .title-block.default
+                .row
+                  %label{:for => "title02-default"} Title
+                  %select#title02-default.sel.default.required-sel
+                    %option Title
+                    %option option
+                / row
+                .row
+                  %label{:for => "document-default"} Select document type
+                  %select#document-default.sel.default.required-sel
+                    %option Select document type
+                    %option Journal Article
+                    %option News Article
+                    %option Map
+                    %option Report
+                    %option Other
+                  %a.link-minus{:href => "#"} minus
+                / row-holder
+                .row-holder.add-document.required-radio.default
+                  .box-row
+                    %input#r01-default.default{:name => "quest-default", :type => "radio", :value => "1"}/
+                    %label{:for => "r01-default"} Upload a file
+                    .box-file.upload-box
+                      %label{:for => "file-default"} Choose file
+                      %input#file-default.file-input-area{:size => "20", :type => "file", :value => "Choose file"}/
+                      %a.button{:href => "#"} File
+                  .box-row.box
+                    %input#r02-default.default{:name => "quest-default", :type => "radio", :value => "2"}/
+                    %label{:for => "r02-default"} Provide a link
+                    %label.hidden{:for => "url-default"} url
+                    .text-row.upload-box
+                      .text
+                        %input#url-default{:type => "text", :value => "URL"}/
+              .title-block
+                .row
+                  %label{:for => "title2"} Title
+                  %select#title2.sel.required-sel
+                    %option Title
+                    %option option
+                / row
+                .row
+                  %label{:for => "document"} Select document type
+                  %select#document.sel.required-sel
+                    %option Select document type
+                    %option Journal Article
+                    %option News Article
+                    %option Map
+                    %option Report
+                    %option Other
+                / row-holder
+                .row-holder.add-document.required-radio
+                  .box-row
+                    %input#r01{:name => "quest", :type => "radio", :value => "1"}/
+                    %label{:for => "r01"} Upload a file
+                    .box-file.upload-box
+                      %label{:for => "file"} Choose file
+                      %input#file.file-input-area{:size => "20", :type => "file", :value => "Choose file"}/
+                      %a.button{:href => "#"} File
+                  .box-row.box
+                    %input#r02{:name => "quest", :type => "radio", :value => "2"}/
+                    %label{:for => "r02"} Provide a link
+                    %label.hidden{:for => "url"} url
+                    .text-row.upload-box
+                      .text
+                        %input#url{:type => "text", :value => "URL"}/
+                / row-holder
+                .row-holder
+                  .box-add
+                    %a.link-add{:href => "#"} Add Title
+            .row-batton
+              %input.btn-submit{:type => "submit", :value => "Go to last step"}/

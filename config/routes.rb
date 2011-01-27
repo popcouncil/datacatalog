@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :profile, :controller => "users", :only => [:edit, :update]
   map.resource :user_session
 
+  map.resource :static
+
   map.root                                                        :controller => "main",            :action => "dashboard"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"

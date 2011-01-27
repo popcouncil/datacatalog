@@ -2,6 +2,10 @@
 module ApplicationHelper
   include SortableTable::App::Helpers::ApplicationHelper
 
+  def body_class_hook
+    @body_class_hook
+  end
+
   def custom_error_messages
     { :header_message => "", :message => "The following problems occurred:" }
   end

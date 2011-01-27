@@ -1,0 +1,495 @@
+/ block-catalog
+.block-catalog.browse-page
+  .box-info
+    .box-select
+      %h1
+        Browse by tag “Financial Sector”
+        %span
+          (
+          %a{:href => "#"}> View all
+          )
+      / block-catalog
+      .box-select
+        %form.form-select{:action => "#"}
+          %fieldset
+            %legend Title
+            / row
+            .row.sel-info
+              %label{:for => "coverage"} Coverage
+              %select#coverage.sel02
+                %option All
+                %option Global
+                %option Africa
+                %option Asia
+                %option Europe
+                %option North America
+                %option Oceania
+                %option South America
+                %option Afghanistan
+                %option Albania
+                %option Algeria
+                %option Andorra
+                %option Angola
+                %option Antigua and Barbuda
+                %option Argentina
+                %option Armenia
+                %option Australia
+                %option Austria
+                %option Azerbaijan
+                %option Bahamas
+                %option Bahrain
+                %option Bangladesh
+                %option Barbados
+                %option Belarus
+                %option Belgium
+                %option Belize
+                %option Benin
+                %option Bhutan
+                %option Bolivia
+                %option Bosnia and Herzegovina
+                %option Botswana
+                %option Brazil
+                %option Brunei
+                %option Bulgaria
+                %option Burkina
+                %option Burma (Myanmar)
+                %option Burundi
+                %option Cambodia
+                %option Cameroon
+                %option Canada
+                %option Cape Verde
+                %option Central African Republic
+                %option{:value => "75"} Chad
+                %option{:value => "127"} Chile
+                %option{:value => "164"} China
+                %option{:value => "128"} Colombia
+                %option{:value => "76"} Comoros
+                %option{:value => "77"} Congo
+                %option{:value => "78"} Congo, the Democratic Republic of the
+                %option{:value => "129"} Costa Rica
+                %option{:value => "27"} Croatia
+                %option{:value => "130"} Cuba
+                %option{:value => "28"} Cyprus
+                %option{:value => "29"} Czech Republic
+                %option{:value => "30"} Denmark
+                %option{:value => "79"} Djibouti
+                %option{:value => "131"} Dominica
+                %option{:value => "132"} Dominican Republic
+                %option{:value => "165"} East Timor
+                %option{:value => "133"} Ecuador
+                %option{:value => "80"} Egypt
+                %option{:value => "134"} El Salvador
+                %option{:value => "81"} Equatorial Guinea
+                %option{:value => "82"} Eritrea
+                %option{:value => "31"} Estonia
+                %option{:value => "83"} Ethiopia
+                %option{:value => "4"} Fiji
+                %option{:value => "32"} Finland
+                %option{:value => "33"} France
+                %option{:value => "84"} Gabon
+                %option{:value => "85"} Gambia
+                %option{:value => "34"} Georgia
+                %option{:value => "35"} Germany
+                %option{:value => "86"} Ghana
+                %option{:value => "36"} Greece
+                %option{:value => "135"} Grenada
+                %option{:value => "136"} Guatemala
+                %option{:value => "87"} Guinea
+                %option{:value => "88"} Guinea-Bissau
+                %option{:value => "137"} Guyana
+                %option{:value => "138"} Haiti
+                %option{:value => "139"} Honduras
+                %option{:value => "37"} Hungary
+                %option{:value => "38"} Iceland
+                %option{:value => "166"} India
+                %option{:value => "167"} Indonesia
+                %option{:value => "168"} Iran
+                %option{:value => "169"} Iraq
+                %option{:value => "39"} Ireland
+                %option{:value => "170"} Israel
+                %option{:value => "40"} Italy
+                %option{:value => "89"} Ivory Coast
+                %option{:value => "140"} Jamaica
+                %option{:value => "171"} Japan
+                %option{:value => "172"} Jordan
+                %option{:value => "173"} Kazakhstan
+                %option{:value => "90"} Kenya
+                %option{:value => "5"} Kiribati
+                %option{:value => "174"} Korea, Democratic People's Republic of
+                %option{:value => "175"} Korea, Republic of
+                %option{:value => "176"} Kuwait
+                %option{:value => "177"} Kyrgyzstan
+                %option{:value => "178"} Laos
+                %option{:value => "41"} Latvia
+                %option{:value => "179"} Lebanon
+                %option{:value => "91"} Lesotho
+                %option{:value => "92"} Liberia
+                %option{:value => "93"} Libya
+                %option{:value => "42"} Liechtenstein
+                %option{:value => "43"} Lithuania
+                %option{:value => "44"} Luxembourg
+                %option{:value => "45"} Macedonia
+                %option{:value => "94"} Madagascar
+                %option{:value => "95"} Malawi
+                %option{:value => "180"} Malaysia
+                %option{:value => "181"} Maldives
+                %option{:value => "96"} Mali
+                %option{:value => "46"} Malta
+                %option{:value => "6"} Marshall Islands
+                %option{:value => "97"} Mauritania
+                %option{:value => "98"} Mauritius
+                %option{:value => "154"} Mexico
+                %option{:value => "7"} Micronesia
+                %option{:value => "47"} Moldova
+                %option{:value => "48"} Monaco
+                %option{:value => "182"} Mongolia
+                %option{:value => "49"} Montenegro
+                %option{:value => "99"} Morocco
+                %option{:value => "100"} Mozambique
+                %option{:value => "101"} Namibia
+                %option{:value => "8"} Nauru
+                %option{:value => "183"} Nepal
+                %option{:value => "50"} Netherlands
+                %option{:value => "9"} New Zealand
+                %option{:value => "141"} Nicaragua
+                %option{:value => "102"} Niger
+                %option{:value => "103"} Nigeria
+                %option{:value => "51"} Norway
+                %option{:value => "184"} Oman
+                %option{:value => "185"} Pakistan
+                %option{:value => "10"} Palau
+                %option{:value => "142"} Panama
+                %option{:value => "11"} Papua New Guinea
+                %option{:value => "143"} Paraguay
+                %option{:value => "144"} Peru
+                %option{:value => "186"} Philippines
+                %option{:value => "52"} Poland
+                %option{:value => "53"} Portugal
+                %option{:value => "187"} Qatar
+                %option{:value => "54"} Romania
+                %option{:value => "188"} Russian Federation
+                %option{:value => "104"} Rwanda
+                %option{:value => "145"} Saint Kitts &amp; Nevis
+                %option{:value => "146"} Saint Lucia
+                %option{:value => "147"} Saint Vincent &amp; the Grenadines
+                %option{:value => "12"} Samoa
+                %option{:value => "55"} San Marino
+                %option{:value => "105"} Sao Tome and Principe
+                %option{:value => "189"} Saudi Arabia
+                %option{:value => "106"} Senegal
+                %option{:value => "56"} Serbia
+                %option{:value => "107"} Seychelles
+                %option{:value => "108"} Sierra Leone
+                %option{:value => "190"} Singapore
+                %option{:value => "57"} Slovakia
+                %option{:value => "58"} Slovenia
+                %option{:value => "13"} Solomon Islands
+                %option{:value => "109"} Somalia
+                %option{:value => "110"} South Africa
+                %option{:value => "59"} Spain
+                %option{:value => "191"} Sri Lanka
+                %option{:value => "111"} Sudan
+                %option{:value => "148"} Suriname
+                %option{:value => "112"} Swaziland
+                %option{:value => "60"} Sweden
+                %option{:value => "61"} Switzerland
+                %option{:value => "192"} Syria
+                %option{:value => "193"} Tajikistan
+                %option{:value => "113"} Tanzania
+                %option{:value => "194"} Thailand
+                %option{:value => "114"} Togo
+                %option{:value => "14"} Tonga
+                %option{:value => "149"} Trinidad &amp; Tobago
+                %option{:value => "115"} Tunisia
+                %option{:value => "195"} Turkey
+                %option{:value => "196"} Turkmenistan
+                %option{:value => "15"} Tuvalu
+                %option{:value => "116"} Uganda
+                %option{:value => "62"} Ukraine
+                %option{:value => "197"} United Arab Emirates
+                %option{:value => "63"} United Kingdom
+                %option{:value => "155"} United States
+                %option{:value => "150"} Uruguay
+                %option{:value => "198"} Uzbekistan
+                %option{:value => "16"} Vanuatu
+                %option{:value => "64"} Vatican City
+                %option{:value => "151"} Venezuela
+                %option{:value => "199"} Vietnam
+                %option{:value => "200"} Yemen
+                %option{:value => "117"} Zambia
+                %option{:value => "118"} Zimbabwe
+            / row
+            .row.sel-info
+              %label{:for => "organization"} Organization
+              %select#organization.sel02
+                %option All
+                %option Gabriela Ministry
+                %option Eric Ministry
+                %option{:value => "organization-1"} testOrg
+                %option{:value => "organization-3"} Cubox
+                %option{:value => "organization-4"} UN
+                %option{:value => "organization-5"} Red Cross
+                %option{:value => "organization-6"} londonberry
+                %option{:value => "organization-7"} Ghana
+                %option{:value => "organization-8"} PC
+                %option{:value => "organization-9"} No affiliation
+                %option{:value => "organization-10"} me
+                %option{:value => "organization-11"} pop council
+                %option{:value => "organization-12"} un
+                %option{:value => "organization-13"} test
+                %option{:value => "organization-14"} d
+                %option{:value => "organization-15"} c
+                %option{:value => "organization-16"} ???
+                %option{:value => "organization-17"} ben
+                %option{:value => "organization-18"} Eric
+                %option{:value => "organization-19"} world bank
+                %option{:value => "organization-20"} f
+                %option{:value => "organization-21"} Daniel Fischer
+                %option{:value => "organization-22"} luis org
+                %option{:value => "organization-23"} luis' org
+                %option{:value => "organization-24"} rrrr
+                %option{:value => "organization-25"} lorem lipsum ipsum lumpsum
+                %option{:value => "organization-26"} eee
+                %option{:value => "organization-28"} ouou
+                %option{:value => "organization-29"} ffff
+                %option{:value => "organization-30"} new org
+                %option{:value => "organization-31"} efere
+                %option{:value => "organization-32"} FusionLab, Inc.
+                %option{:value => "organization-33"} eaueoie
+                %option{:value => "organization-34"} uo
+                %option{:value => "organization-35"} fff
+                %option{:value => "organization-36"} Population Council
+                %option{:value => "organization-37"} New York University
+                %option{:value => "organization-38"} eouaoeu
+                %option{:value => "organization-39"} eouoeu
+                %option{:value => "organization-40"} euoaeu
+                %option{:value => "organization-41"} oueuo
+                %option{:value => "organization-42"} ouaoeu
+                %option{:value => "organization-43"} euaoeu
+                %option{:value => "organization-44"} euou
+                %option{:value => "organization-45"} rrr
+                %option{:value => "organization-46"} rr
+                %option{:value => "organization-47"} ff
+            / row
+            .row.sel-info
+              %label{:for => "release"} Release Year
+              %select#release.sel02
+                %option All
+                %option{:value => "2011"} 2011
+                %option{:value => "2010"} 2010
+                %option{:value => "2007"} 2007
+                %option{:value => "2006"} 2006
+                %option{:value => "2005"} 2005
+                %option{:value => "2004"} 2004
+                %option{:value => "2001"} 2001
+                %option{:value => "1997"} 1997
+            / row
+            .row.sel-info
+              %label{:for => "type"} Record Type
+              %select#type.sel02
+                %option All
+                %option All
+                %option{:value => "Data"} Data
+                %option{:value => "Journal Article"} Journal Article
+                %option{:value => "News Article"} News Article
+                %option{:value => "Map"} Map
+                %option{:value => "Report"} Report
+                %option{:value => "Other"} Other
+            %input.btn-submit{:type => "submit", :value => "submit"}/
+            %a.btn{:href => "#"} Filter Data
+    / box-btn
+    .box-btn
+      %ul
+        %li
+          %a.dashboard{:href => "#"} Dashboard
+        %li.active
+          %a.browse{:href => "#"} Browse
+        %li
+          %a.add{:href => "#"} Add Data
+  / catalog-info
+  .catalog-info
+    %ul.list-paging
+      %li 103 results
+      %li
+        %span
+          %a{:href => "#"} 1
+          %a{:href => "#"} 2
+          %a{:href => "#"} 3
+      %li
+        %a.next{:href => "#"} Next
+    / block-title
+    .block-title
+      %ul
+        %li.col01
+          %h2 Data Record
+        %li.col02
+          %h2
+            %a{:href => "#"} Rating
+        %li.col03
+          %h2
+            %a{:href => "#"} Coverage
+        %li.col04
+          %h2
+            %a{:href => "#"} Year
+        %li.col05
+          %h2
+            %a{:href => "#"} Organization
+        %li.col09
+          %h2
+            %a{:href => "#"} Record Type
+      %ul.list
+        %li.col01
+          %h3 Healthy Families-Thriving Communities
+          %a.heart{:href => "#"} heart
+        %li.col02
+          %ul.list-rating
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+        %li.col03
+          %span Global
+        %li.col04
+          %span 2010
+        %li.col05
+          %span Ministry of the Interior
+        %li.col06
+          %span Data Report
+    / block-inf
+    .block-inf
+      .block
+        .frame
+          %p
+            Housing Code Enforcements. The dataset contains locations and attributes of housing code enforcements from the Department of Consumer and Regulatory Affairs (DCRA), created as part of the Citywide Data Program (CityDW) for the D.C. Office of the Chief Technology Officer (OCTO) and participating D.C. government agencies. The dataset contains locations and attributes of housing code enforcements from the Department of Consumer and Regulatory Affairs (DCRA), created as part of the Citywide Data Warehouse Program (CityDW) for the D.C. Office of the Chief Technology Officer (OCTO) and participating D.C. government agencies.
+            %a{:href => "#"} More &gt;
+          %span
+            %strong Tags:
+            = succeed "," do
+              %a{:href => "#"} Education
+            = succeed "," do
+              %a{:href => "#"} Energy &amp; Mining
+            = succeed "," do
+              %a{:href => "#"} Environment
+            = succeed "," do
+              %a{:href => "#"} Financial sector
+            = succeed "," do
+              %a{:href => "#"} Health
+            = succeed "," do
+              %a{:href => "#"} Infrastructure
+            = succeed "," do
+              %a{:href => "#"} Labor &amp; Social Protection
+            = succeed "," do
+              %a{:href => "#"} Poverty
+            = succeed "," do
+              %a{:href => "#"} Private Sector
+            = succeed "," do
+              %a{:href => "#"} Public Sector
+            %a{:href => "#"} Science &amp; Technology
+    / block-title
+    .block-title
+      %ul.list
+        %li.col01
+          %h3 Housing Code Enforcement
+          %a.heart{:href => "#"} heart
+        %li.col02
+          %ul.list-rating
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+        %li.col03
+          %span Pakistan
+        %li.col04
+          %span 2008
+        %li.col05
+          %span Population Council
+        %li.col06
+          %span Data, Maps
+    / block-inf
+    .block-inf
+      .block
+        .frame
+          %p
+            Housing Code Enforcements. The dataset contains locations and attributes of housing code enforcements from the Department of Consumer and Regulatory Affairs (DCRA), created as part of the Citywide Data Program (CityDW) for the D.C. Office of the Chief Technology Officer (OCTO) and participating D.C. government agencies. The dataset contains locations and attributes of housing code enforcements from the Department of Consumer and Regulatory Affairs (DCRA), created as part of the Citywide Data Warehouse Program (CityDW) for the D.C. Office of the Chief Technology Officer (OCTO) and participating D.C. government agencies.
+            %a{:href => "#"} More &gt;
+          %span
+            %strong Tags:
+            = succeed "," do
+              %a{:href => "#"} Education
+            = succeed "," do
+              %a{:href => "#"} Energy &amp; Mining
+            = succeed "," do
+              %a{:href => "#"} Environment
+            = succeed "," do
+              %a{:href => "#"} Financial sector
+            = succeed "," do
+              %a{:href => "#"} Health
+            = succeed "," do
+              %a{:href => "#"} Infrastructure
+            = succeed "," do
+              %a{:href => "#"} Labor &amp; Social Protection
+            %a{:href => "#"} Poverty
+    / block-title
+    .block-title
+      %ul.list
+        %li.col01
+          %h3 Completed Construction Projects 2007
+          %a.heart{:href => "#"} heart
+        %li.col02
+          %ul.list-rating
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+            %li
+              %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+        %li.col03
+          %span Africa
+        %li.col04
+          %span 2004
+        %li.col05
+          %span Johns Hopkins
+        %li.col06
+          %span Data Report
+    / block-inf
+    .block-inf
+      .block
+        .frame
+          %p
+            DC Department of Transportation Completed Construction projects. The dataset contains attributes of construction projects completed by the District Department of Transportation in 2007. The source of the data is a PROTRACK database automatically accessed daily at the District Department of Transportation. The dataset contains attributes of construction projects completed by the District Department of Transportation in 2007. The source of the data is a PROTRACK database automatically accessed daily at the District Department of Transportation.
+            %a{:href => "#"} More &gt;
+          %span
+            %strong Tags:
+            = succeed "," do
+              %a{:href => "#"} Education
+            = succeed "," do
+              %a{:href => "#"} Energy &amp; Mining
+            = succeed "," do
+              %a{:href => "#"} Environment
+            = succeed "," do
+              %a{:href => "#"} Financial sector
+            = succeed "," do
+              %a{:href => "#"} Health
+            = succeed "," do
+              %a{:href => "#"} Infrastructure
+            = succeed "," do
+              %a{:href => "#"} Labor &amp; Social Protection
+            = succeed "," do
+              %a{:href => "#"} Poverty
+            %a{:href => "#"} Private Sector
