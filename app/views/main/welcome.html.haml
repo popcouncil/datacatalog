@@ -1,0 +1,86 @@
+- content_for :title do
+  Open Government Data
+= show_flash_message
+/ content
+#content
+  .box-top
+    .frame
+      %h1 Development data
+      %h2 should be open:
+      %span.mark easy to find and understand.
+      .txt
+        %strong No Walls.
+      %p
+        Learn more:
+        %a{:href => "#"} Take a tour
+        or
+        %a{:href => signup_path} Register
+  / gallery
+  .gallery
+    .gallery-inf
+      %ul
+        %li
+          %img{:alt => "image description", :height => "300", :src => "/images/img-slideshow01.jpg", :width => "584"}/
+          .txt-holder
+            .txt
+              %h2 Governing by the numbers
+              %p Data in policymaking
+        %li
+          %img{:alt => "image description", :height => "300", :src => "/images/img-slideshow02.jpg", :width => "584"}/
+          .txt-holder
+            .txt
+              %h2 Slide 2 Heading
+              %p Slide 2 Description
+        %li
+          %img{:alt => "image description", :height => "300", :src => "/images/img-slideshow03.jpg", :width => "584"}/
+          .txt-holder
+            .txt
+              %h2 Slide 3 Heading
+              %p Slide 3 Description
+    / swicher
+    .swicher
+/ sidebar
+#sidebar
+  %ul.list-btn
+    %li
+      %a.box-holder{:href => data_records_path}
+        %span.box-btn
+          %span.find find
+        %span.txt
+          %em
+            %strong Find
+            %span Search the Catalog
+    %li
+      %a.box-holder{:href => "#"}
+        %span.box-btn
+          %span.apply Apply
+        %span.txt
+          %em
+            %strong Apply
+            %span Use the Tools
+    %li
+      %a.box-holder{:href => "#"}
+        %span.box-btn
+          %span.ask ask
+        %span.txt
+          %em
+            %strong Ask
+            %span Ask the Crowd
+    %li
+      %a.box-holder{:href => "#"}
+        %span.box-btn
+          %span.create create
+        %span.txt
+          %em
+            %strong Create
+            %span Enter the Contest
+  / box-catalog
+  .box-catalog
+    %h2 Top catalog entries
+    %ul
+      - @top.each do |top|
+        %li
+          .frame
+            %h3=h top.title
+            %p=h top.description
+            

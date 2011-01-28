@@ -1,0 +1,16 @@
+#footer
+  %ul.footer-menu
+    %li= link_to 'Contact', contact_path
+    %li
+      %a{:href => "#"} Facebook
+    %li
+      %a{:href => "#"} Twitter
+    %li
+      %a{:href => "#"} RSS
+  %ul.list
+    %li &copy; 2011 Population Council, Inc. All rights reserved
+    %li
+      Support by
+      %a{:href => "#"} The William and Flora Hewlett Foundation
+  = flash[:login_callback]
+  = flash[:logout_callback]

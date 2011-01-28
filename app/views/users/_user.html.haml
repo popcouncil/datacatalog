@@ -1,0 +1,21 @@
+%fieldset
+  %legend Title
+  .row
+    = user.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+  .row
+    %label{:for => "display_name"} Full name
+    .text
+      = user.text_field :display_name
+  .row
+    %label{:for => "email"} Email
+    .text
+      = user.text_field :email
+  .row
+    %label{:for => "password"} Password
+    .text
+      = user.password_field :password
+  .row
+    %label{:for => "password2"} Password
+    .text
+      = user.password_field :password_confirmation
+  %input.btn-submit{:type => "submit", :value => "JOIN!"}/

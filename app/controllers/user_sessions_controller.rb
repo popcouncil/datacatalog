@@ -4,7 +4,7 @@ class UserSessionsController < ApplicationController
   before_filter :activate_authlogic
 
   def new
-    @user_session = UserSession.new
+    redirect_to signup_path
   end
 
   def create
@@ -19,6 +19,7 @@ class UserSessionsController < ApplicationController
       flash[:login_callback] = "<iframe height=0 width=0 frameborder=0 src='#{(ENV['WORDPRESS_URL'] || '')}?callback=login&payload=#{CGI.escape(@user_session.user.wpdata(true).gsub("\n", ''))}'></iframe>"
       redirect_to session.delete(:return_to) || root_path
     else
+    @user = User.new(:display_name => 'Full name', :email => 'Email', :password => 'password', :password_confirmation => 'confirmation')
       render :action => "new" and return
     end
   end

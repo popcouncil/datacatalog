@@ -5,6 +5,7 @@ class MainController < ApplicationController
       render 'dashboard'
     else
       @source_count = DataRecord.count
+      @top = DataRecord.all(:limit => 3, :order => 'views_count DESC')
       render 'welcome'
     end
   end
