@@ -6,24 +6,26 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   before_filter :show_title, :mailer_set_url_options, :set_analytics, :set_avatar
 
-#  unless ["development", "test"].include?(Rails.env)
-#    rescue_from ActiveRecord::RecordNotFound,
-#      ActiveRecord::RecordInvalid,
-#      ActionController::RoutingError,
-#      ActionController::UnknownController,
-#      ActionController::UnknownAction,
-#      :with => :render_404
-#    rescue_from NoMethodError,
-#      ActiveRecord::StatementInvalid,
-#      ActionView::TemplateError,
-#      :with => :render_500
-#  end
+  unless ["development", "test"].include?(Rails.env)
+    rescue_from ActiveRecord::RecordNotFound,
+      ActiveRecord::RecordInvalid,
+      ActionController::RoutingError,
+      ActionController::UnknownController,
+      ActionController::UnknownAction,
+      :with => :render_404
+    rescue_from NoMethodError,
+      ActiveRecord::StatementInvalid,
+      ActionView::TemplateError,
+      :with => :render_500
+  end
 
   def render_404(e)
+    Exceptional::Catcher.handle(e) if Rails.env == 'production'
     render :template => 'main/not_found', :status => "404 Not Found"
   end
 
   def render_500(e)
+    Exceptional::Catcher.handle(e) if Rails.env == 'production'
     render :template => 'main/internal_error', :status => "500 Error"
   end
 
