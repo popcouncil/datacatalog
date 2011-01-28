@@ -44,5 +44,8 @@ if mail_settings_file.file?
   }
 end
 
+  # This is for compass
+  config.serve_static_assets = true
+  Sass::Plugin.options[:never_update] = true
 # Enable threaded mode
 # config.threadsafe!
