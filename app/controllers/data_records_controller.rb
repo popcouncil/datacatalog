@@ -23,11 +23,13 @@ class DataRecordsController < ApplicationController
   end
   
   def new
-    @data_record = current_user.data_records.new
+    @data_record = current_user.data_records.new(:title => 'Title', :description => 'Add description')
     initialize_data_record_associations
   end
 
   def create
+    params[:data_record][:documents_attributes].delete('0') if params[:data_record][:documents_attributes]
+    params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
     if params[:id].present?
       @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else
@@ -48,6 +50,10 @@ class DataRecordsController < ApplicationController
         redirect_to @data_record and return
       else
         @data_record.next_step
+        @data_record.lead_organization_name = 'Lead organization'
+        @data_record.collaborator_list= 'Other institutional collaborators'
+        @data_record.homepage_url = 'URL'
+        @data_record.funder = 'Funder'
       end
     end
     initialize_data_record_associations
@@ -59,6 +65,8 @@ class DataRecordsController < ApplicationController
   end
 
   def update
+    params[:data_record][:documents_attributes].delete('0') if params[:data_record][:documents_attributes]
+    params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
     if current_user.admin?
       @data_record.owner_id = params[:data_record][:owner_id]
     else
@@ -79,7 +87,7 @@ class DataRecordsController < ApplicationController
   def initialize_data_record_associations
     @data_record.documents.build if @data_record.documents.empty?
     @data_record.data_record_locations.build(:location_id => 0) if @data_record.locations.empty?
-    @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
+    @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name, :name => 'Author')
     @data_record.build_contact_from_owner if @data_record.contact.blank?
   end
 

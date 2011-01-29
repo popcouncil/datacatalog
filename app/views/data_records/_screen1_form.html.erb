@@ -3,7 +3,7 @@
   <% if current_user.admin? %> 
     <li>
       <%= form.label :owner_id, "Added By" %>
-      <%= form.select :owner_id, grouped_options_for_select(owners_for_select(current_user)), :selected => current_user.id %>
+      <% %>
     </li>
   <% end %>
   <li>

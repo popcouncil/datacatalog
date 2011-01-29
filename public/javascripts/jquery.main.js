@@ -24,65 +24,6 @@ function initValidation(){
 	var _errorClass = 'error';
 	var _regEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	
-	$('form.form-create').each(function(){
-		var _form = $(this);
-		function checkFields() {
-			_form.removeClass('form-error');
-			var _flag = false;
-			_form.find('.'+_errorClass).removeClass(_errorClass);
-			_form.find('.row-affiliation-'+_errorClass).removeClass('row-affiliation-'+_errorClass);
-			_form.find('.row-name-'+_errorClass).removeClass('row-name-'+_errorClass);
-			_form.find('.textarea-'+_errorClass).removeClass('textarea-'+_errorClass);
-
-			_form.find('input.required, textarea.required').not('.default').each(function(){
-				if(!$(this).val().length || $(this).val() == $(this).attr('title')) addError($(this));
-			});
-			
-			_form.find('select.required-sel').not('.default').each(function(){
-				if(!$(this).attr('selectedIndex')) addError($(this));
-			});
-			
-			_form.find('div.required-radio').not('.default').each(function(){
-				var _test = false;
-				$(this).find('input[type=radio]').each(function(){
-					if ($(this).is(':checked')) _test = true;
-				});
-				if (!_test) {
-					_flag=true;
-					addError($(this));
-				}
-			});
-			
-			_form.find('input.required-email').not('.default').each(function(){
-				if(!_regEmail.test($(this).val())) addError($(this));
-			});
-			
-			// error class adding
-			function addError(_obj) {
-				_form.addClass('form-error');
-				if (_obj.is('div')) {
-					_obj.addClass(_errorClass);
-				} else if (_obj.is('textarea')){
-					_obj.parents('div.row').addClass('textarea-'+_errorClass);
-				} else if (_obj.parents('div.row-name').length) {
-					_obj.parents('div.row-name').addClass('row-name-'+_errorClass);
-				} else if (_obj.parents('div.row-affiliation').length) {
-					_obj.parents('div.row-affiliation').addClass('row-affiliation-'+_errorClass);
-				} else {
-					_obj.parents('div.row').addClass(_errorClass);
-				}
-				_flag=true;
-			}
-			return _flag;
-		}
-
-		// catch form submit event
-		_form.submit(function(){
-			if(checkFields()) {
-				return false;
-			}
-		});
-	});
 }
 
 //clear inputs
