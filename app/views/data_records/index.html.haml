@@ -20,13 +20,7 @@
         = render :partial => 'filters'
     / box-btn
     .box-btn
-      %ul
-        %li
-          %a.dashboard{:href => root_path} Dashboard
-        %li.active
-          %a.browse{:href => data_records_path} Browse
-        %li
-          %a.add{:href => new_data_record_path} Add Data
+      = render :partial => 'shared/quick_menu', :object => 'browse'
   / catalog-info
   .catalog-info
     - if @data_records.total_pages > 1

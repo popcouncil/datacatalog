@@ -1,0 +1,19 @@
+.block
+  / text-inf
+  .text-inf
+    .image
+      - user = User.find(comment_parent.user_id)
+      %img{:alt => "user avatar", :height => "37", :src => user.gravatar_link, :width => "38"}/
+    .txt
+      %p
+        = comment_parent.created_at.strftime('%b %d, %Y @ %H:%m')
+        %br/
+        by
+        = h current_user.display_name
+      %p= h comment_parent.body
+  / box-reply
+  .box-reply
+    %strong= comment_parent.votes_for
+    %p
+      %a{:href => data_record_path(@data_record, :parent_id => comment_parent.id, :anchor => "comment_form")} Reply to This
+= render :partial => 'comments/comment_child', :collection => comment_parent.children

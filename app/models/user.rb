@@ -195,6 +195,10 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest (self.email || '').strip.downcase
   end
 
+  def gravatar_link
+    "http://www.gravatar.com/avatar/#{self.gravatar_hash}"
+  end
+
   private
 
   def map_openid_registration(registration)

@@ -6,7 +6,7 @@
   .box-inf
     .inf
       .image
-        %img{:alt => "user image", :height => "82", :src => "http://www.gravatar.com/avatar/#{current_user.gravatar_hash}", :width => "81"}/
+        %img{:alt => "user image", :height => "82", :src => current_user.gravatar_link, :width => "81"}/
       .txt
         %p
           Set your avatar

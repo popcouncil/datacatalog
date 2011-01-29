@@ -5,13 +5,7 @@
   .box-info
     / box-btn
     .box-btn
-      %ul
-        %li.active
-          %a.dashboard{:href => "#"} Dashboard
-        %li
-          %a.browse{:href => "#"} Browse
-        %li
-          %a.add{:href => "#"} Add Data
+      = render :partial => 'shared/quick_menu', :object => 'dashboard'
     %h1
       - if current_user.favorite_records.empty?
         You have no favorites yet.
