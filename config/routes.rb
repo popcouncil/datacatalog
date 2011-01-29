@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.new_data_record '/data-new', :controller => 'data_records', :action => 'new'
+  map.tour '/tour', :controller => 'main', :action => 'tour'
 
   map.resources :organizations, :as => :org, :only => [:show]
 
