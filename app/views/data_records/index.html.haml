@@ -1,0 +1,43 @@
+- content_for :title do
+  Browse
+  - if @filters.tags.present?
+    by tag "#{h @filters.tags}"
+
+
+/ block-catalog
+.block-catalog.browse-page
+  .box-info
+    .box-select
+      %h1
+        - if @filters.tags.present?
+          Browse by tag “#{h @filters.tags}”
+          %span
+            (
+            %a{:href => data_records_path}> View all
+            )
+      / block-catalog
+      .box-select
+        = render :partial => 'filters'
+    / box-btn
+    .box-btn
+      %ul
+        %li
+          %a.dashboard{:href => root_path} Dashboard
+        %li.active
+          %a.browse{:href => data_records_path} Browse
+        %li
+          %a.add{:href => new_data_record_path} Add Data
+  / catalog-info
+  .catalog-info
+    - if @data_records.total_pages > 1
+      %ul.list-paging
+        %li= @data_records.total_entries
+        %li
+          %span
+            - @data_records.total_pages.times do |i|
+              = link_to(i+=1, data_record_path(params.merge(:page => i)))
+        %li
+          = link_to i=(params[:page] || 0)+1, data_record-path(params.merge(:page => i)), :class => 'next'
+    / block-title
+    = render :partial => 'shared/record_header'
+    = render :partial => 'data_record', :collection => @data_records

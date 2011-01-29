@@ -1,0 +1,27 @@
+.block-title
+  %ul.list
+    %li.col01
+      %h3=link_to data_record.title, data_record_path(data_record)
+      = render :partial => 'favorites/button', :locals => {:data_record => data_record}
+    %li.col02
+      = render :partial => 'ratings/stars', :object => data_record.ratings_average
+    %li.col03
+      %span= h data_record.locations.map(&:name).sort.join(", ")
+    %li.col04
+      %span= h data_record.year
+    %li.col05
+      %span= organizations_for(data_record)
+    %li.col06
+      %span= h data_record.type
+      
+.block-inf
+  .block
+    .frame
+      %p
+        = h truncate(data_record.description, :length => 350)
+        %a{:href => data_record_path(data_record)} More &gt;
+      - if data_record.tags.any?
+        %span
+          %strong Tags:
+          = linked_tags(data_record)
+
