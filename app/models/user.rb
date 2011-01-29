@@ -191,6 +191,10 @@ class User < ActiveRecord::Base
   end
   # End wordpress related stuff
 
+  def gravatar_hash
+    Digest::MD5.hexdigest (self.email || '').strip.downcase
+  end
+
   private
 
   def map_openid_registration(registration)

@@ -307,11 +307,11 @@ $(document).ready(function(){
   });
 
   function hide_alert_links(){
-    if($('.alert_tags').length < 2){ $('#del-alert-topic').hide(); } else {  $('#del-alert-topic').show(); }
-    if($('.alert_locations').length < 2){ $('#del-alert-location').hide(); } else { $('#del-alert-location').show(); }
-    if($('.alert_tags option:selected[value=All]').length == 1 || $('.alert_tags option:selected[value=0]').length >= 1 || $('.alert_tags').length > 16){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
-    if($('.alert_locations[value=0]').length == 1){ $('#add-alert-location').hide(); } else {$('#add-alert-location').show();}
-    if($('.alert_tags[value=Select Topics]').length == 1 && $('.alert_locations[value=Select Coverage]').length == 1){
+    if($('.box-holder select.alert_tags').length < 2){ $('#del-alert-topic').hide(); } else {  $('#del-alert-topic').show(); }
+    if($('.box-holder select.alert_locations').length < 2){ $('#del-alert-location').hide(); } else { $('#del-alert-location').show(); }
+    if($('.box-holder select.alert_tags option:selected[value=All]').length == 1 || $('.box-holder select.alert_tags option:selected[value=0]').length >= 1 || $('.box-holder select.alert_tags').length > 16){ $('#add-alert-topic').hide(); } else {$('#add-alert-topic').show();}
+    if($('.box-holder select.alert_locations option:selected[value=0]').length == 1){ $('#add-alert-location').hide(); } else {$('#add-alert-location').show();}
+    if($('.box-holder select.alert_tags[value=Select Topics]').length == 1 && $('select.alert_locations[value=Select Coverage]').length == 1){
       $('#user_alert_email').attr('checked', false).attr('disabled', true);
       $('#user_alert_sms').attr('checked', false).attr('disabled', true);
       $('#user_alert_sms_number').attr('disabled', true);
@@ -323,7 +323,7 @@ $(document).ready(function(){
   }
   hide_alert_links();
 
-  $('.alert_tags, .alert_locations').live('change', function(){
+  $('select.alert_tags, select.alert_locations').live('change', function(){
     hide_alert_links();
   });
 
@@ -333,16 +333,16 @@ $(document).ready(function(){
 
   $('#add-alert-topic').live('click', function(){
     hide_alert_links();
-    var $item = $('.alert_tags:last');
-    $('.alert_tags:not(:last)').each(function(){
+    var $item = $('#hidden-new-tag select.alert_tags:last');
+    $('.box-holder select.alert_tags:not(:last)').each(function(){
       $item.find('option[value=' + $(this).val() + ']').remove();
     });
   });
 
   $('#add-alert-location').live('click', function(){
     hide_alert_links();
-    var $item = $('.alert_locations:last');
-    $('.alert_locations:not(:last)').each(function(){
+    var $item = $('#hidden-new-location select.alert_locations:last');
+    $('.box-holder select.alert_locations:not(:last)').each(function(){
       $item.find('option[value=' + $(this).val() + ']').remove();
     });
   });

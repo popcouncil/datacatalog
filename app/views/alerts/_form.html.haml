@@ -1,0 +1,82 @@
+
+%fieldset
+  %legend Title
+  .title
+    %h2 Notify me when new data records are created
+    %p
+      %strong Select data by topic and geographical coverage.
+      %br/
+      For notifications of all new records in a specific topic,
+      %br/
+      select “All” in geographic coverage.
+  / box-inf
+  .box-inf
+    .box-holder
+      %h3 Topic
+      / row
+      - if @alert_topics.blank?
+        .row
+          = select_tag 'tags[]', options_for_select([['Select Topics', '0']] + Alert.tags, :disabled => "-------------"), :class => 'alert_tags sel05'
+      - else
+        - @alert_topics.each do |topic|
+          .row
+            = select_tag 'tags[]', options_for_select([['Select Topics', '0']] + Alert.tags, :disabled => "-------------", :selected => (topic.nil? ? 'All' : topic)), :class => 'alert_tags sel05'
+      = link_to '[+]', "#", :id => 'add-alert-topic', :class => 'plus'
+      = link_to '[-]', "#", :id => 'del-alert-topic', :class => 'minus'
+    .box-holder.box
+      %h3 In Geographic Coverage
+      / row
+      - locations = all_locations_for_select; locations[1] = ['Global (does not select all)', '0']; locations.insert(1, ['All', '0'])
+      - if @alert_locations.blank?
+        .row
+          = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations sel05'
+      - else
+        - alert_locations = @alert_locations
+        = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => alert_locations.shift.to_s), :class => 'alert_locations sel05'
+        - locations.delete_at(1)
+        - alert_locations.each do |location|
+          = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations sel05'
+      = link_to '[+]', "#", :id => 'add-alert-location', :class => 'plus'
+      = link_to '[-]', "#", :id => 'del-alert-location', :class => 'minus'
+      .row-check
+        .row-holder
+          = form.check_box :alert_email
+          %label{:for => "ch03"} By email
+        .row-holder
+          = form.check_box :alert_sms
+          %label{:for => "ch04"} By SMS
+      / row
+      .row
+        %label{:for => "inp02"} Title
+        .text
+          = form.text_field :alert_sms_number
+    .btn-holder
+      %input.btn-submit{:type => "submit", :value => "Update"}/
+    %p.clear
+      %a{:href => "#"} Clear All Notifications
+
+:javascript
+  jQuery(document).ready(function($){
+    $('#add-alert-topic').click(function(){
+      $('#add-alert-topic').before($('#hidden-new-tag').html());
+      initCustomForms();
+      return false;
+    });
+
+    $('#del-alert-topic').click(function(){
+      $(this).parent().children('.row:last').remove();
+      return false;
+    });
+
+    $('#add-alert-location').click(function(){
+      $('#add-alert-location').before($('#hidden-new-location').html());
+      initCustomForms();
+      return false;
+    });
+
+    $('#del-alert-location').click(function(){
+      $(this).parent().children('.row:last').remove();
+      return false;
+    });
+    
+  });

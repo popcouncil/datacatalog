@@ -1,9 +1,9 @@
 %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
 %meta{:name => 'description', :content => 'An open platform for government data sets and APIs. We make it easy to find datasets by and about government, across all levels (federal, state, and local) and across all branches (executive, legislative, and judicial).'}/
 %title DataUncovered - #{yield :title}
-= stylesheet_link_tag 'compiled/all.css'
+= stylesheet_link_tag 'all.css'
 = stylesheet_link_tag 'opacity.css'
-= javascript_include_tag 'jquery-1.4.4.min.js', 'jquery.main.js'
+= javascript_include_tag 'jquery-1.4.4.min.js', 'jquery.main.js', 'jquery.tools', 'jquery.form', 'application'
 /[if lt IE 8] 
   = stylesheet_link_tag 'ie.css'
 :javascript

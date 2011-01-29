@@ -1,0 +1,24 @@
+- content_for :title do
+  Account Settings
+
+.settings-holder
+  %h1 Account Settings
+  .block-settings
+    .holder
+      .frame
+        = show_flash_message
+        - form_for @user, :url => profile_path, :html => { :method => :put, :class => 'form-inform' } do |form|
+          = form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+          = render :partial => 'users/form', :object => form
+
+        - form_for (@alert_user || @user || current_user), :url => alerts_path, :html => {:class => 'form-inform2'} do |form|
+          = form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+          = render :partial => 'alerts/form', :object => form
+
+#hidden-new-tag{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
+  .row
+    = select_tag('tags[]', options_for_select([['Select Topics', '0']] + Alert.tags.slice(2, 100), :disabled => "-------------"), :class => 'alert_tags sel05')
+
+#hidden-new-location{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
+  .row
+    = select_tag('locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations sel05')
