@@ -1,5 +1,7 @@
 class MainController < ApplicationController
 
+  include BrowseTableSorts
+
   def dashboard
     if current_user
       render 'dashboard'
