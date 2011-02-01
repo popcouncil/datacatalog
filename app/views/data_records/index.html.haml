@@ -25,7 +25,7 @@
   .catalog-info
     - if @data_records.total_pages > 1
       %ul.list-paging
-        %li= @data_records.total_entries
+        %li= pluralize(@data_records.total_entries, 'result').upcase
         %li
           %span
             - @data_records.total_pages.times do |i|
