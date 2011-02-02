@@ -19,4 +19,5 @@
           .frame
             %p= form.error_messages
       / block-step
-      = render :partial => "#{@data_record.current_step}_form", :locals => {:form => form}
+      .block-step
+        = render :partial => "#{@data_record.current_step}_form", :locals => {:form => form}

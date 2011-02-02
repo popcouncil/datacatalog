@@ -69,6 +69,7 @@ $.fn.addBlocks = function(_options){
 		var holder = $(this);
 		var addLink = $('a.link-add',holder);
 		var copyBlock = $('div.default',holder);
+		var count = holder.children().length;
 		
 		function addBlock(){
 			var block = copyBlock.clone();
@@ -115,12 +116,12 @@ $.fn.addBlocks = function(_options){
 						for (var j = i; j < filterArray.length; j++) {
 							var input2 = filterArray[j];
 							if (input2.attr('name') == name) {
-								input2.attr('name',name+attributeCounter);
+								input2.attr('name',input2.attr('name').replace('[0]', '[' + count +']'));
 								delete filterArray[j];
 							}	
 						}
 					}
-					input.attr('name',name+attributeCounter);
+					input.attr('name',input.attr('name').replace('[0]', '[' + count +']'));
 				}
 			}			
 						
@@ -131,14 +132,18 @@ $.fn.addBlocks = function(_options){
 		function bindDelete(block){
 			var closer = $('a.link-minus',block);
 			closer.click(function(e){
-				block.remove();
-				e.preventDefault();
+			  if($(this).attr('href') != '#'){
+			    block.replaceWith("<input type='hidden' name='" + $(this).attr('href').substr(1) + "' value=1 />");
+			  } else {
+  				block.remove();
+  			}
+				return false;
 			});
 		}
 		
 		addLink.click(function(e){
 			addBlock();
-			e.preventDefault();
+			return true;
 		});
 	});
 }

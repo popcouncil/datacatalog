@@ -85,7 +85,7 @@ class DataRecordsController < ApplicationController
   private
 
   def initialize_data_record_associations
-    @data_record.documents.build if @data_record.documents.empty?
+    @data_record.documents.build(:title => 'Title') if @data_record.documents.empty?
     @data_record.data_record_locations.build(:location_id => 0) if @data_record.locations.empty?
     @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name, :name => 'Author')
     @data_record.build_contact_from_owner if @data_record.contact.blank?
