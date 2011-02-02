@@ -171,7 +171,8 @@ class DataRecord < ActiveRecord::Base
 
   def build_contact_from_owner
     build_contact(:name  => owner.try(:display_name),
-                  :email => owner.try(:email))
+                  :email => owner.try(:email),
+                  :phone => (owner.try(:telephone_number) || 'Phone'))
   end
 
 
