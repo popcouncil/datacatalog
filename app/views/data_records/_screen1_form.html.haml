@@ -21,13 +21,16 @@
       - @data_record.data_record_locations.insert(0, @data_record.data_record_locations.new)
       - i = 0
       -  form.fields_for :data_record_locations do |location_form|
-        .row{:class => [(location_form.object.errors.count > 0 ? 'error' : nil), (i == 0 ? 'default' : nil)].compact.join(' ')}
-          = location_form.select :location_id, all_locations_for_select(:stringify_ids => false), {:disabled => "-------------"}, {:class => "geo-location"}
-          - if i != 1
-            %a.link-minus{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")} minus
-          - else
-            %a.link.link-add#geo-location-add{:href => "#"} plus
-          - i+=1
+        .item{:class => (i == 0 ? 'default' : nil)}
+          .row{:class => [(location_form.object.errors.count > 0 ? 'error' : nil)].compact.join(' ')}
+            = location_form.select :location_id, all_locations_for_select(:stringify_ids => false), {:disabled => "-------------"}, {:class => "geo-location"}
+            - if i != 1
+              %a.link-minus{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")} minus
+            - else
+              %a.link.link-add#geo-location-add{:href => "#"} plus
+            - i+=1
+          .row
+            = location_form.select :disaggregation_level, disaggregation_levels_for_select, :disabled => "-------------"
     / row
     .row{:class => (@data_record.errors.on(:year) ? 'error' : nil)}
       %label{:for => "year"} Publication year

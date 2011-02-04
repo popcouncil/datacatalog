@@ -36,6 +36,13 @@ $(document).ready(function(){
     } else {
       $('#add-tag').show();
     }
+    $('select.geo-location').each(function(){
+      if(['1', '0', '65', '2', '156', '17', '152', '119'].indexOf($(this).val()) == -1){
+        $(this).parent().next().show();
+      } else {
+        $(this).parent().next().hide();
+      }
+    });
   }
   show_hide_datarecord();
 
