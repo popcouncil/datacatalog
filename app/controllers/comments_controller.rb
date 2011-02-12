@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @comment = @comments.new(params[:comment])
 
     if @comment.update_attributes(:user_id => current_user.id)
-      if @comment.reports_problem?
-        
-      end
+#      if @comment.reports_problem?
+#        
+#      end
       flash[:notice] = "Comment saved!"
       redirect_to @data_record
     else

@@ -26,6 +26,9 @@
         / tab-content
         .tab-content
           .frame
+            - if @notes.length == 0
+              %h2 No notes
+              Write some using the form to the right.
             - @notes.each do |note|
               Note from
               = note.created_at.to_s(:mdy_slashed)
