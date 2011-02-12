@@ -9,7 +9,7 @@ class Document < ActiveRecord::Base
   validates_inclusion_of :document_type, :in => DOCUMENT_TYPES
 
   def download_url # Bug alert, XSS?
-    external_url.presence || file.url
+    '' #external_url.presence || file.url
   end
 
   def external?
