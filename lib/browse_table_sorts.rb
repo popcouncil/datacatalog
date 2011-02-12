@@ -8,7 +8,8 @@ module BrowseTableSorts
                                                         :ministry     => "lower(users.display_name)",
                                                         :organization => "lower(organizations.name)",
                                                         :format       => "lower(documents.document_type)",
-                                                        :tags         => "lower(tags.name)"
+                                                        :tags         => "lower(tags.name)",
+                                                        :year => 'lower(data_records.year)'
     end
   end
 end

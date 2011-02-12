@@ -8,6 +8,7 @@ class DataRecordsController < ApplicationController
   include BrowseTableSorts
 
   def index
+    params[:filters][:location] = 'All' if params[:filters] and params[:filters][:location] == '0'
     @filters = Filters.new(params[:filters])
     @data_records = DataRecord.browse(@filters, sort_order).paginate(:page => params[:page], :per_page => 25)
   end

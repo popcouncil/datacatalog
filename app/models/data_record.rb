@@ -45,8 +45,8 @@ class DataRecord < ActiveRecord::Base
   default_scope :conditions => "completed = '1'"
 
   named_scope :sorted, lambda {|sort|
-    { :include => [:organizations, :owner, :locations, :documents, :tags],
-      :order   => ["users.role = 'ministry_user' DESC", sort.presence, "locations.lft DESC", "data_records.created_at DESC"].compact.join(", ") }
+    { :include => [:organizations, :owner, :locations, :documents, :tags, :sponsors],
+      :order   => [sort.presence].compact.join(", ") }
   } 
 
   named_scope :by_location, lambda {|country|

@@ -4,7 +4,9 @@
     / row
     .row.sel-info
       %label{:for => "coverage"} Coverage
-      = form.select :location, all_locations_for_select("All", "-------------"), {:disabled => "-------------"}, {:class => 'sel02', :id => 'coverage'}
+      - locations = all_locations_for_select("All", "-------------")
+      - locations[0][0] = 'Select'
+      = form.select :location, locations, {:disabled => "-------------"}, {:class => 'sel02', :id => 'coverage'}
     / row
     .row.sel-info
       %label{:for => "organization"} Organization
@@ -19,3 +21,4 @@
       = form.select :document_type, document_types_for_select, {:disabled => "-------------"}, {:class => 'sel02', :id => 'type'}
     %input.btn-submit{:type => "submit", :value => "submit"}/
     %a.btn{:href => "#", :onclick => "$(this).prev('input').click(); return false;"} Filter Data
+    = link_to 'clear', data_records_path, :style => 'margin: 18px 0px 0px 10px; float: left; line-height: 26px;';

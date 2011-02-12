@@ -30,8 +30,12 @@
           %span
             - @data_records.total_pages.times do |i|
               = link_to(i+=1, data_records_path(params.merge(:page => i)))
-        %li
-          = link_to i=(params[:page] || 0)+1, data_records_path(params.merge(:page => i)), :class => 'next'
+        - if @data_records.total_pages > (params[:page].to_i)
+          %li
+            = link_to i=(params[:page] || 0).to_i+1, data_records_path(params.merge(:page => i)), :class => 'next'
     / block-title
-    = render :partial => 'shared/record_header'
-    = render :partial => 'data_record', :collection => @data_records
+    - if @data_records.length == 0
+      %h2 No Records Found
+    - else
+      = render :partial => 'shared/record_header'
+      = render :partial => 'data_record', :collection => @data_records
