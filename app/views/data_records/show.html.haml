@@ -34,7 +34,7 @@
           %ul.list-info
             %li
               %strong Submitted By
-              %span= h @data_record.owner.display_name
+              %span= link_to @data_record.owner.display_name, data_records_path(:filters => {:user => @data_record.owner_id})
             %li
               %strong Geographical Coverage
               %span
@@ -104,70 +104,22 @@
                   %strong Phone
                   %span= h @data_record.contact.phone
     / aside
-    .aside
-      %ul.btn-list
-        - if current_user == @data_record.owner || (current_user && current_user.admin?)
-          %li
-            %a.btn-blue{:href => edit_data_record_path(@data_record)} Edit Record
-        %li
-          %a.btn-red{:href => data_record_path(@data_record, :anchor => "comment_form", :reports_problem => 1)} Report a Problem with this Data
-      / box-form
-      .box-form
-        - form_for [@data_record, @data_record.notes.new], :html => {:class=> 'form-notes'} do |form|
-          %fieldset
-            %legend Title
-            / box
-            .box
-              .row
-                .heading
-                  %h2 Overall Rating
-                  %span (Averaged from #{pluralize @data_record.ratings_count, 'vote'})
-                = render :partial => 'ratings/stars', :locals => {:klass => 'list-star'}, :object => @data_record.ratings_average
-              / row
-              .row
-                .heading
-                  %h2 Your Rating
-                - if current_user
-                  %ul.list-star
-                    - rating = current_user.ratings.first(:conditions => {:data_record_id => @data_record.id})
-                    - rating = (rating.present? ? (rating.value || 0) : 0)
-                    - off = (5 - rating) > 0 ? (5 - rating) : 0
-                    - rating.times do |i|
-                      %li
-                        = link_to image_tag('/images/star_on.gif', :alt => 'star', :height => 12, :width => 12), data_record_rating_path(@data_record, :value => (i+=1)), :method => :put
-                    - off.times do |i|
-                      - i += rating
-                      %li
-                        = link_to image_tag('/images/star_off.gif', :alt => 'star', :height => 12, :width => 12), data_record_rating_path(@data_record, :value => (i+=1)), :method => :put
-                - else
-                  Please
-                  = link_to 'login', signin_path
-            / box
-            .box.data
-              .row
-                .heading
-                  %h2= (current_user and current_user.favorite?(@data_record)) ? 'Favorited' : 'Favorite This Data'
-                = render :partial => 'favorites/button', :locals => {:data_record => @data_record}
-            / box-notes
-            .box-notes
-              %h2 My Notes on This Data
-              %label{:for => "note"} Want to keep some private notes on this data record?
-              .text
-                = form.text_area :text, :rows => 10, :cols => 30, :id => 'note'
-              %input.btn-submit{:type => "submit", :value => "Save Notes"}/
+    = render :partial => 'aside'
   / box-discussion
   .box-discussion
     .frame
-      .discussion-inf
-        .title
-          %h2 Discussion
-          %span.note
-            %em= @data_record.comment_threads.count
-        / block-inf
-        .block-inf
-          .holder
-            .frame
-              = render :partial => 'comments/comment_parent', :collection => Comment.find_comments_for_commentable('DataRecord', @data_record.id)
+      - comments = @data_record.comments.all(:conditions => {:parent_id => nil})
+      - if comments.length > 0
+        .discussion-inf
+          .title
+            %h2 Discussion
+            %span.note
+              %em= @data_record.comment_threads.count
+          / block-inf
+          .block-inf
+            .holder
+              .frame
+                = render :partial => 'comments/comment_parent', :collection => comments
       / form-thoughts
       - if current_user
         - form_for [@data_record, @comment], :html => { :id => "comment_form", :class => 'form-thoughts' } do |form|

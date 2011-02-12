@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.find_by_slug(params[:id])
-    @data_records = @organization.data_records.sorted(sort_order).paginate(:page => params[:page])
+    redirect_to data_records_path(:filters => {:ministry_organization => "organization-#{@organization.id}"})
+    #@data_records = @organization.data_records.sorted(sort_order).paginate(:page => params[:page])
   end
 end

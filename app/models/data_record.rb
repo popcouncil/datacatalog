@@ -26,6 +26,7 @@ class DataRecord < ActiveRecord::Base
   has_many :favorites, :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
   has_many :notes,     :dependent => :destroy
+  has_many :comments, :as => :commentable
 
   before_validation_on_create :make_slug
   after_save :link_organizations
@@ -74,6 +75,10 @@ class DataRecord < ActiveRecord::Base
 
   named_scope :by_tags, lambda {|*tags|
     { :include => :tags, :conditions => { "tags.name" => tags }}
+  }
+
+  named_scope :by_user, lambda { |user_id|
+    {:conditions => {:'data_records.owner_id' => user_id }}
   }
   
   named_scope :by_document_type, lambda {|document_type|
