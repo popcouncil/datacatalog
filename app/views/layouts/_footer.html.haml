@@ -8,9 +8,11 @@
     %li
       %a{:href => "#thisistherssfeedlink"} RSS
   %ul.list
-    %li &copy; 2011 The Population Council, Inc. All rights reserved
     %li
-      Support by
-      %a{:href => "http://www.hewlett.org/"} The William and Flora Hewlett Foundation
+      &copy; 2011
+      = link_to 'The Population Council, Inc.', 'http://www.popcouncil.org/'
+      All rights reserved
+    %li
+      %a{:href => "http://www.hewlett.org/"} Support by The William and Flora Hewlett Foundation
   = flash[:login_callback]
   = flash[:logout_callback]

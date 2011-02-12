@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
   # End wordpress related stuff
 
   def gravatar_hash
-    Digest::MD5.hexdigest (self.email || '').strip.downcase
+    Digest::MD5.hexdigest((self.email || '').strip.downcase)
   end
 
   def gravatar_link

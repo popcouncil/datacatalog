@@ -2,17 +2,12 @@
 %fieldset
   %legend Title
   .title
-    %h2 Notify me when new data records are created
-    %p
-      %strong Select data by topic and geographical coverage.
-      %br/
-      For notifications of all new records in a specific topic,
-      %br/
-      select “All” in geographic coverage.
+    %h2 Notification Preferences
   / box-inf
   .box-inf
     .box-holder
       %h3 Topic
+      Select "All" to be notified when there is a new record on any topic that matches your geographic interests. You can select multiple topics.
       / row
       - if @alert_topics.blank?
         .row
@@ -24,9 +19,9 @@
       = link_to '[+]', "#", :id => 'add-alert-topic', :class => 'plus'
       = link_to '[-]', "#", :id => 'del-alert-topic', :class => 'minus'
     .box-holder.box
-      %h3 In Geographic Coverage
-      / row
-      - locations = all_locations_for_select; locations[1] = ['Global (does not select all)', '0']; locations.insert(1, ['All', '0'])
+      %h3 Geographic Coverage
+      Select "All" to be notified when there is a new record about any country or region that matches your topic interests. You can select multiple locations.
+      - locations = all_locations_for_select; locations[1] = ['Global (does not select all)', '1']; locations.insert(1, ['All', '0']); locations[0][0] = 'Select Region/County'
       - if @alert_locations.blank?
         .row
           = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations sel05'
@@ -43,17 +38,23 @@
           = form.check_box :alert_email
           %label{:for => "ch03"} By email
         .row-holder
+          = form.check_box :data_uncovered_opt_in, {:id => 'ch01'}
+          %label{:for => "ch01"} Yes, email me updates from DataUncovered.com.
+        .row-holder
+          = form.check_box :list_opt_in, {:id => "ch02"}
+          %label{:for => "ch02"} Yes, email me updates from the Population Council.
+        -#.row-holder
           = form.check_box :alert_sms
           %label{:for => "ch04"} By SMS
       / row
-      .row
+      -#.row
         %label{:for => "inp02"} Title
         .text
           = form.text_field :alert_sms_number
     .btn-holder
       %input.btn-submit{:type => "submit", :value => "Update"}/
     %p.clear
-      %a{:href => "#"} Clear All Notifications
+      = link_to 'Clear All Notifications', alerts_path, :method => :delete, :confirm => 'Are you sure you want to clear all notifications?'
 
 :javascript
   jQuery(document).ready(function($){

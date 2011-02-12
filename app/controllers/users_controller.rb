@@ -26,6 +26,7 @@ class UsersController < ApplicationController
         redirect_to signin_path
       end
     else
+      @user_session = UserSession.new(:email => 'Email', :password => 'password')
       render :action => :new
     end
   end

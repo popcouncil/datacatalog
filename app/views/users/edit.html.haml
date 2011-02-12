@@ -16,9 +16,7 @@
           = render :partial => 'alerts/form', :object => form
 
 #hidden-new-tag{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
-  .row
-    = select_tag('tags[]', options_for_select([['Select Topics', '0']] + Alert.tags.slice(2, 100), :disabled => "-------------"), :class => 'alert_tags sel05')
+  = select_tag('tags[]', options_for_select([['Select Topics', '0']] + Alert.tags.slice(2, 100), :disabled => "-------------"), :class => 'alert_tags sel05')
 
 #hidden-new-location{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
-  .row
-    = select_tag('locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations sel05')
+  = select_tag('locations[]', options_for_select(all_locations_for_select, :disabled => "-------------"), :class => 'alert_locations sel05')
