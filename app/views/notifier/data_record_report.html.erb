@@ -1,0 +1,9 @@
+Hi <%= @data_record.owner.display_name %>,
+<br><br>
+Someone reported a problem with a record you created on Data Uncovered: <%= link_to @data_record.title, data_record_url(@data_record) %>. Here is how this person described the problem:
+<br><br>
+"<%= @report.%>"
+<br><br>
+If you want to edit the record, please <%= link_to 'click here', data_record_url(@data_record) %>. If you think this user made an error, please feel free to add a comment to the record by clicking on the link. You can also email us. 
+<br><br>
+Thanks for using Data Uncovered!
