@@ -81,6 +81,6 @@
       - @top.each do |top|
         %li
           .frame
-            %h3=h top.title
+            %h3=link_to h(top.title), data_record_path(top)
             %p=h top.description
             
