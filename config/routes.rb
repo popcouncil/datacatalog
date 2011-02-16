@@ -30,7 +30,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :static
 
-  map.root                                                        :controller => "main",            :action => "dashboard"
+  map.dashboard '/dashboard', :controller => 'main', :action => :dashboard
+  map.root                                                        :controller => "main",            :action => "index"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"
   map.confirm            "confirm/:token",                        :controller => "users",           :action => "confirm"
