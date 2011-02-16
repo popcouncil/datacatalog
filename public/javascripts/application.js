@@ -146,11 +146,12 @@ $(document).ready(function(){
     $('.data-record-tag:not(:last)').each(function(){
       $item.find('option[value=' + $(this).val() + ']').remove();
     });
-    if($('.geo-location option:selected[value=0]').length > 0){ $('#location_fields .add_another').hide(); } else { $('#location_fields .add_another').show(); }
+    if($('.alert_locations option:selected[value=0]').length > 1){ $('#add-alert-location').hide(); } else { $('#add-alert-location').show(); }
   }
 
   $('.data-record-tag, #user_alert_sms').live('change', show_hide_add_tag);
-  $('#add-data-record-tag').click(show_hide_add_tag);
+  $('#add-data-record-tag').click(function(){setTimeout(show_hide_add_tag, 250);});
+  $('#add-alert-location').click(function(){setTimeout(show_hide_add_tag, 250);});
   show_hide_add_tag();
 
   $('#documents_fields .remove_link').live('click', function(){

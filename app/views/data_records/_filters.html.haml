@@ -5,7 +5,7 @@
     .row.sel-info
       %label{:for => "coverage"} Coverage
       - locations = all_locations_for_select("All", "-------------")
-      - locations[0][0] = 'Select'
+      - locations.delete_at(0)
       = form.select :location, locations, {:disabled => "-------------"}, {:class => 'sel02', :id => 'coverage'}
     / row
     .row.sel-info
