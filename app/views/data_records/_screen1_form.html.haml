@@ -42,7 +42,7 @@
         %label{:for => "tag-default"} Select tag
         - topic_tags_ = topic_tags.dup; topic_tags_.delete_at(2)
         = select_tag 'tags[]', options_for_select(topic_tags_), :class => 'data-record-tag sel default required-sel', :id => 'tag-default'
-        %a.link-minus{:href => "#"} minus
+        %a.link-minus.tag-remove{:href => "#"} minus
       - if @data_record.tags.blank?
         .row
           = select_tag 'tags[]', options_for_select(topic_tags), :class => 'data-record-tag sel required-sel'
@@ -55,7 +55,7 @@
         - tags.each do |tag|
           .row{:class => (@data_record.errors.on(:tag_list) ? 'error' : nil)}
             = select_tag 'tags[]', options_for_select(topic_tags, :selected => tag.name), :class => 'data-record-tag sel required-sel'
-            = link_to 'minus', '#', :id => 'remove-data-record-tag', :class => 'link link-add'
+            = link_to 'minus', '#', :id => 'remove-data-record-tag', :class => 'link link-add tag-remove'
 
 .box-step
   .frame

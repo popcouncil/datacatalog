@@ -13,7 +13,8 @@
         .box-btn
           = render :partial => 'shared/quick_menu', :object => 'add'
         %h1 #{@data_record.new_record? ? 'Create' : 'Edit'} a record
-        %span.mark All fields are required.
+        - if @data_record.current_step == 1
+          %span.mark All fields are required.
         / box-error
         .box-error
           .frame

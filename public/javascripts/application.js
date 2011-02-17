@@ -55,6 +55,41 @@ $(document).ready(function(){
     show_hide_datarecord();
   });
 
+  $('.geografical-select .link-minus').live('click', function(){
+    var block = $(this).parent().parent();
+	  if($(this).attr('href') != '#'){
+	    block.replaceWith("<input type='hidden' name='" + $(this).attr('href').substr(1) + "' value=1 />");
+	  } else {
+      block.remove();
+	  }
+		return false;
+  });
+
+  $('.title-block .link-minus').live('click', function(){
+    var block = $(this).parent().parent();
+	  if($(this).attr('href') != '#'){
+	    block.replaceWith("<input type='hidden' name='" + $(this).attr('href').substr(1) + "' value=1 />");
+	  } else {
+      block.remove();
+	  }
+    return false;
+  });
+
+  $('.affiliation-remove').live('click', function(){
+    var block = $(this).parent();
+	  if($(this).attr('href') != '#'){
+	    block.replaceWith("<input type='hidden' name='" + $(this).attr('href').substr(1) + "' value=1 />");
+	  } else {
+      block.remove();
+	  }
+    return false;
+  });
+
+  $('.tag-remove').live('click', function(){
+    $(this).parent().remove();
+    return false;
+  });
+
   $('.document-type-radio').live('change', function(){
     var $this = $(this);
     $this.parent().

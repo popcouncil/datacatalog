@@ -33,6 +33,10 @@ class DataRecordsController < ApplicationController
     params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
     params[:data_record][:title] = '' if params[:data_record][:title] == 'Title'
     params[:data_record][:description] = '' if params[:data_record][:description] == 'Add description'
+    params[:data_record][:lead_organization_name] = '' if params[:data_record][:lead_organization_name] == 'Lead organization'
+    params[:data_record][:collaborator_list] = ''  if params[:data_record][:collaborator_list] == 'Other institutional collaborators'
+    params[:data_record][:homepage_url] = '' if params[:data_record][:homepage_url] == 'URL'
+    params[:data_record][:funder] = '' if params[:data_record][:funder] == 'Funder'
     if params[:id].present?
       @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else
@@ -90,7 +94,7 @@ class DataRecordsController < ApplicationController
   def initialize_data_record_associations
     @data_record.documents.build(:title => 'Title') if @data_record.documents.empty?
     @data_record.data_record_locations.build(:location_id => 0) if @data_record.locations.empty?
-    @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name, :name => 'Author')
+    @data_record.authors.unshift Author.new(:affiliation_name => 'Affiliation', :name => 'Author')
     @data_record.build_contact_from_owner if @data_record.contact.blank?
   end
 

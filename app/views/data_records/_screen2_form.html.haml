@@ -5,18 +5,18 @@
     .title
       %h2 Step 3. Tell us who did the work
     / row
-    .row
+    .row{:class => @data_record.errors.on(:lead_organization_name) ? 'error' : nil}
       %label{:for => "organization"} Lead organization
       .text
         = form.text_field :lead_organization_name, :class => 'required'
     / row
-    .row
+    .row{:class => @data_record.errors.on(:collaborator_list) ? 'error' : nil}
       %label{:for => "collaborators"} Other institutional collaborators
       .text
         = form.text_field :collaborator_list, :class => 'required'
       %span.txt Separate organizations with commas
     / row
-    .row
+    .row{:class => @data_record.errors.on(:homepage_url) ? 'error' : nil}
       %label{:for => "url"} URL
       .text
         = form.text_field :homepage_url, :title => 'URL', :class => 'required'
@@ -36,7 +36,8 @@
             %label{:for => "affiliation-default"} Affiliation
             .text
               = author_form.text_field :affiliation_name, :class => 'required'
-          %a.link-minus{:href => "#"} minus
+          - if i > 1
+            %a.link-minus.affiliation-remove{:href => (author_form.object.new_record? ? '#' : "#data_record[authors_attributes][#{i}][_destroy]")} minus
           - if i == 1
             %a.link.link-add{:href => "#"} plus
         - i += 1
@@ -64,6 +65,6 @@
       .row
         %label{:for => "phone"} Phone
         .text
-          = contact_form.text_field :phone, :class => 'required'
+          = contact_form.text_field :phone, :class => 'required', :value => (contact_form.object.phone.blank? ? 'Phone' : contact_form.object.phone)
     .row-btn
     %input.btn-submit{:type => "submit", :value => "Go to last step"}/
