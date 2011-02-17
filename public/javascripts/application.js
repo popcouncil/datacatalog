@@ -38,7 +38,7 @@ $(document).ready(function(){
     }
     $('select.geo-location').each(function(){
       if(['1', '0', '65', '2', '156', '17', '152', '119'].indexOf($(this).val()) == -1){
-        $(this).parent().next().show();
+        $(this).parent().next().show().children('select').customSelect();
       } else {
         $(this).parent().next().hide();
       }
@@ -46,7 +46,7 @@ $(document).ready(function(){
   }
   show_hide_datarecord();
 
-  $('.link-add').live('click', function(){
+  $('.link-add,.link-minus').live('click', function(){
     show_hide_datarecord();
     return false;
   });

@@ -31,6 +31,8 @@ class DataRecordsController < ApplicationController
   def create
     params[:data_record][:documents_attributes].delete('0') if params[:data_record][:documents_attributes]
     params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
+    params[:data_record][:title] = '' if params[:data_record][:title] == 'Title'
+    params[:data_record][:description] = '' if params[:data_record][:description] == 'Add description'
     if params[:id].present?
       @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else

@@ -21,25 +21,27 @@
       - @data_record.data_record_locations.insert(0, @data_record.data_record_locations.new)
       - i = 0
       -  form.fields_for :data_record_locations do |location_form|
-        .item{:class => (i == 0 ? 'default' : nil)}
-          .row{:class => [(location_form.object.errors.count > 0 ? 'error' : nil)].compact.join(' ')}
-            = location_form.select :location_id, all_locations_for_select(:stringify_ids => false), {:disabled => "-------------"}, {:class => "geo-location"}
+        .row.geografical-select{:class => [(location_form.object.errors.count > 0 ? 'error' : nil), (i == 0 ? 'default' : nil)].compact.join(' ')}
+          .select-row
+            = location_form.select :location_id, all_locations_for_select(:stringify_ids => false), {:disabled => "-------------"}, {:class => ["coverage geo-location", (i == 0 ? 'default' : nil)].compact.join(' ')}
             - if i != 1
-              %a.link-minus{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")} minus
+              %a.link-minus{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")} remove location
             - else
-              %a.link.link-add#geo-location-add{:href => "#"} plus
-            - i+=1
-          .row
-            = location_form.select :disaggregation_level, disaggregation_levels_for_select, :disabled => "-------------"
+              %a.link.link-add#geo-location-add{:href => "#"} Add Location
+          .citys
+            %span
+              What is the lowest level of disaggregation?
+            = location_form.select :disaggregation_level, disaggregation_levels_for_select, {:disabled => "-------------"}, {:class => ['city-select', (i == 0 ? 'default' : nil)].compact.join(' ')}
+          - i+=1
     / row
     .row{:class => (@data_record.errors.on(:year) ? 'error' : nil)}
       %label{:for => "year"} Publication year
-      .text
-        = form.text_field :year,{:value => (@data_record.year || 'Publication Year'), :class => :required}
+      = form.select :year, ['Publication Year'] + (1990..Time.now.year).to_a.reverse, :class => :required
     .add-block
       .row.default
         %label{:for => "tag-default"} Select tag
-        = select_tag 'tags[]', options_for_select(topic_tags), :class => 'data-record-tag sel default required-sel', :id => 'tag-default'
+        - topic_tags_ = topic_tags.dup; topic_tags_.delete_at(2)
+        = select_tag 'tags[]', options_for_select(topic_tags_), :class => 'data-record-tag sel default required-sel', :id => 'tag-default'
         %a.link-minus{:href => "#"} minus
       - if @data_record.tags.blank?
         .row
@@ -58,7 +60,7 @@
 .box-step
   .frame
     .title
-      %h2 Step 2. Add documents (at least one document required)
+      %h2 Step 2: Add files or links (at least one file or URL is required)
     / row
     .add-block
       - @data_record.documents.insert(0, @data_record.documents.new(:title => 'Title'))
@@ -87,7 +89,7 @@
               %label{:for => (i == 0 ? 'r02-default' : "r02-#{i}")} Provide a link
               .text-row.upload-box
                 .text
-                  = document_form.text_field :external_url
+                  = document_form.text_field :external_url, {:value => (document_form.object.external_url || 'http://')}
           - if i == 1
             .row-holder
               .box-add

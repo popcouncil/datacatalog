@@ -364,7 +364,7 @@ select{
 	width:300px;
 	overflow:hidden;
 	display:block;
-	padding:9px 13px 7px;
+	padding:9px 13px 8px;
 	cursor:pointer;
 	background:url(../images/bg-box-holder.gif) no-repeat 0 100%;
 }
@@ -657,7 +657,7 @@ select{
 	cursor:pointer;
 	background:url(../images/heart-orange.png) no-repeat;
 }
-.catalog-info .block-title .mark.heart{
+.catalog-info .block-title .mark .heart{
 	background:url(../images/heart-blue.png) no-repeat;
 }
 .catalog-info .block-title .list .col01{
@@ -1130,8 +1130,7 @@ select{
 	padding:0 0 11px;
 }
 .form-login .text,
-.form-register .text,
-.form-contact .texti {
+.form-register .text{
 	width:299px;
 	height:27px;
 	background:url(../images/bg-input7.gif) no-repeat;
@@ -1139,8 +1138,7 @@ select{
 	padding:7px 16px 8px;
 }
 .form-login .text input,
-.form-register .text input,
-.form-contact .texti input {
+.form-register .text input{
 	float:left;
 	background:none;
 	border:0;
@@ -1705,23 +1703,23 @@ select{
 	float:left;
 }
 .form-inform2 .plus{
-	float:right;
+	float:left;
 	width:16px;
 	height:14px;
+	margin:13px 0 0 9px;
 	display:inline;
 	text-indent:-9999px;
-	margin: -40px 17px;
 	overflow:hidden;
 	background:url(../images/bg-plus.gif) no-repeat;
 }
 .form-inform2 .minus{
-	float:right;
+	float:left;
 	width:12px;
 	height:14px;
 	text-indent:-9999px;
 	overflow:hidden;
 	background:url(../images/bg-minus.gif) no-repeat;
-	margin-top: -40px;
+	margin:13px 0 0 5px;
 	display:inline;
 }
 .form-inform2 .link{margin:17px 0 0 9px;}
@@ -2569,6 +2567,10 @@ select{
 	float:left;
 	width:100%;
 }
+.optionsDivVisible ul li.disabled a {
+	text-decoration:none !important;
+	cursor:default !important;
+}
 .optionsDivVisible a {
 	color: #999;
 	overflow:hidden;
@@ -2600,3 +2602,26 @@ select{
 	width:100%;
 	overflow:hidden;
 }
+.select-row {
+	width:100%;
+	overflow:hidden;
+}
+.states,
+.citys {
+	width:100%;
+	overflow:hidden;
+	padding:5px 0 0;
+}
+.geografical-select .link-add,
+.geografical-select .link-minus {
+	display:none;
+	text-indent:0;
+	color:#046F8C;
+	width:auto;
+	padding-left:25px;
+	padding:5px 0 0 25px;
+}
+.geografical-select .link-minus {
+	display:block;
+}
+
