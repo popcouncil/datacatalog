@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
     recipients    user.email
     sent_on       Time.now
-    body          :confirmation_url => confirm_url(user.perishable_token)
+    body          :confirmation_url => confirm_url(user.perishable_token), :user => user
   end
 
   def welcome_message(user)

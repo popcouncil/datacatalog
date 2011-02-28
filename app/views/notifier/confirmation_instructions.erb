@@ -1,9 +1,17 @@
-Thank you for creating an account at the National Data Catalog.
+Hi <%= @user.display_name %>,
 
-Please confirm your email address by clicking the link below:
+Thank you for creating an account with Data Uncovered. To get started, please confirm your email address by clicking the link below:
 
 <%= @confirmation_url %>
 
-If the above link does not work, please try pasting it into your browser.
+If the link does not work, just copy and paste it into your browser's address bar.
 
-- The Sunlight Labs
+Cheers,
+Your friends at Data Uncovered
+
+<% unless @user.list_opt_in? and @user.data_uncovered_opt_in? %>
+
+P.s. You opted not to receive any updates from Data Uncovered or the Population Council. You can change this at any time by going to Account Settings or clicking on the link below:
+
+<%= edit_profile_url %>
+<% end %>
