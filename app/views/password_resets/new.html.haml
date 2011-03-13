@@ -1,0 +1,22 @@
+.block-holder
+  .block-register
+    .holder
+      .frame
+        / box-register
+        .box-register
+          .title
+            %h1 Forgot your password?
+          - form_tag send_reset_path, {:method => 'get', :class => "form-register"} do
+            %fieldset
+              %legend Title
+              .row
+                %label{:for => 'email_address'} Email
+                .text
+                  = text_field_tag :email_address, 'Email'
+              %h2 We'll email you instructions on how to reset your password
+              %input.btn-submit{:type => 'submit', :value => 'JOIN!', :name => 'commit'}
+            %h3 No account yet?
+            %h3
+              You'll need to
+              = link_to 'signup', signup_path
+              first.

@@ -10,6 +10,9 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.new_data_record '/data-new', :controller => 'data_records', :action => 'new'
+  map.tour '/tour', :controller => 'main', :action => 'tour'
+  map.tools '/tools', :controller => 'main', :action => 'tools'
+  map.contest '/contest', :controller => 'main', :action => 'contest'
 
   map.resources :organizations, :as => :org, :only => [:show]
 
@@ -25,18 +28,21 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :profile, :controller => "users", :only => [:edit, :update]
   map.resource :user_session
 
-  map.root                                                        :controller => "main",            :action => "dashboard"
+  map.resource :static
+
+  map.dashboard '/dashboard', :controller => 'main', :action => :dashboard
+  map.root                                                        :controller => "main",            :action => "index"
   map.about              "about",                                 :controller => "main",            :action => "about"
   map.blog               "blog",                                  :controller => "main",            :action => "blog"
   map.confirm            "confirm/:token",                        :controller => "users",           :action => "confirm"
   map.contact            "contact",                               :controller => "contact",         :action => "index"
   map.contact_submission "contact/submit",                        :controller => "contact",         :action => "submit"
   map.dashboard          "dashboard",                             :controller => "main",            :action => "dashboard"
+  map.send_reset         "forgot/sent",                           :controller => "password_resets", :action => "create"
   map.forgot             "forgot",                                :controller => "password_resets", :action => "new"
   map.perform_reset      "reset/attempt",                         :controller => "password_resets", :action => "update"
   map.reset              "reset/:token",                          :controller => "password_resets", :action => "edit"
   map.search             "search",                                :controller => "search",          :action => "index"
-  map.send_reset         "forgot/sent",                           :controller => "password_resets", :action => "create"
   map.signin             "signin",                                :controller => "user_sessions",   :action => "new"
   map.signout            "signout",                               :controller => "user_sessions",   :action => "destroy"
   map.signup             "signup",                                :controller => "users",           :action => "new"

@@ -1,0 +1,22 @@
+%fieldset
+  %legend Title
+  .row
+    =h flash[:notice]
+    = user.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+  .row{:class => (user.object.errors.on(:display_name) ? 'error' : nil)}
+    %label{:for => "display_name"} Full name
+    .text
+      = user.text_field :display_name
+  .row{:class => (user.object.errors.on(:email) ? 'error' : nil)}
+    %label{:for => "email"} Email
+    .text
+      = user.text_field :email
+  .row{:class => (user.object.errors.on(:password) ? 'error' : nil)}
+    %label{:for => "password"} Password
+    .text
+      = user.password_field :password
+  .row{:class => (user.object.errors.on(:password_confirmation) ? 'error' : nil)}
+    %label{:for => "password2"} Password
+    .text
+      = user.password_field :password_confirmation
+  %input.btn-submit{:type => "submit", :value => "JOIN!"}/

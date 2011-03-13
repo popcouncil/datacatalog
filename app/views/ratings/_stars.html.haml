@@ -1,0 +1,10 @@
+- klass ||= 'list-rating'
+- off = (5 - stars) > 0 ? (5 - stars) : 0
+%ul{:class => klass}
+  - stars.times.each do |star|
+    %li
+      %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+  - off.times.each do |off|
+    %li
+      %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+

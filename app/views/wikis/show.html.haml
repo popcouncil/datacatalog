@@ -1,0 +1,50 @@
+- content_for :title do
+  = h @data_record.title
+  
+/ block-catalog
+.block-record
+  .box-info
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'browse'
+    %h1= h @data_record.title
+  / twocolumns
+  .twocolumns
+    .column
+      / text-inform
+      .text-inform
+        %ul.tabset
+          %li
+            %a.tab{:href => data_record_path(@data_record)}
+              %span Data Details
+          %li.active
+            %a.tab{:href => data_record_wiki_path(@data_record)}
+              %span Community Docs
+          %li
+            %a.tab{:href => data_record_notes_path(@data_record)}
+              %span Private Notes
+        / tab-content
+        .tab-content
+          .frame
+            - if @current_version
+              %p= sanitize markdownize @current_version.body
+            - else
+              %p
+                This data record doesn't have any documentation yet.
+                Start
+                = link_to "writing it", edit_data_record_wiki_path(@data_record)
+                \.
+
+            - if @wiki
+              %h3 All Revisions
+              %ul
+                - @wiki.versions.each do |version|
+                  %li
+                    = link_to time_ago_in_words(version.updated_at), data_record_wiki_path(@data_record, :version => version.version)
+                    ago by
+                    = h version.user.display_name
+              %p
+                Have your own input?
+                = link_to "edit and improve the documentation", edit_data_record_wiki_path(@data_record)
+    = render :partial => 'data_records/aside'
+

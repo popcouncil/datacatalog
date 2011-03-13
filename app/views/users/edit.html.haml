@@ -1,0 +1,22 @@
+- content_for :title do
+  Account Settings
+
+.settings-holder
+  %h1 Account Settings
+  .block-settings
+    .holder
+      .frame
+        - form_for @user, :url => profile_path, :html => { :method => :put, :class => 'form-inform' } do |form|
+          = form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+          = render :partial => 'users/form', :object => form
+
+        - form_for (@alert_user || @user || current_user), :url => alerts_path, :html => {:class => 'form-inform2'} do |form|
+          = form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
+          = render :partial => 'alerts/form', :object => form
+
+#hidden-new-tag{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
+  = select_tag('tags[]', options_for_select([['Select Topics', '0']] + Alert.tags.slice(2, 100), :disabled => "-------------"), :class => 'alert_tags sel05')
+
+#hidden-new-location{:style => 'height: 0px; width: 0px; display: none;', :action => '#'}
+  - locations = all_locations_for_select;  locations[1] = ['Global (does not select all)', '1']; locations.insert(1, ['All', '0']); locations[0][0] = 'Select Region/Country'
+  = select_tag('locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations sel05')

@@ -1,0 +1,20 @@
+.block-title
+  %ul
+    %li.col01
+      %h2
+        = link_to 'Data Record', sortable_url(:sort => :title)
+    %li.col02
+      %h2
+        = link_to 'Rating', sortable_url(:sort => :rating)
+    %li.col03
+      %h2
+        = link_to 'Coverage', sortable_url(:sort => :location)
+    %li.col04
+      %h2
+        = link_to 'Year', sortable_url(:sort => :year)
+    %li.col05
+      %h2
+        = link_to 'Organization', sortable_url(:sort => :organization)
+    %li.col09
+      %h2
+        = link_to 'Record Type', sortable_url(:sort => :document_type)

@@ -1,0 +1,15 @@
+%fieldset
+  %legend Title
+  .row
+    = login.error_messages custom_error_messages
+  .row
+    %label{:for => "email2"} Email
+    .text
+      = login.text_field :email
+  .row
+    %label{:for => "password3"} Password
+    .text
+      = login.password_field :password
+  %input.btn-submit{:type => "submit", :value => "Login"}/
+  %p
+    %a{:href => forgot_path} Forgot your password?

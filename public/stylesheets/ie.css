@@ -1,0 +1,27 @@
+* html body {width: expression(document.documentElement.clientWidth < 1002 ? "1002px" : "auto");}
+* html .footer-menu li,
+* html #footer .list li,
+* html .list-paging li{
+	padding-left: expression( (this===this.parentNode.childNodes[0]) ? "0" : "auto"); 
+	background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto"); 
+}
+* html .gallery-inf .txt {
+	background:url(..//images/transparent.gif);
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='/images/bg-txt-holder.png', sizingmethod='scale');
+}
+* html .block-record .aside .heart:hover {
+	background: -9999px -9999px;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='/images/heart-orange.png', sizingmethod='crop');
+}
+* html .block-record .aside .heart {
+	background: -9999px -9999px;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='/images/heart-blue.png', sizingmethod='crop');
+}
+* html .catalog-info .block-title .heart {
+	background: -9999px -9999px;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='/images/heart-orange.png', sizingmethod='crop');
+}
+* html .catalog-info .block-title .mark .heart {
+	background: -9999px -9999px;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='/images/heart-blue.png', sizingmethod='crop');
+}

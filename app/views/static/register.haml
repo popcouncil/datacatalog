@@ -1,0 +1,54 @@
+.block-holder
+  .block-register
+    .holder
+      .frame
+        / box-register
+        .box-register
+          .title
+            %h1 Register
+          / form-register
+          %form.form-register{:action => "#"}
+            %fieldset
+              %legend Title
+              / row
+              .row
+                %label{:for => "name"} Full name
+                .text
+                  %input#name{:type => "text", :value => "Full name"}/
+              / row
+              .row
+                %label{:for => "email"} Email
+                .text
+                  %input#email{:type => "text", :value => "Email"}/
+              / row
+              .row
+                %label{:for => "password"} Password
+                .text
+                  %input#password{:type => "password", :value => "Password"}/
+              / row
+              .row
+                %label{:for => "password2"} Password
+                .text
+                  %input#password2{:type => "password", :value => "Confirm password"}/
+              %input.btn-submit{:type => "submit", :value => "JOIN!"}/
+        / box-login
+        .box-login
+          .title
+            %h2 Login
+          / form-login
+          %form.form-login{:action => "#"}
+            %fieldset
+              %legend Title
+              / row
+              .row
+                %label{:for => "email2"} Email
+                .text
+                  %input#email2{:type => "text", :value => "Email"}/
+              / row
+              .row
+                %label{:for => "password3"} Password
+                .text
+                  %input#password3{:type => "password", :value => "Password"}/
+              %input.btn-submit{:type => "submit", :value => "Login"}/
+              %p
+                %a{:href => "#"} Forgot your password?

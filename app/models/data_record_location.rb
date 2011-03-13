@@ -1,5 +1,6 @@
 class DataRecordLocation < ActiveRecord::Base
-  DISAGGREGATION_LEVELS = %w(1st\ Administrative\ Level\
+  DISAGGREGATION_LEVELS = %w(National
+                             1st\ Administrative\ Level\
                              2nd\ Administrative\ Level\
                              3rd\ Administrative\ Level\
                              Borough

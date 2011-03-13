@@ -1,0 +1,16 @@
+/ block-about
+.block-about
+  %h1 Contact Us
+  / block-contact
+  .block-contact
+    %form.form-contact{:action => "#"}
+      %fieldset
+        %legend Title
+        / title
+        .title
+          %p Have a question or comment about the site? Submit it below.
+        .row
+          %label{:for => "txt01"} If you have a question about a particular data record in the Catalog, use the Comment or Report a Problem tool on that data record's page.
+          .text
+            %textarea#txt01{:cols => "30", :rows => "10"} Comments
+          %input.btn-submit{:type => "submit", :value => "Submit"}/

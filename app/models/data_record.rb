@@ -26,6 +26,7 @@ class DataRecord < ActiveRecord::Base
   has_many :favorites, :dependent => :destroy
   has_many :ratings,   :dependent => :destroy
   has_many :notes,     :dependent => :destroy
+  has_many :comments, :as => :commentable
 
   before_validation_on_create :make_slug
   after_save :link_organizations
@@ -45,8 +46,8 @@ class DataRecord < ActiveRecord::Base
   default_scope :conditions => "completed = '1'"
 
   named_scope :sorted, lambda {|sort|
-    { :include => [:organizations, :owner, :locations, :documents, :tags],
-      :order   => ["users.role = 'ministry_user' DESC", sort.presence, "locations.lft DESC", "data_records.created_at DESC"].compact.join(", ") }
+    { :include => [:organizations, :owner, :locations, :documents, :tags, :sponsors],
+      :order   => [sort.presence].compact.join(", ") }
   } 
 
   named_scope :by_location, lambda {|country|
@@ -74,6 +75,10 @@ class DataRecord < ActiveRecord::Base
 
   named_scope :by_tags, lambda {|*tags|
     { :include => :tags, :conditions => { "tags.name" => tags }}
+  }
+
+  named_scope :by_user, lambda { |user_id|
+    {:conditions => {:'data_records.owner_id' => user_id }}
   }
   
   named_scope :by_document_type, lambda {|document_type|
@@ -171,7 +176,8 @@ class DataRecord < ActiveRecord::Base
 
   def build_contact_from_owner
     build_contact(:name  => owner.try(:display_name),
-                  :email => owner.try(:email))
+                  :email => owner.try(:email),
+                  :phone => (owner.try(:telephone_number) || 'Phone'))
   end
 
 

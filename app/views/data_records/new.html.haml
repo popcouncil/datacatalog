@@ -1,0 +1,24 @@
+- content_for :title do
+  Add Data Record
+
+= show_flash_message
+/ block-create
+.block-create
+  - form_for @data_record, :url => data_records_path, :html => { :multipart => true, :method => :post, :class => "form-create #{@data_record.errors.count > 0 ? 'form-error' : nil}" } do |form|
+    %fieldset
+      %legend Title
+      = form.hidden_field :current_step
+      .block-title
+        / box-btn
+        .box-btn
+          = render :partial => 'shared/quick_menu', :object => 'add'
+        %h1 #{@data_record.new_record? ? 'Create' : 'Edit'} a record
+        - if @data_record.current_step == 1
+          %span.mark All fields are required.
+        / box-error
+        .box-error
+          .frame
+            %p= form.error_messages
+      / block-step
+      .block-step
+        = render :partial => "#{@data_record.current_step}_form", :locals => {:form => form}

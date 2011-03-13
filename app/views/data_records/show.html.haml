@@ -1,0 +1,148 @@
+- content_for :title do
+  = h @data_record.title
+  
+/ block-catalog
+.block-record
+  .box-info
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'browse'
+    %h1= h @data_record.title
+  / twocolumns
+  .twocolumns
+    .column
+      / text-inform
+      .text-inform
+        %ul.tabset
+          %li.active
+            %a.tab{:href => data_record_path(@data_record)}
+              %span Data Details
+          %li
+            %a.tab{:href => data_record_wiki_path(@data_record)}
+              %span Community Docs
+          %li
+            %a.tab{:href => data_record_notes_path(@data_record)}
+              %span Private Notes
+        / tab-content
+        .tab-content
+          .frame
+            %p= simple_format @data_record.description
+      / inform
+      .inform
+        .frame
+          / list-info
+          %ul.list-info
+            %li
+              %strong Submitted By
+              %span= link_to @data_record.owner.display_name, data_records_path(:filters => {:user => @data_record.owner_id})
+            %li
+              %strong Geographical Coverage
+              %span
+                - locations = @data_record.data_record_locations.all
+                - locations.each do |loc|
+                  = link_to(loc.location.name, data_records_path(:filters => { :location => loc.location.id }))
+                  %em= h(" (#{loc.disaggregation_level})")
+                  = ', ' unless locations.last == loc
+            %li
+              %strong Publication Year
+              %span= link_to @data_record.year, data_records_path(:filters => { :release_year => @data_record.year })
+            %li
+              %strong Tags
+              %span= linked_tags(@data_record)
+            - if @data_record.ministry.present?
+              %li
+                %strong Ministry
+                %span= link_to @data_record.ministry.display_name, data_records_path(:filters => { :ministry => @data_record.ministry.id })
+            %li
+              %strong Lead Organization
+              %span= link_to @data_record.lead_organization.name, @data_record.lead_organization
+            - if @data_record.collaborators.any?
+              %li
+                %strong
+                  Other Institutional
+                  %br/
+                  Collaborators
+                %span= @data_record.collaborators.map {|collab| link_to collab.name, collab }.join(", ")
+            - if @data_record.homepage_url.present?
+              %li
+                %strong URL
+                %span= link_to @data_record.homepage_url, @data_record.homepage_url
+            - if @data_record.funder.present?
+              %li
+                %strong Funder
+                %span
+                  %em=h @data_record.funder
+            - if @data_record.authors.any?
+              %li
+                %strong
+                  Authors
+                  %br/
+                  (Affiliation)
+                %span
+                  %em
+                    = authors_of @data_record
+          / box-inf
+          - if @data_record.documents.any?
+            .box-inf
+              %h2 Additional Resources
+              %ul
+                - @data_record.documents.each do |document|
+                  %li
+                    = link_to "#{document.title} (#{document.document_type})", document.download_url, :class => (document.external? ? 'web-link' : 'map-area')
+          / box-details
+          .box-details
+            %h2 Contact Details to Request More Information
+            %ul
+              %li
+                %strong Name
+                %span=h @data_record.contact.name
+              %li
+                %strong Email
+                %span= mail_to @data_record.contact.email
+              - if @data_record.contact.phone.present?
+                %li
+                  %strong Phone
+                  %span= h @data_record.contact.phone
+    / aside
+    = render :partial => 'aside'
+  / box-discussion
+  .box-discussion
+    .frame
+      - comments = @data_record.comments.all(:conditions => {:parent_id => nil})
+      - if comments.length > 0
+        .discussion-inf
+          .title
+            %h2 Discussion
+            %span.note
+              %em= @data_record.comment_threads.count
+          / block-inf
+          .block-inf
+            .holder
+              .frame
+                = render :partial => 'comments/comment_parent', :collection => comments
+      / form-thoughts
+      - if current_user
+        - form_for [@data_record, @comment], :html => { :id => "comment_form", :class => 'form-thoughts' } do |form|
+          = form.hidden_field :parent_id, :value => @comment_parent_id
+          %fieldset
+            %legend Title
+            %h2 Your Thoughts
+            %p Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.
+            .box-holder
+              / box-inf
+              .box-inf
+                %label{:for => "comment"}
+                  %strong Comment
+                %strong.txt This Comment:
+                .row-check
+                  = form.check_box :reports_problem
+                  %label{:for => "ch01"} Reports a Problem in the Data
+              .text
+                = form.text_area :body, :id => "comment", :rows => 10, :cols => 30
+            / row
+            .row
+              %input.btn-submit{:type => "submit", :value => "Post Comments"}/
+      - else
+        = @comment.reports_problem? ? "Sign in to report a problem" : "Sign in to comment"
+        To leave a comment or report a problem with this data, you must #{ link_to "sign in", signin_url}. No account yet? #{ link_to "Sign up", signup_url }.
+

@@ -1,11 +1,18 @@
 class MainController < ApplicationController
 
+  include BrowseTableSorts
+
+  def index
+    @source_count = DataRecord.count
+    @top = DataRecord.all(:limit => 3, :order => 'id DESC')
+    render 'welcome'
+  end
+
   def dashboard
     if current_user
       render 'dashboard'
     else
-      @source_count = DataRecord.count
-      render 'welcome'
+      redirect_to root_path
     end
   end
 

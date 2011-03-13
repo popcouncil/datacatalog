@@ -1,0 +1,51 @@
+#wrapper.home
+  .w1
+    #skip
+      %a{:href => "#main", :tabindex => "1"} Skip to main content
+    / main
+    #main
+      = yield
+    #header
+      .area
+        .nav-holder
+          / nav
+          %ul#nav
+            %li{:class => (controller.is_a?(MainController) and controller.action_name == 'dashboard' ? 'active' : nil)}
+              = link_to 'HOME', root_path, :tabindex => 2
+            %li{:class => (controller.is_a?(DataRecordsController) ? 'active' : nil)}
+              = link_to 'CATALOG', data_records_path, :tab_index => 3
+            %li
+              = link_to 'Q&A', 'http://ask.datauncovered.com/', :tab_index => 4
+            %li{:class => (controller.is_a?(MainController) and controller.action_name == 'tools' ? 'active' : nil)}
+              = link_to 'TOOLS', tools_path, :tabindex => 5
+            %li{:class => (controller.is_a?(MainController) and controller.action_name == 'contest' ? 'active' : nil)}
+              = link_to 'CONTEST', contest_path, :tabindex => 6
+            %li
+              = link_to 'BLOG', 'http://blog.datauncovered.com/', :tabindex => 7
+            %li{:class => (controller.is_a?(MainController) and controller.action_name == 'about' ? 'active' : nil)}
+              = link_to 'ABOUT', about_path, :tabindex => 8
+        / form-search
+        %form.form-search{:action => "#"}
+          %fieldset
+            %legend Title
+            - if current_user.present?
+              %a.account{:href => edit_profile_path}
+                %span My Account
+              %a.logout{:href => signout_path}
+                %span Logout
+            - else
+              %a.account{:href => signup_path}
+                %span Sign up
+              %a.logout{:href => signin_path}
+                %span Login
+            %label{:for => "inp01"} SEARCH
+            .text
+              %input#inp01{:type => "text", :value => "SEARCH"}/
+            %input.btn-submit{:type => "submit", :value => "GO"}/
+      / logo-holder
+      .logo-holder
+        %strong.logo
+          %a{:href => '/'} DataUncovered
+        %strong.logo2
+          %a{:href => "http://www.popcouncil.org"} Population Council
+

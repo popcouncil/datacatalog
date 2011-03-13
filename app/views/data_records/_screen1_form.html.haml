@@ -1,0 +1,99 @@
+
+.box-step
+  .frame
+    .title
+      %h2 Step 1. Describe the record you want to add
+    / row
+    - if current_user.admin?
+      .row
+        %label{:for => 'owner_id'} Added By
+        = form.select :owner_id, grouped_options_for_select(owners_for_select(current_user)), :selected => current_user.id
+    .row{:class => (@data_record.errors.on(:title) ? 'error' : nil)}
+      %label{:for => "title"} Title
+      .text
+        = form.text_field :title, :class => 'required', :title => 'Title'
+    / row
+    .row{:class => (@data_record.errors.on(:description) ? 'error' : nil)}
+      %label{:for => "description"} Add description
+      .text-area
+        = form.text_area :description, :title => 'Add description', :cols => 30, :rows => 10, :class => 'required'
+    .add-block
+      - @data_record.data_record_locations.insert(0, @data_record.data_record_locations.new)
+      - i = 0
+      -  form.fields_for :data_record_locations do |location_form|
+        .row.geografical-select{:class => [(location_form.object.errors.count > 0 ? 'error' : nil), (i == 0 ? 'default' : nil)].compact.join(' ')}
+          .select-row
+            = location_form.select :location_id, all_locations_for_select(:stringify_ids => false), {:disabled => "-------------"}, {:class => ["coverage geo-location", (i == 0 ? 'default' : nil)].compact.join(' ')}
+            - if i != 1
+              %a.link-minus{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")} remove location
+            - else
+              %a.link.link-add#geo-location-add{:href => "#"} Add Location
+          .citys
+            %span
+              What is the lowest level of disaggregation?
+            = location_form.select :disaggregation_level, disaggregation_levels_for_select, {:disabled => "-------------"}, {:class => ['city-select', (i == 0 ? 'default' : nil)].compact.join(' ')}
+          - i+=1
+    / row
+    .row{:class => (@data_record.errors.on(:year) ? 'error' : nil)}
+      %label{:for => "year"} Publication year
+      = form.select :year, ['Publication Year'] + (1990..Time.now.year).to_a.reverse, :class => :required
+    .add-block
+      .row.default
+        %label{:for => "tag-default"} Select tag
+        - topic_tags_ = topic_tags.dup; topic_tags_.delete_at(2)
+        = select_tag 'tags[]', options_for_select(topic_tags_), :class => 'data-record-tag sel default required-sel', :id => 'tag-default'
+        %a.link-minus.tag-remove{:href => "#"} minus
+      - if @data_record.tags.blank?
+        .row
+          = select_tag 'tags[]', options_for_select(topic_tags), :class => 'data-record-tag sel required-sel'
+          %a.link.link-add#add-tag{:href => '#'} plus
+      - else
+        - tags = @data_record.tags
+        .row{:class => (@data_record.errors.on(:tag_list) ? 'error' : nil)}
+          = select_tag 'tags[]', options_for_select(topic_tags, :selected => tags.shift.name), :class => 'data-record-tag sel required-sel'
+          %a.link.link-add#add-tag{:href => '#'} plus
+        - tags.each do |tag|
+          .row{:class => (@data_record.errors.on(:tag_list) ? 'error' : nil)}
+            = select_tag 'tags[]', options_for_select(topic_tags, :selected => tag.name), :class => 'data-record-tag sel required-sel'
+            = link_to 'minus', '#', :id => 'remove-data-record-tag', :class => 'link link-add tag-remove'
+
+.box-step
+  .frame
+    .title
+      %h2 Step 2: Add files or links (at least one file or URL is required)
+    / row
+    .add-block
+      - @data_record.documents.insert(0, @data_record.documents.new(:title => 'Title'))
+      - i = 0 # This is a hack to get the js and ajaxy form working
+      - form.fields_for :documents do |document_form|
+        .title-block{:class => (i == 0 ? 'default' : nil)}
+          .row{:class => (document_form.object.errors.on(:title) ? 'error' : nil)}
+            %label{:for => "document"} Title
+            .text
+              = document_form.text_field :title
+          .row{:class => (document_form.object.errors.on(:document_type) ? 'error' : nil)}
+            %label{:for => "document"} Select document type
+            = document_form.select :document_type, ['Select Document Type'] + Document::DOCUMENT_TYPES, :class => 'sel required-sel'
+            - if i != 1
+              %a.link-minus{:href => (document_form.object.new_record? ? '#' : "#data_record[documents_attributes][#{i}][_destroy]")}
+          .row-holder.add-document.required-radio
+            .box-row
+              = document_form.radio_button :storage, "upload", :class => 'document-type-radio quest', :id => (i == 0 ? 'r01-default' : "r01-#{i}")
+              %label{:for => (i == 0 ? 'r01-default' : "r01-#{i}")} Upload a file
+              .box-file.upload-box
+                %label{:for => "file"} Choose file
+                = document_form.file_field :file, :class => 'file-input-area', :size => 20, :id => (i == 0 ? 'r01-default' : "r01-#{i}")
+                %a.button{:href => "#"} File
+            .box-row.box
+              = document_form.radio_button :storage, "external", :class => 'document-type-radio quest', :id => (i == 0 ? 'r02-default' : "r02-#{i}")
+              %label{:for => (i == 0 ? 'r02-default' : "r02-#{i}")} Provide a link
+              .text-row.upload-box
+                .text
+                  = document_form.text_field :external_url, {:value => (document_form.object.external_url || 'http://')}
+          - if i == 1
+            .row-holder
+              .box-add
+                %a.link-add{:href => "#"} Add Title
+          - i +=1
+    .row-batton
+      %input.btn-submit{:type => "submit", :value => "Go to last step"}/

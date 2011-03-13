@@ -1,0 +1,18 @@
+.block-holder
+  .block-register
+    .holder
+      .frame
+        / box-register
+        .box-register
+          .title
+            %h1 Register
+          / form-register
+          - form_for @user, :url => users_path, :html => {:class => 'form-register'} do |form|
+            = render :partial => 'users/user', :object => form
+        / box-login
+        .box-login
+          .title
+            %h2 Login
+          - form_for @user_session, :url => user_session_path, :html => {:class => 'form-login'} do |form|
+            = render :partial => 'users/login', :object => form
+

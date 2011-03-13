@@ -1,0 +1,37 @@
+- content_for :title do
+  = h @data_record.title
+  
+/ block-catalog
+.block-record
+  .box-info
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'browse'
+    %h1= h @data_record.title
+  / twocolumns
+  .twocolumns
+    .column
+      / text-inform
+      .text-inform
+        %ul.tabset
+          %li
+            %a.tab{:href => data_record_path(@data_record)}
+              %span Data Details
+          %li
+            %a.tab{:href => data_record_wiki_path(@data_record)}
+              %span Community Docs
+          %li.active
+            %a.tab{:href => data_record_notes_path(@data_record)}
+              %span Private Notes
+        / tab-content
+        .tab-content
+          .frame
+            - if @notes.length == 0
+              %h2 No notes
+              Write some using the form to the right.
+            - @notes.each do |note|
+              Note from
+              = note.created_at.to_s(:mdy_slashed)
+              = sanitize markdownize note.text
+    = render :partial => 'data_records/aside'
+

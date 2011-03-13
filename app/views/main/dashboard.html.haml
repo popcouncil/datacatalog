@@ -1,0 +1,30 @@
+- @body_class_hook = 'page-dashboard'
+= show_flash_message
+
+.block-catalog
+  .box-info
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'dashboard'
+    %h1
+      - if current_user.favorite_records.empty?
+        You have no favorites yet.
+        = link_to "Browse", data_records_path
+        for some.
+      - else
+        My Favorite Data Records
+  .catalog-info
+    - if (@data_records = current_user.favorite_records.paginate(:all, :page => params[:page], :per_page => 10)).total_pages > 1
+      %ul.list-paging
+        %li= @data_records.total_entries
+        %li
+          %span
+            - @data_records.total_pages.times do |i|
+              = link_to(i+=1, data_record_path(params.merge(:page => i)))
+        %li
+          = link_to i=(params[:page] || 0)+1, data_record-path(params.merge(:page => i)), :class => 'next'
+    / block-title
+    
+    - unless @data_records.empty?
+      = render :partial => 'shared/record_header'
+      = render :partial => 'data_records/data_record', :collection => @data_records

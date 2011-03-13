@@ -1,0 +1,35 @@
+- content_for :title do
+  = h @data_record.title
+  
+/ block-catalog
+.block-record
+  .box-info
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'browse'
+    %h1= h @data_record.title
+  / twocolumns
+  .twocolumns
+    .column
+      / text-inform
+      .text-inform
+        %ul.tabset
+          %li
+            %a.tab{:href => data_record_path(@data_record)}
+              %span Data Details
+          %li.active
+            %a.tab{:href => data_record_wiki_path(@data_record)}
+              %span Community Docs
+          %li
+            %a.tab{:href => data_record_notes_path(@data_record)}
+              %span Private Notes
+        / tab-content
+        .tab-content
+          .frame
+            - form_for [@data_record, @wiki], :url => data_record_wiki_path(@data_record), :html => { :method => :put } do |form|
+              .row
+                .textarea
+                  = form.text_area :body #, :class => "full mono"
+              %input.btn-submit{:type => "submit", :value => "Save"}/
+    = render :partial => 'data_records/aside'
+

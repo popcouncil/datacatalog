@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
     recipients    user.email
     sent_on       Time.now
-    body          :confirmation_url => confirm_url(user.perishable_token)
+    body          :confirmation_url => confirm_url(user.perishable_token), :user => user
   end
 
   def welcome_message(user)
@@ -80,6 +80,15 @@ class Notifier < ActionMailer::Base
     sent_on Time.now
     content_type 'text/html'
     body :alert => alert, :user => alert.user, :record => record
+  end
+
+  def data_record_report(data_record, report)
+    subject "Problem with Data Record"
+    from "Data Uncovered <catalog@datauncovered.com>"
+    recipients "#{data_record.owner.email}, natdatcat@sunlightfoundation.com"
+    sent_on Time.now
+    content_type 'text/html'
+    body :data_record => data_record, :report => report
   end
 
 end

@@ -1,0 +1,6 @@
+/* line 1, ../../../app/stylesheets/opacity.scss */
+.file-input-area {
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+}

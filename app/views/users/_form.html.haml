@@ -1,0 +1,50 @@
+%fieldset
+  %legend Title
+  .title
+    %span
+      &nbsp;
+      =h flash[:notice]
+    %h2 Personal Information
+
+  .box-inf
+    .inf
+      .image
+        %img{:alt => "user image", :height => "82", :src => current_user.gravatar_link, :width => "81"}/
+      .txt
+        %p
+          Set your avatar
+          %br/
+          on
+          %a{:href => "http://gravatar.com/"} Gravatar
+
+    .row
+      %label{:for => "name"} Name
+      .text
+        = form.text_field :name
+    .row
+      %label{:for => "email"} Email
+      .text
+        = form.text_field :email
+    .row
+      %label{:for => "password"} Change Password
+      .text
+        = form.text_field :password
+    .row
+      %label{:for => "password2"} Confirm Password
+      .text
+        = form.text_field :password_confirmation
+    .row
+      %label{:for => "affiliation"} Affiliation (optional)
+      .text
+        = form.text_field :affiliation_name
+    .row
+      %label{:for => "country"} Country (optional)
+      = form.select :location_id, all_countries_for_select(true), {}, {:id => 'country', :class => 'sel04'}
+    .row
+      %label{:for => "city"} City (optional)
+      .text
+        = form.text_field :city
+    .row
+      %label{:for => "field"} Select field (optional)
+      = form.select :user_type, User::USER_TYPES, {:include_blank => 'Select Field'}, {:id => 'field', :class => 'sel04'}
+    %input.btn-submit{:type => "submit", :value => "Update"}/

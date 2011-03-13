@@ -4,7 +4,7 @@ class UserSessionsController < ApplicationController
   before_filter :activate_authlogic
 
   def new
-    @user_session = UserSession.new
+    redirect_to signup_path
   end
 
   def create
@@ -17,8 +17,9 @@ class UserSessionsController < ApplicationController
       @user_session.user.save_wordpress
       #Would be cleaner as a script tag, however, wordpress doesn't like returning a blank page
       flash[:login_callback] = "<iframe height=0 width=0 frameborder=0 src='#{(ENV['WORDPRESS_URL'] || '')}?callback=login&payload=#{CGI.escape(@user_session.user.wpdata(true).gsub("\n", ''))}'></iframe>"
-      redirect_to session.delete(:return_to) || root_path
+      redirect_to session.delete(:return_to) || data_records_path
     else
+    @user = User.new(:display_name => 'Full name', :email => 'Email', :password => 'password', :password_confirmation => 'confirmation')
       render :action => "new" and return
     end
   end

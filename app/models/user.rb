@@ -191,6 +191,14 @@ class User < ActiveRecord::Base
   end
   # End wordpress related stuff
 
+  def gravatar_hash
+    Digest::MD5.hexdigest((self.email || '').strip.downcase)
+  end
+
+  def gravatar_link
+    "http://www.gravatar.com/avatar/#{self.gravatar_hash}"
+  end
+
   private
 
   def map_openid_registration(registration)

@@ -1,0 +1,5 @@
+- if current_user
+  - if current_user.favorite?(data_record)
+    = link_to 'heart', data_record_favorite_path(data_record), :method => :delete, :class => 'heart'
+  - else
+    = link_to 'heart', data_record_favorite_path(data_record), :method => :post, :class => 'heart mark'

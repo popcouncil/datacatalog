@@ -1,0 +1,226 @@
+/ block-catalog
+.block-record
+  .box-info
+    / box-btn
+    .box-btn
+      %ul
+        %li
+          %a.dashboard{:href => "#"} Dashboard
+        %li.active
+          %a.browse{:href => "#"} Browse
+        %li
+          %a.add{:href => "#"} Add Data
+    %h1 Healthy Families-Thriving Communities
+  / twocolumns
+  .twocolumns
+    .column
+      / text-inform
+      .text-inform
+        %ul.tabset
+          %li.active
+            %a.tab{:href => "#"}
+              %span Data Details
+          %li
+            %a.tab{:href => "#"}
+              %span Community Docs
+          %li
+            %a.tab{:href => "#"}
+              %span Private Notes
+        / tab-content
+        .tab-content
+          .frame
+            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet nisl tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla dapibus fringilla mauris ut dictum. Vivamus varius magna lacinia leo gravida ullamcorper. Phasellus pharetra fringilla tempus. Praesent mi diam, lobortis in dignissim vitae, gravida vel leo. Phasellus est nulla, porttitor adipiscing adipiscing ac, ullamcorper imperdiet neque. In non rutrum diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie aliquet fringilla. Proin ultrices, purus ut tempor ultricies, augue lorem vehicula sem, sit amet suscipit velit urna in augue. Suspendisse potenti. Donec purus ante, fermentum sit amet tempus a, dignissim at eros. Aliquam vestibulum lectus ut justo egestas vel posuere quam pellentesque. Duis malesuada hendrerit ante, in dapibus ipsum scelerisque in. Donec a justo leo. Mauris non lorem quis urna bibendum commodo eu sed lacus. Donec auctor dolor quis velit egestas rhoncus. Donec vitae dui orci. Nulla porta urna sed quam luctus gravida. Nulla facilisi. Cras adipiscing neque commodo neque dignissim quis euismod dui rhoncus. Integer consectetur tortor nec metus auctor id rhoncus elit ullamcorper. Pellentesque at massa est. Phasellus consequat velit ac justo bibendum imperdiet. Quisque dignissim velit vel tellus rutrum posuere vel eu lectus. Nulla eleifend pharetra nibh, vel rutrum nulla ultrices eget. Sed vestibulum massa ut ante volutpat ut lacinia diam sagittis. In velit quam, euismod quis viverra ut, interdum ut enim. Aenean imperdiet sollicitudin neque, vitae interdum tellus vehicula eget. Vivamus adipiscing tempor turpis in tristique. Integer pharetra suscipit dui, auctor mollis nisi ultrices ac.
+      / inform
+      .inform
+        .frame
+          / list-info
+          %ul.list-info
+            %li
+              %strong Submitted By
+              %span Alon Koppel
+            %li
+              %strong Geographical Coverage
+              %span
+                Global
+                %em (Global)
+            %li
+              %strong Publication Year
+              %span 2010
+            %li
+              %strong Tags
+              %span health, mch...
+            %li
+              %strong Ministry
+              %span John Doe
+            %li
+              %strong Lead Organization
+              %span Ministry of the Interior
+            %li
+              %strong
+                Other Institutional
+                %br/
+                Collaborators
+              %span New York University
+            %li
+              %strong URL
+              %span
+                %a{:href => "#"} www.fusionlab.com
+            %li
+              %strong Funder
+              %span
+                %em Hewlett
+            %li
+              %strong
+                Authors
+                %br/
+                (Affiliation)
+              %span
+                %em
+                  Alon (
+                  = succeed ")" do
+                    %span FusionLab, Inc
+          / box-inf
+          .box-inf
+            %h2 Files Available for Download
+            %ul
+              %li
+                %a.map-area{:href => "#"} Map of area 2009-2011
+              %li
+                %a.web-link{:href => "#"} www.website.com
+          / box-details
+          .box-details
+            %h2 Contact Details to Request More Information
+            %ul
+              %li
+                %strong Name
+                %span Alon Koppel
+              %li
+                %strong Email
+                %span
+                  %a{:href => "#"} alon@fusionlab.com
+    / aside
+    .aside
+      %ul.btn-list
+        %li
+          %a.btn-blue{:href => "#"} Edit Record
+        %li
+          %a.btn-red{:href => "#"} Report a Problem with this Data
+      / box-form
+      .box-form
+        %form.form-notes{:action => "#"}
+          %fieldset
+            %legend Title
+            / box
+            .box
+              .row
+                .heading
+                  %h2 Overall Rating
+                  %span (Averaged from 0 votes)
+                %ul.list-star
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_off.gif", :width => "12"}/
+              / row
+              .row
+                .heading
+                  %h2 Your Rating
+                %ul.list-star
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+                  %li
+                    %img{:alt => "star", :height => "12", :src => "/images/star_on.gif", :width => "12"}/
+            / box
+            .box.data
+              .row
+                .heading
+                  %h2 Favorite This Data
+                %a.heart{:href => "#"} heart
+            / box-notes
+            .box-notes
+              %h2 My Notes on This Data
+              %label{:for => "note"} Want to keep some private notes on this data record?
+              .text
+                %textarea#note{:cols => "30", :rows => "10"}
+              %input.btn-submit{:type => "submit", :value => "Save Notes"}/
+  / box-discussion
+  .box-discussion
+    .frame
+      .discussion-inf
+        .title
+          %h2 Discussion
+          %span.note
+            %em 2
+        / block-inf
+        .block-inf
+          .holder
+            .frame
+              .block
+                / text-inf
+                .text-inf
+                  .image
+                    %img{:alt => "image description", :height => "37", :src => "/images/img05.gif", :width => "38"}/
+                  .txt
+                    %p
+                      Dec 22, 2010 @ 12:11
+                      %br/
+                      by
+                      %a{:href => "#"} Eric Green
+                    %p this is a problem (not really)
+                / box-reply
+                .box-reply
+                  %strong 1
+                  %p
+                    %a{:href => "#"} Reply to This
+              .block.mark
+                .frame
+                  / text-inf
+                  .text-inf
+                    .image
+                      %img{:alt => "image description", :height => "38", :src => "/images/img06.jpg", :width => "38"}/
+                    .txt
+                      %p
+                        Jan 07, 2011 @ 22:07
+                        %br/
+                        by
+                        %a{:href => "#"} Alon Koppel
+                      %p Really?
+                  / box-reply
+                  .box-reply
+                    .inf
+                      %strong 0
+                      %a.link{:href => "#"} link
+                    %p
+                      %a{:href => "#"} Reply to This
+      / form-thoughts
+      %form.form-thoughts{:action => "#"}
+        %fieldset
+          %legend Title
+          %h2 Your Thoughts
+          %p Have some findings to share? Run across something that was missing or broken? Please leave us a comment below.
+          .box-holder
+            / box-inf
+            .box-inf
+              %label{:for => "comment"}
+                %strong Comment
+              %strong.txt This Comment:
+              .row-check
+                %input#ch01{:name => "ch", :type => "checkbox", :value => "1"}/
+                %label{:for => "ch01"} Reports a Problem in the Data
+            .text
+              %textarea#comment{:cols => "30", :rows => "10"}
+          / row
+          .row
+            %input.btn-submit{:type => "submit", :value => "Post Comments"}/

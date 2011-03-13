@@ -8,6 +8,7 @@ class DataRecordsController < ApplicationController
   include BrowseTableSorts
 
   def index
+    params[:filters][:location] = 'All' if params[:filters] and params[:filters][:location] == '0'
     @filters = Filters.new(params[:filters])
     @data_records = DataRecord.browse(@filters, sort_order).paginate(:page => params[:page], :per_page => 25)
   end
@@ -23,11 +24,19 @@ class DataRecordsController < ApplicationController
   end
   
   def new
-    @data_record = current_user.data_records.new
+    @data_record = current_user.data_records.new(:title => 'Title', :description => 'Add description')
     initialize_data_record_associations
   end
 
   def create
+    params[:data_record][:documents_attributes].delete('0') if params[:data_record][:documents_attributes]
+    params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
+    params[:data_record][:title] = '' if params[:data_record][:title] == 'Title'
+    params[:data_record][:description] = '' if params[:data_record][:description] == 'Add description'
+    params[:data_record][:lead_organization_name] = '' if params[:data_record][:lead_organization_name] == 'Lead organization'
+    params[:data_record][:collaborator_list] = ''  if params[:data_record][:collaborator_list] == 'Other institutional collaborators'
+    params[:data_record][:homepage_url] = '' if params[:data_record][:homepage_url] == 'URL'
+    params[:data_record][:funder] = '' if params[:data_record][:funder] == 'Funder'
     if params[:id].present?
       @data_record = DataRecord.unscoped_find(:first, :conditions => {:slug => params[:id]})
     else
@@ -48,6 +57,10 @@ class DataRecordsController < ApplicationController
         redirect_to @data_record and return
       else
         @data_record.next_step
+        @data_record.lead_organization_name = 'Lead organization'
+        @data_record.collaborator_list= 'Other institutional collaborators'
+        @data_record.homepage_url = 'URL'
+        @data_record.funder = 'Funder'
       end
     end
     initialize_data_record_associations
@@ -59,6 +72,8 @@ class DataRecordsController < ApplicationController
   end
 
   def update
+    params[:data_record][:documents_attributes].delete('0') if params[:data_record][:documents_attributes]
+    params[:data_record][:authors_attributes].delete('0') if params[:data_record][:authors_attributes]
     if current_user.admin?
       @data_record.owner_id = params[:data_record][:owner_id]
     else
@@ -77,9 +92,9 @@ class DataRecordsController < ApplicationController
   private
 
   def initialize_data_record_associations
-    @data_record.documents.build if @data_record.documents.empty?
+    @data_record.documents.build(:title => 'Title') if @data_record.documents.empty?
     @data_record.data_record_locations.build(:location_id => 0) if @data_record.locations.empty?
-    @data_record.authors.unshift Author.new(:affiliation_name => @data_record.lead_organization_name)
+    @data_record.authors.unshift Author.new(:affiliation_name => 'Affiliation', :name => 'Author')
     @data_record.build_contact_from_owner if @data_record.contact.blank?
   end
 

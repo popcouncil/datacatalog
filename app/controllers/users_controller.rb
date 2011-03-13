@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:show, :edit, :update]
 
   def new
-    @user = User.new
+    @user = User.new(:display_name => 'Full name', :email => 'Email', :password => 'password', :password_confirmation => 'confirmation')
+    @user_session = UserSession.new(:email => 'Email', :password => 'password')
     if params[:from] == 'wordpress' and !ENV['WORDPRESS_REGISTERED'].blank?
       session[:after_registration] = ENV['WORDPRESS_REGISTERED'] #use :return_to ?
     end
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
         redirect_to signin_path
       end
     else
+      @user_session = UserSession.new(:email => 'Email', :password => 'password')
       render :action => :new
     end
   end

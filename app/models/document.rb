@@ -9,11 +9,21 @@ class Document < ActiveRecord::Base
   validates_inclusion_of :document_type, :in => DOCUMENT_TYPES
 
   def download_url # Bug alert, XSS?
-    '' #external_url.presence || file.url
+    if self.external?
+      begin
+        x = self.external_url.include?('://') ? self.external_url : "http://#{self.external_url}"
+        uri = URI.parse(x)
+        uri.to_s
+      rescue
+        '#'
+      end
+    else
+      file.url
+    end
   end
 
   def external?
-    self.file.exists?
+    !self.external_url.blank?
   end
 
   def storage

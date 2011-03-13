@@ -2,9 +2,12 @@ class CommentsController < ApplicationController
   def create
     @data_record = DataRecord.find_by_slug(params[:data_record_id])
     @comments = @data_record.comment_threads
-    @comment = @comments.new(:user_id => current_user.id)
+    @comment = @comments.new(params[:comment])
 
-    if @comment.update_attributes(params[:comment])
+    if @comment.update_attributes(:user_id => current_user.id)
+      if @comment.reports_problem?
+        Notifier.deliver_data_record_report(@data_record, @comment)
+      end
       flash[:notice] = "Comment saved!"
       redirect_to @data_record
     else

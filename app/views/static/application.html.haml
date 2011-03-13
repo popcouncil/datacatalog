@@ -1,0 +1,73 @@
+!!! Strict
+%html{:lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title DataUncovered
+    = stylesheet_link_tag 'all.css'
+    = stylesheet_link_tag 'opacity.css'
+    = javascript_include_tag 'jquery-1.4.4.min.js', 'jquery.main.js'
+    /[if lt IE 8] 
+      = stylesheet_link_tag 'ie.css'
+  %body{:class => body_class_hook}
+    / wrapper
+    #wrapper.home
+      .w1
+        #skip
+          %a{:href => "#main", :tabindex => "1"} Skip to main content
+        / main
+        #main
+          = yield
+        #header
+          .area
+            .nav-holder
+              / nav
+              %ul#nav
+                %li
+                  %a{:href => "#", :tabindex => "2"} HOME
+                %li
+                  %a{:href => "#", :tabindex => "3"} CATALOG
+                %li
+                  %a{:href => "#", :tabindex => "4"} Q&amp;A
+                %li
+                  %a{:href => "#", :tabindex => "5"} TOOLS
+                %li
+                  %a{:href => "#", :tabindex => "6"} CONTEST
+                %li
+                  %a{:href => "#", :tabindex => "7"} BLOG
+                %li
+                  %a{:href => "#", :tabindex => "8"} ABOUT
+            / form-search
+            %form.form-search{:action => "#"}
+              %fieldset
+                %legend Title
+                %a.account{:href => "#"}
+                  %span My Account
+                %a.logout{:href => "#"}
+                  %span Logout
+                %label{:for => "inp01"} SEARCH
+                .text
+                  %input#inp01{:type => "text", :value => "SEARCH"}/
+                %input.btn-submit{:type => "submit", :value => "GO"}/
+          / logo-holder
+          .logo-holder
+            %strong.logo
+              %a{:href => "#"} DataUncovered
+            %strong.logo2
+              %a{:href => "#"} Population Council
+    / footer
+    #footer
+      %ul.footer-menu
+        %li
+          %a{:href => "#"} Contact
+        %li
+          %a{:href => "#"} Facebook
+        %li
+          %a{:href => "#"} Twitter
+        %li
+          %a{:href => "#"} RSS
+      %ul.list
+        %li &copy; 2011 Population Council, Inc. All rights reserved
+        %li
+          Support by
+          %a{:href => "#"} The William and Flora Hewlett Foundation
+

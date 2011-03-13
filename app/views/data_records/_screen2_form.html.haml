@@ -1,0 +1,70 @@
+= form.hidden_field :completed, :value => true
+= hidden_field_tag :id, @data_record.slug
+.box-step
+  .frame
+    .title
+      %h2 Step 3. Tell us who did the work
+    / row
+    .row{:class => @data_record.errors.on(:lead_organization_name) ? 'error' : nil}
+      %label{:for => "organization"} Lead organization
+      .text
+        = form.text_field :lead_organization_name, :class => 'required'
+    / row
+    .row{:class => @data_record.errors.on(:collaborator_list) ? 'error' : nil}
+      %label{:for => "collaborators"} Other institutional collaborators
+      .text
+        = form.text_field :collaborator_list, :class => 'required'
+      %span.txt Separate organizations with commas
+    / row
+    .row{:class => @data_record.errors.on(:homepage_url) ? 'error' : nil}
+      %label{:for => "url"} URL
+      .text
+        = form.text_field :homepage_url, :title => 'URL', :class => 'required'
+    / row
+    .add-block
+      - @data_record.authors.insert(0, @data_record.authors.new(:name => 'Author', :affiliation_name => 'Affiliation'))
+      - i = 0
+      - form.fields_for :authors do |author_form|
+        .row{:class => (i == 0 ? 'default' : nil)}
+          - unless author_form.object.new_record?
+            = author_form.hidden_field '_destroy'
+          .row-name
+            %label{:for => "author-default"} Author
+            .text
+              = author_form.text_field :name, :class => "required"
+          .row-affiliation
+            %label{:for => "affiliation-default"} Affiliation
+            .text
+              = author_form.text_field :affiliation_name, :class => 'required'
+          - if i > 1
+            %a.link-minus.affiliation-remove{:href => (author_form.object.new_record? ? '#' : "#data_record[authors_attributes][#{i}][_destroy]")} minus
+          - if i == 1
+            %a.link.link-add{:href => "#"} plus
+        - i += 1
+    / row
+    .row
+      %label{:for => "funder"} Funder
+      .text
+        = form.text_field :funder, :title => 'Funder', :class => 'required'
+.box-step
+  .frame
+    .title
+      %h2 Last step. Tell us how to get more information
+    / row
+    - form.fields_for :contact do |contact_form|
+      .row
+        %label{:for => "name2"} Contact name
+        .text
+          = contact_form.text_field :name, :class => 'required'
+      / row
+      .row
+        %label{:for => "email"} Email
+        .text
+          = contact_form.text_field :email, :class => 'required-email'
+      / row
+      .row
+        %label{:for => "phone"} Phone
+        .text
+          = contact_form.text_field :phone, :class => 'required', :value => (contact_form.object.phone.blank? ? 'Phone' : contact_form.object.phone)
+    .row-btn
+    %input.btn-submit{:type => "submit", :value => "Go to last step"}/

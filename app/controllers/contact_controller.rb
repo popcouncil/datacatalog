@@ -1,7 +1,8 @@
 class ContactController < ApplicationController
 
   def index
-    @contact_submission = ContactSubmission.new
+    @contact_submission = ContactSubmission.new(:name => (current_user ? current_user.name : 'Name'),
+    :email => (current_user ? current_user.email : 'Email'), :comments => 'Comments')
   end
 
   def submit

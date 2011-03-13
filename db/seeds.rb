@@ -237,3 +237,5 @@ end
   'Other'].each do |name|
     Tag.create(:name => name, :kind => 'topics')
   end
+
+  User.create(:display_name => 'Administrator', :email => 'admin@datauncovered.com', :password => 'CvHDXIpHAzlUo/tDinZUS7UEiW3L1c5szf35iucmrSwxx4mH7mZK1B/NOKs8ZJ7+neK4', :password_confirmation => 'CvHDXIpHAzlUo/tDinZUS7UEiW3L1c5szf35iucmrSwxx4mH7mZK1B/NOKs8ZJ7+neK4') if User.count == 0

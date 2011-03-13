@@ -1,0 +1,18 @@
+#footer
+  %ul.footer-menu
+    %li= link_to 'Contact', contact_path
+    %li
+      %a{:href => "http://www.facebook.com/pages/Data-Uncovered/151817384835229"} Facebook
+    %li
+      %a{:href => "http://twitter.com/datauncovered"} Twitter
+    %li
+      %a{:href => "#thisistherssfeedlink"} RSS
+  %ul.list
+    %li
+      &copy; 2011
+      = link_to 'The Population Council, Inc.', 'http://www.popcouncil.org/'
+      All rights reserved
+    %li
+      %a{:href => "http://www.hewlett.org/"} Support by The William and Flora Hewlett Foundation
+  = flash[:login_callback]
+  = flash[:logout_callback]

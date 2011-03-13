@@ -1,0 +1,96 @@
+/ block-create
+.block-create
+  %form.form-create{:action => "#"}
+    %fieldset
+      %legend Title
+      .block-title
+        / box-btn
+        .box-btn
+          %ul
+            %li
+              %a.dashboard{:href => "#"} Dashboard
+            %li
+              %a.browse{:href => "#"} Browse
+            %li.active
+              %a.add{:href => "#"} Add Data
+        %h1 Create a record
+        %span.mark All fields are required.
+        / box-error
+        .box-error
+          .frame
+            %p There was a problem creating your record Errors have been highlighted below.
+      / block-step
+      .block-step
+        .box-step
+          .frame
+            .title
+              %h2 Step 3. Tell us who did the work
+            / row
+            .row
+              %label{:for => "organization"} Lead organization
+              .text
+                %input#organization.required{:title => "Lead organization", :type => "text", :value => "Lead organization"}/
+            / row
+            .row
+              %label{:for => "collaborators"} Other institutional collaborators
+              .text
+                %input#collaborators.required{:title => "Other institutional collaborators", :type => "text", :value => "Other institutional collaborators"}/
+              %span.txt Separate organizations with commas
+            / row
+            .row
+              %label{:for => "url"} URL
+              .text
+                %input#url.required{:title => "URL", :type => "text", :value => "URL"}/
+            / row
+            .row
+              %label{:for => "author2"} Author
+              .text
+                %input#author2.required{:title => "Author", :type => "text", :value => "Author"}/
+            / row
+            .add-block
+              .row.default
+                .row-name
+                  %label{:for => "author-default"} Author
+                  .text
+                    %input#author-default.default.required{:title => "Author", :type => "text", :value => "Author"}/
+                .row-affiliation
+                  %label{:for => "affiliation-default"} Affiliation
+                  .text
+                    %input#affiliation-default.default.required{:type => "text", :value => "Affiliation"}/
+                %a.link-minus{:href => "#"} plus
+              .row
+                .row-name
+                  %label{:for => "author"} Author
+                  .text
+                    %input#author.required{:title => "Author", :type => "text", :value => "Author"}/
+                .row-affiliation
+                  %label{:for => "affiliation"} Affiliation
+                  .text
+                    %input#affiliation.required{:title => "Affiliation", :type => "text", :value => "Affiliation"}/
+                %a.link.link-add{:href => "#"} plus
+            / row
+            .row
+              %label{:for => "funder"} Funder
+              .text
+                %input#funder.required{:title => "Funder", :type => "text", :value => "Funder"}/
+        .box-step
+          .frame
+            .title
+              %h2 Last step. Tell us how to get more information
+            / row
+            .row
+              %label{:for => "name2"} Contact name
+              .text
+                %input#name2.required{:title => "Contact name", :type => "text", :value => "Contact name"}/
+            / row
+            .row
+              %label{:for => "email"} Email
+              .text
+                %input#email.required-email{:title => "Email", :type => "text", :value => "Email"}/
+            / row
+            .row
+              %label{:for => "phone"} Phone
+              .text
+                %input#phone.required{:title => "Phone", :type => "text", :value => "Phone"}/
+            .row-btn
+              %input.btn-submit{:type => "submit", :value => "Go to last step"}/

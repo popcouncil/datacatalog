@@ -1,0 +1,19 @@
+%meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+%meta{:name => 'description', :content => 'An open platform for government data sets and APIs. We make it easy to find datasets by and about government, across all levels (federal, state, and local) and across all branches (executive, legislative, and judicial).'}/
+%title DataUncovered - #{yield :title}
+= stylesheet_link_tag '/stylesheet/all.css'
+= stylesheet_link_tag 'opacity.css'
+= javascript_include_tag 'jquery-1.4.4.min.js', 'jquery.main2.js', 'jquery.tools', 'jquery.form', 'application'
+/[if lt IE 8] 
+  = stylesheet_link_tag 'ie.css'
+:javascript
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10766227-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+= yield :head

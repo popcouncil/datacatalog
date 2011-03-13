@@ -1,0 +1,41 @@
+- content_for :title do
+  Browse
+  - if @filters.tags.present?
+    by tag "#{h @filters.tags}"
+
+
+/ block-catalog
+.block-catalog.browse-page
+  .box-info
+    .box-select
+      %h1
+        - if @filters.tags.present?
+          Browse by tag “#{h @filters.tags}”
+          %span
+            (
+            %a{:href => data_records_path}> View all
+            )
+      / block-catalog
+      .box-select
+        = render :partial => 'filters'
+    / box-btn
+    .box-btn
+      = render :partial => 'shared/quick_menu', :object => 'browse'
+  / catalog-info
+  .catalog-info
+    - if @data_records.total_pages > 1
+      %ul.list-paging
+        %li= pluralize(@data_records.total_entries, 'result').upcase
+        %li
+          %span
+            - @data_records.total_pages.times do |i|
+              = link_to(i+=1, data_records_path(params.merge(:page => i)))
+        - if @data_records.total_pages > (params[:page].to_i)
+          %li
+            = link_to i=(params[:page] || 0).to_i+1, data_records_path(params.merge(:page => i)), :class => 'next'
+    / block-title
+    - if @data_records.length == 0
+      %h2 No Records Found
+    - else
+      = render :partial => 'shared/record_header'
+      = render :partial => 'data_record', :collection => @data_records

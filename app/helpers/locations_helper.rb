@@ -29,8 +29,8 @@ module LocationsHelper
   
   def disaggregation_levels_for_select
     dls = DataRecordLocation::DISAGGREGATION_LEVELS.dup
-    dls.insert(0, "UNKNOWN", "-------------")
-    dls.insert(5, "-------------")
+    dls.insert(1, "UNKNOWN")
+    #dls.insert(5, "-------------")
     dls
   end
 end
