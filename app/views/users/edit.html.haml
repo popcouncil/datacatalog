@@ -6,7 +6,6 @@
   .block-settings
     .holder
       .frame
-        = show_flash_message
         - form_for @user, :url => profile_path, :html => { :method => :put, :class => 'form-inform' } do |form|
           = form.error_messages :header_message => "Uh-oh!", :message => "The following problems occurred:"
           = render :partial => 'users/form', :object => form

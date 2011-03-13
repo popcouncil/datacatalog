@@ -395,10 +395,7 @@ select{
 	min-height:32px;
 	background:url(../images/bg-txt.gif) repeat-y;
 }
-* html .list-btn .txt {
-	overflow:visible;
-	height:32px;
-}
+* html .list-btn .txt {	overflow:visible;	height:32px;}
 .list-btn .txt em{
 	display:block;
 	font-style:normal;
@@ -464,9 +461,8 @@ select{
 .block-catalog .box-info{
 	width:100%;
 	overflow:hidden;
-	margin:0 0 5px;
+	margin:0 0 -5px;
 }
-.browse-page .box-info{margin:0 0 15px;}
 /* box-select */
 .box-select{
 	width:740px;
@@ -487,9 +483,14 @@ select{
 }
 .box-select h1 span a{color:#3a86c7;}
 .box-select .row{
-	width:126px;
+	width:100%;
+	overflow:hidden;
+	margin:0 0 20px;
+}
+.box-select .row-sel{
+	width:280px;
 	float:left;
-	margin:0 27px 0 0;
+	overflow:hidden;
 }
 .form-select{
 	width:100%;
@@ -506,7 +507,7 @@ select{
 }
 .form-select select{
 	float:left;
-	width:126px;
+	width:204px;
 	font-size:11px;
 	line-height:13px;
 	color:#000;
@@ -523,7 +524,7 @@ select{
 	font-size:12px;
 	line-height:26px;
 	text-transform:uppercase;
-	margin:18px 0 0;
+	margin:75px 0 0 30px;
 	font-weight:bold;
 	background:url(../images/btn.gif) no-repeat;
 }
@@ -619,25 +620,40 @@ select{
 .catalog-info .block-title .col02{
 	width:117px;
 	float:left;
+	padding:0 0 5px;
 }
 .catalog-info .block-title .col03{
 	width:134px;
 	float:left;
+	padding:0 0 5px;
 }
 .catalog-info .block-title .col04{
 	width:100px;
 	float:left;
+	padding:0 0 5px;
 }
 .catalog-info .block-title .col05{
 	width:159px;
 	float:left;
+	padding:0 0 5px;
 }
 .catalog-info .block-title .col06{
 	width:109px;
 	float:left;
+	padding:0 0 5px;
 }
 /* list */
-.catalog-info .block-title .list{margin:0;}
+.catalog-info .block-title .list-inf{
+	width:100%;
+	overflow:hidden;
+	margin:0 0 3px;
+	background:url(../images/bg-list2.gif) repeat-y;
+}
+.catalog-info .block-title .list-holder{background:url(../images/bg-lost-holder.gif) no-repeat;}
+.catalog-info .block-title .list{
+	margin:0;
+	background:url(../images/bg-list-frame.gif) no-repeat 0 100%;
+}
 .catalog-info .block-title .list span{
 	color:#3a86c7;
 	font-size:1.2em;
@@ -661,17 +677,14 @@ select{
 	background:url(../images/heart-blue.png) no-repeat;
 }
 .catalog-info .block-title .list .col01{
-	width:288px;
-	height:15px;
-	padding:17px 0 0 28px;
-	background:url(../images/bg-list.gif) no-repeat;
+	width:278px;
+	padding:8px 10px 7px 28px;
 }
-.catalog-info .block-title .mark .col01{background:url(../images/bg-list-mark.gif) no-repeat;}
 .catalog-info .block-title .list .col01 h3{
 	font-size:13px;
 	line-height:13px;
 	color:#000;
-	margin:0;
+	margin:0 5px 0 0;
 }
 .catalog-info .block-title .list-rating{
 	width:114px;
@@ -1548,10 +1561,7 @@ select{
 	padding:14px 0 15px;
 	background:url(../images/bg-block-setting.gif) no-repeat -935px 100%;
 }
-* html .block-settings .frame {
-	overflow:visible;
-	padding:14px 0 0;
-}
+* html .block-settings .frame {	overflow:visible;	padding:14px 0 0;}
 /* box-inform */
 .form-inform{
 	width:545px;
@@ -1561,15 +1571,20 @@ select{
 }
 .form-inform2 .title,
 .form-inform .title{
-	width:461px;
+	width:478px;
 	overflow:hidden;
-	padding:0 42px 17px;
+	padding:0 42px 17px 25px;
 	margin: 0 0 11px;
 	background:url(../images/bg-title.gif) repeat-x 0 100%;
 }
+.form-inform .title span{
+	font-size:1.2em;
+	color:#1b325f;
+	display:block;
+}
 .form-inform2 .title {
 	width:332px;
-	padding:0 20px 13px;
+	padding:17px 20px 15px;
 	margin:0 0 7px;
 }
 .form-inform2 .title h2,
@@ -1985,7 +2000,7 @@ select{
 	padding:0 5px 12px 9px;
 	background:#f0f6fb url(../images/bg-tab-content.gif) no-repeat -584px 100%;
 }
-.tab-content p{margin:0;}
+.tab-content p { margin: 10px 0 0 0;}
 /* inform */
 .twocolumns .inform{
 	width:584px;
@@ -2219,24 +2234,31 @@ select{
 	margin:0;
 }
 .box-reply p a{color:#3a86c7;}
-.discussion-inf .mark .inf{
+.discussion-inf .inf{
 	width:100%;
 	overflow:hidden;
 	margin:0 0 6px;
 }
-.discussion-inf .mark strong{
+.discussion-inf strong{
 	float:left;
 	width:auto;
 	margin:6px 12px 0 15px;
 	display:inline;
 }
-.discussion-inf .mark .link{
+.discussion-inf .mark .link,
+.discussion-inf .link{
 	float:left;
 	width:28px;
 	height:29px;
 	text-indent:-9999px;
 	overflow:hidden;
 	background:url(../images/bg-link.gif) no-repeat;
+}
+.discussion-inf .link {
+	background:url(../images/bg-link2.gif) no-repeat;
+	float:right;
+	margin:0 7px 0 0;
+	display:inline;
 }
 /* form-thoughts */
 .form-thoughts{
@@ -2550,7 +2572,7 @@ select{
 .optionsDivInvisible.drop-sel05 ,
 .optionsDivVisible.drop-sel05 {font-size: 18px !important;}
 .drop-sel{width:717px !important;}
-.drop-sel02{width:124px !important;}
+.drop-sel02{width:202px !important;}
 .drop-sel03{width:327px !important;}
 .drop-sel04{width:290px !important;}
 .drop-sel05{width:292px !important;}
@@ -2624,4 +2646,3 @@ select{
 .geografical-select .link-minus {
 	display:block;
 }
-

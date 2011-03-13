@@ -13,8 +13,9 @@
       %p= h comment_parent.body
   / box-reply
   .box-reply
-    %strong= comment_parent.votes_for
-    = link_to 'VOTE UP',  [@data_record, comment_parent, comment_parent.votes.new], :method => :post, :class => 'link'
+    .inf
+      %strong= comment_parent.votes_for
+      = link_to 'VOTE UP',  [@data_record, comment_parent, comment_parent.votes.new], :method => :post, :class => 'link'
     %p
       %a{:href => data_record_path(@data_record, :parent_id => comment_parent.id, :anchor => "comment_form")} Reply to This
 = render :partial => 'comments/comment_child', :collection => comment_parent.children

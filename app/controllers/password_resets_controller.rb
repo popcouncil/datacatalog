@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
       flash[:notice] = "Instructions to reset your password have been emailed to you."
       redirect_to signin_url
     else
-      flash[:error] = "The email address #{params[:email_address]} has not been found. Try <a href='" + signup_path + "'>signing up</a>."
+      flash[:error] = "The email address #{params[:email_address]} has not been found. Try <a href='" + signin_path + "'>signing up</a>."
       redirect_to forgot_url
     end
   end
