@@ -100,6 +100,7 @@ class DataRecordsController < ApplicationController
 
   def find_data_record
     @data_record = DataRecord.find_by_slug(params[:id], :include => [:organizations, :locations, :authors, :contact, :tags, :comment_threads, :ratings, :favorites])
+    raise ActiveRecord::RecordNotFound.new('Does not exist') unless @data_record.present?
   end
   
   def format_ministry_organization_params

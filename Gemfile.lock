@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/technoweenie/acts_as_versioned.git
+  remote: http://github.com/technoweenie/acts_as_versioned.git
   revision: 589289fd42b2600d5f643c85e3e4e38e03ac655e
   tag: rails_2
   specs:

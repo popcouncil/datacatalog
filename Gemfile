@@ -15,7 +15,7 @@ gem 'paperclip', '>= 2.3.3'
 gem 'aws-s3', '>= 0.6.2'
 gem 'awesome_nested_set', '1.4.3'
 gem 'will_paginate', '2.3.15'
-gem 'acts_as_versioned', :git => "git://github.com/technoweenie/acts_as_versioned.git", :tag => "rails_2"
+gem 'acts_as_versioned', :git => "http://github.com/technoweenie/acts_as_versioned.git", :tag => "rails_2"
 gem "compass", ">= 0.10.6"
 
 group :test do
