@@ -86,7 +86,7 @@ GEM
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
-    nokogiri (1.4.4)
+    nokogiri (1.4.2)
     paperclip (2.3.6)
       activerecord
       activesupport
@@ -156,7 +156,7 @@ DEPENDENCIES
   gherkin (= 1.0.30)
   machinist (>= 1.0.6)
   mongrel
-  nokogiri (>= 1.3.2)
+  nokogiri (= 1.4.2)
   paperclip (>= 2.3.3)
   pg
   rails (= 2.3.8)

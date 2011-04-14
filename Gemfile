@@ -6,7 +6,7 @@ gem 'pg'
 gem 'authlogic', '>= 2.1.1'
 gem "authlogic-oid", '>= 1.0.4', :require => "authlogic_openid"
 gem "ruby-openid", '>= 2.1.7', :require => "openid"
-gem 'nokogiri', '>= 1.3.2'
+gem 'nokogiri', '1.4.2'
 gem 'rdiscount', '>= 1.3.5'
 gem 'feedzirra', '>= 0.0.20'
 gem 'delayed_job', '>= 1.8.4'
