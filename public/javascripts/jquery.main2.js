@@ -22,10 +22,11 @@ function addDocumentFunctional(){
 
 function initValidation(){
 	var _errorClass = 'error';
-	var _regEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
+	var _errorFormClass = 'form-error';
+	var _regEmail = /([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+/;
+	var _regNum = /([0-9\+])+/;
+	var _errorSumm = 0;
 }
-
 //clear inputs
 function clearInputs(holder){
 	$('input:text, input:password, textarea',holder).each(function(){
@@ -69,17 +70,46 @@ $.fn.addBlocks = function(_options){
 		var holder = $(this);
 		var addLink = $('a.link-add',holder);
 		var copyBlock = $('div.default',holder);
-		var count = holder.children().length;
+		var count = 0;
+		var x = holder.children('div').children('div').children('select:last');
+		if(x.length > 0)
+		  count=Number(x.attr('name').match(/\[(\d+)\]/)[1]) + 1;
+		var item = $('.geografical-select', holder);
+		var itemSelect = item.find('.select-row select');
+		var optiionArr = [];
+		
+		if(itemSelect.hasClass('default') && itemSelect.hasClass('geo-location')){
+			itemSelect.find('option').each(function(){
+				optiionArr.push(jQuery(this));
+			});
+		}
+		itemSelect.each(function(i){
+			jQuery(this).bind('change', function(){
+				addLink.show();
+			});
+		});
 		
 		function addBlock(){
-			var block = copyBlock.clone();
+			var block = copyBlock.clone(true);
+			if(block.children('select.data-record-tag').length > 0){
+        var $item = $('select.data-record-tag option:selected');
+        $item.each(function(){
+        if($(this).val() != 'Select Tag')
+			  block.children('select.data-record-tag').find('option[value=' + $(this).val() + ']').remove();
+			  });
+			}
 			block.appendTo(holder).removeClass('default');
 			block.find('.error').removeClass('error');
-			var selects = $('select',block);
+			var selects = $('select', block);
 			var radios = $('input:radio',block);
 			attributeCounter++;
-			if (selects.length) selects.removeClass('default').customSelect();
+
+			item = $('.geografical-select', holder);
 			
+			if (selects.length){
+				selects.removeClass('default').customSelect();
+			}
+
 			//if (block.hasClass('geografical-select')) block.geograficalSelect();
 			
 			if (radios.length) {

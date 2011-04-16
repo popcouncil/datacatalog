@@ -1,3 +1,40 @@
+
+function show_hide_datarecord(){
+  if($('select.geo-location option:selected[value=0]').length < 2){
+    $('.geo-location-add:not(:last)').hide();
+    $('.geo-location-add:last').show();
+  } else {
+    $('.geo-location-add').hide();
+  }
+  if($('select.geo-location').length > 2){
+    $('.geo-location-del').show();
+  } else {
+    $('.geo-location-del').hide();
+  }
+  if($('.affiliation').length > 2){
+    $('.affiliation-add:not(:last)').hide();
+    $('.affiliation-add:last').show();
+    $('.affiliation-remove').show();
+  } else {
+    $('.affiliation-add:not(:last)').hide();
+    $('.affiliation-add:last').show();
+    $('.affiliation-remove').hide();
+  }
+  if($('select.data-record-tag option:selected[value=Agriculture & Rural Development,Aid Effectiveness,Economic Policy and External Debt,Education,Energy & Mining,Environment,Financial sector,Health,Infrastructure,Labor & Social Protection,Poverty,Private Sector,Public Sector,Science & Technology,Social Development,Urban Development,Other]').length > 0){
+    $('.add-tag').hide();
+  } else {
+    $('.add-tag:not(:last)').hide();
+    $('.add-tag:last').show();
+  }
+  $('select.geo-location').each(function(){
+    if(['1', '0', '65', '2', '156', '17', '152', '119'].indexOf($(this).val()) == -1){
+      $(this).parent().next().show().children('select').customSelect();
+    } else {
+      $(this).parent().next().hide();
+    }
+  });
+}
+
 $(document).ready(function(){
   // star hovering
   // #favoriteData_dropdown and #favoriteData a.buttonLink toggling
@@ -25,29 +62,10 @@ $(document).ready(function(){
 
   // show or hide add document link
 
-  function show_hide_datarecord(){
-    // if($('select.geo-location option:selected[value=0]').length < 2){
-      // $('#geo-location-add').show();
-    // } else {
-      // $('#geo-location-add').hide();
-    // }
-    if($('select.data-record-tag option:selected[value=Agriculture & Rural Development,Aid Effectiveness,Economic Policy and External Debt,Education,Energy & Mining,Environment,Financial sector,Health,Infrastructure,Labor & Social Protection,Poverty,Private Sector,Public Sector,Science & Technology,Social Development,Urban Development,Other]').length > 0){
-      $('#add-tag').hide();
-    } else {
-      $('#add-tag').show();
-    }
-    $('select.geo-location').each(function(){
-      if(['1', '0', '65', '2', '156', '17', '152', '119'].indexOf($(this).val()) == -1){
-        $(this).parent().next().show().children('select').customSelect();
-      } else {
-        $(this).parent().next().hide();
-      }
-    });
-  }
   show_hide_datarecord();
 
   $('.link-add,.link-minus').live('click', function(){
-    show_hide_datarecord();
+    setTimeout(show_hide_datarecord, 500);
     return false;
   });
 
@@ -184,7 +202,7 @@ $(document).ready(function(){
     if($('.alert_locations option:selected[value=0]').length > 1){ $('#add-alert-location').hide(); } else { $('#add-alert-location').show(); }
   }
 
-  $('.data-record-tag, #user_alert_sms').live('change', show_hide_add_tag);
+  $('#user_alert_sms').live('change', show_hide_add_tag);
   $('#add-data-record-tag').click(function(){setTimeout(show_hide_add_tag, 250);});
   $('#add-alert-location').click(function(){setTimeout(show_hide_add_tag, 250);});
   show_hide_add_tag();

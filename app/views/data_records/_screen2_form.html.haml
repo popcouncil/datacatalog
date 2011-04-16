@@ -3,7 +3,7 @@
 .box-step
   .frame
     .title
-      %h2 Step 3. Tell us who did the work
+      %h2 Step 3. Tell us who did the work (Required: Lead organization)
     / row
     .row{:class => @data_record.errors.on(:lead_organization_name) ? 'error' : nil}
       %label{:for => "organization"} Lead organization
@@ -25,7 +25,7 @@
       - @data_record.authors.insert(0, @data_record.authors.new(:name => 'Author', :affiliation_name => 'Affiliation'))
       - i = 0
       - form.fields_for :authors do |author_form|
-        .row{:class => (i == 0 ? 'default' : nil)}
+        .row{:class => "#{(i == 0 ? 'default' : nil)} affiliation"}
           - unless author_form.object.new_record?
             = author_form.hidden_field '_destroy'
           .row-name
@@ -36,10 +36,8 @@
             %label{:for => "affiliation-default"} Affiliation
             .text
               = author_form.text_field :affiliation_name, :class => 'required'
-          - if i > 1
-            %a.link-minus.affiliation-remove{:href => (author_form.object.new_record? ? '#' : "#data_record[authors_attributes][#{i}][_destroy]")} minus
-          - if i == 1
-            %a.link.link-add{:href => "#"} plus
+          %a.link-minus.affiliation-remove{:href => (author_form.object.new_record? ? '#' : "#data_record[authors_attributes][#{i}][_destroy]")} minus
+          %a.link.link-add.affiliation-add{:href => "#"} plus
         - i += 1
     / row
     .row
@@ -49,7 +47,7 @@
 .box-step
   .frame
     .title
-      %h2 Last step. Tell us how to get more information
+      %h2 Last step. Tell us how to get more information (Required: contact name, contact email or phone)
     / row
     - form.fields_for :contact do |contact_form|
       .row

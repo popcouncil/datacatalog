@@ -184,6 +184,15 @@ class DataRecord < ActiveRecord::Base
   def coverage_list
     @coverage_list ||= self.locations.collect(&:name)
   end
+
+  def set_defaults
+    self.title = 'Title' if self.title.blank?
+    self.description = 'Add Description' if self.description.blank?
+    self.lead_organization_name = 'Lead organization' if self.lead_organization_name.blank?
+    self.collaborator_list= 'Other institutional collaborators' if self.collaborator_list.blank?
+    self.homepage_url = 'URL' if self.homepage_url.blank?
+    self.funder = 'Funder' if funder.blank?
+  end
   
   private
 
