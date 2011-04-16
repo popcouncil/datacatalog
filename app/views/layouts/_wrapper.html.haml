@@ -3,9 +3,9 @@
     #skip
       %a{:href => "#main", :tabindex => "1"} Skip to main content
     / main
-    #main
+    #main{:class => (controller.is_a?(PasswordResetsController) ? 'email-page' : nil)}
       = yield
-    #header
+    #header{:class => (controller.is_a?(PasswordResetsController) ? 'email-page' : nil)}
       .area
         .nav-holder
           / nav
