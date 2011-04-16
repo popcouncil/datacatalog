@@ -2,7 +2,7 @@ class Notifier < ActionMailer::Base
 
   def confirmation_instructions(user)
     subject       "Please confirm your account"
-    from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from          "Data Uncovered <catalog@datauncovered.com>"
     recipients    user.email
     sent_on       Time.now
     body          :confirmation_url => confirm_url(user.perishable_token), :user => user
@@ -10,7 +10,7 @@ class Notifier < ActionMailer::Base
 
   def welcome_message(user)
     subject       user.openid_identifier ? "Thanks for signing up!" : "Thanks for confirming!"
-    from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from          "Data Uncovered <catalog@datauncovered.com>"
     recipients    user.email
     sent_on       Time.now
     body          :profile_url => profile_url
@@ -18,7 +18,7 @@ class Notifier < ActionMailer::Base
 
   def admin_welcome(user)
     subject       "A new account has been created for you!"
-    from          "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from          "Data Uncovered <catalog@datauncovered.com>"
     recipients    user.email
     sent_on       Time.now
     body          :profile_url => profile_url, :email => user.email, :password => user.password
@@ -27,7 +27,7 @@ class Notifier < ActionMailer::Base
 
   def password_reset_instructions(user)
     subject      "Password Reset Instructions"
-    from         "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from         "Data Uncovered <catalog@datauncovered.com>"
     recipients   user.email
     sent_on      Time.now
     body         :reset_url => reset_url(user.perishable_token)
@@ -35,8 +35,8 @@ class Notifier < ActionMailer::Base
 
   def contact_submission(contact_submission)
     subject      "Contact Us: #{contact_submission.title}"
-    from         "National Data Catalog <natdatcat@sunlightfoundation.com>"
-    recipients   "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from         "Data Uncovered <catalog@datauncovered.com>"
+    recipients   "Data Uncovered <catalog@datauncovered.com>"
     sent_on      Time.now
     body <<-BLOCK
       From:
@@ -52,8 +52,8 @@ class Notifier < ActionMailer::Base
 
   def data_suggestion(data_suggestion)
     subject      "Data Suggestion: #{data_suggestion.title}"
-    from         "National Data Catalog <natdatcat@sunlightfoundation.com>"
-    recipients   "National Data Catalog <natdatcat@sunlightfoundation.com>"
+    from         "Data Uncovered <catalog@datauncovered.com>"
+    recipients   "Data Uncovered <catalog@datauncovered.com>"
     sent_on      Time.now
     body <<-BLOCK
       From:
