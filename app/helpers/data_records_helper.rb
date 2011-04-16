@@ -13,7 +13,7 @@ module DataRecordsHelper
 
   def authors_of(record)
     record.authors.map do |author|
-      author.affiliation.present? ?  "#{author.name} (#{link_to author.affiliation.name, author.affiliation})" : author.name
+      author.affiliation.present? ?  "#{author.name} (#{author.affiliation.name})" : author.name
     end.join(", ")
   end
 
