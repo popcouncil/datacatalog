@@ -13,34 +13,34 @@
         .row-holder
           = form.check_box :list_opt_in, {:id => "ch02"}
           %label{:for => "ch02"} Email me updates from the Population Council.
-      
+      %br/
+      %br/
       %h3 Topic
-      Select "All" to be notified when there is a new record on any topic that matches your geographic interests. You can select multiple topics.
+      %p Select "All" to be notified when there is a new record on any topic that matches your geographic interests. You can select multiple topics.
       / row
-      - if @alert_topics.blank?
-        .row
+      .row
+        - if @alert_topics.blank?
           = select_tag 'tags[]', options_for_select([['Select Topics', '0']] + Alert.tags, :disabled => "-------------"), :class => 'alert_tags sel05'
-      - else
-        - @alert_topics.each do |topic|
-          .row
+        - else
+          - @alert_topics.each do |topic|
             = select_tag 'tags[]', options_for_select([['Select Topics', '0']] + Alert.tags, :disabled => "-------------", :selected => (topic.nil? ? 'All' : topic)), :class => 'alert_tags sel05'
-      = link_to '[+]', "#", :id => 'add-alert-topic', :class => 'plus'
-      = link_to '[-]', "#", :id => 'del-alert-topic', :class => 'minus'
+        = link_to '[+]', "#", :id => 'add-alert-topic', :class => 'plus'
+        = link_to '[-]', "#", :id => 'del-alert-topic', :class => 'minus'
     .box-holder.box
       %h3 Geographic Coverage
-      Select "All" to be notified when there is a new record about any country or region that matches your topic interests. You can select multiple locations.
+      %p Select "All" to be notified when there is a new record about any country or region that matches your topic interests. You can select multiple locations.
       - locations = all_locations_for_select; locations[1] = ['Global (does not select all)', '1']; locations.insert(1, ['All', '0']); locations[0][0] = 'Select Region/Country'
-      - if @alert_locations.blank?
-        .row
+      .row
+        - if @alert_locations.blank?
           = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------"), :class => 'alert_locations sel05'
-      - else
-        - alert_locations = @alert_locations
-        = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => alert_locations.shift.to_s), :class => 'alert_locations sel05'
-        - locations.delete_at(1)
-        - alert_locations.each do |location|
-          = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations sel05'
-      = link_to '[+]', "#", :id => 'add-alert-location', :class => 'plus'
-      = link_to '[-]', "#", :id => 'del-alert-location', :class => 'minus'
+        - else
+          - alert_locations = @alert_locations
+          = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => alert_locations.shift.to_s), :class => 'alert_locations sel05'
+          - locations.delete_at(1)
+          - alert_locations.each do |location|
+            = select_tag 'locations[]', options_for_select(locations, :disabled => "-------------", :selected => location.to_s), :class => 'alert_locations sel05'
+        = link_to '[+]', "#", :id => 'add-alert-location', :class => 'plus'
+        = link_to '[-]', "#", :id => 'del-alert-location', :class => 'minus'
       .row-check
         = form.hidden_field :alert_email, {:value => '1'}
         -#.row-holder
@@ -63,20 +63,15 @@
       initCustomForms();
       return false;
     });
-
-    $('#del-alert-topic').click(function(){
-      $(this).parent().children('.row:last').remove();
-      return false;
-    });
-
+    
     $('#add-alert-location').click(function(){
       $('#add-alert-location').before($('#hidden-new-location').html());
       initCustomForms();
       return false;
     });
 
-    $('#del-alert-location').click(function(){
-      $(this).parent().children('.row:last').remove();
+    $('#del-alert-location, #del-alert-topic').click(function(){
+      $(this).parent().children('select.sel05:last, div.sel05:last').remove();
       return false;
     });
     

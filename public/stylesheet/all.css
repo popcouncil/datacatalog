@@ -116,6 +116,7 @@ select{
 	float:right;
 	overflow:hidden;
 }
+.form-email legend,
 .form-thoughts legend,
 .form-notes legend,
 .form-inform2 legend,
@@ -198,8 +199,11 @@ select{
 #main {
 	width:935px;
 	overflow: hidden;
+	position:relative;
+	z-index:2;
 	padding:23px 10px 0 15px;
 }
+.citys span{padding:0 4px;}
 /* content */
 #content{
 	width:584px;
@@ -395,7 +399,10 @@ select{
 	min-height:32px;
 	background:url(../images/bg-txt.gif) repeat-y;
 }
-* html .list-btn .txt {	overflow:visible;	height:32px;}
+* html .list-btn .txt {
+	overflow:visible;
+	height:32px;
+}
 .list-btn .txt em{
 	display:block;
 	font-style:normal;
@@ -488,7 +495,7 @@ select{
 	margin:0 0 20px;
 }
 .box-select .row-sel{
-	width:280px;
+	width:220px;
 	float:left;
 	overflow:hidden;
 }
@@ -775,15 +782,18 @@ select{
 /* block-create */
 .block-create{
 	width:100%;
-	overflow:hidden;
 	padding:16px 0 0;
 }
 .create-page .block-create{padding:16px 0 10px;}
 .block-create .block-title{
 	width:100%;
-	overflow:hidden;
 	margin:0 0 13px;
 	position:relative;
+}
+.form-create:after,
+.block-create:after,
+.block-create .block-title:after{
+	content:'';	display:block;	clear:both;
 }
 .block-create h1{
 	font-size:2.5em;
@@ -799,29 +809,27 @@ select{
 .box-error{
 	width:288px;
 	position:absolute;
-	top:5px;
+	bottom:-13px;
 	left:325px;
-	font-size:1.3em;
-	line-height:1.3em;
+	font-size:1.2em;
+	line-height:1.4em;
 	color:#c1272d;
 	background:#faeeef url(../images/bg-box-error.gif) no-repeat;
 	display:none;
 }
 .box-error .frame{
-	width:248px;
+	width:268px;
 	overflow:hidden;
-	padding:15px 20px 10px;
+	padding:10px 10px 10px;
 	background:url(../images/bg-frame04.gif) no-repeat 0 100%;
 }
+.box-error ul{
+	margin:0;	padding:0;	list-style:none;
+}
 .box-error p{margin:0;}
-.form-error .box-error{
-	display:block;
-}
+.form-error .box-error{display:block;}
 /* form-create */
-.form-create{
-	width:935px;
-	overflow:hidden;
-}
+.form-create{width:935px;}
 .block-step{
 	width:100%;
 	overflow:hidden;
@@ -1038,7 +1046,8 @@ select{
 .page-dashboard h1{
 	font-size:2.5em;
 	color:#3a86c7;
-	margin:20px 0 0;
+	margin:20px 0 20px;
+	width: 600px;
 }
 .page-dashboard .block-catalog .box-info{margin:0 0 35px;}
 .page-dashboard .block-catalog{padding:16px 0 30px;}
@@ -1055,6 +1064,7 @@ select{
 	float:left;
 	margin:0 21px 0 0;
 }
+.block-step .row-name{margin:0 13px 0 0;}
 .block-create .row-name .text{
 	width:381px !important;
 	padding:9px 14px 10px;
@@ -1142,6 +1152,12 @@ select{
 	overflow:hidden;
 	padding:0 0 11px;
 }
+
+.row p {
+	font-size: 1.3em;
+}
+
+
 .form-login .text,
 .form-register .text{
 	width:299px;
@@ -1204,6 +1220,11 @@ select{
 	overflow:hidden;
 	padding:36px 0 0;
 }
+
+#errorExplanation.errorExplanation {
+	font-size: 0.8em;
+}
+
 /* block-about */
 .block-about{
 	width:100%;
@@ -1561,7 +1582,10 @@ select{
 	padding:14px 0 15px;
 	background:url(../images/bg-block-setting.gif) no-repeat -935px 100%;
 }
-* html .block-settings .frame {	overflow:visible;	padding:14px 0 0;}
+* html .block-settings .frame {
+	overflow:visible;
+	padding:14px 0 0;
+}
 /* box-inform */
 .form-inform{
 	width:545px;
@@ -1706,7 +1730,7 @@ select{
 	margin:0 0 9px;
 	font-weight:normal;
 }
-.form-inform2 .box .row{padding:0 0 11px 2px;}
+.form-inform2 .box .row{padding:0 0 11px;}
 .form-inform2 .row{
 	height:1%;
 	overflow:hidden;
@@ -1765,6 +1789,11 @@ select{
 	margin:0 0 0 70px;
 	font-size:2em;
 }
+
+.form-inform2 p{
+	font-size: 1.3em;
+}
+
 .form-inform2 .clear a{color:#3a86c7;}
 /* block-record */
 .block-record{
@@ -2474,11 +2503,11 @@ select{
 	height: 41px;
 	float:left;
 	color:#999;
-	font-size:21px;
+	font-size:18px;
 	line-height:23px;
 }
 .sel03{
-	font-size:25px;
+	font-size:18px;
 	line-height:27px;
 }
 .sel04,
@@ -2516,6 +2545,7 @@ select{
 	outline:none;
 	background: url(../images/select-button.gif) no-repeat 100% 0;
 }
+* html .selectArea a.selectButton{right:-1px;}
 .form-error .error .selectArea a.selectButton{background: url(../images/select-button-error.gif) no-repeat 100% 0 !important;}
 .select-center {
 	height:1%;
@@ -2557,9 +2587,10 @@ select{
 	background-color: #fff;
 	border: 1px solid #C9C9C9;
 	display: block;
-	z-index: 30;
-	font-size: 21px;
+	z-index:30;
+	font-size:18px;
 }
+.drop-alert_tags{font-size:18px;}
 .optionsDivInvisible.drop-sel02 ,
 .optionsDivVisible.drop-sel02 {font-size: 12px !important;}
 .optionsDivInvisible.drop-sel03 ,
@@ -2646,3 +2677,130 @@ select{
 .geografical-select .link-minus {
 	display:block;
 }
+/* email-page */
+.email-page .form-search{width:206px;}
+#main.email-page{
+	min-height:496px;
+	padding:58px 10px 0 15px;
+}
+* html #main.email-page {
+	overflow:visible;
+	height:496px;
+}
+.block-email{
+	width:382px;
+	overflow:hidden;
+	margin:0 0 0 275px;
+	background:#ddeefd url(../images/bg-block-email.gif) no-repeat;
+}
+.form-email {
+	width:382px;
+	overflow:hidden;
+	padding:18px 0 20px;
+	background:url(../images/bg-holder2.gif) no-repeat 0 100%;
+}
+.block-email .title{
+	width:333px;
+	overflow:hidden;
+	padding:0 10px 18px 39px;
+	margin:0 0 18px;
+	background:url(../images/bg-title2.gif) repeat-x 0 100%;
+}
+.block-email h1{
+	font-size:2.5em;
+	line-height:1.2em;
+	color:#3a86c7;
+	margin:0;
+}
+.form-email label{display:none;}
+/* text */
+.block-email .row{
+	width:331px;
+	overflow:hidden;
+	padding:0 25px 0 26px;
+	color:#666;
+}
+.form-email .text{
+	width:307px;
+	height:27px;
+	margin:0 0 11px;
+	padding:7px 12px 8px;
+	background:url(../images/bg-text.gif) no-repeat;
+}
+.form-email .text input{
+	width:307px;
+	float:left;
+	margin:0;
+	padding:0;
+	outline:none;
+	border:0;
+	background:none;
+	color:#999;
+	font-size:25px;
+	line-height:27px;
+}
+.form-email p{
+	font-size:1.4em;
+	line-height:1.4em;
+	margin:0 15px 0;
+}
+/* btn */
+.form-email .btn{
+	width:331px;
+	overflow:hidden;
+	margin:22px 0 29px;
+}
+* html .form-email .btn {
+	margin:22px 0 26px;
+}
+.form-email .btn-submit{
+	width:135px;
+	height:38px;
+	border:0;
+	cursor:pointer;
+	text-indent:-9999px;
+	overflow:hidden;
+	line-height:0;
+	font-size:0;
+	margin:0 auto;
+	padding:0;
+	display:block;
+	background:url(../images/btn-submit.gif) no-repeat;
+}
+.sell-holder{
+	width:100%;
+	overflow:hidden;
+}
+.sell-holder .row{
+	float:left;
+	width:161px;
+	padding:0 12px 0 0;
+}
+.form-select .sell-small{width:161px;}
+.form-select .sell-wide{width:345px;}
+.row-sel-wide{width:370px !important;}
+.btn-links{
+	float:left;
+	padding:15px 0 0;
+}
+.btn-links .btn,
+.btn-links a{
+	float:left;
+	margin:0 0 0 8px;
+	display:inline;
+	cursor:pointer;
+	height:26px;
+	color:#fff;
+	text-transform:uppercase;
+	font:12px/26px Arial, Helvetica, sans-serif;
+	width:auto;
+	background:url(../images/bg-btns.gif) no-repeat;
+}
+.btn-links a:hover{text-decoration:none;}
+.btn-links .btn{font-weight:bold;}
+.btn-links a span{
+	float:left;
+	padding:0 11px;
+	background:url(../images/bg-btns.gif) no-repeat 100% -27px;
+}
+.errorExplanation h2{margin:0;}

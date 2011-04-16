@@ -26,11 +26,11 @@ $(document).ready(function(){
   // show or hide add document link
 
   function show_hide_datarecord(){
-    if($('select.geo-location option:selected[value=0]').length < 2){
-      $('#geo-location-add').show();
-    } else {
-      $('#geo-location-add').hide();
-    }
+    // if($('select.geo-location option:selected[value=0]').length < 2){
+      // $('#geo-location-add').show();
+    // } else {
+      // $('#geo-location-add').hide();
+    // }
     if($('select.data-record-tag option:selected[value=Agriculture & Rural Development,Aid Effectiveness,Economic Policy and External Debt,Education,Energy & Mining,Environment,Financial sector,Health,Infrastructure,Labor & Social Protection,Poverty,Private Sector,Public Sector,Science & Technology,Social Development,Urban Development,Other]').length > 0){
       $('#add-tag').hide();
     } else {
