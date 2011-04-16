@@ -680,6 +680,9 @@ select{
 	cursor:pointer;
 	background:url(../images/heart-orange.png) no-repeat;
 }
+.catalog-info .block-title .mark.heart{
+  background:url(../images/heart-blue.png) no-repeat;
+}
 .catalog-info .block-title .mark .heart{
 	background:url(../images/heart-blue.png) no-repeat;
 }
@@ -2808,5 +2811,5 @@ select{
 	background:url(../images/bg-btns.gif) no-repeat 100% -27px;
 }
 .errorExplanation h2{margin:0;}
-
 .citys{margin-left: 30px;}
+

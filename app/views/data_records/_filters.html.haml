@@ -1,6 +1,5 @@
 - form_for @filters, :url => data_records_path, :html => { :method => :get, :id => 'filterDataForm', :class => 'form-select' } do |form|
   %fieldset
-    %legend Title
     .row-sel
       .row.sel-info
         %label{:for => "coverage"} Coverage
@@ -10,13 +9,17 @@
       .row.sel-info
         %label{:for => "release"} Release Year
         = form.select :release_year, years_for_select, {:disabled => "-------------"}, {:class => 'sel02', :id => 'release'}
-    .row-sel
+    .row-sel.row-sel-wide
       .row.sel-info
         %label{:for => "organization"} Organization
-        = form.select :ministry_organization, ministries_and_organizations_for_select(@filters.ministry_organization), {}, {:class => 'sel02', :id => 'organization'}
-      .row.sel-info
-        %label{:for => "type"} Record Type
-        = form.select :document_type, document_types_for_select, {:disabled => "-------------"}, {:class => 'sel02', :id => 'type'}
-    %input.btn-submit{:type => "submit", :value => "submit"}/
-    %a.btn{:href => "#", :onclick => "$(this).prev('input').click(); return false;"} Filter Data
-    = link_to 'clear', data_records_path, :style => 'margin: 18px 0px 0px 10px; float: left; line-height: 26px;';
+        = form.select :ministry_organization, ministries_and_organizations_for_select(@filters.ministry_organization), {}, {:class => 'sel02 sell-wide', :id => 'organization'}
+      .sell-holder
+        .row.sel-info
+          %label{:for => "type"} Record Type
+          = form.select :document_type, document_types_for_select, {:disabled => "-------------"}, {:class => 'sel02 sell-small', :id => 'type'}
+        .btn-links
+          %input.btn-submit{:type => "submit", :value => "submit"}/
+          %a.btn{:href => "#", :onclick => "$(this).prev('input').click(); return false;"}
+            %span Filter Data
+          %a.btn{:href => data_records_path}
+            %span clear

@@ -8,13 +8,6 @@
 .block-catalog.browse-page
   .box-info
     .box-select
-      %h1
-        - if @filters.tags.present?
-          Browse by tag “#{h @filters.tags}”
-          %span
-            (
-            %a{:href => data_records_path}> View all
-            )
       / block-catalog
       .box-select
         = render :partial => 'filters'
@@ -22,6 +15,14 @@
     .box-btn
       = render :partial => 'shared/quick_menu', :object => 'browse'
   / catalog-info
+  
+  - if @filters.tags.present?
+    %h1
+      Browse by tag “#{h @filters.tags}”
+      %span
+        (
+        %a{:href => data_records_path}> View all
+        )
   .catalog-info
     - if @data_records.total_pages > 1
       %ul.list-paging
