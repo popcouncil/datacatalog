@@ -80,14 +80,14 @@
               %a.link-minus{:href => (document_form.object.new_record? ? '#' : "#data_record[documents_attributes][#{i}][_destroy]")}
           .row-holder.add-document.required-radio
             .box-row
-              = document_form.radio_button :storage, "upload", :class => 'document-type-radio quest', :id => (i == 0 ? 'r01-default' : "r01-#{i}")
+              = document_form.radio_button :storage, "upload", :class => "document-type-radio quest #{(i == 0 ? 'default' : nil)}", :id => (i == 0 ? 'r01-default' : "r01-#{i}")
               %label{:for => (i == 0 ? 'r01-default' : "r01-#{i}")} Upload a file
               .box-file.upload-box
                 %label{:for => "file"} Choose file
                 = document_form.file_field :file, :class => 'file-input-area', :size => 20, :id => (i == 0 ? 'r01-default' : "r01-#{i}")
                 %a.button{:href => "#"} File
             .box-row.box
-              = document_form.radio_button :storage, "external", :class => 'document-type-radio quest', :id => (i == 0 ? 'r02-default' : "r02-#{i}")
+              = document_form.radio_button :storage, "external", :class => "document-type-radio quest #{(i == 0 ? 'default' : nil)}", :id => (i == 0 ? 'r02-default' : "r02-#{i}")
               %label{:for => (i == 0 ? 'r02-default' : "r02-#{i}")} Provide a link
               .text-row.upload-box
                 .text

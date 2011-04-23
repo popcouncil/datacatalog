@@ -129,6 +129,15 @@ $(document).ready(function(){
       show();
     return true;
   });
+
+  $('.radioAreaChecked').live('change', function(){
+    $(this).next().removeAttr('checked');
+  });
+  $('.radioArea').live('change', function(){
+    $(this).next().attr('checked', 'checked');
+  });
+
+  $('#r01-default, #r02-default').change(function(){return false});
   
   $('#user_alert_email,#user_alert_sms').click(function(){
     if($('#tags__tag_id').val() == 'All' && $('#locations__location_id').val() == '1'){

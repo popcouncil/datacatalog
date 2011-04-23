@@ -90,7 +90,7 @@ $.fn.addBlocks = function(_options){
 		});
 		
 		function addBlock(){
-			var block = copyBlock.clone(true);
+			var block = copyBlock.clone(!copyBlock.hasClass('title-block'));
 			if(block.children('select.data-record-tag').length > 0){
         var $item = $('select.data-record-tag option:selected');
         $item.each(function(){
@@ -461,7 +461,7 @@ slideshow.prototype = {
 // custom forms init
 function initCustomForms() {
 	$('select').customSelect();
-	$('input:radio').customRadio();
+	$('input:radio:not(.default)').customRadio();
 	$('input:checkbox').customCheckbox();
 }
 
