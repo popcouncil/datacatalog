@@ -29,7 +29,7 @@ function initValidation(){
 }
 //clear inputs
 function clearInputs(holder){
-	$('input:text, input:password, textarea',holder).each(function(){
+	$('input:text:not(.noclear), input:password, textarea',holder).each(function(){
 		var _el = $(this);
 		var _val = _el.val();
 		_el.bind('focus', function(){

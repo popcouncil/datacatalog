@@ -91,7 +91,7 @@
               %label{:for => (i == 0 ? 'r02-default' : "r02-#{i}")} Provide a link
               .text-row.upload-box
                 .text
-                  = document_form.text_field :external_url, {:title => 'http:// ', :value => (document_form.object.external_url || 'http://')}
+                  = document_form.text_field :external_url, {:title => 'http://', :value => (document_form.object.external_url || 'http://'), :class => 'noclear'}
           - if i == 1
             .row-holder
               .box-add
