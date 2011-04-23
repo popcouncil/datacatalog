@@ -83,7 +83,7 @@ class DataRecordsController < ApplicationController
     if (docs = params[:data_record][:documents_attributes])
       docs.delete('0')
       docs.each_pair do |k, v|
-        docs.delete(k) if v[:title] == 'Title' or v[:title] == 'Document Title'
+        v[:title] = '' if v[:title] == 'Title' or v[:title] == 'Document Title'
       end
     end
     if (aut = params[:data_record][:authors_attributes])
@@ -95,11 +95,12 @@ class DataRecordsController < ApplicationController
       end
     end
     params[:data_record][:title] = '' if params[:data_record][:title] == 'Title'
-    params[:data_record][:description] = '' if params[:data_record][:description] == 'Add Description'
+    params[:data_record][:description] = '' if params[:data_record][:description] == 'Add Description' || params[:data_record][:description] == 'Add description'
     params[:data_record][:lead_organization_name] = '' if params[:data_record][:lead_organization_name] == 'Lead organization'
     params[:data_record][:collaborator_list] = ''  if params[:data_record][:collaborator_list] == 'Other institutional collaborators'
     params[:data_record][:homepage_url] = '' if params[:data_record][:homepage_url] == 'URL'
     params[:data_record][:funder] = '' if params[:data_record][:funder] == 'Funder'
+    params[:data_record][:year] = '' if params[:data_record][:year] == 'Publication Year'
   end
 
   def initialize_data_record_associations

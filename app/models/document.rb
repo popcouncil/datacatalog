@@ -6,6 +6,7 @@ class Document < ActiveRecord::Base
   has_attached_file :file, PAPERCLIP_CONFIG
 
   validate :presence_of_file_or_url
+  validates_presence_of :title
   validates_inclusion_of :document_type, :in => DOCUMENT_TYPES
 
   def download_url # Bug alert, XSS?
@@ -20,6 +21,10 @@ class Document < ActiveRecord::Base
     else
       file.url
     end
+  end
+
+  def title
+    self[:title].blank? ? 'Title' : self[:title]
   end
 
   def external?
