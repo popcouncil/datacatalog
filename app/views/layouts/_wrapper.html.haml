@@ -25,7 +25,7 @@
             %li{:class => (controller.is_a?(MainController) and controller.action_name == 'about' ? 'active' : nil)}
               = link_to 'ABOUT', about_path, :tabindex => 8
         / form-search
-        %form.form-search{:action => "#"}
+        %form.form-search{:action => "http://www.google.com/cse"}
           %fieldset
             %legend Title
             - if current_user.present?
@@ -40,8 +40,10 @@
                 %span Login
             %label{:for => "inp01"} SEARCH
             .text
-              %input#inp01{:type => "text", :value => "SEARCH"}/
-            %input.btn-submit{:type => "submit", :value => "GO"}/
+              %input{:type => 'hidden', :name => 'cx', :value => '007076995731509612530:77sxrusn9si'}/
+              %input{:type => 'hidden', :name => 'ie', :value => 'UTF-8'}/
+              %input#inp01{:type => "text", :name => 'q', :value => "SEARCH"}/
+            %input.btn-submit{:type => "submit", :name => 'sa', :value => "GO"}/
       / logo-holder
       .logo-holder
         %strong.logo
