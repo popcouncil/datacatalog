@@ -98,6 +98,13 @@ $.fn.addBlocks = function(_options){
 			  block.children('select.data-record-tag').find('option[value=' + $(this).val() + ']').remove();
 			  });
 			}
+			if(block.hasClass('geografical-select')){
+        var $item = $('select.geo-location option:selected');
+        $item.each(function(){
+          if($(this).val() != '0')
+            block.children('.select-row').children('select.geo-location').find('option[value=' + $(this).val() + ']').remove();
+        });
+			}
 			block.appendTo(holder).removeClass('default');
 			block.find('.error').removeClass('error');
 			var selects = $('select', block);
@@ -155,7 +162,7 @@ $.fn.addBlocks = function(_options){
 					}
 					input.attr('name',input.attr('name').replace('[0]', '[' + count +']'));
 				}
-			}			
+			}	
 						
 			clearInputs(block);
 		}

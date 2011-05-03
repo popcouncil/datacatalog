@@ -13,7 +13,7 @@
       .text
         = form.text_field :title, :class => 'required', :title => 'Title'
     / row
-    .row{:class => (@data_record.errors.on(:description) ? 'textarea-error' : nil)}
+    .row{:class => (@data_record.errors.on(:description) ? 'error' : nil)}
       %label{:for => "description"} Add description
       .text-area
         = form.text_area :description, :title => 'Add description', :cols => 30, :rows => 10, :class => 'required'
@@ -27,7 +27,7 @@
             %a.link-minus.geo-location-del{:href => (location_form.object.new_record? ? '#' : "#data_record[data_record_locations_attributes][#{i}][_destroy]")}
             %a.link.link-add.geo-location-add{:href => "#"}
           .citys
-            %span
+            %p
               What is the lowest level of disaggregation?
             = location_form.select :disaggregation_level, disaggregation_levels_for_select, {:disabled => "-------------"}, {:class => ['city-select', (i == 0 ? 'default' : nil)].compact.join(' ')}
           - i+=1

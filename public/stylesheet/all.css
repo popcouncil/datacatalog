@@ -480,7 +480,7 @@ select{
 	font-size:25px;
 	line-height:27px;
 	color:#3a86c7;
-	padding:23px 0 35px;
+	padding:0;
 	margin:0;
 }
 .box-select h1 span{
@@ -607,9 +607,9 @@ select{
 	position:relative;
 }
 .catalog-info .block-title .col01{
-	width:303px;
+	width:227px;
 	float:left;
-	padding:0 0 0 13px;
+	padding:0 0 0 90px;
 }
 .catalog-info .block-title h1,
 .catalog-info .block-title h2{
@@ -630,22 +630,26 @@ select{
 	padding:0 0 5px;
 }
 .catalog-info .block-title .col03{
-	width:134px;
+	width:140px;
 	float:left;
-	padding:0 0 5px;
+	padding: 0 25px 5px 35px;
+	margin-left: 80px;
+	
 }
 .catalog-info .block-title .col04{
-	width:100px;
+	width:80px;
 	float:left;
 	padding:0 0 5px;
+	margin-left: 10px;
 }
+
 .catalog-info .block-title .col05{
 	width:159px;
 	float:left;
-	padding:0 0 5px;
+	padding:0 0 5px;	
 }
 .catalog-info .block-title .col06{
-	width:109px;
+	width:130px;
 	float:left;
 	padding:0 0 5px;
 }
@@ -680,9 +684,6 @@ select{
 	cursor:pointer;
 	background:url(../images/heart-orange.png) no-repeat;
 }
-.catalog-info .block-title .mark.heart{
-  background:url(../images/heart-blue.png) no-repeat;
-}
 .catalog-info .block-title .mark .heart{
 	background:url(../images/heart-blue.png) no-repeat;
 }
@@ -706,12 +707,12 @@ select{
 .catalog-info .block-title .list-rating li{float:left;}
 .catalog-info .block-title .list-rating img{display:block;}
 .catalog-info .block-title .list .col03{
-	margin:0 11px 0 0;
-	width:94px;
+	margin:0 11px 0 25px;
+	width:200px;
 }
 .catalog-info .block-title .list .col04{
-	padding:0 0 0 14px;
-	width:86px;
+	padding:0 0 0 0px;
+	width:80px;
 	margin:0 9px 0 0;
 }
 .catalog-info .block-title .list .col05{
@@ -906,7 +907,9 @@ select{
 	padding:10px 14px 9px;
 	background:url(../images/bg-textarea.gif) no-repeat;
 }
-.box-step .textarea-error .text-area{background:url(../images/bg-textarea-error.gif) no-repeat;}
+
+.box-step .error .text-area {background:url(../images/bg-textarea-error.gif) no-repeat;}
+
 .box-step .row textarea{
 	background:none;
 	border:0;
@@ -1229,7 +1232,7 @@ select{
 }
 
 #errorExplanation.errorExplanation {
-	font-size: 0.8em;
+	font-size: 1.1em;
 }
 
 /* block-about */
@@ -2037,6 +2040,10 @@ select{
 	background:#f0f6fb url(../images/bg-tab-content.gif) no-repeat -584px 100%;
 }
 .tab-content p { margin: 10px 0 0 0;}
+
+.tab-content p a { text-decoration: underline;}
+
+
 /* inform */
 .twocolumns .inform{
 	width:584px;
@@ -2811,5 +2818,3 @@ select{
 	background:url(../images/bg-btns.gif) no-repeat 100% -27px;
 }
 .errorExplanation h2{margin:0;}
-.citys{margin-left: 30px;}
-

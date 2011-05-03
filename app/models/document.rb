@@ -23,10 +23,6 @@ class Document < ActiveRecord::Base
     end
   end
 
-  def title
-    self[:title].blank? ? 'Title' : self[:title]
-  end
-
   def external?
     !self.external_url.blank?
   end

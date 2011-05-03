@@ -192,6 +192,9 @@ class DataRecord < ActiveRecord::Base
     self.collaborator_list= 'Other institutional collaborators' if self.collaborator_list.blank?
     self.homepage_url = 'URL' if self.homepage_url.blank?
     self.funder = 'Funder' if funder.blank?
+    self.documents.each do |doc|
+      doc.title = 'Title' if doc.title.blank?
+    end
   end
   
   private

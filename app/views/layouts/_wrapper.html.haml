@@ -5,7 +5,7 @@
     / main
     #main{:class => (controller.is_a?(PasswordResetsController) ? 'email-page' : nil)}
       = yield
-    #header{:class => (controller.is_a?(PasswordResetsController) ? 'email-page' : nil)}
+    #header
       .area
         .nav-holder
           / nav

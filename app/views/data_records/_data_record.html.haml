@@ -8,19 +8,17 @@
           = render :partial => 'favorites/button', :locals => {:data_record => data_record}
         %li.col02
           = render :partial => 'ratings/stars', :object => data_record.ratings_average
-        %li.col03
-          %span
-            - data_record.locations.each do |loc|
-              = link_to h(loc.name), data_records_path(:filters => filter.merge(:location => loc.id))
         %li.col04
           %span
             = link_to h(data_record.year), data_records_path(:filters => filter.merge(:release_year => data_record.year))
-        %li.col05
-          %span= organizations_for(data_record)
         %li.col06
           %span
             - data_record.documents.each do |document|
               = link_to h(document.document_type), data_records_path(:filters => filter.merge(:document_type => document.document_type))
+        %li.col03
+          %span
+            - data_record.locations.each do |loc|
+              = link_to h(loc.name), data_records_path(:filters => filter.merge(:location => loc.id))
       
 .block-inf
   .block
@@ -32,4 +30,8 @@
         %span
           %strong Tags:
           = linked_tags(data_record)
+        %br
+        %span
+          %strong Organizations:
+          = organizations_for(data_record)
 
