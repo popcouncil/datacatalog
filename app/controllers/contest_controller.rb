@@ -11,7 +11,7 @@ class ContestController < ApplicationController
   end
 
   def new
-    @contest_entry = ContestRegistration.new(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
+    @registration = ContestRegistration.new(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
       :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone'),
       :address => 'Address', :city => (current_user.city || 'City'))
   end
