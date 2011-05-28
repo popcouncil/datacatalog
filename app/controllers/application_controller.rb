@@ -20,12 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404(e)
-    Exceptional::Catcher.handle(e) if Rails.env == 'production'
     render :template => 'main/not_found', :status => "404 Not Found"
   end
 
   def render_500(e)
-    Exceptional::Catcher.handle(e) if Rails.env == 'production'
     render :template => 'main/internal_error', :status => "500 Error"
   end
 
