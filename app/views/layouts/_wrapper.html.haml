@@ -18,8 +18,8 @@
               = link_to 'Q&A', 'http://ask.datauncovered.com/', :tab_index => 4
             %li{:class => (controller.is_a?(MainController) and controller.action_name == 'tools' ? 'active' : nil)}
               = link_to 'TOOLS', tools_path, :tabindex => 5
-            %li{:class => (controller.is_a?(MainController) and controller.action_name == 'contest' ? 'active' : nil)}
-              = link_to 'CONTEST', contest_path, :tabindex => 6
+            %li{:class => (controller.is_a?(ContestController) ? 'active' : nil)}
+              = link_to 'CONTEST', contest_index_path, :tabindex => 6
             %li
               = link_to 'BLOG', 'http://blog.datauncovered.com/', :tabindex => 7
             %li{:class => (controller.is_a?(MainController) and controller.action_name == 'about' ? 'active' : nil)}

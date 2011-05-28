@@ -1,0 +1,19 @@
+- content_for :body_class do
+  about
+
+- content_for :title do
+  Contest
+
+= show_flash_message
+.block-about
+  %h1 Join the Contest
+  .aside
+    .frame
+      %ul
+        %li= link_to 'Senegal', contest_path(:id => 'Senegal')
+        %li= link_to 'Ghana', contest_path(:id => 'Ghana')
+        %li= link_to 'Nambia', contest_path(:id => 'Nambia')
+  .column
+    %span
+      Text text text.
+    %p ~~~~~~~~~~~~
