@@ -1,4 +1,4 @@
-if Rails.env.production?
+if Rails.env.production? && ENV['S3_ACCESS_KEY']
   PAPERCLIP_CONFIG = {
     :storage        => :s3,
     :s3_credentials => {
