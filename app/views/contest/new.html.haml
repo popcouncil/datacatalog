@@ -1,0 +1,56 @@
+.block-create
+  - form_for @registration, :url => contest_index_path(:id => params[:id]), :html => {:class => "form-create #{'form-error' unless @registration.errors.blank?}"} do |f|
+    %fieldset
+      .block-title
+        %h1 Registration
+        .box-error
+          .frame
+            %p= f.error_messages
+    .box-step
+      .frame
+        .title
+          %h1
+        .row{:class => (@registration.errors.on(:category) ? 'error' : nil)}
+          = f.select :category, [['Select Category',''], 'Software', 'Journalism']
+        .row{:class => (@registration.errors.on(:team) ? 'error' : nil)}
+          = f.select :team, [['Select Individual or Team', ''], ['Individual', 0], ['Team', 1]]
+        .add-block
+          .row.affiliation.default
+            .row-name{:style => 'margin-right: 13px;'}
+              .text
+                = text_field_tag 'contest_registration[members][][name]', 'Name'
+            .row-affiliation
+              .text
+                = text_field_tag 'contest_registration[members][][email]', 'Email'
+            %a.link-minus.affiliation-remove{:href => '#'} minus
+            %a.link.link-add.affiliation-add{:href => "#"} plus
+        
+          .row.affiliation
+            .row-name{:style => 'margin-right: 13px;'}
+              .text
+                = text_field_tag 'contest_registration[members][][name]', current_user.name
+            .row-affiliation
+              .text
+                = text_field_tag 'contest_registration[members][][email]', current_user.email
+            %a.link-minus.affiliation-remove{:href => '#'} minus
+            %a.link.link-add.affiliation-add{:href => "#"} plus
+        .row{:class => (@registration.errors.on(:affiliation) ? 'error' : nil)}
+          .text
+            = f.text_field :affiliation
+        .row{:class => (@registration.errors.on(:email) ? 'error' : nil)}
+          .text
+            = f.text_field :email
+        .row{:class => (@registration.errors.on(:phone) ? 'error' : nil)}
+          .text
+            = f.text_field :phone
+        .row{:class => (@registration.errors.on(:address) ? 'error' : nil)}
+          .text
+            = f.text_field :address
+        .row{:class => (@registration.errors.on(:city) ? 'error' : nil)}
+          .text
+            = f.text_field :city
+        .row{:class => (@registration.errors.on(:terms) ? 'error' : nil)}
+          = f.check_box :terms
+          %label{:style => 'display: block; font-size: 1.5em;'} I have read and understand...
+        .row
+          = f.submit 'Register', :class => 'btn-submit', :style => 'background-image: url("/images/btn-submit.gif");'

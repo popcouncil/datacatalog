@@ -1,0 +1,39 @@
+%table
+  %thead
+    %tr
+      %td Contest
+      %td Category
+      %td Members
+      %td Affiliation
+      %td Email
+      %td Phone
+      %td Address
+      %td City
+      %td Title
+      %td Summary
+      %td URLs
+      %td File
+      %td Time
+  %tbody
+    - @entries.each do |entry|
+      - reg = entry.contest_registration
+      - user = entry.contest_registration.user
+      %tr
+        %td=h reg.contest
+        %td=h reg.category
+        %td=h reg.friendly_members.join('::')
+        %td=h reg.affiliation
+        %td=h reg.email
+        %td=h reg.phone
+        %td=h reg.address
+        %td=h reg.city
+        %td=h entry.title
+        %td=h entry.summary
+        %td
+          Program: #{h entry.program_url}
+          %br
+          Video: #{h entry.video_url}
+          %br
+          Photo: #{h entry.photo_url}
+        %td= entry.file.exists? ? entry.file.url : 'NONE'
+        %td= entry.created_at.strftime('%c')

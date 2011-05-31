@@ -1,0 +1,18 @@
+- content_for :body_class do
+  about
+
+- content_for :title do
+  Contest
+
+= show_flash_message
+.block-about
+  %h1=h params[:id]
+  .aside
+    .frame
+      %ul
+        %li= link_to 'Register', new_contest_path(:id => params[:id])
+        %li= link_to 'Submit', new_contest_path(:id => params[:id])
+        %li= link_to 'Gallery', new_contest_path(:id => params[:id])
+  .column
+    = render :partial => "#{params[:id].downcase}_rules"
+

@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.new_data_record '/data-new', :controller => 'data_records', :action => 'new'
   map.tour '/tour', :controller => 'main', :action => 'tour'
   map.tools '/tools', :controller => 'main', :action => 'tools'
-  map.contest '/contest', :controller => 'main', :action => 'contest'
+  map.resources :contest, :except => [:index, :destroy, :edit], :collection => [:admin]
 
   map.resources :organizations, :as => :org, :only => [:show]
 
