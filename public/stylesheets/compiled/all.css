@@ -293,6 +293,15 @@ select{
 	left:0;
 	bottom:0;
 }
+
+.txt-holder a
+{
+text-decoration: none;
+}
+.txt-holder a: hover
+{
+text-decoration: none;
+}
 .gallery-inf .txt{
 	width:560px;
 	overflow:hidden;
@@ -2599,4 +2608,9 @@ select{
 .add-block  {
 	width:100%;
 	overflow:hidden;
+}/* added for form C Savel 5/24/2011 */
+.formpara
+{
+	font:1em Arial, Helvetica, sans-serif;
+	color:#333;
 }

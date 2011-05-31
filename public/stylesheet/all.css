@@ -297,6 +297,14 @@ select{
 	left:0;
 	bottom:0;
 }
+.txt-holder a
+{
+text-decoration:none;
+}
+.txt-holder a:hover
+{
+text-decoration: none;
+}
 .gallery-inf .txt{
 	width:560px;
 	overflow:hidden;
@@ -2818,3 +2826,11 @@ select{
 	background:url(../images/bg-btns.gif) no-repeat 100% -27px;
 }
 .errorExplanation h2{margin:0;}
+
+/* added for form C Savel 5/24/2011 */
+.formpara
+{
+	font:1em Arial, Helvetica, sans-serif;
+	color:#333;
+}
+
