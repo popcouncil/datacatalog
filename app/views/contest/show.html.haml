@@ -10,9 +10,11 @@
   .aside
     .frame
       %ul
-        %li= link_to 'Register', new_contest_path(:id => params[:id])
-        %li= link_to 'Submit', new_contest_path(:id => params[:id])
-        %li= link_to 'Gallery', new_contest_path(:id => params[:id])
+        %li= link_to 'Register: News Article Category', new_contest_path(:id => params[:id], :category => 'Journalism')
+        %li= link_to 'Register: Software Category', new_contest_path(:id => params[:id], :category => 'Software') unless params[:id] == 'Nambia'
+        -# Enable these later
+          %li= link_to 'Submit', new_contest_path(:id => params[:id])
+          %li= link_to 'Gallery', new_contest_path(:id => params[:id])
   .column
     = render :partial => "#{params[:id].downcase}_rules"
 

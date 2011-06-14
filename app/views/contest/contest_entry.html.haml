@@ -1,0 +1,36 @@
+.block-create
+  - form_for @entry, :url => contest_path(:id => @registration.id), :html => {:method => :put, :class => "form-create #{'form-error' unless @entry.errors.blank?}"} do |f|
+    %fieldset
+      .block-title
+        %h1 Registration
+        .box-error
+          .frame
+            %p= f.error_messages
+    .box-step
+      .frame
+        .title
+          %h1
+        .row{:class => (@entry.errors.on(:title) ? 'error' : nil)}
+          .text
+            = f.text_field :title
+        - if @registration.category == 'Software'
+          .row
+            .text
+              = f.text_field :program_url
+          .row
+            .text
+              = f.text_field :video_url
+          .row
+            .text
+              = f.text_field :photo_url
+        .row
+          .text-area
+            = f.text_area :summary
+        - if @registration.category == 'Journalism'
+          .row
+            = f.file_field :file
+        .row
+          = f.check_box :terms
+          %label{:style => 'display: block; font-size: 1.5em;'} I verify that...
+        .row
+          = f.submit 'Register', :class => 'btn-submit', :style => 'background-image: url("/images/btn-submit.gif");'
