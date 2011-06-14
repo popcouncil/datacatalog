@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101230220721) do
+ActiveRecord::Schema.define(:version => 20110527213759) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +41,36 @@ ActiveRecord::Schema.define(:version => 20101230220721) do
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "contest_entries", :force => true do |t|
+    t.integer  "contest_registration_id"
+    t.string   "title"
+    t.text     "summary"
+    t.string   "program_url"
+    t.string   "video_url"
+    t.string   "photo_url"
+    t.string   "file_file_name"
+    t.integer  "file_file_size"
+    t.string   "file_content_type"
+    t.datetime "file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contest_registrations", :force => true do |t|
+    t.string   "contest"
+    t.string   "category"
+    t.boolean  "team"
+    t.text     "members"
+    t.string   "affiliation"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "city"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "data_record_locations", :force => true do |t|
     t.integer  "data_record_id"
