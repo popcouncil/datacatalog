@@ -4,19 +4,16 @@
 
 <% else -%>
 
-<li>
-    <%= form.label :name, "Name" %>
-    <%= form.text_field :name %>
-</li>
 
-<li>
-    <%= form.label :email, "Email Address" %>
-    <%= form.text_field :email %>
-</li>
+    <p class='formpara'><%= form.label :name, "Name" %><br/>
+    <br/><%= form.text_field :name %><br/>
+    <br/><%= form.label :email, "Email Address" %><br/>
+    <br/><%= form.text_field :email %><br/>
+
 
 <% end -%>
 
-<li>
-    <%= form.label :comments, "Comments" %>
-    <%= form.text_area :comments %>
-</li>
+
+    <br/><%= form.label :comments, "Comments" %><br/>
+    <br/><%= form.text_area :comments %><br/></p>
+

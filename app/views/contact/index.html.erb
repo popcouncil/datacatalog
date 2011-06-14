@@ -2,33 +2,26 @@
 Contact Us
 <% end %>
 
+<p class='formpara'>Have a question or comment about the site? Submit it below.</p>
+  <p class='formpara'>If you have a question about a particular data record, use the Comment or Report a Problem tool on that data record's page.</p>
 <div id="ltColumn">
-
+<div class="formpara">
   <%= show_flash_message %>
   <% content_for :body_class do %>submission<% end %>
 
-  <p>Have a question or comment about the site? Submit it below.</p>
-  <p>If you have a question about a particular data record, use the Comment or Report a Problem tool on that data record's page.</p>
-
   <% form_for @contact_submission, :url => contact_submission_path do |f| %>
   <%= f.error_messages custom_error_messages %>
-  <ul>
+  
     <%= render :partial => "form", :object => f %>
-    <li>
+  
       <button class="submit" id="contact_submission_submit" type="submit" value="Submit" name="commit">
         <span>Submit</span>
       </button>
-    </li>
-  </ul>
+ 
 
   <% end %>
-
+</div>
 </div>
 
-<div id="rtColumnWrapper">
-  <div id="rtColumn" class="withBg">
-    <h3>About</h3>
-    <p>The National Data Catalog is a project of the <a href="http://sunlightfoundation.com">Sunlight Foundation</a>.</p>
-  </div>
-</div>
+
 <div class="clear"></div>    
