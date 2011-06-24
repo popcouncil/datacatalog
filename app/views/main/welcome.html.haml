@@ -81,6 +81,6 @@
       - @top.each do |top|
         %li
           .frame
-            %h3=link_to h(top.title), data_record_path(top)
-            %p=h top.description
+            %h3=link_to h(truncate(top.title, :length => 75)), data_record_path(top)
+            %p=h(truncate(top.description, :length => 85))
             
