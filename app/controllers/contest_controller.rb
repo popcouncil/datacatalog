@@ -11,9 +11,10 @@ class ContestController < ApplicationController
   end
 
   def new
+    redirect_to contest_path(params[:id]) unless %w(Software Journalism).include?(params[:category])
     @registration = ContestRegistration.new(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
       :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone'),
-      :address => 'Address', :city => (current_user.city || 'City'))
+      :address => 'Address', :city => (current_user.city || 'City'), :category => params[:category])
   end
 
   def create
@@ -22,18 +23,20 @@ class ContestController < ApplicationController
     ['email', 'phone', 'city', 'address', 'affiliation'].each { |x| contest[x] = '' if contest[x] == x.capitalize }
     @registration = ContestRegistration.new(params[:contest_registration].merge(:user_id => current_user.id, :contest => params[:id]))
     if @registration.save
-      @entry = ContestEntry.new(DEFAULT_CONTEST)
+      #@entry = ContestEntry.new(DEFAULT_CONTEST)
+      Notifier.deliver_contest_registration(@registration)
     else
       render :action => :new
     end
   end
 
+  #This is for later when we allow submissions
   def update
     DEFAULT_CONTEST.each_pair { |k, v| params[:contest_entry][k] = nil if params[:contest_entry][k] == v or params[:contest_entry][k].blank? }
     @registration = ContestRegistration.first(:conditions => {:id => params[:id], :user_id => current_user.id})
     @entry = @registration.contest_entries.new(params[:contest_entry])
     if @entry.save
-      Notifier.deliver_contest_entry(@registration, @entry)
+      #Notifier.deliver_contest_entry(@registration, @entry)
     else
       @entry.defaults(DEFAULT_CONTEST)
       render :action => :create

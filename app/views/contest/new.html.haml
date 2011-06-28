@@ -2,7 +2,7 @@
   - form_for @registration, :url => contest_index_path(:id => params[:id]), :html => {:class => "form-create #{'form-error' unless @registration.errors.blank?}"} do |f|
     %fieldset
       .block-title
-        %h1 Registration
+        %h1= h("#{params[:category]} Registration")
         .box-error
           .frame
             %p= f.error_messages
@@ -10,10 +10,7 @@
       .frame
         .title
           %h1
-        .row{:class => (@registration.errors.on(:category) ? 'error' : nil)}
-          = f.select :category, [['Select Category',''], 'Software', 'Journalism']
-        .row{:class => (@registration.errors.on(:team) ? 'error' : nil)}
-          = f.select :team, [['Select Individual or Team', ''], ['Individual', 0], ['Team', 1]]
+        = f.hidden_field :category
         .add-block
           .row.affiliation.default
             .row-name{:style => 'margin-right: 13px;'}
@@ -22,8 +19,9 @@
             .row-affiliation
               .text
                 = text_field_tag 'contest_registration[members][][email]', 'Email'
-            %a.link-minus.affiliation-remove{:href => '#'} minus
-            %a.link.link-add.affiliation-add{:href => "#"} plus
+            - if @registration.category != 'Journalism'
+              %a.link-minus.affiliation-remove{:href => '#'} minus
+              %a.link.link-add.affiliation-add{:href => "#"} plus
         
           .row.affiliation
             .row-name{:style => 'margin-right: 13px;'}
@@ -32,8 +30,9 @@
             .row-affiliation
               .text
                 = text_field_tag 'contest_registration[members][][email]', current_user.email
-            %a.link-minus.affiliation-remove{:href => '#'} minus
-            %a.link.link-add.affiliation-add{:href => "#"} plus
+            - if @registration.category != 'Journalism'
+              %a.link-minus.affiliation-remove{:href => '#'} minus
+              %a.link.link-add.affiliation-add{:href => "#"} plus
         .row{:class => (@registration.errors.on(:affiliation) ? 'error' : nil)}
           .text
             = f.text_field :affiliation
