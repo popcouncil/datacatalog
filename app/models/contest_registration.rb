@@ -15,4 +15,11 @@ class ContestRegistration < ActiveRecord::Base
     rescue
       []
   end
+
+  def defaults(d)
+    d.each_pair do |k, v|
+      self.send("#{k}=", v) if self[k].blank? rescue nil
+    end
+  end
+  
 end

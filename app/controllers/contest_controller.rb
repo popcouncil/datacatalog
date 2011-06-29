@@ -26,6 +26,9 @@ class ContestController < ApplicationController
       #@entry = ContestEntry.new(DEFAULT_CONTEST)
       Notifier.deliver_contest_registration(@registration)
     else
+      @registration.defaults(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
+      :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone'),
+      :address => 'Address', :city => (current_user.city || 'City'), :category => params[:category])
       render :action => :new
     end
   end
