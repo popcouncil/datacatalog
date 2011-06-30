@@ -12,6 +12,7 @@
           %h1
         = f.hidden_field :category
         .add-block
+          %span{:style=>"font-size: 2em; padding-top: 10px; position: absolute; left: -100px;"} Team Captain
           .row.affiliation.default
             .row-name{:style => 'margin-right: 13px;'}
               .text
@@ -53,3 +54,9 @@
           %label{:style => 'display: block; font-size: 1.5em;'} I have read and understand...
         .row
           = f.submit 'Register', :class => 'btn-submit', :style => 'background-image: url("/images/btn-submit.gif");'
+
+
+- content_for :style do
+  %style{:type => 'text/stylesheet'}
+    #main { overflow: visible; }
+          
