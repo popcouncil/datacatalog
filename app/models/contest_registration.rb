@@ -6,6 +6,7 @@ class ContestRegistration < ActiveRecord::Base
   validates_acceptance_of :terms
   has_many :contest_entries
   belongs_to :user
+  has_one :contest_entry
 
   
   def friendly_members

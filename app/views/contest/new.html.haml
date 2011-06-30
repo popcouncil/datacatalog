@@ -2,7 +2,7 @@
   - form_for @registration, :url => contest_index_path(:id => params[:id]), :html => {:class => "form-create #{'form-error' unless @registration.errors.blank?}"} do |f|
     %fieldset
       .block-title
-        %h1= h("#{params[:category]} Registration")
+        %h1= h(params[:category] == 'Software' ? "Software / D'Enregistrement du Logiciel" : "Journalism Registration / Journalisme D'Enregistrement")
         .box-error
           .frame
             %p= f.error_messages
@@ -16,7 +16,7 @@
           .row.affiliation.default
             .row-name{:style => 'margin-right: 13px;'}
               .text
-                = text_field_tag 'contest_registration[members][][name]', 'Name'
+                = text_field_tag 'contest_registration[members][][name]', 'Name / Nom'
             .row-affiliation
               .text
                 = text_field_tag 'contest_registration[members][][email]', 'Email'
@@ -34,6 +34,7 @@
             - if @registration.category != 'Journalism'
               %a.link-minus.affiliation-remove{:href => '#'} minus
               %a.link.link-add.affiliation-add{:href => "#"} plus
+              %span{:style => 'position: absolute; margin-left: 10px;'} Click the plus sign to add team members.
         .row{:class => (@registration.errors.on(:affiliation) ? 'error' : nil)}
           .text
             = f.text_field :affiliation
@@ -57,6 +58,8 @@
 
 
 - content_for :style do
-  %style{:type => 'text/stylesheet'}
-    #main { overflow: visible; }
-          
+  %style{:type => 'text/css'}
+    :plain
+      #main { overflow: visible; }
+
+
