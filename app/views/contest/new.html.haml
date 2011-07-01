@@ -52,7 +52,11 @@
             = f.text_field :city
         .row{:class => (@registration.errors.on(:terms) ? 'error' : nil)}
           = f.check_box :terms
-          %label{:style => 'display: block; font-size: 1.5em;'} I have read and understand...
+          %label{:style => 'display: block; font-size: 1.5em;'}
+            - if params[:id] != 'Senegal'
+              I have read and understand the contest rules.
+            - else
+              J'ai lu et compris le règlement du concours.
         .row
           = f.submit 'Register', :class => 'btn-submit', :style => 'background-image: url("/images/btn-submit.gif");'
 

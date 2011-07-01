@@ -2834,3 +2834,6 @@ text-decoration: none;
 	color:#333;
 }
 
+div.ministry_organization {
+  width: 345px !important;
+}
