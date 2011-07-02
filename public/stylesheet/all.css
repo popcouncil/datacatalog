@@ -692,7 +692,7 @@ text-decoration: none;
 	cursor:pointer;
 	background:url(../images/heart-orange.png) no-repeat;
 }
-.catalog-info .block-title .mark .heart{
+.catalog-info .block-title .mark.heart{
 	background:url(../images/heart-blue.png) no-repeat;
 }
 .catalog-info .block-title .list .col01{
