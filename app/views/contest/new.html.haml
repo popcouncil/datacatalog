@@ -2,7 +2,7 @@
   - form_for @registration, :url => contest_index_path(:id => params[:id]), :html => {:class => "form-create #{'form-error' unless @registration.errors.blank?}"} do |f|
     %fieldset
       .block-title
-        %h1= h(params[:category] == 'Software' ? "Software / D'Enregistrement du Logiciel" : "Journalism Registration / Inscription Journalisme")
+        %h1= h(params[:category] == 'Software' ? "Software / D'Enregistrement du Logiciel" : "Journalism Registration / Inscription du Concours: Journalisme")
         .box-error
           .frame
             %p= f.error_messages
