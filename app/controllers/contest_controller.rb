@@ -13,8 +13,8 @@ class ContestController < ApplicationController
   def new
     redirect_to contest_path(params[:id]) unless %w(Software Journalism).include?(params[:category])
     @registration = ContestRegistration.new(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
-      :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone'),
-      :address => 'Address', :city => (current_user.city || 'City'), :category => params[:category])
+      :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone / Téléphone'),
+      :address => 'Address / Adresse', :city => (current_user.city || 'City / La Ville'), :category => params[:category])
   end
 
   def create
@@ -25,6 +25,8 @@ class ContestController < ApplicationController
     if @registration.save
       #@entry = ContestEntry.new(DEFAULT_CONTEST)
       Notifier.deliver_contest_registration(@registration)
+      flash[:notice] = 'Successfully joined the contest. You will receive a an email confirmation shortly.'
+      redirect_to contest_index_path
     else
       @registration.defaults(:affiliation => (current_user.affiliation.name rescue 'Affiliation'),
       :email => (current_user.email || 'Email'), :phone => (current_user.telephone_number || 'Phone'),
@@ -47,8 +49,25 @@ class ContestController < ApplicationController
   end
 
   def admin
-    redirect_to contest_index_path unless current_user.admin?
-    @entries = ContestEntry.all(:include => [:contest_registration => :user])
+    redirect_to contest_index_path and return unless current_user.admin?
+    @registrations = ContestRegistration.all(:include => [:contest_entry, :user])
+    respond_to do |f|
+      f.html {}
+      f.csv {
+        require 'csv'
+        csv = ''
+        CSV::Writer.generate(csv) do |c|
+          c << ['Contest', 'Category', 'Members', 'Affiliation', 'Emails', 'Phone', 'Address', 'City', 'Title', 'Summary', 'Program URL', 'Video URL', 'Photo URL', 'File', 'Register Time', 'Entry Time']
+          @registrations.each do |reg|
+            entry = reg.contest_entry
+            user = reg.user
+            c << [reg.contest, reg.category, reg.friendly_members.join("\n"), reg.affiliation, reg.email, reg.phone, reg.address, reg.city, (entry.title rescue nil), (entry.summary rescue nil), (entry.program_url rescue nil), (entry.video_url rescue nil), (entry.photo_url rescue nil), (entry.file_file_name rescue nil), (reg.created_at.strftime('%c %z') rescue nil), (entry.created_at.strftime('%c %z') rescue nil)]
+          end
+        end
+        send_data csv, :type => 'text/csv; charset=iso-8859-1; header=present',
+          :disposition => "attachment; filename=admin_#{Time.now.strftime('%Y-%m-%d')}.csv"
+      }
+    end
   end
 
   protected

@@ -18,3 +18,7 @@
   .column
     = render :partial => "#{params[:id].downcase}_rules"
 
+- content_for :style do
+  %style{:type => 'text/css'}
+    :plain
+      a { color: blue; }

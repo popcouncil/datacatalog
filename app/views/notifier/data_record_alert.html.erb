@@ -3,9 +3,9 @@
 <body>
 Hi <%= @user.name %>,
 <br><br>
-You might be interested in a new record that was just added to the <a href="http://threed-staging.heroku.com">Development Data Catalog</a>:
+You might be interested in a new record that was just added to the <a href="http://www.datauncovered.com">Development Data Catalog</a>:
 <br><br>
-<b>Title:</b> <%= link_to @record.title, data_record_url(@record, :host => 'threed-staging.heroku.com') %><br><br>
+<b>Title:</b> <%= link_to @record.title, data_record_url(@record, :host => 'www.datauncovered.com') %><br><br>
 <b>Topic(s):</b> <%= @record.tag_list.join(', ') %><br><br>
 <b>Geographical Coverage(s):</b> <%= @record.coverage_list.join(', ') %><br>
 <br><br>
@@ -20,5 +20,5 @@ P.s. You received this message because you asked us to notify you when new recor
 <br>AND<br><br>
 <b>Geographical Coverages:</b> <%= @user.alert_locations_list.collect {|x| "( #{x} )"}.join(' OR ') %><br>
 <br><br>
-To change these preferences or to stop receiving notifications, please visit <a href="http://threed-staging.heroku.com/profile/edit">http://threed-staging.heroku.com/profile/edit</a>.
+To change these preferences or to stop receiving notifications, please visit <a href="http://www.datauncovered.com/profile/edit">http://www.datauncovered.com/profile/edit</a>.
 </body></html>

@@ -2,6 +2,7 @@
 %html{:lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     = render :partial => 'layouts/header'
+    = yield :style
   %body{:class => @body_class_hook}
     = render :partial => 'layouts/wrapper'
     :javascript

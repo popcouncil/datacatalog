@@ -13,11 +13,13 @@
       %td Summary
       %td URLs
       %td File
-      %td Time
+      %td Register Time
+      %td Entry Time
   %tbody
-    - @entries.each do |entry|
-      - reg = entry.contest_registration
-      - user = entry.contest_registration.user
+    = link_to 'download as csv (excel can import)', admin_contest_path(:format => 'csv')
+    - @registrations.each do |reg|
+      - entry = reg.contest_entry
+      - user = reg.user
       %tr
         %td=h reg.contest
         %td=h reg.category
@@ -27,13 +29,14 @@
         %td=h reg.phone
         %td=h reg.address
         %td=h reg.city
-        %td=h entry.title
-        %td=h entry.summary
+        %td=h entry.title rescue nil
+        %td=h entry.summary rescue nil
         %td
-          Program: #{h entry.program_url}
+          Program: #{h entry.program_url rescue nil}
           %br
-          Video: #{h entry.video_url}
+          Video: #{h entry.video_url rescue nil}
           %br
-          Photo: #{h entry.photo_url}
-        %td= entry.file.exists? ? entry.file.url : 'NONE'
-        %td= entry.created_at.strftime('%c')
+          Photo: #{h entry.photo_url rescue nil}
+        %td= entry.file.exists? ? entry.file.url : 'NONE' rescue nil
+        %td= reg.created_at.strftime('%c %z') rescue nil
+        %td= entry.created_at.strftime('%c %z') rescue nil
