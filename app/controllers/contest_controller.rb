@@ -20,6 +20,9 @@ class ContestController < ApplicationController
   def create
     contest = params[:contest_registration]
     contest[:members].delete_if { |k| (k[:name] == 'Name' or k[:name].blank?) and (k[:email] == 'Email' or k[:email].blank?)}
+    contest[:phone] = '' if contest[:phone] == 'Phone / Téléphone'
+    contest[:city] = '' if contest[:city] == 'City / La Ville'
+    contest[:address] = '' if contest[:address] == 'Address / Adresse'
     ['email', 'phone', 'city', 'address', 'affiliation'].each { |x| contest[x] = '' if contest[x] == x.capitalize }
     @registration = ContestRegistration.new(params[:contest_registration].merge(:user_id => current_user.id, :contest => params[:id]))
     if @registration.save

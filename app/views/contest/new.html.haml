@@ -12,7 +12,8 @@
           %h1
         = f.hidden_field :category
         .add-block
-          %span{:style=>"font-size: 2em; padding-top: 10px; position: absolute; left: -100px;"} Team Captain
+          - if params[:category] == 'Software'
+            %span{:style=>"font-size: 2em; padding-top: 10px; position: absolute; left: -100px;"} Team Captain
           .row.affiliation.default
             .row-name{:style => 'margin-right: 13px;'}
               .text
