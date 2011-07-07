@@ -2837,3 +2837,7 @@ text-decoration: none;
 div.ministry_organization {
   width: 345px !important;
 }
+
+#google_translate_element {
+  margin-top: 25px;
+}
