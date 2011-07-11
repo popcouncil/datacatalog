@@ -18,8 +18,9 @@ module UsersHelper
 
   def ministries_and_organizations_for_select(selected = nil)
     regular_options = options_for_select(["All", "-------------"], :disabled => "-------------")
-    grouped_options = {"Ministry" =>  User.ministry_users.map {|u| [u.display_name, "ministry-#{u.id.to_s}"] }}
-    grouped_options["Organization"] = organization_tree_except(nil).map { |name, id| [name, "organization-#{id.to_s}"] }
+    grouped_options = {"" =>  User.ministry_users.map {|u| [u.display_name, "ministry-#{u.id.to_s}"] }}
+    grouped_options[""] |= organization_tree_except(nil).map { |name, id| [name, "organization-#{id.to_s}"] }
+    grouped_options[''].sort! { |x, y| x.first <=> y.first }
     grouped_options = grouped_options_for_select(grouped_options, :selected => selected)
     "#{regular_options}#{grouped_options}" 
   end
