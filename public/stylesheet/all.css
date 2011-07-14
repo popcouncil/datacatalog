@@ -53,6 +53,7 @@ select{
 .logo-holder{
 	width:100%;
 	overflow:hidden;
+        height:120px;
 }
 .logo{
 	width:584px;
@@ -2839,5 +2840,8 @@ div.ministry_organization {
 }
 
 #google_translate_element {
-  margin-top: 25px;
+position: absolute;
+z-index:10;
+top:45px;
+left:723px;
 }
