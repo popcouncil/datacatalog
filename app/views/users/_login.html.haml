@@ -7,9 +7,32 @@
     .text
       = login.text_field :email
   .row
+    .text
+      = text_field_tag 'pw3', 'Password'
+  .row{:style => 'display: none;'}
     %label{:for => "password3"} Password
     .text
       = login.password_field :password
   %input.btn-submit{:type => "submit", :value => "Login"}/
   %p
     %a{:href => forgot_path} Forgot your password?
+
+
+:javascript
+  $(function(){
+    $('#pw3').click(function(){
+      $(this).parent().parent().hide();
+      $('#user_session_password').parent().parent().show();
+      $('#user_session_password').focus();
+      return false;
+    });
+
+    $('#user_session_password').blur(function(){
+      var $this = $(this);
+      if($this.val() == ''){
+        $this.parent().parent().hide();
+        $('#pw3').parent().parent().show();
+      }
+    });
+  });
+    

@@ -12,11 +12,51 @@
     .text
       = user.text_field :email
   .row{:class => (user.object.errors.on(:password) ? 'error' : nil)}
+    .text
+      = text_field_tag 'pw', 'Password'
+  .row{:class => (user.object.errors.on(:password) ? 'error' : nil), :style => 'display: none;'}
     %label{:for => "password"} Password
     .text
       = user.password_field :password
   .row{:class => (user.object.errors.on(:password_confirmation) ? 'error' : nil)}
+    .text
+      = text_field_tag 'pw1', 'Re-enter password'
+  .row{:class => (user.object.errors.on(:password_confirmation) ? 'error' : nil), :style => 'display: none;'}
     %label{:for => "password2"} Password
     .text
       = user.password_field :password_confirmation
   %input.btn-submit{:type => "submit", :value => "JOIN!"}/
+
+:javascript
+  $(function(){
+    $('#pw').click(function(){
+      $(this).parent().parent().hide();
+      $('#user_password').parent().parent().show();
+      $('#user_password').focus();
+      return false;
+    });
+
+    $('#user_password').blur(function(){
+      var $this = $(this);
+      if($this.val() == ''){
+        $(this).parent().parent().hide();
+        $('#pw').parent().parent().show();
+      }
+    });
+
+    $('#user_password_confirmation').blur(function(){
+      var $this = $(this);
+      if($this.val() == ''){
+        $(this).parent().parent().hide();
+        $('#pw1').parent().parent().show();
+      }
+    });
+
+    $('#pw1').click(function(){
+      $(this).parent().parent().hide();
+      $('#user_password_confirmation').parent().parent().show();
+      $('#user_password_confirmation').focus();
+      return false;
+    });
+  });
+  
