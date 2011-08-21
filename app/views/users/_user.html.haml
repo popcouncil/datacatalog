@@ -29,9 +29,9 @@
 
 :javascript
   $(function(){
-    $('#pw').click(function(){
+    $('#pw').focus(function(){
       $(this).parent().parent().hide();
-      $('#user_password').parent().parent().show();
+      $('#user_password').parents('.row').show();
       $('#user_password').focus();
       return false;
     });
@@ -39,22 +39,22 @@
     $('#user_password').blur(function(){
       var $this = $(this);
       if($this.val() == ''){
-        $(this).parent().parent().hide();
-        $('#pw').parent().parent().show();
+        $(this).parents('.row').hide();
+        $('#pw').val('Password').parent().parent().show();
       }
     });
 
     $('#user_password_confirmation').blur(function(){
       var $this = $(this);
       if($this.val() == ''){
-        $(this).parent().parent().hide();
-        $('#pw1').parent().parent().show();
+        $(this).parents('.row').hide();
+        $('#pw1').val('Re-enter password').parent().parent().show();
       }
     });
 
-    $('#pw1').click(function(){
+    $('#pw1').focus(function(){
       $(this).parent().parent().hide();
-      $('#user_password_confirmation').parent().parent().show();
+      $('#user_password_confirmation').parents('.row').show();
       $('#user_password_confirmation').focus();
       return false;
     });

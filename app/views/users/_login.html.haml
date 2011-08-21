@@ -20,9 +20,9 @@
 
 :javascript
   $(function(){
-    $('#pw3').click(function(){
+    $('#pw3').focus(function(){
       $(this).parent().parent().hide();
-      $('#user_session_password').parent().parent().show();
+      $('#user_session_password').parents('.row').show();
       $('#user_session_password').focus();
       return false;
     });
@@ -30,8 +30,8 @@
     $('#user_session_password').blur(function(){
       var $this = $(this);
       if($this.val() == ''){
-        $this.parent().parent().hide();
-        $('#pw3').parent().parent().show();
+        $this.parents('.row').hide();
+        $('#pw3').val('Password').parent().parent().show();
       }
     });
   });
