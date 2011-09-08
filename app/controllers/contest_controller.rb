@@ -75,7 +75,7 @@ class ContestController < ApplicationController
 
   protected
     def check_contests
-      redirect_to contest_index_path unless %w(Senegal Nambia Ghana).include?(params[:id])
+      redirect_to contest_index_path unless %w(Senegal Namibia Ghana).include?(params[:id])
     end
 
     def check_user
