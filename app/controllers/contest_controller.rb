@@ -44,11 +44,16 @@ class ContestController < ApplicationController
     @registration = ContestRegistration.first(:conditions => {:id => params[:id], :user_id => current_user.id})
     @entry = @registration.contest_entries.new(params[:contest_entry])
     if @entry.save
-      #Notifier.deliver_contest_entry(@registration, @entry)
+      Notifier.deliver_contest_entry(@registration, @entry)
     else
       @entry.defaults(DEFAULT_CONTEST)
-      render :action => :create
+      render :action => :submission
     end
+  end
+
+  def submission
+    @registration = ContestRegistration.first(:conditions => {:contest => params[:id], :category => params[:category], :user_id => current_user.id})
+    @entry = ContestEntry.new(DEFAULT_CONTEST)
   end
 
   def admin
