@@ -4,6 +4,7 @@
       %legend Title
       .title
         %h1 Forgot your password?
+        = flash[:error]
       .row
         %label{:for => 'email_address'} Email
         .text
