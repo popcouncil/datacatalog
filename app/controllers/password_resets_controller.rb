@@ -28,7 +28,7 @@ class PasswordResetsController < ApplicationController
       redirect_to profile_url
     else
       flash[:error] = "Your passwords didn't match!"
-      redirect_to reset_url
+      redirect_to reset_url(params[:token])
     end
   end
 
