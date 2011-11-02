@@ -9,12 +9,13 @@
   %h1=h params[:id]
   .aside
     .frame
-      %ul 
-        - if ContestRegistration.exists?({:contest => params[:id], :category => 'Journalism', :user_id => current_user.id})
-          %li= link_to 'Submit: News Article Category', submission_contest_path(:id => params[:id], :category => 'Journalism')
-        - else
-          %li= link_to 'Register: News Article Category', new_contest_path(:id => params[:id], :category => 'Journalism')
-        - if ContestRegistration.exists?({:contest => params[:id], :category => 'Software', :user_id => current_user.id})
+      %ul
+        - if params[:id] != 'Senegal'
+          - if current_user and ContestRegistration.exists?({:contest => params[:id], :category => 'Journalism', :user_id => current_user.id})
+            %li= link_to 'Submit: News Article Category', submission_contest_path(:id => params[:id], :category => 'Journalism')
+          - else
+            %li= link_to 'Register: News Article Category', new_contest_path(:id => params[:id], :category => 'Journalism')
+        - if current_user and ContestRegistration.exists?({:contest => params[:id], :category => 'Software', :user_id => current_user.id})
           %li= link_to 'Submit: Software Category', submission_contest_path(:id => params[:id], :category => 'Software')
         - else
           %li= link_to 'Register: Software Category', new_contest_path(:id => params[:id], :category => 'Software') unless params[:id] == 'Nambia'
