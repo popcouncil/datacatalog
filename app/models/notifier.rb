@@ -100,4 +100,13 @@ class Notifier < ActionMailer::Base
     body :registration => registration, :user => registration.user
   end
 
+  def contest_entry(registration, entry)
+    subject "Data Uncovered - Contest Registration"
+    from "Data Uncovered <catalog@datauncovered.com>"
+    recipients "#{registration.user.email}"
+    bcc "catalog@datauncovered.com"
+    sent_on Time.now
+    body :registration => registration, :entry => entry
+  end
+
 end
